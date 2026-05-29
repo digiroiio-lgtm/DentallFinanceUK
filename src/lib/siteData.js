@@ -9,6 +9,39 @@ export const primaryNav = [
   { href: "/turkey-teeth-finance", label: "Turkey Teeth Finance" },
 ];
 
+const cityCatalog = [
+  { name: "London", slug: "london" },
+  { name: "Manchester", slug: "manchester" },
+  { name: "Birmingham", slug: "birmingham" },
+  { name: "Leeds", slug: "leeds" },
+  { name: "Liverpool", slug: "liverpool" },
+  { name: "Glasgow", slug: "glasgow" },
+];
+
+const cityServiceConfigs = [
+  {
+    key: "dental-finance",
+    slugPrefix: "dental-finance",
+    titlePrefix: "Dental Finance",
+    treatmentLabel: "general private dental treatment",
+    costBase: 3000,
+  },
+  {
+    key: "veneers-finance",
+    slugPrefix: "veneers-finance",
+    titlePrefix: "Veneers Finance",
+    treatmentLabel: "composite and porcelain veneers",
+    costBase: 4200,
+  },
+  {
+    key: "dental-implants-finance",
+    slugPrefix: "dental-implants-finance",
+    titlePrefix: "Dental Implants Finance",
+    treatmentLabel: "single and multiple dental implant treatment",
+    costBase: 6800,
+  },
+];
+
 const financeFaqs = [
   {
     question: "Can I pay monthly for dental treatment?",
@@ -87,8 +120,136 @@ const allPages = [
   ["cookie-policy", "Cookie Policy", "policy"],
 ];
 
-export const pageMap = Object.fromEntries(
-  allPages.map(([slug, title, type]) => {
+function toCurrency(value) {
+  return `£${value.toLocaleString("en-GB")}`;
+}
+
+function getMonthlyExamples(costBase) {
+  return [
+    {
+      label: "12 month 0% example",
+      treatmentCost: toCurrency(costBase),
+      apr: "0% APR",
+      monthly: toCurrency(Math.round(costBase / 12)),
+      totalRepayable: toCurrency(costBase),
+    },
+    {
+      label: "24 month representative example",
+      treatmentCost: toCurrency(costBase),
+      apr: "9.9% APR",
+      monthly: toCurrency(Math.round((costBase * 1.1) / 24)),
+      totalRepayable: toCurrency(Math.round(costBase * 1.1)),
+    },
+    {
+      label: "36 month representative example",
+      treatmentCost: toCurrency(costBase),
+      apr: "12.9% APR",
+      monthly: toCurrency(Math.round((costBase * 1.2) / 36)),
+      totalRepayable: toCurrency(Math.round(costBase * 1.2)),
+    },
+  ];
+}
+
+function buildCityPage(city, service) {
+  const slug = `${service.slugPrefix}-${city.slug}`;
+  const title = `${service.titlePrefix} ${city.name}`;
+  const monthlyExamples = getMonthlyExamples(service.costBase);
+
+  return [
+    slug,
+    {
+      slug,
+      title,
+      type: "city",
+      cityName: city.name,
+      serviceType: service.titlePrefix,
+      description: `Compare ${service.titlePrefix.toLowerCase()} in ${city.name} with local monthly payment examples, eligibility guidance, and lender-focused options for UK patients.`,
+      answerBlock: `${service.titlePrefix} in ${city.name} can help spread ${service.treatmentLabel} costs into fixed monthly instalments. Compare APR, total repayable amount, and clinic-lender support before applying.`,
+      localIntroduction: `This ${city.name}-focused guide targets long-tail queries such as "${service.slugPrefix} ${city.slug}", "${service.slugPrefix} monthly payments ${city.slug}", and "${service.slugPrefix} bad credit ${city.slug}" so patients can compare options faster.`,
+      keyTakeaways: [
+        `${city.name} clinics may offer both 0% and representative APR plans depending on term and eligibility.`,
+        "Total repayable can vary significantly by APR and repayment duration.",
+        "Compare lender checks, deposit rules, and early-settlement terms before agreeing.",
+        "Use calculators and treatment-specific pages before submitting any application.",
+      ],
+      summaryRows: [
+        ["City", city.name],
+        ["Treatment focus", service.treatmentLabel],
+        ["Common terms", "6 to 60 months"],
+        ["Availability", "0% promotional and representative APR plans"],
+      ],
+      monthlyExamples,
+      comparisonRows: [
+        ["0% short term", "Lower monthly terms, no interest", "Higher monthly outlay"],
+        ["Representative APR plans", "Longer term flexibility", "Higher total repayable amount"],
+        ["Clinic-arranged finance", "Streamlined treatment journey", "Lender panel may be limited"],
+      ],
+      longTailQueries: [
+        `${service.slugPrefix} ${city.slug}`,
+        `${service.slugPrefix} monthly payments ${city.slug}`,
+        `${service.slugPrefix} bad credit ${city.slug}`,
+        `${service.slugPrefix} 0 percent ${city.slug}`,
+      ],
+      sections: [
+        {
+          heading: `${city.name} local finance overview`,
+          body: `Patients in ${city.name} typically compare treatment timeline, deposit requirements, and repayment flexibility before choosing ${service.titlePrefix.toLowerCase()} options.`,
+        },
+        {
+          heading: "Eligibility and approval checks",
+          body: "Most lenders assess residency, affordability, and credit profile. Some pathways may start with soft checks, followed by full checks before agreement.",
+        },
+        {
+          heading: "How to compare local options",
+          body: `Ask clinics for representative examples, total repayable values, and written terms. Compare at least two offers before selecting a ${service.titlePrefix.toLowerCase()} route.`,
+        },
+      ],
+      faqs: [
+        {
+          question: `Can I get ${service.titlePrefix.toLowerCase()} in ${city.name} with monthly payments?`,
+          answer: `Yes, many clinics in ${city.name} provide lender-backed monthly plans. Terms and APR depend on provider criteria and affordability checks.`,
+        },
+        {
+          question: `Is 0% ${service.titlePrefix.toLowerCase()} available in ${city.name}?`,
+          answer:
+            "Some clinics offer 0% promotional terms for selected repayment durations. Longer terms may use interest-bearing agreements.",
+        },
+        {
+          question: `Can bad-credit applicants in ${city.name} apply for ${service.titlePrefix.toLowerCase()}?`,
+          answer:
+            "Some providers assess wider credit profiles, but acceptance and pricing vary. Always review total repayable and repayment risk.",
+        },
+        {
+          question: `What should I compare before choosing a ${service.titlePrefix.toLowerCase()} plan?`,
+          answer:
+            "Compare APR, total repayable, monthly amount, late-fee policy, and early-settlement terms alongside treatment quality and aftercare.",
+        },
+      ],
+      localLinks: [
+        { href: "/finance-calculator", label: "Finance Calculator" },
+        { href: "/dental-finance-uk", label: "Dental Finance UK" },
+        { href: "/dental-implants-finance", label: "Dental Implants Finance" },
+        { href: "/veneers-finance", label: "Veneers Finance" },
+      ],
+      author: "DentalFinanceUK Editorial Team",
+      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      references: [
+        "Financial Conduct Authority (FCA) Consumer Credit rules",
+        "NHS dental charges and treatment guidance",
+        "MoneyHelper borrowing and credit information",
+      ],
+      disclaimer:
+        "Medical and financial information is educational only and not personal advice. Confirm suitability with a qualified clinician and regulated lender before proceeding.",
+      lastUpdated: "2026-05-29",
+    },
+  ];
+}
+
+const cityPageEntries = cityCatalog.flatMap((city) =>
+  cityServiceConfigs.map((service) => buildCityPage(city, service))
+);
+
+const basePageEntries = allPages.map(([slug, title, type]) => {
     const summaryRows = [
       ["Typical UK treatment budget", "£800 to £12,000+ depending on treatment"],
       ["Monthly payment terms", "6 to 60 months"],
@@ -209,8 +370,9 @@ export const pageMap = Object.fromEntries(
     }
 
     return [slug, base];
-  })
-);
+  });
+
+export const pageMap = Object.fromEntries([...basePageEntries, ...cityPageEntries]);
 
 export const pageSlugs = Object.keys(pageMap);
 

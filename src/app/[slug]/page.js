@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import PageTemplate from "@/components/PageTemplate";
+import CityPageTemplate from "@/components/CityPageTemplate";
 import { getPageBySlug, getPageUrl, pageSlugs } from "@/lib/siteData";
 
 export const dynamic = "force-static";
@@ -40,6 +41,10 @@ export default function SlugPage({ params }) {
 
   if (!page) {
     notFound();
+  }
+
+  if (page.type === "city") {
+    return <CityPageTemplate page={page} />;
   }
 
   return <PageTemplate page={page} />;
