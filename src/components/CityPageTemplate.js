@@ -3,16 +3,20 @@ import StructuredData from "@/components/StructuredData";
 import { getInternalLinks, getPageUrl } from "@/lib/siteData";
 
 function buildCitySchemas(page) {
+  const reviewedBy = [
+    page.financeReviewer ? { "@type": "Person", name: page.financeReviewer } : null,
+    page.dentalReviewer ? { "@type": "Person", name: page.dentalReviewer } : null,
+    !page.financeReviewer && page.reviewer ? { "@type": "Person", name: page.reviewer } : null,
+  ].filter(Boolean);
+
   return [
     {
       "@context": "https://schema.org",
-      "@type": "FinancialService",
-      name: page.title,
-      areaServed: {
-        "@type": "City",
-        name: page.cityName,
-      },
-      serviceType: page.serviceType,
+      "@type": "Article",
+      headline: page.title,
+      dateModified: page.lastUpdated,
+      author: { "@type": "Person", name: page.author },
+      reviewedBy,
       url: getPageUrl(`/${page.slug}`),
       description: page.description,
     },
@@ -160,6 +164,14 @@ export default function CityPageTemplate({ page }) {
             </details>
           ))}
         </div>
+      </section>
+
+      <section className="mt-6 rounded border border-gray-200 p-4">
+        <h2 className="text-2xl font-semibold">Review and Disclosure</h2>
+        <p>Author: {page.author}</p>
+        <p>Finance Reviewer: {page.financeReviewer ?? page.reviewer}</p>
+        {page.dentalReviewer ? <p>Dental Reviewer: {page.dentalReviewer}</p> : null}
+        <p>Last Updated: {page.lastUpdated}</p>
       </section>
 
       <section className="mt-6 rounded border border-gray-200 p-4">

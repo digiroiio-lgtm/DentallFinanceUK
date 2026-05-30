@@ -79,8 +79,8 @@ export default function Home() {
       </p>
 
       <p className="mt-4 rounded bg-blue-50 p-4">
-        Dental finance in the UK lets you spread treatment costs through fixed monthly payments. Compare
-        APR, term length, total repayable, and clinic support before choosing a plan.
+        We help users compare UK dental finance options with educational guides, repayment examples, and calculator tools.
+        Finance products are provided by authorised third-party lenders and brokers, subject to eligibility and status.
       </p>
 
       <section className="mt-6">
@@ -127,9 +127,9 @@ export default function Home() {
       <section className="mt-6 rounded border border-gray-200 p-4">
         <h2 className="text-2xl font-semibold">Trust and Transparency</h2>
         <ul className="mt-2 list-disc pl-6">
-          <li>FCA information and representative examples</li>
-          <li>Transparent disclosures and update logs</li>
-          <li>Editorial policy and medical review policy pages</li>
+          <li><strong>Independent Information:</strong> We publish educational content and comparison resources about dental treatment finance.</li>
+          <li><strong>FCA Transparency:</strong> Featured finance products are offered by authorised third-party providers who make eligibility and lending decisions.</li>
+          <li><strong>Editorial Independence:</strong> Content is written and reviewed independently from finance providers.</li>
         </ul>
       </section>
 

@@ -1117,6 +1117,14 @@ const allPages = [
   ["cookie-policy", "Cookie Policy", "policy"],
 ];
 
+const DEFAULT_AUTHOR = "James Walker, Consumer Finance Writer";
+const DEFAULT_FINANCE_REVIEWER = "Michael Brown, Consumer Credit Specialist";
+const DEFAULT_DENTAL_REVIEWER = "Dr Sarah Thompson BDS";
+
+function needsDentalReviewer(slug) {
+  return /implant|veneer|turkey|all-on|hollywood-smile|cosmetic-dentistry/.test(slug) || slug === "uk-vs-turkey-dental-costs";
+}
+
 function toCurrency(value) {
   return `£${value.toLocaleString("en-GB")}`;
 }
@@ -1868,7 +1876,7 @@ const turkeyFinanceDisclosure = {
 };
 
 const turkeyMedicalReview = {
-  title: "Medical Review Section",
+  title: "Dental Review",
   summary:
     "This content has been reviewed for clinical suitability, aftercare planning, and the main risks UK patients should understand before travelling to Turkey for dental treatment.",
 };
@@ -3403,7 +3411,7 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
       type,
       description: `UK-focused guidance on ${title.toLowerCase()}, affordability, eligibility, and monthly repayment examples.`,
       answerBlock:
-        "Dental finance helps spread treatment costs through manageable monthly payments. Compare APR, term length, total repayable amount, and provider protections before applying.",
+        "We help users compare dental finance options through educational guidance on APR, term length, total repayable amount, and provider protections.",
       keyTakeaways: [
         "Compare total repayable, not just monthly cost.",
         "Check if 0% terms are available for your treatment type.",
@@ -3434,15 +3442,15 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
         },
       ],
       faqs: financeFaqs,
-      author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      author: DEFAULT_AUTHOR,
+      financeReviewer: DEFAULT_FINANCE_REVIEWER,
       references: [
         "Financial Conduct Authority (FCA) Consumer Credit rules",
         "NHS dental charges and treatment guidance",
         "MoneyHelper borrowing and credit information",
       ],
       disclaimer:
-        "Medical and financial information is educational only and not personal advice. Confirm suitability with a qualified clinician and regulated lender before proceeding.",
+        "We are not a lender and do not make lending decisions. Information on this website is educational only; finance products are offered by third-party authorised providers subject to eligibility and status.",
       lastUpdated: "2026-05-29",
     };
 
@@ -3533,8 +3541,8 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
             { question: "Do calculator results affect my credit score?", answer: "No. The calculators are informational tools only. No credit check is performed when using any calculator on this site." },
             { question: "What is APR?", answer: "APR (Annual Percentage Rate) is the annual cost of borrowing, including interest and any compulsory fees. A lower APR means less total cost. 0% APR means no interest is charged for the promotional term." },
           ],
-          author: "DentalFinanceUK Editorial Team",
-          reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+          author: DEFAULT_AUTHOR,
+          financeReviewer: DEFAULT_FINANCE_REVIEWER,
           references: base.references,
           disclaimer: base.disclaimer,
           lastUpdated: "2026-05-29",
@@ -3561,6 +3569,52 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
     }
 
     if (type === "policy") {
+      if (slug === "about-us") {
+        return [
+          slug,
+          {
+            ...base,
+            answerBlock:
+              "Dental Finance UK is an independent information and comparison website. We do not provide loans or regulated credit products.",
+            sections: [
+              {
+                heading: "About Dental Finance UK",
+                body:
+                  "We introduce consumers to authorised finance providers and publish educational content about dental treatment financing options available in the UK.",
+              },
+              {
+                heading: "Independent comparison positioning",
+                body:
+                  "We do not provide credit products, make lending decisions, or act as a lender. Any finance product discussed on this website is offered by a third-party authorised lender or broker.",
+              },
+            ],
+          },
+        ];
+      }
+
+      if (slug === "editorial-policy") {
+        return [
+          slug,
+          {
+            ...base,
+            answerBlock:
+              "Our editorial policy explains how independent finance and treatment content is researched, reviewed, and updated for UK readers.",
+            sections: [
+              {
+                heading: "Editorial policy overview",
+                body:
+                  "Content is created for educational and comparison purposes, with transparent sourcing, clear update dates, and independent review standards.",
+              },
+              {
+                heading: "Regulatory and lender disclaimer",
+                body:
+                  "We are not a lender and do not make lending decisions. Information on this website is provided for educational purposes only. Finance products are offered by third-party authorised providers subject to eligibility and status.",
+              },
+            ],
+          },
+        ];
+      }
+
       return [
         slug,
         {
@@ -3585,7 +3639,7 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
     return [slug, base];
   });
 
-export const pageMap = Object.fromEntries([
+const rawPageMap = Object.fromEntries([
   ...basePageEntries,
   editorialRoadmapEntry,
   ...editorialPublishedEntries,
@@ -3594,6 +3648,19 @@ export const pageMap = Object.fromEntries([
   ...financeComparisonEntries,
   ...ukTurkeyComparisonEntries,
 ]);
+
+export const pageMap = Object.fromEntries(
+  Object.entries(rawPageMap).map(([slug, page]) => [
+    slug,
+    {
+      ...page,
+      author: page.author ?? DEFAULT_AUTHOR,
+      financeReviewer: page.financeReviewer ?? DEFAULT_FINANCE_REVIEWER,
+      dentalReviewer: page.dentalReviewer ?? (needsDentalReviewer(slug) ? DEFAULT_DENTAL_REVIEWER : undefined),
+      reviewer: page.reviewer ?? page.financeReviewer ?? DEFAULT_FINANCE_REVIEWER,
+    },
+  ])
+);
 
 export const pageSlugs = Object.keys(pageMap);
 

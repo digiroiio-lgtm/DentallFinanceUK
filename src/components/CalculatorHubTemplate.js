@@ -130,9 +130,10 @@ export default function CalculatorHubTemplate({ page }) {
       </section>
 
       <section className="mt-8 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">Author and Medical Review</h2>
+        <h2 className="text-2xl font-semibold">Review and Disclosure</h2>
         <p>Author: {page.author}</p>
-        <p>Reviewer: {page.reviewer}</p>
+        <p>Finance Reviewer: {page.financeReviewer ?? page.reviewer}</p>
+        {page.dentalReviewer ? <p>Dental Reviewer: {page.dentalReviewer}</p> : null}
         <p>Last Updated: {page.lastUpdated}</p>
       </section>
 

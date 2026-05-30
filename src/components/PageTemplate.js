@@ -5,6 +5,12 @@ import { getInternalLinks, getPageUrl } from "@/lib/siteData";
 import CalculatorWidget from "@/components/CalculatorWidget";
 
 function buildSchemas(page) {
+  const reviewedBy = [
+    page.financeReviewer ? { "@type": "Person", name: page.financeReviewer } : null,
+    page.dentalReviewer ? { "@type": "Person", name: page.dentalReviewer } : null,
+    !page.financeReviewer && page.reviewer ? { "@type": "Person", name: page.reviewer } : null,
+  ].filter(Boolean);
+
   const breadcrumbs = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -50,7 +56,7 @@ function buildSchemas(page) {
       headline: page.title,
       dateModified: page.lastUpdated,
       author: { "@type": "Person", name: page.author },
-      reviewedBy: { "@type": "Person", name: page.reviewer },
+      reviewedBy,
       description: page.description,
       mainEntityOfPage: getPageUrl(`/${page.slug}`),
     },
@@ -346,10 +352,11 @@ export default function PageTemplate({ page }) {
       </section>
 
       <section className="mt-6 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">{medicalReview?.title ?? "Medical Review"}</h2>
+        <h2 className="text-2xl font-semibold">{medicalReview?.title ?? "Review and Disclosure"}</h2>
         {medicalReview?.summary ? <p className="mb-3">{medicalReview.summary}</p> : null}
         <p>Author: {page.author}</p>
-        <p>Reviewer: {page.reviewer}</p>
+        <p>Finance Reviewer: {page.financeReviewer ?? page.reviewer}</p>
+        {page.dentalReviewer ? <p>Dental Reviewer: {page.dentalReviewer}</p> : null}
         <p>Last Updated: {page.lastUpdated}</p>
       </section>
 
