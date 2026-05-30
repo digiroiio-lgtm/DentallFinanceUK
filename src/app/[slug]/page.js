@@ -3,11 +3,13 @@ import PageTemplate from "@/components/PageTemplate";
 import CityPageTemplate from "@/components/CityPageTemplate";
 import CalculatorHubTemplate from "@/components/CalculatorHubTemplate";
 import { getPageBySlug, getPageUrl, pageSlugs } from "@/lib/siteData";
+import { getStaticSlugParams } from "@/lib/slugRoutes";
 
 export const dynamic = "force-static";
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return pageSlugs.map((slug) => ({ slug }));
+  return getStaticSlugParams(pageSlugs);
 }
 
 export function generateMetadata({ params }) {
