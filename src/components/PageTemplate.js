@@ -67,9 +67,42 @@ function buildSchemas(page) {
   ];
 }
 
+function DataTable({ section }) {
+  return (
+    <section className="mt-6 overflow-x-auto">
+      <h2 className="text-2xl font-semibold">{section.title}</h2>
+      {section.description ? <p className="mt-2 text-sm text-gray-600">{section.description}</p> : null}
+      <table className="mt-3 w-full border-collapse border border-gray-300 text-sm">
+        <thead>
+          <tr>
+            {section.headers.map((header) => (
+              <th key={header} className="border border-gray-300 bg-gray-50 p-2 text-left">
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {section.rows.map((row, rowIndex) => (
+            <tr key={`${section.title}-${rowIndex}`}>
+              {row.map((cell, cellIndex) => (
+                <td key={`${section.title}-${rowIndex}-${cellIndex}`} className="border border-gray-300 p-2">
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  );
+}
+
 export default function PageTemplate({ page }) {
-  const internalLinks = getInternalLinks(page.slug);
+  const internalLinks = page.internalLinks ?? getInternalLinks(page.slug);
   const schemas = buildSchemas(page);
+  const medicalReview = page.medicalReview ?? null;
+  const financeDisclosure = page.financeDisclosure ?? null;
 
   return (
     <main className="mx-auto w-full max-w-5xl p-6 text-gray-900">
@@ -109,6 +142,10 @@ export default function PageTemplate({ page }) {
           </tbody>
         </table>
       </section>
+
+      {page.savingsTable ? <DataTable section={page.savingsTable} /> : null}
+
+      {page.monthlyPaymentTable ? <DataTable section={page.monthlyPaymentTable} /> : null}
 
       {page.type === "calculator" ? (
         <>
@@ -237,11 +274,26 @@ export default function PageTemplate({ page }) {
       </section>
 
       <section className="mt-6 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">Author and Medical Review</h2>
+        <h2 className="text-2xl font-semibold">{medicalReview?.title ?? "Medical Review"}</h2>
+        {medicalReview?.summary ? <p className="mb-3">{medicalReview.summary}</p> : null}
         <p>Author: {page.author}</p>
         <p>Reviewer: {page.reviewer}</p>
         <p>Last Updated: {page.lastUpdated}</p>
       </section>
+
+      {financeDisclosure ? (
+        <section className="mt-6 rounded border border-gray-200 p-4">
+          <h2 className="text-2xl font-semibold">{financeDisclosure.title ?? "Finance Disclosure"}</h2>
+          {financeDisclosure.intro ? <p className="mt-2">{financeDisclosure.intro}</p> : null}
+          {financeDisclosure.items?.length ? (
+            <ul className="mt-3 list-disc space-y-1 pl-6">
+              {financeDisclosure.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+      ) : null}
 
       <section className="mt-6 rounded border border-gray-200 p-4">
         <h2 className="text-2xl font-semibold">References and Sources</h2>

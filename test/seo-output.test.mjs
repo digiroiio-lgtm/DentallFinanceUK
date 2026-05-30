@@ -41,3 +41,29 @@ test("sitemap includes all calculator hub pages", () => {
     assert.ok(urls.includes(`https://dentalfinanceuk.co.uk/${slug}`), `Missing sitemap entry for /${slug}`);
   }
 });
+
+test("sitemap includes the full Turkey finance cluster", () => {
+  const data = sitemap();
+  const urls = data.map((item) => item.url);
+
+  const turkeyClusterSlugs = [
+    "turkey-teeth-finance",
+    "dental-treatment-turkey-finance",
+    "veneers-finance-turkey",
+    "dental-implants-finance-turkey",
+    "all-on-4-finance-turkey",
+    "all-on-6-finance-turkey",
+    "hollywood-smile-finance-turkey",
+    "full-mouth-reconstruction-finance-turkey",
+    "smile-makeover-finance-turkey",
+    "veneers-turkey-cost-monthly-payments",
+    "dental-implants-turkey-cost-monthly-payments",
+    "all-on-4-turkey-cost-monthly-payments",
+    "all-on-6-turkey-cost-monthly-payments",
+    "hollywood-smile-turkey-cost-monthly-payments",
+  ];
+
+  for (const slug of turkeyClusterSlugs) {
+    assert.ok(urls.includes(`https://dentalfinanceuk.co.uk/${slug}`), `Missing sitemap entry for /${slug}`);
+  }
+});

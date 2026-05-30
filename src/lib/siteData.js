@@ -786,6 +786,120 @@ function getMonthlyExamples(costBase) {
   ];
 }
 
+function buildTurkeySavingsRow(label, ukCost, turkeyCost) {
+  const saving = ukCost - turkeyCost;
+  const savingPct = Math.round((saving / ukCost) * 100);
+
+  return [label, toCurrency(ukCost), toCurrency(turkeyCost), toCurrency(saving), `${savingPct}%`];
+}
+
+function buildTurkeyMonthlyRow(label, amount, aprPct, term) {
+  const monthly = calcMonthly(amount, aprPct, term);
+  const total = monthly * term;
+
+  return [
+    label,
+    toCurrency(amount),
+    aprPct === 0 ? "0% APR" : `${aprPct}% APR`,
+    `${term} months`,
+    fmtMoney(monthly),
+    fmtMoney(total),
+  ];
+}
+
+function buildTurkeySavingsTable(treatmentLabel, ukBaseCost, turkeyBaseCost) {
+  return {
+    title: "UK vs Turkey Savings Table",
+    description: `Indicative private treatment pricing for ${treatmentLabel.toLowerCase()} before travel, accommodation, or remedial care costs.`,
+    headers: ["Scenario", "Typical UK private cost", "Typical Turkey cost", "Indicative saving", "Saving"],
+    rows: [
+      buildTurkeySavingsRow("Lower-range quote", Math.round(ukBaseCost * 0.9), Math.round(turkeyBaseCost * 0.85)),
+      buildTurkeySavingsRow("Typical quote", ukBaseCost, turkeyBaseCost),
+      buildTurkeySavingsRow("Premium quote", Math.round(ukBaseCost * 1.15), Math.round(turkeyBaseCost * 1.15)),
+    ],
+  };
+}
+
+function buildTurkeyMonthlyTable(treatmentLabel, turkeyBaseCost) {
+  return {
+    title: "Monthly Payment Table",
+    description: `Illustrative monthly payment examples for a UK patient funding ${treatmentLabel.toLowerCase()} in Turkey through a separate finance arrangement.`,
+    headers: ["Example", "Finance amount", "APR", "Term", "Monthly payment", "Total repayable"],
+    rows: [
+      buildTurkeyMonthlyRow("Short-term budget", Math.round(turkeyBaseCost * 0.85), 0, 12),
+      buildTurkeyMonthlyRow("Typical plan", turkeyBaseCost, 9.9, 24),
+      buildTurkeyMonthlyRow("Longer-term spread", Math.round(turkeyBaseCost * 1.15), 12.9, 36),
+    ],
+  };
+}
+
+const turkeyFinanceDisclosure = {
+  title: "Finance Disclosure",
+  intro:
+    "All Turkey finance examples on this website are illustrative only. UK patients typically use savings, staged clinic payments, or separate regulated credit agreements rather than a single guaranteed in-clinic finance product.",
+  items: [
+    "Finance is subject to status, affordability, and lender criteria.",
+    "Representative APR examples are not a formal credit offer or quotation.",
+    "Travel, accommodation, consultations, and remedial treatment may be extra.",
+    "Overseas clinics may not provide the same UK regulatory protections as a domestic lender-backed plan.",
+  ],
+};
+
+const turkeyMedicalReview = {
+  title: "Medical Review Section",
+  summary:
+    "This content has been reviewed for clinical suitability, aftercare planning, and the main risks UK patients should understand before travelling to Turkey for dental treatment.",
+};
+
+const turkeyReferenceList = [
+  "Financial Conduct Authority (FCA) consumer credit guidance",
+  "General Dental Council guidance on receiving dental treatment abroad",
+  "MoneyHelper guidance on loans, credit, and affordability checks",
+  "NHS guidance on dental treatment planning and informed consent",
+];
+
+const turkeyLinkLabels = {
+  "turkey-teeth-finance": "Turkey Teeth Finance",
+  "dental-treatment-turkey-finance": "Dental Treatment Turkey Finance",
+  "veneers-finance-turkey": "Veneers Finance Turkey",
+  "dental-implants-finance-turkey": "Dental Implants Finance Turkey",
+  "all-on-4-finance-turkey": "All-on-4 Finance Turkey",
+  "all-on-6-finance-turkey": "All-on-6 Finance Turkey",
+  "hollywood-smile-finance-turkey": "Hollywood Smile Finance Turkey",
+  "full-mouth-reconstruction-finance-turkey": "Full Mouth Reconstruction Finance Turkey",
+  "smile-makeover-finance-turkey": "Smile Makeover Finance Turkey",
+  "veneers-turkey-cost-monthly-payments": "Veneers Turkey Cost Monthly Payments",
+  "dental-implants-turkey-cost-monthly-payments": "Dental Implants Turkey Cost Monthly Payments",
+  "all-on-4-turkey-cost-monthly-payments": "All-on-4 Turkey Cost Monthly Payments",
+  "all-on-6-turkey-cost-monthly-payments": "All-on-6 Turkey Cost Monthly Payments",
+  "hollywood-smile-turkey-cost-monthly-payments": "Hollywood Smile Turkey Cost Monthly Payments",
+  "uk-vs-turkey-dental-costs": "UK vs Turkey Dental Costs",
+  "finance-calculator": "Finance Calculator",
+  "monthly-payment-calculator": "Monthly Payment Calculator",
+  "implant-finance-calculator": "Implant Finance Calculator",
+  "veneer-finance-calculator": "Veneer Finance Calculator",
+  "all-on-4-finance-calculator": "All-on-4 Finance Calculator",
+  "all-on-6-finance-calculator": "All-on-6 Finance Calculator",
+};
+
+function buildTurkeyInternalLinks(currentSlug, relatedSlugs = []) {
+  const defaults = [
+    "turkey-teeth-finance",
+    "dental-treatment-turkey-finance",
+    "uk-vs-turkey-dental-costs",
+    "finance-calculator",
+    "monthly-payment-calculator",
+  ];
+
+  return [...new Set([...relatedSlugs, ...defaults])]
+    .filter((slug) => slug !== currentSlug && turkeyLinkLabels[slug])
+    .slice(0, 8)
+    .map((slug) => ({
+      href: `/${slug}`,
+      label: turkeyLinkLabels[slug],
+    }));
+}
+
 function buildCityPage(city, service) {
   const slug = `${service.slugPrefix}-${city.slug}`;
   const title = `${service.titlePrefix} ${city.name}`;
@@ -884,6 +998,551 @@ function buildCityPage(city, service) {
 const cityPageEntries = cityCatalog.flatMap((city) =>
   cityServiceConfigs.map((service) => buildCityPage(city, service))
 );
+
+const turkeySupportingPageConfigs = [
+  {
+    slug: "veneers-finance-turkey",
+    title: "Veneers Finance Turkey",
+    treatmentLabel: "veneers",
+    ukBaseCost: 7800,
+    turkeyBaseCost: 3200,
+    budgetRange: "£2,200 to £4,500",
+    approvalFocus: "Shade planning, material choice, and warranty terms matter as much as the monthly cost.",
+    relatedSlugs: [
+      "veneers-turkey-cost-monthly-payments",
+      "hollywood-smile-finance-turkey",
+      "smile-makeover-finance-turkey",
+      "veneer-finance-calculator",
+    ],
+  },
+  {
+    slug: "dental-implants-finance-turkey",
+    title: "Dental Implants Finance Turkey",
+    treatmentLabel: "dental implants",
+    ukBaseCost: 9800,
+    turkeyBaseCost: 4200,
+    budgetRange: "£3,200 to £6,500",
+    approvalFocus: "Bone quality, implant system, and aftercare access are the biggest cost drivers.",
+    relatedSlugs: [
+      "dental-implants-turkey-cost-monthly-payments",
+      "all-on-4-finance-turkey",
+      "all-on-6-finance-turkey",
+      "implant-finance-calculator",
+    ],
+  },
+  {
+    slug: "all-on-4-finance-turkey",
+    title: "All-on-4 Finance Turkey",
+    treatmentLabel: "All-on-4 dental implants",
+    ukBaseCost: 16000,
+    turkeyBaseCost: 7800,
+    budgetRange: "£6,500 to £9,500",
+    approvalFocus: "Check whether the quote includes sedation, provisional teeth, and follow-up adjustments.",
+    relatedSlugs: [
+      "all-on-4-turkey-cost-monthly-payments",
+      "all-on-6-finance-turkey",
+      "full-mouth-reconstruction-finance-turkey",
+      "all-on-4-finance-calculator",
+    ],
+  },
+  {
+    slug: "all-on-6-finance-turkey",
+    title: "All-on-6 Finance Turkey",
+    treatmentLabel: "All-on-6 dental implants",
+    ukBaseCost: 19000,
+    turkeyBaseCost: 9200,
+    budgetRange: "£7,500 to £11,500",
+    approvalFocus: "The number of implants, grafting, and long-term maintenance change the finance need.",
+    relatedSlugs: [
+      "all-on-6-turkey-cost-monthly-payments",
+      "all-on-4-finance-turkey",
+      "full-mouth-reconstruction-finance-turkey",
+      "all-on-6-finance-calculator",
+    ],
+  },
+  {
+    slug: "hollywood-smile-finance-turkey",
+    title: "Hollywood Smile Finance Turkey",
+    treatmentLabel: "a Hollywood smile package",
+    ukBaseCost: 11000,
+    turkeyBaseCost: 4600,
+    budgetRange: "£3,500 to £6,500",
+    approvalFocus: "Smile design work, mock-ups, and the number of crowns or veneers affect the final cost.",
+    relatedSlugs: [
+      "hollywood-smile-turkey-cost-monthly-payments",
+      "veneers-finance-turkey",
+      "smile-makeover-finance-turkey",
+      "veneer-finance-calculator",
+    ],
+  },
+  {
+    slug: "full-mouth-reconstruction-finance-turkey",
+    title: "Full Mouth Reconstruction Finance Turkey",
+    treatmentLabel: "full mouth reconstruction",
+    ukBaseCost: 24000,
+    turkeyBaseCost: 11800,
+    budgetRange: "£9,500 to £15,000",
+    approvalFocus: "Complex reconstructions need a detailed phased plan, not just a headline monthly figure.",
+    relatedSlugs: [
+      "all-on-4-finance-turkey",
+      "all-on-6-finance-turkey",
+      "dental-treatment-turkey-finance",
+      "finance-calculator",
+    ],
+  },
+  {
+    slug: "smile-makeover-finance-turkey",
+    title: "Smile Makeover Finance Turkey",
+    treatmentLabel: "a smile makeover",
+    ukBaseCost: 12500,
+    turkeyBaseCost: 5200,
+    budgetRange: "£3,800 to £7,000",
+    approvalFocus: "Smile makeovers often bundle veneers, whitening, contouring, and temporary restorations.",
+    relatedSlugs: [
+      "veneers-finance-turkey",
+      "hollywood-smile-finance-turkey",
+      "dental-treatment-turkey-finance",
+      "veneer-finance-calculator",
+    ],
+  },
+];
+
+function buildTurkeySupportPage(config) {
+  const typicalMonthly = fmtMoney(calcMonthly(config.turkeyBaseCost, 9.9, 24));
+
+  return [
+    config.slug,
+    {
+      slug: config.slug,
+      title: config.title,
+      type: "article",
+      description: `Compare ${config.treatmentLabel} costs in the UK vs Turkey, review monthly payment examples, and see how UK patients typically fund treatment abroad.`,
+      answerBlock: `${config.title} usually means funding treatment abroad with savings, staged clinic payments, or a separate UK credit product. Typical Turkey costs start around ${config.budgetRange}, with representative monthly examples from about ${typicalMonthly} over 24 months.`,
+      keyTakeaways: [
+        `Typical Turkey budgets for ${config.treatmentLabel} are lower than private UK pricing, but travel and remedial care can narrow the saving.`,
+        "Monthly payment examples should be used to stress-test affordability rather than to assume guaranteed clinic finance.",
+        "Always compare material quality, aftercare, and revision policy before choosing the cheapest quote.",
+        config.approvalFocus,
+      ],
+      summaryRows: [
+        ["Treatment focus", config.treatmentLabel],
+        ["Typical Turkey budget", config.budgetRange],
+        ["Indicative UK private cost", toCurrency(config.ukBaseCost)],
+        ["Representative 24 month example", typicalMonthly],
+      ],
+      savingsTable: buildTurkeySavingsTable(config.treatmentLabel, config.ukBaseCost, config.turkeyBaseCost),
+      monthlyPaymentTable: buildTurkeyMonthlyTable(config.treatmentLabel, config.turkeyBaseCost),
+      sections: [
+        {
+          heading: `${config.title} overview`,
+          body: `UK patients usually pay for ${config.treatmentLabel} in Turkey by combining a deposit, staged clinic payments, and separate finance at home if required. Ask for a written plan showing what is included before you compare monthly budgets.`,
+        },
+        {
+          heading: "How much can UK patients save?",
+          body: `Turkey quotes can look materially lower than UK private pricing, but you should add flights, hotels, imaging, medications, and a realistic contingency fund for aftercare back home when calculating the true saving.`,
+        },
+        {
+          heading: "How monthly payments should be assessed",
+          body: `Use the monthly payment table to test whether a shorter 0% style budget, a typical representative APR plan, or a longer-term spread is manageable alongside travel costs and time away from work.`,
+        },
+        {
+          heading: "Clinical and aftercare checks",
+          body: `Before committing, confirm who handles complications, what warranty applies, how many visits are needed, and whether your UK dentist is willing to manage maintenance after treatment abroad.`,
+        },
+      ],
+      faqs: [
+        {
+          question: `Can I get ${config.treatmentLabel} in Turkey on monthly payments?`,
+          answer:
+            "Possibly, but many patients fund treatment through a separate UK lender or staged self-payment rather than a single guaranteed overseas clinic finance plan.",
+        },
+        {
+          question: `Is ${config.treatmentLabel} in Turkey cheaper than the UK?`,
+          answer:
+            "Typical headline prices are lower, but the true comparison should include travel, accommodation, diagnostics, maintenance, and any future remedial work.",
+        },
+        {
+          question: `What should I check before financing treatment abroad?`,
+          answer:
+            "Check the full treatment scope, brand or material specification, cancellation terms, aftercare responsibilities, and how problems would be resolved once you are back in the UK.",
+        },
+        {
+          question: `Do Turkey dental finance examples affect my credit score?`,
+          answer:
+            "No. Reading the content and using the tables on this site does not trigger a credit check. A formal lender application would be separate.",
+        },
+      ],
+      internalLinks: buildTurkeyInternalLinks(config.slug, config.relatedSlugs),
+      medicalReview: turkeyMedicalReview,
+      financeDisclosure: turkeyFinanceDisclosure,
+      author: "DentalFinanceUK Editorial Team",
+      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      references: turkeyReferenceList,
+      disclaimer:
+        "Educational only. This content does not replace a personalised treatment plan, travel risk assessment, or regulated financial advice.",
+      lastUpdated: "2026-05-30",
+    },
+  ];
+}
+
+const turkeyCostPageConfigs = [
+  {
+    slug: "veneers-turkey-cost-monthly-payments",
+    title: "Veneers Turkey Cost Monthly Payments",
+    treatmentLabel: "veneers",
+    ukBaseCost: 7800,
+    turkeyBaseCost: 3200,
+    budgetRange: "£2,200 to £4,500",
+    relatedSlugs: [
+      "veneers-finance-turkey",
+      "hollywood-smile-finance-turkey",
+      "smile-makeover-finance-turkey",
+      "veneer-finance-calculator",
+    ],
+  },
+  {
+    slug: "dental-implants-turkey-cost-monthly-payments",
+    title: "Dental Implants Turkey Cost Monthly Payments",
+    treatmentLabel: "dental implants",
+    ukBaseCost: 9800,
+    turkeyBaseCost: 4200,
+    budgetRange: "£3,200 to £6,500",
+    relatedSlugs: [
+      "dental-implants-finance-turkey",
+      "all-on-4-finance-turkey",
+      "all-on-6-finance-turkey",
+      "implant-finance-calculator",
+    ],
+  },
+  {
+    slug: "all-on-4-turkey-cost-monthly-payments",
+    title: "All-on-4 Turkey Cost Monthly Payments",
+    treatmentLabel: "All-on-4 dental implants",
+    ukBaseCost: 16000,
+    turkeyBaseCost: 7800,
+    budgetRange: "£6,500 to £9,500",
+    relatedSlugs: [
+      "all-on-4-finance-turkey",
+      "all-on-6-finance-turkey",
+      "full-mouth-reconstruction-finance-turkey",
+      "all-on-4-finance-calculator",
+    ],
+  },
+  {
+    slug: "all-on-6-turkey-cost-monthly-payments",
+    title: "All-on-6 Turkey Cost Monthly Payments",
+    treatmentLabel: "All-on-6 dental implants",
+    ukBaseCost: 19000,
+    turkeyBaseCost: 9200,
+    budgetRange: "£7,500 to £11,500",
+    relatedSlugs: [
+      "all-on-6-finance-turkey",
+      "all-on-4-finance-turkey",
+      "full-mouth-reconstruction-finance-turkey",
+      "all-on-6-finance-calculator",
+    ],
+  },
+  {
+    slug: "hollywood-smile-turkey-cost-monthly-payments",
+    title: "Hollywood Smile Turkey Cost Monthly Payments",
+    treatmentLabel: "a Hollywood smile package",
+    ukBaseCost: 11000,
+    turkeyBaseCost: 4600,
+    budgetRange: "£3,500 to £6,500",
+    relatedSlugs: [
+      "hollywood-smile-finance-turkey",
+      "veneers-finance-turkey",
+      "smile-makeover-finance-turkey",
+      "veneer-finance-calculator",
+    ],
+  },
+];
+
+function buildTurkeyCostPage(config) {
+  const illustrativeMonthly = fmtMoney(calcMonthly(config.turkeyBaseCost, 9.9, 24));
+
+  return [
+    config.slug,
+    {
+      slug: config.slug,
+      title: config.title,
+      type: "article",
+      description: `See typical ${config.treatmentLabel.toLowerCase()} costs in Turkey, compare monthly payment examples, and estimate UK vs Turkey savings before travel costs.`,
+      answerBlock: `${config.title} usually fall in the ${config.budgetRange} range, with representative monthly examples from roughly ${illustrativeMonthly} over 24 months if a UK patient spreads the cost using separate finance.`,
+      keyTakeaways: [
+        `Headline Turkey pricing for ${config.treatmentLabel} is often lower than the UK, but the final bill depends on treatment scope and travel planning.`,
+        "Monthly payments rise sharply when flights, hotel stays, and staged appointments are added to the finance amount.",
+        "Ask whether the quote includes scans, temporaries, sedation, medication, and follow-up appointments.",
+        "Never compare monthly payments without checking total repayable and aftercare responsibility.",
+      ],
+      summaryRows: [
+        ["Treatment focus", config.treatmentLabel],
+        ["Typical Turkey budget", config.budgetRange],
+        ["Typical UK private benchmark", toCurrency(config.ukBaseCost)],
+        ["Illustrative 24 month monthly payment", illustrativeMonthly],
+      ],
+      savingsTable: buildTurkeySavingsTable(config.treatmentLabel, config.ukBaseCost, config.turkeyBaseCost),
+      monthlyPaymentTable: buildTurkeyMonthlyTable(config.treatmentLabel, config.turkeyBaseCost),
+      sections: [
+        {
+          heading: `What ${config.treatmentLabel} in Turkey usually costs`,
+          body: `Most quotes vary according to diagnostics, materials, surgeon experience, number of appointments, and whether temporary restorations or sedation are included. Always request a written itemised quote before booking travel.`,
+        },
+        {
+          heading: "How monthly payments change the budget",
+          body: `A lower monthly figure can still lead to a higher total repayable if the term is extended or a representative APR is added. Use the table above to compare short-term affordability with the full financed cost.`,
+        },
+        {
+          heading: "What UK patients should include in their comparison",
+          body: `Add flights, accommodation, transfers, meals, time off work, and the cost of any future check-ups in the UK. This creates a more realistic cost comparison than using treatment price alone.`,
+        },
+        {
+          heading: "When the cheapest quote is the wrong choice",
+          body: `Avoid choosing purely on price if the provider will not confirm implant brands, veneer materials, warranty terms, or complication handling. Low-cost dentistry can become expensive if remedial treatment is needed later.`,
+        },
+      ],
+      faqs: [
+        {
+          question: `How much does ${config.treatmentLabel.toLowerCase()} in Turkey usually cost?`,
+          answer: `Typical treatment budgets are around ${config.budgetRange}, but your final quote depends on treatment complexity, clinic reputation, and what is included.`,
+        },
+        {
+          question: "Can I pay monthly for treatment in Turkey?",
+          answer:
+            "Some patients do, but this usually involves a separate UK finance product or staged self-payment rather than a universally available clinic finance plan.",
+        },
+        {
+          question: "Should travel costs be added to the finance amount?",
+          answer:
+            "Yes. Flights, hotels, transfers, and contingency costs can materially change the true budget and should be considered before agreeing to any credit product.",
+        },
+        {
+          question: "What is the safest way to compare quotes?",
+          answer:
+            "Compare itemised treatment plans, provider credentials, aftercare support, warranty wording, and the total repayable cost of any finance arrangement.",
+        },
+      ],
+      internalLinks: buildTurkeyInternalLinks(config.slug, config.relatedSlugs),
+      medicalReview: turkeyMedicalReview,
+      financeDisclosure: turkeyFinanceDisclosure,
+      author: "DentalFinanceUK Editorial Team",
+      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      references: turkeyReferenceList,
+      disclaimer:
+        "Educational only. Monthly figures are examples and are not personalised financial or medical advice.",
+      lastUpdated: "2026-05-30",
+    },
+  ];
+}
+
+const turkeyPageEntries = [
+  [
+    "turkey-teeth-finance",
+    {
+      slug: "turkey-teeth-finance",
+      title: "Turkey Teeth Finance",
+      type: "article",
+      description:
+        "UK to Turkey teeth finance guide covering treatment costs, payment plans, monthly payment examples, and UK vs Turkey savings across veneers, implants, and smile makeovers.",
+      answerBlock:
+        "Turkey teeth finance usually means comparing a lower overseas treatment quote with a separate UK payment plan or staged clinic payments. Savings can be substantial versus UK private dentistry, but total cost should include travel, aftercare, and any remedial treatment risk.",
+      keyTakeaways: [
+        "Turkey teeth payment plans can reduce upfront pressure, but they do not remove the need to assess total repayable and aftercare risk.",
+        "The strongest UK vs Turkey comparison includes travel, accommodation, medication, and follow-up appointments back home.",
+        "Monthly payment examples are most useful when paired with treatment-specific savings tables, not headline package prices alone.",
+        "Patients should prioritise written treatment scope, warranty terms, and clinical review over the lowest monthly payment.",
+      ],
+      summaryRows: [
+        ["Cluster focus", "UK patients comparing Turkey dental treatment finance"],
+        ["Typical Turkey treatment budget", "£2,200 to £15,000"],
+        ["Indicative UK vs Turkey saving range", "£2,000 to £12,000+"],
+        ["Common funding routes", "Savings, staged clinic payments, or separate UK credit"],
+      ],
+      savingsTable: {
+        title: "UK vs Turkey Savings Table",
+        description: "Indicative comparisons across the main Turkey treatment categories targeted by this content cluster.",
+        headers: ["Treatment", "Typical UK private cost", "Typical Turkey cost", "Indicative saving", "Saving"],
+        rows: [
+          buildTurkeySavingsRow("Veneers", 7800, 3200),
+          buildTurkeySavingsRow("Dental implants", 9800, 4200),
+          buildTurkeySavingsRow("All-on-4", 16000, 7800),
+          buildTurkeySavingsRow("All-on-6", 19000, 9200),
+          buildTurkeySavingsRow("Hollywood smile", 11000, 4600),
+        ],
+      },
+      monthlyPaymentTable: {
+        title: "Monthly Payment Table",
+        description: "Illustrative monthly examples showing how common Turkey treatment budgets might look if funded from the UK.",
+        headers: ["Treatment", "Finance amount", "APR", "Term", "Monthly payment", "Total repayable"],
+        rows: [
+          buildTurkeyMonthlyRow("Veneers typical plan", 3200, 9.9, 24),
+          buildTurkeyMonthlyRow("Implants typical plan", 4200, 9.9, 24),
+          buildTurkeyMonthlyRow("All-on-4 longer-term plan", 7800, 12.9, 36),
+          buildTurkeyMonthlyRow("All-on-6 longer-term plan", 9200, 12.9, 36),
+          buildTurkeyMonthlyRow("Hollywood smile short-term plan", 4600, 0, 12),
+        ],
+      },
+      sections: [
+        {
+          heading: "How UK to Turkey teeth finance usually works",
+          body: "Most UK patients do not use a single standardised overseas finance product. Instead, they compare the Turkey treatment quote, pay a deposit to secure treatment dates, and if needed arrange separate finance at home to spread the total cost.",
+        },
+        {
+          heading: "What the true UK vs Turkey saving looks like",
+          body: "A lower Turkey quote can still be good value, but only after adding travel, accommodation, medications, scans, and a realistic allowance for review appointments or remedial work in the UK.",
+        },
+        {
+          heading: "How to compare monthly payments safely",
+          body: "The right monthly payment is one that remains affordable after flights and contingency costs are added. Compare 12, 24, and 36 month scenarios and focus on total repayable, not only the lowest monthly figure.",
+        },
+        {
+          heading: "What to verify before committing",
+          body: "Request an itemised treatment plan, clarify which clinician is responsible for aftercare, confirm the brand or material used, and review cancellation, warranty, and complication policies before booking.",
+        },
+      ],
+      faqs: [
+        {
+          question: "Can I pay monthly for turkey teeth treatment?",
+          answer:
+            "Sometimes. Many UK patients spread the cost using savings, staged clinic payments, or separate UK credit rather than a guaranteed in-clinic Turkey finance plan.",
+        },
+        {
+          question: "Is turkey teeth finance cheaper than UK finance?",
+          answer:
+            "The treatment cost can be cheaper, but the total budget should include travel and aftercare. A cheaper headline package does not always mean a lower overall financed cost.",
+        },
+        {
+          question: "What should I check before agreeing to turkey teeth payment plans?",
+          answer:
+            "Check total repayable, treatment inclusions, warranty wording, who handles complications, how many visits are needed, and what happens if treatment is delayed or changed.",
+        },
+        {
+          question: "Does using these monthly payment examples affect my credit score?",
+          answer:
+            "No. The examples on this site are informational only. A credit check would only happen if you formally applied with a lender.",
+        },
+      ],
+      internalLinks: buildTurkeyInternalLinks("turkey-teeth-finance", [
+        "veneers-finance-turkey",
+        "dental-implants-finance-turkey",
+        "all-on-4-finance-turkey",
+        "all-on-6-finance-turkey",
+        "hollywood-smile-finance-turkey",
+        "dental-treatment-turkey-finance",
+      ]),
+      medicalReview: turkeyMedicalReview,
+      financeDisclosure: turkeyFinanceDisclosure,
+      author: "DentalFinanceUK Editorial Team",
+      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      references: turkeyReferenceList,
+      disclaimer:
+        "Educational only. Always get personalised dental advice, treatment planning, and regulated financial information before committing to care abroad.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  [
+    "dental-treatment-turkey-finance",
+    {
+      slug: "dental-treatment-turkey-finance",
+      title: "Dental Treatment Turkey Finance",
+      type: "article",
+      description:
+        "Guide to financing dental treatment in Turkey from the UK, including cost comparisons, monthly payment examples, and practical checks before travelling.",
+      answerBlock:
+        "Dental treatment Turkey finance means planning how you will pay for overseas care before you travel. UK patients often compare staged clinic payments with separate UK finance so they can budget for treatment, travel, and aftercare together.",
+      keyTakeaways: [
+        "The best finance plan is one that covers the full trip cost, not only the clinic quote.",
+        "Turkey can be cheaper than private UK dentistry, but cost alone should not outweigh clinical planning and aftercare support.",
+        "Monthly payment tables are useful for affordability modelling, especially on complex implant and smile rehabilitation cases.",
+        "Always ask whether scans, temporaries, medications, and adjustments are included in the quoted package.",
+      ],
+      summaryRows: [
+        ["Topic", "General dental treatment finance for Turkey"],
+        ["Typical Turkey budget", "£2,500 to £15,000+"],
+        ["Best use of finance", "Budgeting for treatment plus travel and aftercare"],
+        ["Core red flag", "Unclear treatment scope or warranty wording"],
+      ],
+      savingsTable: {
+        title: "UK vs Turkey Savings Table",
+        description: "Illustrative comparisons across common treatment types UK patients consider overseas.",
+        headers: ["Treatment", "Typical UK private cost", "Typical Turkey cost", "Indicative saving", "Saving"],
+        rows: [
+          buildTurkeySavingsRow("Cosmetic veneers", 7800, 3200),
+          buildTurkeySavingsRow("Single or multiple implants", 9800, 4200),
+          buildTurkeySavingsRow("Full-arch implant work", 16000, 7800),
+          buildTurkeySavingsRow("Smile makeover package", 12500, 5200),
+        ],
+      },
+      monthlyPaymentTable: {
+        title: "Monthly Payment Table",
+        description: "Illustrative examples for UK patients spreading the cost of common Turkey dental treatment budgets.",
+        headers: ["Example", "Finance amount", "APR", "Term", "Monthly payment", "Total repayable"],
+        rows: [
+          buildTurkeyMonthlyRow("Cosmetic treatment example", 3200, 9.9, 24),
+          buildTurkeyMonthlyRow("Implant treatment example", 4200, 9.9, 24),
+          buildTurkeyMonthlyRow("Complex case example", 7800, 12.9, 36),
+        ],
+      },
+      sections: [
+        {
+          heading: "When patients use finance for dental treatment in Turkey",
+          body: "Patients often use finance when the treatment plan is still cheaper than the UK but the upfront cost is too high to pay in one instalment. A realistic budget should cover the whole treatment journey, not just the clinic invoice.",
+        },
+        {
+          heading: "What to include in a full budget",
+          body: "Include scans, flights, accommodation, airport transfers, medications, temporary restorations, and the possibility of follow-up reviews in the UK. Complex implant cases usually need the largest contingency allowance.",
+        },
+        {
+          heading: "How to compare providers",
+          body: "Request itemised plans from at least two clinics, compare clinician credentials, confirm material and implant brand details, and ask exactly how complications would be managed once you return home.",
+        },
+        {
+          heading: "How internal linking supports your next step",
+          body: "Use the treatment-specific Turkey pages and the monthly payment calculators linked below to compare veneers, implants, full-arch procedures, and smile makeover scenarios in more detail.",
+        },
+      ],
+      faqs: [
+        {
+          question: "How do UK patients usually finance dental treatment in Turkey?",
+          answer:
+            "Many pay a deposit to the clinic and fund the balance through savings, staged payments, or a separate UK loan or finance product if they need to spread the cost.",
+        },
+        {
+          question: "Is Turkey dental treatment always cheaper than the UK?",
+          answer:
+            "Usually the headline quote is lower, but you should compare the full journey cost and not assume the lowest package will offer the best long-term value or safety.",
+        },
+        {
+          question: "Can I include flights and hotels in the finance amount?",
+          answer:
+            "Some patients choose to model that in their total budget, but any formal credit agreement would depend on the lender and product used.",
+        },
+        {
+          question: "What is the main risk when financing treatment abroad?",
+          answer:
+            "The biggest risk is underestimating the true cost if complications, revisions, or extra travel are needed after you return to the UK.",
+        },
+      ],
+      internalLinks: buildTurkeyInternalLinks("dental-treatment-turkey-finance", [
+        "turkey-teeth-finance",
+        "veneers-finance-turkey",
+        "dental-implants-finance-turkey",
+        "full-mouth-reconstruction-finance-turkey",
+        "smile-makeover-finance-turkey",
+      ]),
+      medicalReview: turkeyMedicalReview,
+      financeDisclosure: turkeyFinanceDisclosure,
+      author: "DentalFinanceUK Editorial Team",
+      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      references: turkeyReferenceList,
+      disclaimer:
+        "Educational only. Always confirm suitability with a clinician and review formal finance paperwork before agreeing to treatment abroad.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  ...turkeySupportingPageConfigs.map((config) => buildTurkeySupportPage(config)),
+  ...turkeyCostPageConfigs.map((config) => buildTurkeyCostPage(config)),
+];
 
 const basePageEntries = allPages.map(([slug, title, type]) => {
     const summaryRows = [
@@ -1081,7 +1740,7 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
     return [slug, base];
   });
 
-export const pageMap = Object.fromEntries([...basePageEntries, ...cityPageEntries]);
+export const pageMap = Object.fromEntries([...basePageEntries, ...cityPageEntries, ...turkeyPageEntries]);
 
 export const pageSlugs = Object.keys(pageMap);
 
