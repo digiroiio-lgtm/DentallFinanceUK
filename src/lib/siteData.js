@@ -90,6 +90,991 @@ const financeFaqs = [
   },
 ];
 
+const editorialRoadmap = [
+  {
+    "category": "Dental Finance",
+    "titles": [
+      "Dental Finance Explained: A UK Patient Guide to Paying Monthly",
+      "How 0% Dental Finance Works and When It Saves Money",
+      "Dental Finance Eligibility: What UK Lenders Usually Check",
+      "Is Dental Finance Worth It? Costs, Risks, and Benefits Compared",
+      "Dental Payment Plans vs Personal Loans for Treatment Costs",
+      "How Much Deposit Do You Need for Dental Finance?",
+      "Can You Use Dental Finance for Multiple Treatments at Once?",
+      "Dental Finance for Emergency Treatment: What to Know Before You Apply",
+      "How Dental Finance Affects Your Credit Score Over Time",
+      "What Documents You Need for a Dental Finance Application",
+      "Dental Finance for Self-Employed Patients in the UK",
+      "Can You Settle Dental Finance Early and Save Money?",
+      "Fixed APR vs Promotional Finance for Dental Treatment",
+      "What Happens If Your Dental Treatment Plan Changes After Approval?",
+      "How to Compare Dental Finance Quotes Without Focusing Only on Monthly Cost",
+      "Dental Finance Red Flags: Fees, Terms, and Warnings to Check First"
+    ]
+  },
+  {
+    "category": "Bad Credit Finance",
+    "titles": [
+      "Bad Credit Dental Finance: What Options Are Realistically Available?",
+      "Can You Get Dental Finance After Missed Payments or Defaults?",
+      "Bad Credit Dental Loans vs Clinic Finance: Which Is Safer?",
+      "How to Improve Your Chances of Dental Finance Approval With Bad Credit",
+      "Will a Guarantor Help With Bad Credit Dental Finance?",
+      "Can You Get 0% Dental Finance With Bad Credit?",
+      "Bad Credit Dental Finance for Implants: What Changes?",
+      "Bad Credit Dental Finance for Veneers: What to Expect",
+      "Soft Search vs Hard Search for Bad Credit Dental Applications",
+      "How Much More Does Bad Credit Dental Finance Cost?",
+      "Are BNPL Options Better Than Bad Credit Dental Finance?",
+      "What If You Are Declined for Dental Finance?",
+      "Does Checking Eligibility Hurt Your Credit Score?",
+      "Alternatives to Dental Finance When Your Credit File Is Weak"
+    ]
+  },
+  {
+    "category": "Dental Implants",
+    "titles": [
+      "Dental Implants Finance Explained: Monthly Payment Options in the UK",
+      "Single Implant Finance vs Full-Mouth Finance: What Changes?",
+      "Can You Get 0% Finance for Dental Implants?",
+      "How Much Do Dental Implants Cost Per Month on Finance?",
+      "Implant Finance for Bone Grafts, Scans, and Extras",
+      "How Long Can You Spread the Cost of Dental Implants?",
+      "Are Dental Implants Worth Financing Instead of Delaying Treatment?",
+      "Dental Implant Finance for One Tooth, Multiple Teeth, and Full Arches",
+      "Can Older Patients Get Dental Implants on Finance?",
+      "What Questions to Ask Before Signing an Implant Finance Agreement",
+      "Implant Finance With Bad Credit: Approval and Pricing Basics",
+      "Do Implant Packages Include Aftercare and Repairs?",
+      "Implant Finance vs Saving Up: Which Costs Less Overall?",
+      "How Clinics Price All-on-4 and All-on-6 Finance Plans",
+      "Dental Implant Consultation Fees and How They Affect Budgeting",
+      "What Happens If Implant Treatment Takes Longer Than Expected?"
+    ]
+  },
+  {
+    "category": "Veneers",
+    "titles": [
+      "Veneers Finance Explained: Spreading the Cost of a Smile Makeover",
+      "Composite vs Porcelain Veneers on Finance: Which Costs More Monthly?",
+      "Can You Get 0% Finance for Veneers in the UK?",
+      "How Much Do Veneers Cost Per Month? Realistic Finance Examples",
+      "Finance for 4, 6, 8, and 10 Veneers: What Changes?",
+      "Are Veneers Worth Financing for Cosmetic Treatment?",
+      "Veneers Finance With Bad Credit: What to Expect",
+      "How to Compare Veneer Packages Without Overpaying",
+      "Do Veneer Finance Plans Cover Repairs or Replacements?",
+      "What Deposit Do You Need for Veneers Finance?",
+      "Smile Makeover Finance vs Veneers Finance: Key Differences",
+      "Can You Finance Composite Bonding and Veneers Together?",
+      "What Happens If You Change Your Veneer Treatment Plan Midway?",
+      "Questions to Ask Before You Finance Cosmetic Dentistry"
+    ]
+  },
+  {
+    "category": "Turkey Dental Treatment",
+    "titles": [
+      "Turkey Teeth Finance Explained for UK Patients Considering Treatment Abroad",
+      "Can You Finance Dental Treatment in Turkey From the UK?",
+      "Turkey Teeth Costs vs Monthly Payments: What the Full Price Really Looks Like",
+      "How to Budget for Travel, Aftercare, and Revisions on Turkey Dental Treatment",
+      "Is Dental Work in Turkey Worth Financing?",
+      "Veneers in Turkey on Finance: What UK Patients Should Check",
+      "Dental Implants in Turkey on Finance: Risks, Savings, and Questions",
+      "All-on-4 Turkey Finance: What Is Usually Included?",
+      "What Consumer Protection Applies When You Finance Treatment Abroad?",
+      "How to Compare UK and Turkey Quotes Like for Like",
+      "Can You Get Aftercare in the UK After Treatment in Turkey?",
+      "Hidden Costs of Turkey Teeth Packages",
+      "What Happens If Complications Arise After Overseas Treatment?",
+      "Turkey Dental Treatment Red Flags: Clinics, Contracts, and Credit"
+    ]
+  },
+  {
+    "category": "Cost Guides",
+    "titles": [
+      "How Much Does Dental Finance Cost Per Month in the UK?",
+      "Dental Implants Cost Guide UK: Upfront Prices vs Finance Costs",
+      "Veneers Cost Guide UK: Monthly Payment Examples by Treatment Type",
+      "Turkey Teeth Cost Guide: Treatment, Travel, and Finance Combined",
+      "All-on-4 Cost Guide UK: Finance Examples and Total Repayable",
+      "All-on-6 Cost Guide UK: What Changes in Monthly Cost?",
+      "Composite Bonding Cost Guide: Pay Upfront or Finance?",
+      "Full Mouth Reconstruction Cost Guide UK",
+      "Root Canal and Crown Cost Guide for Private Patients",
+      "Invisalign and Cosmetic Dentistry Cost Guide UK",
+      "Emergency Dental Cost Guide: When Finance Makes Sense",
+      "Gum Treatment Cost Guide UK: Private Fees and Payment Plans",
+      "Smile Makeover Cost Guide: How to Budget Across Procedures",
+      "What Makes One Dental Quote More Expensive Than Another?"
+    ]
+  },
+  {
+    "category": "Finance Providers",
+    "titles": [
+      "How to Compare Dental Finance Providers Without Guesswork",
+      "0% Dental Finance Providers: What to Ask Before You Apply",
+      "Bad Credit Dental Finance Providers: How to Compare the Fine Print",
+      "Which Finance Providers Do UK Dental Clinics Commonly Use?",
+      "What Makes One Dental Finance Provider Better for Your Situation?",
+      "How Provider APRs, Terms, and Fees Change the Real Cost",
+      "Finance Provider Eligibility Checks: Why Decisions Differ",
+      "How to Verify a Dental Finance Provider Is FCA Authorised",
+      "Questions to Ask Clinics About Their Finance Provider Partnership",
+      "Can You Switch Dental Finance Providers After a Quote?",
+      "Provider Red Flags: Hidden Fees, Vague Terms, and Poor Disclosures",
+      "Dental Finance Provider Glossary: Terms Patients Should Understand"
+    ]
+  }
+];
+
+const editorialPublishedConfigs = [
+  {
+    "slug": "dental-finance-explained-uk-guide-paying-monthly",
+    "title": "Dental Finance Explained: A UK Patient Guide to Paying Monthly",
+    "category": "Dental Finance",
+    "keyword": "dental finance",
+    "treatment": "private dental treatment",
+    "audience": "UK patients who want to spread treatment costs without rushing into the wrong agreement",
+    "question": "how dental finance works in practice before they agree to any clinic quote",
+    "alt": "personal loans, credit cards, and staged treatment plans",
+    "amount": 3200,
+    "apr": 0,
+    "term": 24,
+    "relatedSlugs": [
+      "how-0-percent-dental-finance-works",
+      "dental-finance-eligibility-what-lenders-check",
+      "is-dental-finance-worth-it"
+    ]
+  },
+  {
+    "slug": "how-0-percent-dental-finance-works",
+    "title": "How 0% Dental Finance Works and When It Saves Money",
+    "category": "Dental Finance",
+    "keyword": "0% dental finance",
+    "treatment": "private dental treatment with an interest-free promotional plan",
+    "audience": "patients comparing headline monthly payments with the real total cost of care",
+    "question": "whether a genuine 0% plan is available and when it is better than longer interest-bearing finance",
+    "alt": "longer representative-APR finance and paying upfront from savings",
+    "amount": 3000,
+    "apr": 0,
+    "term": 18,
+    "relatedSlugs": [
+      "dental-finance-explained-uk-guide-paying-monthly",
+      "dental-finance-eligibility-what-lenders-check",
+      "is-dental-finance-worth-it"
+    ]
+  },
+  {
+    "slug": "dental-finance-eligibility-what-lenders-check",
+    "title": "Dental Finance Eligibility: What UK Lenders Usually Check",
+    "category": "Dental Finance",
+    "keyword": "dental finance eligibility",
+    "treatment": "clinic-arranged finance for private dentistry",
+    "audience": "borrowers who want to improve approval odds before they submit a full application",
+    "question": "what lenders usually review during affordability and identity checks",
+    "alt": "soft-search eligibility tools, smaller treatment phases, and alternative borrowing routes",
+    "amount": 2800,
+    "apr": 9.9,
+    "term": 24,
+    "relatedSlugs": [
+      "dental-finance-explained-uk-guide-paying-monthly",
+      "how-0-percent-dental-finance-works",
+      "is-dental-finance-worth-it"
+    ]
+  },
+  {
+    "slug": "is-dental-finance-worth-it",
+    "title": "Is Dental Finance Worth It? Costs, Risks, and Benefits Compared",
+    "category": "Dental Finance",
+    "keyword": "is dental finance worth it",
+    "treatment": "planned private dental treatment",
+    "audience": "patients weighing convenience against total borrowing cost and repayment risk",
+    "question": "whether finance is a sensible choice compared with waiting, saving, or using another credit product",
+    "alt": "saving up, personal loans, and credit cards",
+    "amount": 4000,
+    "apr": 7.9,
+    "term": 36,
+    "relatedSlugs": [
+      "dental-finance-explained-uk-guide-paying-monthly",
+      "how-0-percent-dental-finance-works",
+      "dental-finance-eligibility-what-lenders-check"
+    ]
+  },
+  {
+    "slug": "bad-credit-dental-finance-options",
+    "title": "Bad Credit Dental Finance: What Options Are Realistically Available?",
+    "category": "Bad Credit Finance",
+    "keyword": "bad credit dental finance",
+    "treatment": "private dental treatment when credit history is not perfect",
+    "audience": "patients with adverse credit who need realistic approval expectations rather than sales promises",
+    "question": "what products, checks, and compromises are common when applying with a weaker credit file",
+    "alt": "guarantor borrowing, staged treatment, and saving for part of the treatment cost",
+    "amount": 2500,
+    "apr": 14.9,
+    "term": 36,
+    "relatedSlugs": [
+      "dental-finance-after-missed-payments-or-defaults",
+      "bad-credit-dental-loans-vs-clinic-finance",
+      "improve-dental-finance-approval-with-bad-credit"
+    ]
+  },
+  {
+    "slug": "dental-finance-after-missed-payments-or-defaults",
+    "title": "Can You Get Dental Finance After Missed Payments or Defaults?",
+    "category": "Bad Credit Finance",
+    "keyword": "dental finance after defaults",
+    "treatment": "dental treatment finance after credit issues",
+    "audience": "borrowers who want to understand how past missed payments can affect current options",
+    "question": "whether recent or historic credit problems automatically rule out approval",
+    "alt": "specialist bad-credit lenders, deposits, and reduced treatment scope",
+    "amount": 2200,
+    "apr": 15.9,
+    "term": 24,
+    "relatedSlugs": [
+      "bad-credit-dental-finance-options",
+      "bad-credit-dental-loans-vs-clinic-finance",
+      "improve-dental-finance-approval-with-bad-credit"
+    ]
+  },
+  {
+    "slug": "bad-credit-dental-loans-vs-clinic-finance",
+    "title": "Bad Credit Dental Loans vs Clinic Finance: Which Is Safer?",
+    "category": "Bad Credit Finance",
+    "keyword": "bad credit dental loans vs clinic finance",
+    "treatment": "dental treatment funded through third-party borrowing",
+    "audience": "patients comparing direct clinic finance with separate borrowing from mainstream or specialist lenders",
+    "question": "which route tends to offer clearer terms, better consumer protections, and more predictable repayments",
+    "alt": "credit-builder strategies and partial upfront payment",
+    "amount": 2600,
+    "apr": 16.9,
+    "term": 36,
+    "relatedSlugs": [
+      "bad-credit-dental-finance-options",
+      "dental-finance-after-missed-payments-or-defaults",
+      "improve-dental-finance-approval-with-bad-credit"
+    ]
+  },
+  {
+    "slug": "improve-dental-finance-approval-with-bad-credit",
+    "title": "How to Improve Your Chances of Dental Finance Approval With Bad Credit",
+    "category": "Bad Credit Finance",
+    "keyword": "improve dental finance approval with bad credit",
+    "treatment": "dental finance applications from borrowers with thin or damaged credit files",
+    "audience": "people trying to strengthen affordability evidence before a lender makes a decision",
+    "question": "which practical preparation steps can make an application cleaner and more credible",
+    "alt": "reducing borrowing amount, using deposits, and postponing non-urgent work",
+    "amount": 1800,
+    "apr": 12.9,
+    "term": 24,
+    "relatedSlugs": [
+      "bad-credit-dental-finance-options",
+      "dental-finance-after-missed-payments-or-defaults",
+      "bad-credit-dental-loans-vs-clinic-finance"
+    ]
+  },
+  {
+    "slug": "dental-implants-finance-explained-monthly-options",
+    "title": "Dental Implants Finance Explained: Monthly Payment Options in the UK",
+    "category": "Dental Implants",
+    "keyword": "dental implants finance",
+    "treatment": "single, multiple, and full-arch dental implant treatment",
+    "audience": "patients facing large implant costs and looking for a structured way to compare monthly options",
+    "question": "how implant finance is usually structured and what drives the monthly payment higher or lower",
+    "alt": "saving in stages, treatment phasing, and other regulated credit options",
+    "amount": 6500,
+    "apr": 9.9,
+    "term": 48,
+    "relatedSlugs": [
+      "single-implant-finance-vs-full-mouth-finance",
+      "can-you-get-0-percent-finance-for-dental-implants",
+      "how-much-do-dental-implants-cost-per-month-on-finance"
+    ]
+  },
+  {
+    "slug": "single-implant-finance-vs-full-mouth-finance",
+    "title": "Single Implant Finance vs Full-Mouth Finance: What Changes?",
+    "category": "Dental Implants",
+    "keyword": "single implant finance vs full-mouth finance",
+    "treatment": "implant cases ranging from one missing tooth to full-mouth rehabilitation",
+    "audience": "patients trying to understand why finance structure changes as treatment becomes more complex",
+    "question": "how borrowing amount, treatment timeline, and extras affect total repayable",
+    "alt": "phased treatment, savings, and mixed funding approaches",
+    "amount": 9500,
+    "apr": 11.9,
+    "term": 60,
+    "relatedSlugs": [
+      "dental-implants-finance-explained-monthly-options",
+      "can-you-get-0-percent-finance-for-dental-implants",
+      "how-much-do-dental-implants-cost-per-month-on-finance"
+    ]
+  },
+  {
+    "slug": "can-you-get-0-percent-finance-for-dental-implants",
+    "title": "Can You Get 0% Finance for Dental Implants?",
+    "category": "Dental Implants",
+    "keyword": "0% finance for dental implants",
+    "treatment": "implant treatment offered with promotional finance terms",
+    "audience": "patients hoping to reduce the cost of borrowing on a high-value procedure",
+    "question": "when 0% finance is genuinely available for implants and what trade-offs often come with it",
+    "alt": "shorter-term promotional finance and longer APR-bearing plans",
+    "amount": 5000,
+    "apr": 0,
+    "term": 12,
+    "relatedSlugs": [
+      "dental-implants-finance-explained-monthly-options",
+      "single-implant-finance-vs-full-mouth-finance",
+      "how-much-do-dental-implants-cost-per-month-on-finance"
+    ]
+  },
+  {
+    "slug": "how-much-do-dental-implants-cost-per-month-on-finance",
+    "title": "How Much Do Dental Implants Cost Per Month on Finance?",
+    "category": "Dental Implants",
+    "keyword": "dental implants cost per month",
+    "treatment": "implant treatment budgets translated into monthly repayment examples",
+    "audience": "patients who need realistic payment ranges before committing to consultations or scans",
+    "question": "what monthly budgets might look like at different treatment values and term lengths",
+    "alt": "consultation budgeting and all-inclusive package comparisons",
+    "amount": 7000,
+    "apr": 9.9,
+    "term": 60,
+    "relatedSlugs": [
+      "dental-implants-finance-explained-monthly-options",
+      "single-implant-finance-vs-full-mouth-finance",
+      "can-you-get-0-percent-finance-for-dental-implants"
+    ]
+  },
+  {
+    "slug": "veneers-finance-explained-smile-makeover",
+    "title": "Veneers Finance Explained: Spreading the Cost of a Smile Makeover",
+    "category": "Veneers",
+    "keyword": "veneers finance",
+    "treatment": "composite or porcelain veneer treatment",
+    "audience": "cosmetic dentistry patients who want to plan a smile makeover without underestimating total cost",
+    "question": "how veneer finance works from quote stage through monthly repayment",
+    "alt": "staged cosmetic treatment and saving up for part of the plan",
+    "amount": 4200,
+    "apr": 9.9,
+    "term": 36,
+    "relatedSlugs": [
+      "composite-vs-porcelain-veneers-on-finance",
+      "can-you-get-0-percent-finance-for-veneers",
+      "how-much-do-veneers-cost-per-month"
+    ]
+  },
+  {
+    "slug": "composite-vs-porcelain-veneers-on-finance",
+    "title": "Composite vs Porcelain Veneers on Finance: Which Costs More Monthly?",
+    "category": "Veneers",
+    "keyword": "composite vs porcelain veneers on finance",
+    "treatment": "veneer treatment with different material choices and treatment scopes",
+    "audience": "patients comparing aesthetic outcome, longevity, and monthly affordability at the same time",
+    "question": "how material choice changes upfront price, maintenance expectations, and finance cost",
+    "alt": "composite bonding, phased veneer treatment, and mixed smile plans",
+    "amount": 5200,
+    "apr": 9.9,
+    "term": 36,
+    "relatedSlugs": [
+      "veneers-finance-explained-smile-makeover",
+      "can-you-get-0-percent-finance-for-veneers",
+      "how-much-do-veneers-cost-per-month"
+    ]
+  },
+  {
+    "slug": "can-you-get-0-percent-finance-for-veneers",
+    "title": "Can You Get 0% Finance for Veneers in the UK?",
+    "category": "Veneers",
+    "keyword": "0% finance for veneers",
+    "treatment": "cosmetic veneer treatment on promotional credit",
+    "audience": "patients attracted by low monthly payments but unsure what the full agreement includes",
+    "question": "when 0% veneer finance is available and what eligibility or term limits usually apply",
+    "alt": "longer interest-bearing plans and partial upfront payment",
+    "amount": 3600,
+    "apr": 0,
+    "term": 12,
+    "relatedSlugs": [
+      "veneers-finance-explained-smile-makeover",
+      "composite-vs-porcelain-veneers-on-finance",
+      "how-much-do-veneers-cost-per-month"
+    ]
+  },
+  {
+    "slug": "how-much-do-veneers-cost-per-month",
+    "title": "How Much Do Veneers Cost Per Month? Realistic Finance Examples",
+    "category": "Veneers",
+    "keyword": "veneers cost per month",
+    "treatment": "veneer budgets converted into monthly payment ranges",
+    "audience": "patients who want realistic monthly numbers before choosing the size of their smile makeover",
+    "question": "how monthly cost changes with veneer count, material, and repayment term",
+    "alt": "limiting veneer numbers or combining veneers with other cosmetic treatments later",
+    "amount": 4800,
+    "apr": 9.9,
+    "term": 48,
+    "relatedSlugs": [
+      "veneers-finance-explained-smile-makeover",
+      "composite-vs-porcelain-veneers-on-finance",
+      "can-you-get-0-percent-finance-for-veneers"
+    ]
+  },
+  {
+    "slug": "turkey-teeth-finance-explained-for-uk-patients",
+    "title": "Turkey Teeth Finance Explained for UK Patients Considering Treatment Abroad",
+    "category": "Turkey Dental Treatment",
+    "keyword": "Turkey teeth finance",
+    "treatment": "overseas cosmetic or restorative dental treatment in Turkey",
+    "audience": "UK patients comparing lower treatment prices abroad with the added complexity of travel and aftercare",
+    "question": "how overseas treatment finance differs from straightforward UK clinic borrowing",
+    "alt": "UK treatment finance, staged treatment, and saving for travel separately",
+    "amount": 4500,
+    "apr": 12.9,
+    "term": 36,
+    "relatedSlugs": [
+      "can-you-finance-dental-treatment-in-turkey-from-the-uk",
+      "turkey-teeth-costs-vs-monthly-payments",
+      "budget-for-travel-aftercare-revisions-turkey-dental-treatment"
+    ]
+  },
+  {
+    "slug": "can-you-finance-dental-treatment-in-turkey-from-the-uk",
+    "title": "Can You Finance Dental Treatment in Turkey From the UK?",
+    "category": "Turkey Dental Treatment",
+    "keyword": "finance dental treatment in Turkey from the UK",
+    "treatment": "Turkey-based dental treatment paid for by UK patients",
+    "audience": "patients checking what is actually financeable and where consumer protection starts and ends",
+    "question": "whether a UK resident can borrow for treatment abroad without missing hidden legal and practical issues",
+    "alt": "UK lenders, overseas clinic plans, and blended travel-plus-treatment budgeting",
+    "amount": 5000,
+    "apr": 13.9,
+    "term": 48,
+    "relatedSlugs": [
+      "turkey-teeth-finance-explained-for-uk-patients",
+      "turkey-teeth-costs-vs-monthly-payments",
+      "budget-for-travel-aftercare-revisions-turkey-dental-treatment"
+    ]
+  },
+  {
+    "slug": "turkey-teeth-costs-vs-monthly-payments",
+    "title": "Turkey Teeth Costs vs Monthly Payments: What the Full Price Really Looks Like",
+    "category": "Turkey Dental Treatment",
+    "keyword": "Turkey teeth costs vs monthly payments",
+    "treatment": "headline Turkey package quotes translated into a total project budget",
+    "audience": "patients who want to move past advertising prices and understand the whole commitment",
+    "question": "how flights, hotels, aftercare, revisions, and finance interest change the true cost",
+    "alt": "UK treatment comparisons and contingency budgeting",
+    "amount": 6200,
+    "apr": 14.9,
+    "term": 48,
+    "relatedSlugs": [
+      "turkey-teeth-finance-explained-for-uk-patients",
+      "can-you-finance-dental-treatment-in-turkey-from-the-uk",
+      "budget-for-travel-aftercare-revisions-turkey-dental-treatment"
+    ]
+  },
+  {
+    "slug": "budget-for-travel-aftercare-revisions-turkey-dental-treatment",
+    "title": "How to Budget for Travel, Aftercare, and Revisions on Turkey Dental Treatment",
+    "category": "Turkey Dental Treatment",
+    "keyword": "budget travel aftercare revisions Turkey dental treatment",
+    "treatment": "Turkey dental treatment involving travel, accommodation, and possible follow-up costs",
+    "audience": "patients who want a safer budget before committing to overseas treatment",
+    "question": "which non-treatment costs should be planned before signing any finance agreement",
+    "alt": "holding back a contingency fund and comparing UK aftercare arrangements",
+    "amount": 5500,
+    "apr": 13.9,
+    "term": 36,
+    "relatedSlugs": [
+      "turkey-teeth-finance-explained-for-uk-patients",
+      "can-you-finance-dental-treatment-in-turkey-from-the-uk",
+      "turkey-teeth-costs-vs-monthly-payments"
+    ]
+  },
+  {
+    "slug": "how-much-does-dental-finance-cost-per-month-uk",
+    "title": "How Much Does Dental Finance Cost Per Month in the UK?",
+    "category": "Cost Guides",
+    "keyword": "how much does dental finance cost per month",
+    "treatment": "private dental treatment across a range of budgets",
+    "audience": "patients at the start of research who need realistic UK repayment ranges",
+    "question": "what monthly payments look like once amount, APR, and term are combined",
+    "alt": "0% finance, representative APR products, and saving strategies",
+    "amount": 3000,
+    "apr": 9.9,
+    "term": 24,
+    "relatedSlugs": [
+      "dental-implants-cost-guide-uk-upfront-vs-finance",
+      "veneers-cost-guide-uk-monthly-payment-examples",
+      "turkey-teeth-cost-guide-treatment-travel-finance"
+    ]
+  },
+  {
+    "slug": "dental-implants-cost-guide-uk-upfront-vs-finance",
+    "title": "Dental Implants Cost Guide UK: Upfront Prices vs Finance Costs",
+    "category": "Cost Guides",
+    "keyword": "dental implants cost guide UK",
+    "treatment": "implant treatment priced both upfront and on finance",
+    "audience": "patients trying to understand the difference between sticker price and total repayable",
+    "question": "how implant pricing, extras, and APR affect the final budget",
+    "alt": "phased treatment and different implant package structures",
+    "amount": 7200,
+    "apr": 9.9,
+    "term": 48,
+    "relatedSlugs": [
+      "how-much-does-dental-finance-cost-per-month-uk",
+      "veneers-cost-guide-uk-monthly-payment-examples",
+      "turkey-teeth-cost-guide-treatment-travel-finance"
+    ]
+  },
+  {
+    "slug": "veneers-cost-guide-uk-monthly-payment-examples",
+    "title": "Veneers Cost Guide UK: Monthly Payment Examples by Treatment Type",
+    "category": "Cost Guides",
+    "keyword": "veneers cost guide UK",
+    "treatment": "veneer treatment with different counts and materials",
+    "audience": "cosmetic patients comparing smile design goals with a realistic budget",
+    "question": "how many veneers, material choice, and term length change monthly cost",
+    "alt": "composite bonding, partial smile makeovers, and phased treatment",
+    "amount": 4600,
+    "apr": 9.9,
+    "term": 36,
+    "relatedSlugs": [
+      "how-much-does-dental-finance-cost-per-month-uk",
+      "dental-implants-cost-guide-uk-upfront-vs-finance",
+      "turkey-teeth-cost-guide-treatment-travel-finance"
+    ]
+  },
+  {
+    "slug": "turkey-teeth-cost-guide-treatment-travel-finance",
+    "title": "Turkey Teeth Cost Guide: Treatment, Travel, and Finance Combined",
+    "category": "Cost Guides",
+    "keyword": "Turkey teeth cost guide",
+    "treatment": "Turkey-based dental treatment with travel and finance costs included",
+    "audience": "patients who need a more realistic all-in budget before comparing UK and overseas quotes",
+    "question": "how to build a full budget that includes treatment, travel, accommodation, aftercare, and borrowing cost",
+    "alt": "UK treatment finance comparisons and emergency contingency planning",
+    "amount": 6000,
+    "apr": 14.9,
+    "term": 48,
+    "relatedSlugs": [
+      "how-much-does-dental-finance-cost-per-month-uk",
+      "dental-implants-cost-guide-uk-upfront-vs-finance",
+      "veneers-cost-guide-uk-monthly-payment-examples"
+    ]
+  },
+  {
+    "slug": "how-to-compare-dental-finance-providers",
+    "title": "How to Compare Dental Finance Providers Without Guesswork",
+    "category": "Finance Providers",
+    "keyword": "compare dental finance providers",
+    "treatment": "any clinic-arranged finance product offered through a third-party provider",
+    "audience": "patients who want to assess the lender behind the clinic quote rather than focusing only on the treatment",
+    "question": "which provider checks, disclosures, and pricing details matter most before applying",
+    "alt": "independent loan quotes, clinic-arranged finance, and soft-search tools",
+    "amount": 3500,
+    "apr": 9.9,
+    "term": 36,
+    "relatedSlugs": []
+  }
+];
+
+const editorialLinkLabels = {
+  "blog": "Editorial Roadmap & Published Articles",
+  "dental-finance-uk": "Dental Finance UK",
+  "0-percent-dental-finance": "0% Dental Finance",
+  "dental-payment-plans": "Dental Payment Plans",
+  "finance-calculator": "Finance Calculator",
+  "bad-credit-dental-finance": "Bad Credit Dental Finance",
+  "dental-treatment-finance": "Dental Treatment Finance",
+  "dental-finance-vs-loan": "Dental Finance vs Loan",
+  "dental-loan-calculator": "Dental Loan Calculator",
+  "dental-implants-finance": "Dental Implants Finance",
+  "implant-finance-calculator": "Implant Finance Calculator",
+  "implant-cost-calculator": "Implant Cost Calculator",
+  "veneers-finance": "Veneers Finance",
+  "veneer-finance-calculator": "Veneer Finance Calculator",
+  "veneer-cost-calculator": "Veneer Cost Calculator",
+  "cosmetic-dentistry-finance": "Cosmetic Dentistry Finance",
+  "turkey-teeth-finance": "Turkey Teeth Finance",
+  "dental-treatment-turkey-finance": "Dental Treatment Turkey Finance",
+  "uk-vs-turkey-dental-costs": "UK vs Turkey Dental Costs",
+  "monthly-payment-calculator": "Monthly Payment Calculator",
+  "dental-finance-explained-uk-guide-paying-monthly": "Dental Finance Explained: A UK Patient Guide to Paying Monthly",
+  "how-0-percent-dental-finance-works": "How 0% Dental Finance Works and When It Saves Money",
+  "dental-finance-eligibility-what-lenders-check": "Dental Finance Eligibility: What UK Lenders Usually Check",
+  "is-dental-finance-worth-it": "Is Dental Finance Worth It? Costs, Risks, and Benefits Compared",
+  "bad-credit-dental-finance-options": "Bad Credit Dental Finance: What Options Are Realistically Available?",
+  "dental-finance-after-missed-payments-or-defaults": "Can You Get Dental Finance After Missed Payments or Defaults?",
+  "bad-credit-dental-loans-vs-clinic-finance": "Bad Credit Dental Loans vs Clinic Finance: Which Is Safer?",
+  "improve-dental-finance-approval-with-bad-credit": "How to Improve Your Chances of Dental Finance Approval With Bad Credit",
+  "dental-implants-finance-explained-monthly-options": "Dental Implants Finance Explained: Monthly Payment Options in the UK",
+  "single-implant-finance-vs-full-mouth-finance": "Single Implant Finance vs Full-Mouth Finance: What Changes?",
+  "can-you-get-0-percent-finance-for-dental-implants": "Can You Get 0% Finance for Dental Implants?",
+  "how-much-do-dental-implants-cost-per-month-on-finance": "How Much Do Dental Implants Cost Per Month on Finance?",
+  "veneers-finance-explained-smile-makeover": "Veneers Finance Explained: Spreading the Cost of a Smile Makeover",
+  "composite-vs-porcelain-veneers-on-finance": "Composite vs Porcelain Veneers on Finance: Which Costs More Monthly?",
+  "can-you-get-0-percent-finance-for-veneers": "Can You Get 0% Finance for Veneers in the UK?",
+  "how-much-do-veneers-cost-per-month": "How Much Do Veneers Cost Per Month? Realistic Finance Examples",
+  "turkey-teeth-finance-explained-for-uk-patients": "Turkey Teeth Finance Explained for UK Patients Considering Treatment Abroad",
+  "can-you-finance-dental-treatment-in-turkey-from-the-uk": "Can You Finance Dental Treatment in Turkey From the UK?",
+  "turkey-teeth-costs-vs-monthly-payments": "Turkey Teeth Costs vs Monthly Payments: What the Full Price Really Looks Like",
+  "budget-for-travel-aftercare-revisions-turkey-dental-treatment": "How to Budget for Travel, Aftercare, and Revisions on Turkey Dental Treatment",
+  "how-much-does-dental-finance-cost-per-month-uk": "How Much Does Dental Finance Cost Per Month in the UK?",
+  "dental-implants-cost-guide-uk-upfront-vs-finance": "Dental Implants Cost Guide UK: Upfront Prices vs Finance Costs",
+  "veneers-cost-guide-uk-monthly-payment-examples": "Veneers Cost Guide UK: Monthly Payment Examples by Treatment Type",
+  "turkey-teeth-cost-guide-treatment-travel-finance": "Turkey Teeth Cost Guide: Treatment, Travel, and Finance Combined",
+  "how-to-compare-dental-finance-providers": "How to Compare Dental Finance Providers Without Guesswork"
+};
+
+const editorialCategoryDefaults = {
+  "Dental Finance": [
+    "blog",
+    "dental-finance-uk",
+    "0-percent-dental-finance",
+    "dental-payment-plans",
+    "finance-calculator"
+  ],
+  "Bad Credit Finance": [
+    "blog",
+    "bad-credit-dental-finance",
+    "dental-treatment-finance",
+    "dental-finance-vs-loan",
+    "dental-loan-calculator"
+  ],
+  "Dental Implants": [
+    "blog",
+    "dental-implants-finance",
+    "implant-finance-calculator",
+    "implant-cost-calculator",
+    "dental-payment-plans"
+  ],
+  "Veneers": [
+    "blog",
+    "veneers-finance",
+    "veneer-finance-calculator",
+    "veneer-cost-calculator",
+    "cosmetic-dentistry-finance"
+  ],
+  "Turkey Dental Treatment": [
+    "blog",
+    "turkey-teeth-finance",
+    "dental-treatment-turkey-finance",
+    "uk-vs-turkey-dental-costs",
+    "monthly-payment-calculator"
+  ],
+  "Cost Guides": [
+    "blog",
+    "finance-calculator",
+    "dental-payment-plans",
+    "dental-finance-uk",
+    "uk-vs-turkey-dental-costs"
+  ],
+  "Finance Providers": [
+    "blog",
+    "0-percent-dental-finance",
+    "bad-credit-dental-finance",
+    "dental-finance-vs-loan",
+    "finance-calculator"
+  ]
+};
+
+const editorialReferenceLists = {
+  "Dental Finance": [
+    "Financial Conduct Authority (FCA) consumer credit guidance",
+    "MoneyHelper guidance on loans, credit scores, and affordability",
+    "NHS guidance on private dental treatment planning and patient consent"
+  ],
+  "Bad Credit Finance": [
+    "Financial Conduct Authority (FCA) guidance on creditworthiness and responsible lending",
+    "MoneyHelper guidance on bad credit borrowing and improving credit files",
+    "Experian UK guidance on credit reports, soft searches, and hard searches"
+  ],
+  "Dental Implants": [
+    "NHS guidance on dental implants and replacement options",
+    "General Dental Council guidance on treatment planning and consent",
+    "MoneyHelper guidance on comparing borrowing costs and APR"
+  ],
+  "Veneers": [
+    "General Dental Council guidance on cosmetic dentistry consent and communication",
+    "NHS guidance on dental veneers and private treatment considerations",
+    "MoneyHelper guidance on budgeting and comparing finance agreements"
+  ],
+  "Turkey Dental Treatment": [
+    "General Dental Council guidance on receiving dental treatment abroad",
+    "Financial Conduct Authority (FCA) consumer credit guidance",
+    "NHS guidance on informed consent, treatment planning, and follow-up care"
+  ],
+  "Cost Guides": [
+    "MoneyHelper guidance on APR, borrowing, and budgeting for major purchases",
+    "NHS guidance on dental treatment planning and private fee discussions",
+    "Financial Conduct Authority (FCA) consumer credit guidance"
+  ],
+  "Finance Providers": [
+    "Financial Conduct Authority (FCA) consumer credit guidance",
+    "Financial Services Register guidance on checking firm authorisation",
+    "MoneyHelper guidance on comparing loans and finance agreements"
+  ]
+};
+
+const editorialCategoryIntros = {
+  "Dental Finance": "This cluster builds top-of-funnel and mid-funnel coverage for readers comparing monthly payment options, APR structures, affordability checks, and borrowing risks before private treatment begins.",
+  "Bad Credit Finance": "This cluster targets patients who need realistic guidance on adverse-credit borrowing, lender checks, decline scenarios, and safer fallback options rather than over-promising approval odds.",
+  "Dental Implants": "This cluster supports high-intent readers researching implant finance, monthly budgets, treatment complexity, and the difference between single-tooth and full-arch funding decisions.",
+  "Veneers": "This cluster focuses on cosmetic patients comparing veneer materials, smile makeover scope, promotional finance offers, and the real monthly cost of different veneer plans.",
+  "Turkey Dental Treatment": "This cluster addresses overseas-treatment intent by combining finance, travel, aftercare, regulatory, and red-flag content for UK readers considering treatment in Turkey.",
+  "Cost Guides": "This cluster captures price-led searches by translating treatment fees into monthly payment examples, total repayable figures, and realistic budgeting frameworks.",
+  "Finance Providers": "This cluster helps users understand the lender behind the clinic quote, compare provider features, and evaluate disclosures, eligibility rules, and authorisation checks."
+};
+
+
+function buildEditorialInternalLinks(config) {
+  return [...new Set([...(editorialCategoryDefaults[config.category] ?? []), ...(config.relatedSlugs ?? [])])]
+    .filter((slug) => slug !== config.slug && editorialLinkLabels[slug])
+    .slice(0, 8)
+    .map((slug) => ({ href: `/${slug}`, label: editorialLinkLabels[slug] }));
+}
+
+function buildEditorialFaqs(config, example) {
+  return [
+    {
+      question: `Can I use ${config.keyword} for ${config.treatment}?`,
+      answer:
+        `Usually yes, provided the clinic offers regulated finance and the lender is comfortable with your affordability profile. Always confirm whether the quoted amount covers the full treatment plan, scans, laboratory work, retainers, aftercare, and any deposit requirements before you apply.`,
+    },
+    {
+      question: `What does ${config.keyword} look like on a monthly budget?`,
+      answer:
+        `On the illustrative example used in this guide, ${fmtMoney(example.amount)} over ${example.term} months is about ${example.monthly}. Your actual payment can be lower or higher depending on the final treatment cost, APR, and repayment term you agree with the lender.`,
+    },
+    {
+      question: `Will ${config.keyword} affect my credit score?`,
+      answer:
+        `Most formal applications involve a credit search and any missed repayment can damage your credit profile. Some clinics also offer soft-search eligibility checks, but you should verify exactly when a hard search takes place before you consent.`,
+    },
+    {
+      question: `What should I compare before choosing ${config.keyword}?`,
+      answer:
+        `Compare the total repayable, APR, length of the agreement, deposit requirement, early settlement rules, and whether the treatment quote is fixed. It is also sensible to compare those costs with ${config.alt} so that you are not choosing based only on a lower monthly payment.`,
+    },
+    {
+      question: `Who is ${config.keyword} best suited to?`,
+      answer:
+        `It is usually best suited to readers who understand the total cost and can manage the repayment comfortably alongside travel, maintenance, or emergency expenses. If the monthly commitment feels tight, ask the clinic whether treatment can be phased or whether a smaller borrowing amount would still meet your goals.`,
+    },
+  ];
+}
+
+function buildEditorialSections(config, example) {
+  const aprLabel = example.apr === 0 ? "0% APR" : `${example.apr}% APR`;
+
+  return [
+    {
+      heading: "Why this topic matters to UK patients",
+      paragraphs: [
+        `${config.title} matters because many readers start their research with the same question: ${config.question}. In practical terms, ${config.keyword} sits at the point where treatment planning, household budgeting, and regulated borrowing all meet. Patients are often given a headline quote in clinic, a suggested term length, and a quick repayment illustration, yet they still need enough context to decide whether the offer fits their circumstances. This is why the decision cannot be reduced to a single monthly figure or a marketing phrase such as interest free or low deposit.`,
+        `${config.audience} They usually need a framework that explains how lenders think, what a clinic quote really includes, and where seemingly small contract details can change the final cost. A thorough guide should therefore cover more than approval criteria. It should also show how repayment length affects total cost, why treatment extras matter, and how to prepare questions before signing a regulated agreement. That approach helps readers make a calmer decision rather than responding to urgency on the treatment day.`,
+        `For UK readers, the subject also has a consumer-protection angle. Finance for treatment is different from simply paying with a debit card because the lender, the clinic, and the treatment schedule can all influence the experience. Clear editorial coverage helps readers understand who they are borrowing from, which figures are illustrative, and when it is sensible to pause and compare ${config.alt} before moving forward.`,
+      ],
+    },
+    {
+      heading: "How the pricing usually works",
+      paragraphs: [
+        `The first thing to understand is that the treatment price and the finance price are not always the same story. A quote for ${config.treatment} may look simple, but the number on the treatment plan can include or exclude diagnostics, laboratory work, retainers, surgical extras, temporary restorations, aftercare visits, travel costs, or contingency work. If any of those items sit outside the financed amount, the real out-of-pocket cost can be higher than expected even when the repayment looks affordable.`,
+        `Using a clear sample helps. In this guide, the illustrative example is ${fmtMoney(example.amount)} over ${example.term} months at ${aprLabel}. That produces an indicative monthly repayment of ${example.monthly}, a total repayable of ${example.total}, and total interest of ${example.interest}. Those figures are not a quote, but they show the core trade-off: extending the term can make the monthly figure feel easier while also increasing the total cost unless the agreement is genuinely interest free.`,
+        `Readers should also check how the clinic handles deposits and staged treatment. Some clinics finance the full amount, while others ask for a deposit or only finance the core treatment value. If the plan changes after approval, the patient may need a new application, an amended treatment plan, or separate funding for additional work. That is why cost checking must happen before the patient focuses on the application itself.`,
+      ],
+    },
+    {
+      heading: "What lenders and clinics usually assess",
+      paragraphs: [
+        `Although each lender has its own policy, most decisions for ${config.keyword} revolve around a familiar mix of identity checks, residency status, income stability, existing commitments, and overall affordability. A clinic may discuss treatment suitability first, but the lender still wants evidence that the proposed monthly payment is manageable in the context of rent, mortgage, household bills, and existing credit commitments. That is why a patient can be clinically suitable for treatment and still receive a finance outcome that is different from what they expected.`,
+        `The practical questions are usually straightforward. Is the borrower over the lender’s minimum age? Are they a UK resident with a bank account? Is the borrowing amount proportionate to income and regular commitments? Does the credit file show recent stress, frequent new applications, or missed payments? Some clinics can tell a patient whether they offer a soft-search eligibility tool before a full application, but readers should always ask exactly when a hard search is triggered.`,
+        `Clinics also influence the experience because the finance journey is attached to a treatment plan. If the plan is still moving, if the patient has not agreed the scope of work, or if the clinic has not itemised likely extras, the patient can enter the borrowing process too early. A better approach is to make sure the treatment plan is specific enough that the finance illustration reflects the likely real cost, not an incomplete starting estimate.`,
+      ],
+    },
+    {
+      heading: "Comparing finance with the alternatives",
+      paragraphs: [
+        `A strong comparison always goes beyond the monthly figure. For many readers, the real choice is not simply whether to use ${config.keyword}, but whether to use it instead of ${config.alt}. Some alternatives may look more flexible because they are not linked to a treatment plan, while clinic-arranged finance can feel simpler because it is presented at the point of care. Neither option is automatically better. The right answer depends on total cost, flexibility, credit impact, and how certain the treatment scope really is.`,
+        `For example, a longer personal loan may offer a lower monthly payment than a shorter clinic agreement, but the total repayable can still be higher once interest is added over time. A credit card may offer short-term flexibility, yet it can become expensive if the balance is not cleared quickly. Saving first can remove borrowing cost altogether, but that only works when delaying treatment is clinically sensible and practically realistic. Readers should therefore compare at least three things at the same time: total repayable, term length, and how easy the funding method is to adjust if treatment changes.`,
+        `This comparison mindset is especially important for readers who are making a high-value decision. It is easy to anchor on the first approved plan because approval feels like progress, but approval alone does not prove value. The better question is whether the chosen route makes sense after comparing the full borrowing cost, the treatment timeline, and the patient’s own tolerance for ongoing repayment.`,
+      ],
+    },
+    {
+      heading: "Risks, red flags, and hidden pressure points",
+      paragraphs: [
+        `Every borrowing route carries risk, and the risks are often most visible in the small print or in the timing of the sale. Red flags include vague statements about representative APR, unclear treatment inclusions, pressure to apply before the patient has reviewed the treatment plan, or a clinic discussion that focuses only on affordability rather than total repayable. Readers should also watch for agreements that seem inexpensive only because the quoted term is very long or because likely extras are not yet included in the financed amount.`,
+        `Another risk is over-borrowing. Patients researching ${config.treatment} can become focused on the ideal final result and accept a borrowing amount that feels only slightly higher than planned. In reality, even a modest increase can change total interest, lengthen the term, or reduce financial headroom for aftercare and emergencies. Where treatment is partly elective or cosmetic, there is even more reason to pause before committing to a repayment that would be difficult to manage if circumstances changed.`,
+        `Finally, readers should consider what happens if treatment or life circumstances shift. Early settlement terms, missed-payment consequences, refund processes, and complaint routes all matter. A patient who understands those pathways in advance is far less likely to confuse treatment dissatisfaction with finance obligations or to assume that a change in treatment automatically pauses the credit agreement.`,
+      ],
+    },
+    {
+      heading: "Questions to ask before you apply",
+      paragraphs: [
+        `Before applying, readers should ask the clinic for a treatment breakdown that is detailed enough to support a finance decision. That means confirming what is included, what may change later, what deposit is required, and whether any maintenance, repairs, or travel expenses sit outside the core quote. Patients should also ask which lender provides the agreement, whether the clinic offers more than one finance route, and whether the initial check is a soft search or a full application.`,
+        `The next set of questions should focus on the contract itself. What is the APR and is it fixed for the whole term? What is the total repayable? Are there fees for missed payments or early settlement? If the treatment plan changes, does the patient need a new agreement? If the treatment is delayed or cancelled, how is the finance handled? Those questions sound basic, but they are often the difference between a controlled borrowing decision and one that feels confusing later.`,
+        `Readers should also ask themselves a few internal questions. Would the repayment still feel comfortable if another household bill increased? Is the treatment urgent enough to justify borrowing now? Have they compared at least one alternative funding route? Are they using finance because it is the best option or because it is the first option offered? Honest answers to those questions usually improve the quality of the final decision.`,
+      ],
+    },
+    {
+      heading: "Worked repayment example",
+      paragraphs: [
+        `To ground the decision, return to the sample illustration: ${fmtMoney(example.amount)} over ${example.term} months at ${aprLabel}. On that basis, the monthly payment is about ${example.monthly} and the total repayable is about ${example.total}. If the plan is a 0% offer, the monthly figure is simply the treatment cost divided across the promotional term. If the plan carries interest, the higher total repayable shows the premium paid for spreading the cost rather than settling it immediately.`,
+        `This kind of example is useful because it gives readers a budgeting reference point. A patient may decide that ${example.monthly} fits comfortably within monthly cash flow, or they may realise that the amount leaves too little room for aftercare, travel, or other commitments. In that case, the right move may be to shorten the treatment scope, increase the deposit, or delay the application until the budget is stronger. Using a worked example in this way turns finance into a planning decision rather than a reactive one.`,
+        `It is also worth modelling what happens when the term changes. Shorter terms push the monthly figure up but usually reduce the total borrowing cost. Longer terms do the reverse. Readers who understand that trade-off are less likely to be swayed by low monthly marketing and more likely to choose a structure that matches both the treatment plan and long-term affordability.`,
+      ],
+    },
+    {
+      heading: "UK consumer protection and compliance context",
+      paragraphs: [
+        `Because this topic sits inside regulated borrowing, UK readers should treat compliance language as practical information rather than formal background noise. The presence of a regulated lender, clear pre-contract information, a representative example where required, and transparent affordability messaging all help the patient evaluate whether the journey is being handled properly. Readers should not be embarrassed to ask for paperwork, clarification, or time to review terms away from the clinic chair.`,
+        `Consumer protection also depends on clear separation between treatment advice and borrowing decisions. A clinician can explain treatment options, while the lender is responsible for the credit decision and finance documentation. Patients benefit when both roles are clear. If the process feels rushed or if the patient is not sure who is responsible for which part of the agreement, that uncertainty is itself a reason to slow down and ask more questions.`,
+        `The compliance angle is especially relevant for complex or high-value cases because the consequences of misunderstanding are bigger. A patient who keeps records, compares disclosures, and reads the key terms before applying is in a stronger position whether the result is approval, decline, treatment change, or a later complaint. Good preparation is therefore part of good consumer protection.`,
+      ],
+    },
+    {
+      heading: "A practical decision checklist",
+      paragraphs: [
+        `A useful checklist for ${config.keyword} is simple. Confirm the treatment scope. Confirm the financed amount. Confirm the monthly payment, APR, total repayable, and term. Confirm whether a deposit, travel budget, or aftercare cost sits outside the plan. Confirm what happens if treatment changes or the patient settles early. Then compare that full picture with ${config.alt}. If one of those answers is still unclear, the patient does not yet have enough information to make a strong decision.`,
+        `Readers should also look at timing. Applying too early can lock attention onto borrowing before the treatment plan is stable, while applying too late can create unnecessary stress when treatment is urgent. The best time is usually after the quote is detailed enough to be credible but before the patient has committed emotionally to one funding route. That timing gives space for comparison without losing momentum.`,
+        `Finally, readers should remember that affordability is not only about being approved. A plan can be approved and still be a poor fit for the patient’s wider finances. The best borrowing decisions are the ones that remain manageable after the excitement of treatment has passed and ordinary monthly life resumes.`,
+      ],
+    },
+    {
+      heading: "Bottom line",
+      paragraphs: [
+        `${config.title} should leave readers with a straightforward conclusion: finance can be useful when it helps them access the right treatment at the right time, but it only works well when the quote is clear, the total cost is understood, and the repayment is comfortably affordable. That is why editorial coverage must connect treatment decisions with borrowing decisions instead of treating them as separate conversations.`,
+        `In practice, the strongest next step is to collect a written treatment plan, compare at least one alternative funding route, and review the agreement in terms of total repayable rather than headline affordability alone. Readers researching ${config.keyword} will usually get better outcomes when they are willing to pause, ask for detail, and model a few scenarios before they commit.`,
+        `That balanced approach keeps control with the patient. It reduces the chance of surprise costs, makes the final agreement easier to understand, and helps the reader choose a route that fits both the treatment goal and the realities of everyday budgeting.`,
+      ],
+    },
+  ];
+}
+
+function buildEditorialArticleEntry(config) {
+  const monthlyPayment = calcMonthly(config.amount, config.apr, config.term);
+  const totalRepayable = monthlyPayment * config.term;
+  const example = {
+    amount: config.amount,
+    apr: config.apr,
+    term: config.term,
+    monthly: fmtMoney(monthlyPayment),
+    total: fmtMoney(totalRepayable),
+    interest: fmtMoney(totalRepayable - config.amount),
+  };
+
+  return [
+    config.slug,
+    {
+      slug: config.slug,
+      title: config.title,
+      type: "article",
+      description: `${config.title} for UK readers: monthly payment examples, lender checks, repayment risks, internal comparisons, and practical questions to ask before applying.`,
+      answerBlock:
+        `${config.title} helps readers understand ${config.question}. This guide pairs treatment-planning context with borrowing examples so patients can compare affordability, total repayable, and practical risks before they commit.`,
+      keyTakeaways: [
+        `Compare total repayable and APR, not only the monthly figure, when reviewing ${config.keyword}.`,
+        `Check that the finance amount matches the real scope of ${config.treatment}, including likely extras and deposits.`,
+        `Ask whether the lender uses a soft-search eligibility step or a full hard-search application.`,
+        `Model at least one alternative to ${config.keyword}, including ${config.alt}.`,
+      ],
+      summaryRows: [
+        ["Primary topic", config.category],
+        ["Illustrative amount", fmtMoney(config.amount)],
+        ["Illustrative term", `${config.term} months`],
+        ["Illustrative APR", config.apr === 0 ? "0% APR" : `${config.apr}% APR`],
+        ["Illustrative monthly payment", example.monthly],
+        ["Illustrative total repayable", example.total],
+      ],
+      sections: buildEditorialSections(config, example),
+      faqs: buildEditorialFaqs(config, example),
+      internalLinks: buildEditorialInternalLinks(config),
+      author: "DentalFinanceUK Editorial Team",
+      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      references: editorialReferenceLists[config.category] ?? comparisonReferenceList,
+      disclaimer:
+        "Educational only. Borrowing availability, APR, and treatment suitability depend on the lender, clinic, and your circumstances. Review regulated credit documents and clinical advice before proceeding.",
+      lastUpdated: "2026-05-30",
+    },
+  ];
+}
+
+const editorialPublishedEntries = editorialPublishedConfigs.map((config) => buildEditorialArticleEntry(config));
+
+const editorialRoadmapEntry = [
+  "blog",
+  {
+    slug: "blog",
+    title: "Dental Finance UK Editorial Roadmap",
+    type: "article",
+    description:
+      "Editorial roadmap for Dental Finance UK with 100 grouped blog titles and the first 25 long-form articles published across finance, bad credit, implants, veneers, Turkey treatment, cost guides, and provider topics.",
+    answerBlock:
+      "This editorial roadmap groups 100 blog titles across seven search-intent clusters and links directly to the first 25 articles that are now published on the site.",
+    keyTakeaways: [
+      "100 blog titles grouped into Dental Finance, Bad Credit Finance, Dental Implants, Veneers, Turkey Dental Treatment, Cost Guides, and Finance Providers.",
+      "The first 25 articles are published and linked directly from this roadmap.",
+      "Every published article uses the core article template with FAQ schema, references, author, reviewer, and internal links.",
+      "The roadmap balances commercial, informational, comparison, and cost-led search intent.",
+    ],
+    summaryRows: [
+      ["Total roadmap titles", "100"],
+      ["Published now", `${editorialPublishedConfigs.length}`],
+      ...editorialRoadmap.map((group) => [group.category, `${group.titles.length} titles`]),
+    ],
+    sections: editorialRoadmap.map((group) => ({
+      heading: group.category,
+      paragraphs: [
+        editorialCategoryIntros[group.category],
+        `${group.titles.filter((title) => editorialPublishedConfigs.some((article) => article.title === title)).length} of these titles are already live and linked below where applicable, creating an immediate foundation for internal linking and topical depth within the cluster.`,
+      ],
+      ordered: true,
+      items: group.titles.map((title) => {
+        const match = editorialPublishedConfigs.find((article) => article.title === title);
+        return match ? { text: `${title} (published)`, href: `/${match.slug}` } : { text: title };
+      }),
+    })),
+    faqs: [
+      {
+        question: "How many titles are included in the editorial roadmap?",
+        answer:
+          "The roadmap contains 100 titles grouped across seven categories: Dental Finance, Bad Credit Finance, Dental Implants, Veneers, Turkey Dental Treatment, Cost Guides, and Finance Providers.",
+      },
+      {
+        question: "How many articles are already published?",
+        answer:
+          `The first ${editorialPublishedConfigs.length} articles are published immediately and linked from the relevant category lists above.`,
+      },
+      {
+        question: "Do the published articles include FAQ schema and references?",
+        answer:
+          "Yes. The published articles use the site’s article template, which outputs FAQ schema, author and reviewer information, references, disclaimers, and internal links.",
+      },
+      {
+        question: "Why are the titles grouped by category?",
+        answer:
+          "Grouping the titles by category creates clearer search-intent silos, improves internal linking opportunities, and makes it easier to expand topical authority without publishing disconnected articles.",
+      },
+      {
+        question: "What happens after the first 25 articles?",
+        answer:
+          "The remaining 75 titles can be published in the same cluster order so that each category grows with a mix of guides, comparisons, cost content, and provider-focused articles.",
+      },
+    ],
+    internalLinks: editorialPublishedConfigs.slice(0, 8).map((article) => ({ href: `/${article.slug}`, label: article.title })),
+    author: "DentalFinanceUK Editorial Team",
+    reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+    references: [
+      "DentalFinanceUK editorial policy",
+      "Financial Conduct Authority (FCA) consumer credit guidance",
+      "MoneyHelper guidance on loans, APR, and affordability",
+    ],
+    disclaimer:
+      "Editorial planning content is informational only. Clinical suitability and borrowing options depend on individual circumstances and regulated provider terms.",
+    lastUpdated: "2026-05-30",
+  },
+];
+
+
 const allPages = [
   ["dental-finance-uk", "Dental Finance UK", "article"],
   ["dental-monthly-payments", "Dental Monthly Payments", "article"],
@@ -2602,6 +3587,8 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
 
 export const pageMap = Object.fromEntries([
   ...basePageEntries,
+  editorialRoadmapEntry,
+  ...editorialPublishedEntries,
   ...cityPageEntries,
   ...turkeyPageEntries,
   ...financeComparisonEntries,

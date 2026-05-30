@@ -125,6 +125,45 @@ function SavingsCalculation({ calculation }) {
   );
 }
 
+function SectionContent({ section }) {
+  const items = section.items ?? [];
+  const ListTag = section.ordered ? "ol" : "ul";
+
+  return (
+    <>
+      {section.paragraphs?.length
+        ? section.paragraphs.map((paragraph, index) => (
+            <p key={`${section.heading}-paragraph-${index}`} className="mt-2">
+              {paragraph}
+            </p>
+          ))
+        : section.body
+          ? <p className="mt-2">{section.body}</p>
+          : null}
+
+      {items.length > 0 ? (
+        <ListTag className={`mt-3 space-y-2 pl-6 ${section.ordered ? "list-decimal" : "list-disc"}`}>
+          {items.map((item, index) => {
+            const value = typeof item === "string" ? { text: item } : item;
+
+            return (
+              <li key={`${section.heading}-item-${index}`}>
+                {value.href ? (
+                  <Link href={value.href} className="underline">
+                    {value.text}
+                  </Link>
+                ) : (
+                  value.text
+                )}
+              </li>
+            );
+          })}
+        </ListTag>
+      ) : null}
+    </>
+  );
+}
+
 export default function PageTemplate({ page }) {
   const internalLinks = page.internalLinks ?? getInternalLinks(page.slug);
   const schemas = buildSchemas(page);
@@ -289,7 +328,7 @@ export default function PageTemplate({ page }) {
         {page.sections.map((section) => (
           <article key={section.heading}>
             <h2 className="text-2xl font-semibold">{section.heading}</h2>
-            <p className="mt-2">{section.body}</p>
+            <SectionContent section={section} />
           </article>
         ))}
       </section>
