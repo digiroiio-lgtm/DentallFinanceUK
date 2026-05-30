@@ -2,16 +2,19 @@ import { notFound } from "next/navigation";
 import PageTemplate from "@/components/PageTemplate";
 import CityPageTemplate from "@/components/CityPageTemplate";
 import CalculatorHubTemplate from "@/components/CalculatorHubTemplate";
-import { getPageBySlug, getPageUrl, pageSlugs } from "@/lib/siteData";
+import { getPageBySlug, getPageUrl } from "@/lib/siteData";
+import { getStaticSlugParams } from "@/lib/slugRoutes";
 
 export const dynamic = "force-static";
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return pageSlugs.map((slug) => ({ slug }));
+  return getStaticSlugParams();
 }
 
-export function generateMetadata({ params }) {
-  const page = getPageBySlug(params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const page = getPageBySlug(slug);
 
   if (!page) {
     return {};
@@ -37,8 +40,9 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function SlugPage({ params }) {
-  const page = getPageBySlug(params.slug);
+export default async function SlugPage({ params }) {
+  const { slug } = await params;
+  const page = getPageBySlug(slug);
 
   if (!page) {
     notFound();
