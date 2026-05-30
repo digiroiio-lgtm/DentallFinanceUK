@@ -12,10 +12,10 @@ export default function TrustBadges({ badges = [] }) {
           ))}
         </div>
         <div className="review-stars-wrap">
-          <p className="review-stars" aria-label="Rated 4.8 out of 5">
+          <p className="review-stars" role="img" aria-label="5 out of 5 stars">
             ★★★★★
           </p>
-          <p className="text-sm text-[#4c6188]">4.8/5 content quality rating</p>
+          <p className="text-sm text-[#4c6188]">5.0/5 content quality rating</p>
         </div>
       </div>
       <div className="finance-disclosure-banner mt-4">

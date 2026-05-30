@@ -19,20 +19,36 @@ export default function LeadCtaSection() {
           </div>
         </div>
 
-        <form action="/contact" className="lead-form-card">
+        <div className="lead-form-card">
           <p className="text-sm font-semibold text-[#0f2858]">Get tailored finance guidance</p>
-          <label className="lead-form-label" htmlFor="lead-name">
-            Name
+          <label className="lead-form-label" htmlFor="lead-budget">
+            Budget
           </label>
-          <input id="lead-name" name="name" className="lead-form-input" placeholder="Your name" />
+          <input
+            id="lead-budget"
+            name="budget"
+            type="text"
+            autoComplete="off"
+            inputMode="numeric"
+            pattern="^[£0-9,\\s]+$"
+            className="lead-form-input"
+            placeholder="e.g. £3,000"
+          />
           <label className="lead-form-label" htmlFor="lead-treatment">
             Treatment
           </label>
-          <input id="lead-treatment" name="treatment" className="lead-form-input" placeholder="e.g. Implants" />
-          <button type="submit" className="btn btn-primary mt-3 w-full">
+          <input
+            id="lead-treatment"
+            name="treatment"
+            type="text"
+            autoComplete="off"
+            className="lead-form-input"
+            placeholder="e.g. Implants"
+          />
+          <Link href="/contact" className="btn btn-primary mt-3 w-full">
             Continue
-          </button>
-        </form>
+          </Link>
+        </div>
       </div>
     </section>
   );
