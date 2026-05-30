@@ -1,5 +1,13 @@
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
+import HeroSection from "@/components/HeroSection";
+import TrustBadges from "@/components/TrustBadges";
+import CTASection from "@/components/CTASection";
+import ReviewerBox from "@/components/ReviewerBox";
+import ProviderCard from "@/components/ProviderCard";
+import TreatmentCard from "@/components/TreatmentCard";
+import FAQAccordion from "@/components/FAQAccordion";
+import LeadCtaSection from "@/components/LeadCtaSection";
 import { getPageUrl } from "@/lib/siteData";
 
 export const dynamic = "force-static";
@@ -48,161 +56,188 @@ const homepageSchema = [
   },
 ];
 
-const homepageSections = [
-  "What is dental finance",
-  "How dental finance works",
-  "Eligibility requirements",
-  "0% APR options",
-  "Monthly payment examples",
-  "Finance calculator",
-  "Comparison tables",
-  "Dental implants finance",
-  "Veneers finance",
-  "Turkey treatment finance",
+const providerCards = [
+  {
+    title: "Provider Hub",
+    href: "/finance-providers",
+    copy: "Compare provider features, approvals, and plan flexibility.",
+    apr: "0% to representative APR",
+    bestFor: "wide comparison",
+  },
+  {
+    title: "Best Provider UK",
+    href: "/best-dental-finance-provider-uk",
+    copy: "Review top UK provider options and best-for scenarios.",
+    apr: "provider dependent",
+    bestFor: "decision support",
+  },
+  {
+    title: "Kandoo vs V12",
+    href: "/kandoo-vs-v12",
+    copy: "Side-by-side eligibility and repayment positioning.",
+    apr: "varies by lender",
+    bestFor: "head-to-head compare",
+  },
 ];
 
-const popularGuides = [
-  { href: "/finance-calculator/", label: "Finance Calculator", desc: "Estimate monthly payments for any dental treatment budget and term." },
-  { href: "/dental-payment-plans/", label: "Dental Payment Plans", desc: "Compare UK monthly payment plan options and typical eligibility criteria." },
-  { href: "/dental-implants-finance/", label: "Implants Finance", desc: "Spread the cost of single or multiple implants with monthly repayment examples." },
-  { href: "/veneers-finance/", label: "Veneers Finance", desc: "Finance composite or porcelain veneers across 12 to 60-month terms." },
-  { href: "/turkey-teeth-finance/", label: "Turkey Teeth Finance", desc: "UK patient guide to financing dental treatment abroad in Turkey." },
-  { href: "/0-percent-dental-finance/", label: "0% Dental Finance", desc: "How 0% APR promotional plans work and where to find them." },
-  { href: "/bad-credit-dental-finance/", label: "Bad Credit Dental Finance", desc: "Options for patients with impaired credit history." },
-  { href: "/dental-finance-companies-uk/", label: "Finance Providers", desc: "Compare UK dental finance companies, brokers, and lenders." },
+const treatmentCards = [
+  { title: "Veneers Finance", href: "/veneers-finance", exampleCost: "£3,500", fromMonthly: "£146" },
+  { title: "Dental Implants Finance", href: "/dental-implants-finance", exampleCost: "£4,800", fromMonthly: "£200" },
+  { title: "Invisalign Finance", href: "/dental-treatment-finance", exampleCost: "£3,000", fromMonthly: "£125" },
+  { title: "Turkey Teeth Finance", href: "/turkey-teeth-finance", exampleCost: "£4,000", fromMonthly: "£167" },
 ];
 
-const treatmentCategories = [
-  { href: "/dental-implants-finance/", label: "Dental Implants", desc: "Single tooth to full-arch implant finance." },
-  { href: "/veneers-finance/", label: "Veneers", desc: "Composite and porcelain smile makeover finance." },
-  { href: "/turkey-teeth-finance/", label: "Turkey Dental", desc: "Treatment abroad finance for UK patients." },
-  { href: "/dental-treatment-finance/", label: "General Treatment", desc: "Finance for fillings, crowns, bridges, and more." },
-  { href: "/cosmetic-dentistry-finance/", label: "Cosmetic Dentistry", desc: "Whitening, bonding, and cosmetic work on finance." },
-  { href: "/dental-payment-plans/", label: "Payment Plans", desc: "Monthly plans direct from UK dental clinics." },
+const financeSteps = [
+  "Choose treatment and request example finance terms.",
+  "Compare providers based on total repayable amount and affordability checks.",
+  "Review APR, term length, and disclosure details before application.",
+  "Apply directly with the provider and receive outcome from the lender.",
 ];
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-5xl p-6">
+    <main className="site-container py-8">
       {homepageSchema.map((schema, index) => (
         <StructuredData key={`home-schema-${index}`} data={schema} />
       ))}
 
-      <h1 className="text-4xl font-bold">Dental Finance UK</h1>
-      <p className="mt-3 text-xl">
-        Compare dental payment plans, monthly finance options and treatment costs across the UK.
-      </p>
+      <HeroSection
+        title="Dental Finance UK: Compare Monthly Payment Plans"
+        description="Compare dental finance options, monthly payment examples, 0% APR plans, provider guides and treatment finance options for UK patients."
+        primaryCta={{ href: "/finance-calculator", label: "Check Monthly Payments" }}
+        secondaryCta={{ href: "/finance-providers", label: "Compare Providers" }}
+        highlights={[
+          "Independent comparison resource",
+          "FCA-aware educational content",
+          "Finance reviewed",
+          "Dental treatment guides reviewed",
+        ]}
+      />
 
-      <p className="mt-4 rounded bg-blue-50 p-4">
-        We help users compare UK dental finance options with educational guides, repayment examples, and calculator tools.
-        Finance products are provided by authorised third-party lenders and brokers, subject to eligibility and status.
-      </p>
+      <TrustBadges
+        badges={[
+          "Trusted by UK patients",
+          "Independent editorial process",
+          "Finance compliance aware",
+          "Reviewed treatment guidance",
+        ]}
+      />
 
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">Key Takeaways</h2>
-        <ul className="mt-2 list-disc pl-6">
-          <li>0% dental finance can be available for selected terms.</li>
-          <li>Bad credit options exist, but APR and criteria can differ.</li>
-          <li>Implants, veneers, and wider cosmetic treatment can all be financed.</li>
-          <li>Use calculators and comparison pages before submitting applications.</li>
-        </ul>
+      <CTASection
+        title="Get your personalised monthly estimate"
+        description="Use our calculators to compare repayment examples in under two minutes."
+        primaryCta={{ href: "/finance-calculator", label: "Start Calculator" }}
+        secondaryCta={{ href: "/monthly-payment-calculator", label: "Monthly Tool" }}
+      />
+
+      <section className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div className="surface-card p-6">
+          <h2 className="section-title text-2xl">Why trust Dental Finance UK</h2>
+          <ul className="mt-4 space-y-3 text-sm text-[#556689]">
+            <li className="subtle-card interactive-card p-3">Independent educational and comparison content, not lender advertising copy.</li>
+            <li className="subtle-card interactive-card p-3">Consistent review standards for finance and treatment pages.</li>
+            <li className="subtle-card interactive-card p-3">Clear financial disclosure and UK-focused guidance for informed decisions.</li>
+          </ul>
+        </div>
+
+        <div className="grid gap-4">
+          <ReviewerBox
+            label="Editorial Team"
+            name="Dental Finance UK Editorial"
+            credentials="Consumer finance and dental treatment researchers"
+            bio="Our editorial team compares provider terms, explains affordability checks, and publishes neutral educational guides."
+            updatedAt="30 May 2026"
+          />
+          <ReviewerBox
+            label="Medical Reviewer"
+            name="Clinical Dental Reviewer"
+            credentials="GDC-registered clinical advisor"
+            bio="Treatment descriptions and suitability notes are medically reviewed for accuracy and patient safety context."
+            updatedAt="30 May 2026"
+          />
+          <ReviewerBox
+            label="Financial Reviewer"
+            name="Finance Compliance Reviewer"
+            credentials="UK consumer finance compliance specialist"
+            bio="Finance claims, APR framing, and disclosures are reviewed to keep content clear and compliant."
+            updatedAt="30 May 2026"
+          />
+        </div>
       </section>
 
-      <section className="mt-6 overflow-x-auto">
-        <h2 className="text-2xl font-semibold">Summary Table</h2>
-        <table className="mt-2 w-full border-collapse border border-gray-300">
-          <tbody>
-            <tr>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Primary CTA</th>
-              <td className="border border-gray-300 p-2">Check Your Monthly Payments</td>
-            </tr>
-            <tr>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Secondary CTA</th>
-              <td className="border border-gray-300 p-2">Get A Free Finance Assessment</td>
-            </tr>
-            <tr>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Representative Example</th>
-              <td className="border border-gray-300 p-2">£2,400 over 24 months from £100 per month at 0% APR</td>
-            </tr>
-          </tbody>
-        </table>
+      <CTASection
+        title="Compare providers with confidence"
+        description="See side-by-side options before committing to a treatment plan."
+        primaryCta={{ href: "/finance-providers", label: "View Provider Hub" }}
+      />
+
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">How dental finance works</h2>
+        <ol className="mt-4 grid gap-3 sm:grid-cols-2">
+          {financeSteps.map((step) => (
+            <li key={step} className="subtle-card interactive-card p-4 text-sm text-[#556689]">
+              {step}
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">Homepage Content Coverage</h2>
-        <div className="mt-2 grid gap-2 sm:grid-cols-2">
-          {homepageSections.map((section) => (
-            <div key={section} className="rounded border border-gray-200 p-3">
-              {section}
-            </div>
+      <CTASection
+        title="Ready to estimate repayments?"
+        description="Check typical terms and monthly examples for your treatment budget."
+        primaryCta={{ href: "/finance-calculator", label: "Estimate Payments" }}
+      />
+
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Popular treatment finance options</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {treatmentCards.map((item) => (
+            <TreatmentCard key={item.href} {...item} />
           ))}
         </div>
       </section>
 
-      <section className="mt-6 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">Trust and Transparency</h2>
-        <ul className="mt-2 list-disc pl-6">
-          <li><strong>Independent Information:</strong> We publish educational content and comparison resources about dental treatment finance.</li>
-          <li><strong>FCA Transparency:</strong> Featured finance products are offered by authorised third-party providers who make eligibility and lending decisions.</li>
-          <li><strong>Editorial Independence:</strong> Content is written and reviewed independently from finance providers.</li>
-        </ul>
-      </section>
+      <CTASection
+        title="Find a treatment plan that fits your budget"
+        description="Compare common treatments and repayment scenarios before applying."
+        primaryCta={{ href: "/dental-treatment-finance", label: "Explore Treatment Finance" }}
+      />
 
-      <section className="mt-6 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">Lead Form</h2>
-        <form className="mt-2 grid gap-3 sm:grid-cols-2" aria-label="Lead form">
-          {["First Name", "Last Name", "Email", "Phone", "Treatment Type", "Estimated Budget"].map((field) => (
-            <label key={field} className="block text-sm">
-              {field}
-              <input className="mt-1 w-full rounded border p-2" />
-            </label>
-          ))}
-          <div className="sm:col-span-2 flex gap-3">
-            <button type="button" className="rounded bg-blue-700 px-4 py-2 text-white">
-              Check Your Monthly Payments
-            </button>
-            <button type="button" className="rounded border border-blue-700 px-4 py-2 text-blue-700">
-              Get A Free Finance Assessment
-            </button>
-          </div>
-        </form>
-      </section>
-
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">Popular Guides</h2>
-        <div className="mt-2 grid gap-3 sm:grid-cols-2">
-          {popularGuides.map(({ href, label, desc }) => (
-            <Link key={href} href={href} className="block rounded border border-gray-200 p-3 hover:border-blue-400">
-              <span className="font-semibold underline">{label}</span>
-              <p className="mt-1 text-sm text-gray-600">{desc}</p>
-            </Link>
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Compare providers</h2>
+        <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {providerCards.map((provider) => (
+            <ProviderCard key={provider.href} {...provider} />
           ))}
         </div>
       </section>
 
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">Browse by Treatment</h2>
-        <div className="mt-2 grid gap-3 sm:grid-cols-3">
-          {treatmentCategories.map(({ href, label, desc }) => (
-            <Link key={href} href={href} className="block rounded border border-gray-200 p-3 hover:border-blue-400">
-              <span className="font-semibold underline">{label}</span>
-              <p className="mt-1 text-sm text-gray-600">{desc}</p>
-            </Link>
-          ))}
+      <CTASection
+        title="See all provider comparisons"
+        description="Review provider differences, representative examples, and application pathways."
+        primaryCta={{ href: "/finance-providers", label: "Compare All Providers" }}
+      />
+
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Calculator tools</h2>
+        <p className="mt-3 text-[#4e6288]">Use calculator tools to compare 0% APR and representative APR scenarios.</p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link href="/finance-calculator" className="btn btn-primary calculator-cta-btn">
+            Open Finance Calculator
+          </Link>
+          <Link href="/monthly-payment-calculator" className="btn btn-secondary">
+            Monthly Payment Tool
+          </Link>
         </div>
       </section>
 
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">FAQs</h2>
-        <div className="mt-2 space-y-2">
-          {homeFaqs.map((faq) => (
-            <details key={faq.question} className="rounded border border-gray-200 p-3">
-              <summary>{faq.question}</summary>
-              <p className="mt-2">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <LeadCtaSection />
+
+      <FAQAccordion items={homeFaqs} />
+
+      <Link href="/finance-calculator" className="mobile-floating-cta md:hidden">
+        Check Monthly Payments
+      </Link>
     </main>
   );
 }

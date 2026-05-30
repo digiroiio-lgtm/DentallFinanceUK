@@ -7,6 +7,7 @@ export const primaryNav = [
   { href: "/dental-implants-finance", label: "Implants Finance" },
   { href: "/veneers-finance", label: "Veneers Finance" },
   { href: "/turkey-teeth-finance", label: "Turkey Teeth Finance" },
+  { href: "/finance-providers", label: "Providers" },
 ];
 
 const cityCatalog = [
@@ -1110,6 +1111,7 @@ const allPages = [
   ["about-us", "About Us", "policy"],
   ["editorial-policy", "Editorial Policy", "policy"],
   ["medical-review-policy", "Medical Review Policy", "policy"],
+  ["financial-disclosure", "Financial Disclosure", "policy"],
   ["authors", "Authors", "policy"],
   ["contact", "Contact", "policy"],
   ["privacy-policy", "Privacy Policy", "policy"],

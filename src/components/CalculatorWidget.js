@@ -39,7 +39,6 @@ export default function CalculatorWidget({ config }) {
   const [copied, setCopied] = useState(false);
   const skipUrlWrite = useRef(true);
 
-  // On mount: read URL params and initialise state from them
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const pAmount = parseFloat(params.get("amount"));
@@ -52,7 +51,6 @@ export default function CalculatorWidget({ config }) {
     if (Object.keys(update).length > 0) dispatch({ type: "INIT", payload: update });
   }, []);
 
-  // After user changes state: write updated params back to the URL
   useEffect(() => {
     if (skipUrlWrite.current) {
       skipUrlWrite.current = false;
@@ -80,10 +78,10 @@ export default function CalculatorWidget({ config }) {
   }
 
   return (
-    <div className="rounded border border-gray-200 p-4">
-      <div className="grid gap-4 sm:grid-cols-3">
+    <div className="surface-card p-5">
+      <div className="grid gap-4 md:grid-cols-3">
         <label className="block">
-          <span className="text-sm font-medium">Loan Amount (£)</span>
+          <span className="text-sm font-semibold text-[#0f2858]">Loan Amount (£)</span>
           <input
             type="number"
             min="100"
@@ -91,12 +89,12 @@ export default function CalculatorWidget({ config }) {
             step="100"
             value={amount}
             onChange={(e) => dispatch({ type: "SET_AMOUNT", payload: Math.max(0, parseFloat(e.target.value) || 0) })}
-            className="mt-1 w-full rounded border border-gray-300 p-2 text-base"
+            className="mt-2 w-full rounded-xl border border-[#d1dcf2] bg-white p-2.5 text-base outline-none focus:border-[#2b61c6]"
             aria-label="Loan amount in pounds"
           />
         </label>
         <label className="block">
-          <span className="text-sm font-medium">APR (%)</span>
+          <span className="text-sm font-semibold text-[#0f2858]">APR (%)</span>
           <input
             type="number"
             min="0"
@@ -104,16 +102,16 @@ export default function CalculatorWidget({ config }) {
             step="0.1"
             value={apr}
             onChange={(e) => dispatch({ type: "SET_APR", payload: Math.max(0, parseFloat(e.target.value) || 0) })}
-            className="mt-1 w-full rounded border border-gray-300 p-2 text-base"
+            className="mt-2 w-full rounded-xl border border-[#d1dcf2] bg-white p-2.5 text-base outline-none focus:border-[#2b61c6]"
             aria-label="Annual percentage rate"
           />
         </label>
         <label className="block">
-          <span className="text-sm font-medium">Term (months)</span>
+          <span className="text-sm font-semibold text-[#0f2858]">Term (months)</span>
           <select
             value={term}
             onChange={(e) => dispatch({ type: "SET_TERM", payload: parseInt(e.target.value, 10) })}
-            className="mt-1 w-full rounded border border-gray-300 p-2 text-base"
+            className="mt-2 w-full rounded-xl border border-[#d1dcf2] bg-white p-2.5 text-base outline-none focus:border-[#2b61c6]"
             aria-label="Repayment term in months"
           >
             {TERM_OPTIONS.map((t) => (
@@ -125,34 +123,35 @@ export default function CalculatorWidget({ config }) {
         </label>
       </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        <div className="rounded bg-blue-50 p-3 text-center">
-          <p className="text-sm text-gray-600">Monthly Payment</p>
-          <p className="text-2xl font-bold text-blue-800">{formatCurrency(monthly)}</p>
+      <div className="mt-5 grid gap-3 sm:grid-cols-3">
+        <div className="rounded-2xl border border-[#bfd4ff] bg-[#eef4ff] p-4 text-center">
+          <p className="text-xs uppercase tracking-wide text-[#6178a0]">Monthly Repayment</p>
+          <p className="mt-1 text-2xl font-extrabold text-[#0f2858]">{formatCurrency(monthly)}</p>
         </div>
-        <div className="rounded bg-gray-50 p-3 text-center">
-          <p className="text-sm text-gray-600">Total Repayable</p>
-          <p className="text-2xl font-bold">{formatCurrency(total)}</p>
+        <div className="subtle-card p-4 text-center">
+          <p className="text-xs uppercase tracking-wide text-[#6178a0]">Total Repayable</p>
+          <p className="mt-1 text-2xl font-bold text-[#0f2858]">{formatCurrency(total)}</p>
         </div>
-        <div className="rounded bg-gray-50 p-3 text-center">
-          <p className="text-sm text-gray-600">Total Interest</p>
-          <p className="text-2xl font-bold">{formatCurrency(interest >= 0 ? interest : 0)}</p>
+        <div className="subtle-card p-4 text-center">
+          <p className="text-xs uppercase tracking-wide text-[#6178a0]">Total Interest</p>
+          <p className="mt-1 text-2xl font-bold text-[#0f2858]">{formatCurrency(interest >= 0 ? interest : 0)}</p>
         </div>
       </div>
 
-      <p className="mt-3 text-xs text-gray-500">
-        Indicative estimate only. Figures are based on standard loan amortisation and do not represent a formal
-        credit offer or lender illustration.
-      </p>
+      <div className="mt-4 flex flex-wrap gap-3">
+        <button
+          onClick={handleShare}
+          className="btn btn-secondary text-sm"
+          type="button"
+          aria-label="Copy shareable link to clipboard"
+        >
+          {copied ? "✓ Link copied!" : "Copy shareable link"}
+        </button>
+      </div>
 
-      <button
-        onClick={handleShare}
-        className="mt-3 rounded border border-blue-700 px-4 py-2 text-sm text-blue-700 hover:bg-blue-50"
-        type="button"
-        aria-label="Copy shareable link to clipboard"
-      >
-        {copied ? "✓ Link copied!" : "Copy shareable link"}
-      </button>
+      <p className="mt-4 rounded-xl border border-[#e1e8f7] bg-[#f8fbff] p-3 text-xs text-[#5f7295]">
+        Disclaimer: Indicative estimate only. Figures are based on standard loan amortisation and do not represent a formal credit offer.
+      </p>
     </div>
   );
 }
