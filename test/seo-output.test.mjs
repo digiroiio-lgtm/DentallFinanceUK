@@ -81,6 +81,12 @@ test("sitemap includes comparison pages", () => {
     "implants-uk-vs-turkey",
     "all-on-4-uk-vs-turkey",
     "hollywood-smile-uk-vs-turkey",
+    "kandoo-vs-v12",
+    "kandoo-vs-tabeo",
+    "v12-vs-chrysalis",
+    "ideal4finance-vs-kandoo",
+    "best-dental-finance-provider-uk",
+    "dental-finance-companies-ranked",
   ];
 
   for (const slug of comparisonSlugs) {
