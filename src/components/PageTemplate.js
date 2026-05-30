@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 import { getInternalLinks, getPageUrl } from "@/lib/siteData";
+import CalculatorWidget from "@/components/CalculatorWidget";
 
 function buildSchemas(page) {
   const breadcrumbs = {
@@ -21,6 +23,12 @@ function buildSchemas(page) {
         applicationCategory: "FinanceApplication",
         operatingSystem: "Web",
         url: getPageUrl(`/${page.slug}`),
+        description: page.description,
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "GBP",
+        },
       },
       {
         "@context": "https://schema.org",
@@ -57,26 +65,6 @@ function buildSchemas(page) {
     },
     breadcrumbs,
   ];
-}
-
-function CalculatorPreview() {
-  return (
-    <form className="grid gap-3 rounded border border-gray-200 p-4" aria-label="Dental finance calculator preview">
-      <label>
-        Treatment Cost (£)
-        <input className="mt-1 w-full rounded border p-2" defaultValue="3000" />
-      </label>
-      <label>
-        APR (%)
-        <input className="mt-1 w-full rounded border p-2" defaultValue="0" />
-      </label>
-      <label>
-        Term (months)
-        <input className="mt-1 w-full rounded border p-2" defaultValue="24" />
-      </label>
-      <p className="text-sm text-gray-700">Estimated monthly payment example: £125/month</p>
-    </form>
-  );
 }
 
 export default function PageTemplate({ page }) {
@@ -123,10 +111,108 @@ export default function PageTemplate({ page }) {
       </section>
 
       {page.type === "calculator" ? (
-        <section className="mt-6">
-          <h2 className="text-2xl font-semibold">Calculator</h2>
-          <CalculatorPreview />
-        </section>
+        <>
+          <section className="mt-6">
+            <h2 className="text-2xl font-semibold">Calculator</h2>
+            <p className="mt-1 mb-3 text-sm text-gray-600">
+              Adjust the inputs below to estimate your monthly repayment. The URL updates automatically — copy and share
+              it to save your calculation.
+            </p>
+            <Suspense fallback={<p className="rounded border border-gray-200 p-4 text-sm text-gray-500">Loading calculator…</p>}>
+              <CalculatorWidget config={page.calculatorConfig} />
+            </Suspense>
+          </section>
+
+          {page.scenarios && page.scenarios.length > 0 && (
+            <section className="mt-8 overflow-x-auto">
+              <h2 className="text-2xl font-semibold">Example Scenarios</h2>
+              <p className="mt-1 text-sm text-gray-600">
+                Indicative estimates based on standard loan amortisation. Use the calculator above to adjust for your
+                own figures.
+              </p>
+              <table className="mt-3 w-full border-collapse border border-gray-300 text-sm">
+                <thead>
+                  <tr>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Scenario</th>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Amount</th>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">APR</th>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Term</th>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Monthly</th>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {page.scenarios.map((row) => (
+                    <tr key={row.name}>
+                      <td className="border border-gray-300 p-2 font-medium">{row.name}</td>
+                      <td className="border border-gray-300 p-2">{row.amount}</td>
+                      <td className="border border-gray-300 p-2">{row.apr}</td>
+                      <td className="border border-gray-300 p-2">{row.term}</td>
+                      <td className="border border-gray-300 p-2">{row.monthly}</td>
+                      <td className="border border-gray-300 p-2">{row.total}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          )}
+
+          {page.aprExamples && page.aprExamples.length > 0 && (
+            <section className="mt-8 overflow-x-auto">
+              <h2 className="text-2xl font-semibold">APR Comparison</h2>
+              <p className="mt-1 text-sm text-gray-600">
+                Same loan amount and term at different APRs, showing the impact of interest rate on monthly payment
+                and total cost.
+              </p>
+              <table className="mt-3 w-full border-collapse border border-gray-300 text-sm">
+                <thead>
+                  <tr>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">APR</th>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Monthly Payment</th>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Total Repayable</th>
+                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Total Interest</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {page.aprExamples.map((row) => (
+                    <tr key={row.apr}>
+                      <th className="border border-gray-300 bg-gray-50 p-2 text-left font-medium">{row.apr}</th>
+                      <td className="border border-gray-300 p-2">{row.monthly}</td>
+                      <td className="border border-gray-300 p-2">{row.total}</td>
+                      <td className="border border-gray-300 p-2">{row.interest}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          )}
+
+          {page.savingsExample && (
+            <section className="mt-8 rounded border border-blue-100 bg-blue-50 p-4">
+              <h2 className="text-2xl font-semibold">Savings Example</h2>
+              <p className="mt-2">{page.savingsExample.description}</p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                <div className="rounded border border-blue-200 bg-white p-3 text-center">
+                  <p className="text-xs text-gray-500">0% APR monthly</p>
+                  <p className="text-xl font-bold text-blue-800">{page.savingsExample.zeroAprMonthly}</p>
+                  <p className="text-xs text-gray-500">Total: {page.savingsExample.zeroAprTotal}</p>
+                </div>
+                <div className="rounded border border-gray-200 bg-white p-3 text-center">
+                  <p className="text-xs text-gray-500">{page.savingsExample.repAprLabel} monthly</p>
+                  <p className="text-xl font-bold">{page.savingsExample.repAprMonthly}</p>
+                  <p className="text-xs text-gray-500">Total: {page.savingsExample.repAprTotal}</p>
+                </div>
+                <div className="rounded border border-green-200 bg-white p-3 text-center">
+                  <p className="text-xs text-gray-500">Interest saved at 0% APR</p>
+                  <p className="text-xl font-bold text-green-700">{page.savingsExample.saving}</p>
+                </div>
+              </div>
+              <p className="mt-3 text-xs text-gray-500">
+                Savings examples are indicative. Actual savings depend on the specific APR, term, and lender product available to you.
+              </p>
+            </section>
+          )}
+        </>
       ) : null}
 
       <section className="mt-6 space-y-4">

@@ -22,3 +22,22 @@ test("sitemap includes homepage, key routes, and policy pages", () => {
   assert.ok(urls.includes("https://dentalfinanceuk.co.uk/editorial-policy"));
   assert.ok(urls.includes("https://dentalfinanceuk.co.uk/medical-review-policy"));
 });
+
+test("sitemap includes all calculator hub pages", () => {
+  const data = sitemap();
+  const urls = data.map((item) => item.url);
+
+  const calculatorSlugs = [
+    "0-percent-finance-calculator",
+    "dental-loan-calculator",
+    "monthly-payment-calculator",
+    "veneer-cost-calculator",
+    "implant-cost-calculator",
+    "all-on-4-finance-calculator",
+    "all-on-6-finance-calculator",
+  ];
+
+  for (const slug of calculatorSlugs) {
+    assert.ok(urls.includes(`https://dentalfinanceuk.co.uk/${slug}`), `Missing sitemap entry for /${slug}`);
+  }
+});
