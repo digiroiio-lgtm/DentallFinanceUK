@@ -9,7 +9,7 @@ function calcMonthly(principal, aprPct, months) {
   return (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
 }
 
-function fmt(n) {
+function formatCurrency(n) {
   return "£" + Math.abs(n).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
@@ -128,15 +128,15 @@ export default function CalculatorWidget({ config }) {
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         <div className="rounded bg-blue-50 p-3 text-center">
           <p className="text-sm text-gray-600">Monthly Payment</p>
-          <p className="text-2xl font-bold text-blue-800">{fmt(monthly)}</p>
+          <p className="text-2xl font-bold text-blue-800">{formatCurrency(monthly)}</p>
         </div>
         <div className="rounded bg-gray-50 p-3 text-center">
           <p className="text-sm text-gray-600">Total Repayable</p>
-          <p className="text-2xl font-bold">{fmt(total)}</p>
+          <p className="text-2xl font-bold">{formatCurrency(total)}</p>
         </div>
         <div className="rounded bg-gray-50 p-3 text-center">
           <p className="text-sm text-gray-600">Total Interest</p>
-          <p className="text-2xl font-bold">{fmt(interest >= 0 ? interest : 0)}</p>
+          <p className="text-2xl font-bold">{formatCurrency(interest >= 0 ? interest : 0)}</p>
         </div>
       </div>
 
