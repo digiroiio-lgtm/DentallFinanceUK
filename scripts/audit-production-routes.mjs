@@ -14,17 +14,24 @@ const failures = [];
 
 for (const path of routePaths) {
   const url = new URL(path, baseUrl);
-  const response = await fetch(url, {
-    headers: {
-      "user-agent": "production-route-audit/1.0",
-    },
-    redirect: "follow",
-  });
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "user-agent": "production-route-audit/1.0",
+      },
+      redirect: "follow",
+    });
 
-  console.log(`${response.status} ${url.href}`);
+    console.log(`${response.status} ${url.href}`);
 
-  if (response.status !== 200) {
-    failures.push(`${response.status} ${url.href}`);
+    if (response.status !== 200) {
+      failures.push(`${response.status} ${url.href}`);
+    }
+  } catch (error) {
+    const message = `${url.href} (${error.cause?.code ?? error.message})`;
+
+    console.log(`ERROR ${message}`);
+    failures.push(`ERROR ${message}`);
   }
 }
 
