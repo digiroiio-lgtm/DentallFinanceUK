@@ -3397,6 +3397,534 @@ const ukTurkeyComparisonEntries = [
   }),
 ];
 
+const financeProviderEntries = [
+  [
+    "finance-providers",
+    {
+      slug: "finance-providers",
+      title: "Finance Providers Hub: Compare Dental Finance Companies in the UK",
+      type: "article",
+      description:
+        "Use this finance providers hub to compare major UK dental finance companies, their positioning, and practical fit for clinic workflows.",
+      answerBlock:
+        "This hub gives an educational, non-ranking view of major UK dental finance providers so practices and patients can compare provider style, onboarding fit, and disclosure quality before choosing.",
+      keyTakeaways: [
+        "Use this page as a hub for provider profile pages, not as lending advice.",
+        "Compare provider fit by treatment mix, patient profile, and clinic operations.",
+        "Always validate current APR, terms, and disclosures with each provider.",
+        "The strongest decision process combines profile comparison with compliance checks.",
+      ],
+      summaryRows: [
+        ["Coverage", "Major UK dental finance provider profiles"],
+        ["Main use", "Side-by-side provider discovery and shortlisting"],
+        ["Comparison focus", "Onboarding fit, support quality, and patient suitability"],
+        ["Positioning", "Independent educational comparison resource"],
+      ],
+      featureTable: {
+        title: "Pros & Cons Table",
+        description: "High-level strengths and limitations of using a central provider hub before shortlisting.",
+        headers: ["Pros", "Cons"],
+        rows: [
+          ["Centralises multiple provider profiles in one navigation path", "Profile summaries cannot replace direct provider due diligence"],
+          ["Helps structure early-stage provider comparison", "Commercial terms and acceptance criteria can change over time"],
+        ],
+      },
+      costTable: {
+        title: "Comparison Table",
+        description: "Core angles to compare across each provider profile page.",
+        headers: ["Comparison Angle", "Why It Matters"],
+        rows: [
+          ["Patient acceptance profile", "Improves matching between lender criteria and real clinic demographics"],
+          ["Operational onboarding", "Affects launch speed, training workload, and patient handover quality"],
+          ["Repayment flexibility", "Supports better fit across lower and higher treatment values"],
+        ],
+      },
+      sections: [
+        {
+          heading: "How to use the provider hub",
+          body: "Review each provider profile for positioning and practical fit, then confirm current terms and representative examples directly with the provider.",
+        },
+        {
+          heading: "Avoid headline-only decisions",
+          body: "Headline APR can be useful, but operational reliability, patient communication quality, and acceptance profile usually determine long-term success.",
+        },
+      ],
+      faqs: [
+        {
+          question: "Is this hub a lender ranking?",
+          answer:
+            "No. It is an educational comparison hub designed to help users explore provider differences before requesting regulated provider information.",
+        },
+        {
+          question: "Should clinics use more than one provider?",
+          answer:
+            "Some clinics do, especially when treatment mix and patient profiles vary. Any setup should still be clear, fair, and compliant.",
+        },
+      ],
+      internalLinks: [
+        { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
+        { href: "/v12-retail-finance", label: "V12 Retail Finance" },
+        { href: "/chrysalis-finance", label: "Chrysalis Finance" },
+        { href: "/kandoo-finance", label: "Kandoo Finance" },
+        { href: "/tabeo-finance", label: "Tabeo Finance" },
+        { href: "/medenta-finance", label: "Medenta Finance" },
+        { href: "/practi-finance", label: "Practi Finance" },
+        { href: "/ideal4finance", label: "Ideal4Finance" },
+      ],
+      references: [
+        "Financial Conduct Authority (FCA) consumer credit guidance",
+        "MoneyHelper borrowing and credit comparison guidance",
+        "Provider websites for current terms, representative examples, and onboarding details",
+      ],
+      disclaimer:
+        "Educational comparison only. We are not a lender and do not provide credit products. Confirm all terms directly with authorised providers.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  [
+    "dental-finance-companies-uk",
+    {
+      slug: "dental-finance-companies-uk",
+      title: "Dental Finance Companies UK: How to Compare Providers",
+      type: "article",
+      description:
+        "Compare dental finance companies in the UK using practical criteria beyond headline APR to improve provider fit for patients and clinics.",
+      answerBlock:
+        "The most reliable way to compare UK dental finance companies is to combine pricing checks with acceptance profile fit, operational quality, and patient communication standards.",
+      keyTakeaways: [
+        "APR matters, but acceptance profile and service reliability matter just as much.",
+        "Use one repeatable comparison framework across every provider.",
+        "Check onboarding effort and team support before implementation.",
+        "Confirm all lending terms and disclosures directly with each provider.",
+      ],
+      summaryRows: [
+        ["Primary goal", "Consistent provider comparison framework"],
+        ["Best for", "Clinics shortlisting multiple provider options"],
+        ["Key risk", "Choosing on headline APR alone"],
+        ["Review cadence", "At least annually or when treatment mix changes"],
+      ],
+      featureTable: {
+        title: "Pros & Cons Table",
+        description: "Benefits and limits of a framework-led provider comparison process.",
+        headers: ["Pros", "Cons"],
+        rows: [
+          ["Creates a repeatable process for evaluating provider fit", "Still depends on accurate and current provider disclosures"],
+          ["Reduces one-dimensional APR-led decision making", "Cannot guarantee the same outcomes across all patient segments"],
+        ],
+      },
+      costTable: {
+        title: "Comparison Table",
+        description: "Suggested provider comparison criteria for UK dental finance decisions.",
+        headers: ["Comparison Angle", "Why It Matters"],
+        rows: [
+          ["Representative APR clarity", "Improves transparency and expectation setting for patients"],
+          ["Approval and routing experience", "Impacts treatment acceptance consistency and conversion confidence"],
+          ["Clinic support model", "Determines onboarding effort and ongoing team workload"],
+        ],
+      },
+      sections: [
+        {
+          heading: "Core comparison criteria",
+          body: "Use representative APR, term flexibility, application friction, and provider support quality as a core baseline before any shortlist decision.",
+        },
+        {
+          heading: "What to avoid when comparing",
+          body: "Do not treat one monthly payment example as definitive. Compare total repayable, patient suitability, and operational fit across multiple scenarios.",
+        },
+      ],
+      faqs: [
+        {
+          question: "How often should a clinic review finance providers?",
+          answer:
+            "At least once a year, and sooner when treatment mix, patient demographics, or approval outcomes change materially.",
+        },
+      ],
+      internalLinks: [
+        { href: "/finance-providers", label: "Finance Providers Hub" },
+        { href: "/v12-retail-finance", label: "V12 Retail Finance" },
+        { href: "/chrysalis-finance", label: "Chrysalis Finance" },
+        { href: "/kandoo-finance", label: "Kandoo Finance" },
+        { href: "/tabeo-finance", label: "Tabeo Finance" },
+        { href: "/medenta-finance", label: "Medenta Finance" },
+        { href: "/practi-finance", label: "Practi Finance" },
+        { href: "/ideal4finance", label: "Ideal4Finance" },
+      ],
+      references: [
+        "Financial Conduct Authority (FCA) consumer credit guidance",
+        "MoneyHelper borrowing and credit comparison guidance",
+        "Provider websites for current terms, representative examples, and onboarding details",
+      ],
+      disclaimer:
+        "Educational comparison only. We are not a lender and do not provide credit products. Confirm all terms directly with authorised providers.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  [
+    "v12-retail-finance",
+    {
+      slug: "v12-retail-finance",
+      title: "V12 Retail Finance for Dental Clinics: Profile & Comparison",
+      type: "article",
+      description:
+        "Profile overview of V12 Retail Finance for UK dental clinics, including practical fit factors and key comparison angles.",
+      answerBlock:
+        "V12 Retail Finance is commonly considered by clinics looking for established retail-finance workflows and structured onboarding support.",
+      keyTakeaways: [
+        "Often chosen for established onboarding and process maturity.",
+        "Suitability depends on patient profile and current commercial setup.",
+        "Check representative examples and eligibility details before rollout.",
+        "Compare operational fit as closely as pricing.",
+      ],
+      summaryRows: [
+        ["Provider style", "Established retail finance infrastructure"],
+        ["Typical clinic fit", "Teams that want mature onboarding processes"],
+        ["Key check", "Current product and disclosure detail"],
+        ["Decision driver", "Acceptance fit plus operational reliability"],
+      ],
+      featureTable: {
+        title: "Pros & Cons Table",
+        headers: ["Pros", "Cons"],
+        rows: [
+          ["Established provider familiarity across healthcare contexts", "Commercial terms and acceptance vary by profile and setup"],
+          ["Structured onboarding process for many clinics", "Standard process may require workflow adaptation"],
+        ],
+      },
+      costTable: {
+        title: "Comparison Table",
+        headers: ["Comparison Angle", "Why It Matters"],
+        rows: [
+          ["Approval consistency", "Supports more predictable treatment planning"],
+          ["Operational integration", "Affects staff workload and patient experience quality"],
+        ],
+      },
+      sections: [
+        {
+          heading: "Where V12 may fit",
+          body: "Often a fit for clinics that value established process infrastructure and a defined onboarding model.",
+        },
+      ],
+      faqs: [{ question: "Is V12 always the best option for every clinic?", answer: "No. Best fit depends on treatment profile, patient mix, and operational priorities." }],
+      internalLinks: [
+        { href: "/finance-providers", label: "Finance Providers Hub" },
+        { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
+      ],
+      references: ["Provider website disclosures and onboarding documentation", "Financial Conduct Authority (FCA) consumer credit guidance"],
+      disclaimer:
+        "Educational profile only. We are not a lender and do not provide credit products. Confirm all terms directly with authorised providers.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  [
+    "chrysalis-finance",
+    {
+      slug: "chrysalis-finance",
+      title: "Chrysalis Finance for Dental Clinics: Profile & Comparison",
+      type: "article",
+      description:
+        "Profile overview of Chrysalis Finance for UK dental clinics, with practical fit considerations and comparison criteria.",
+      answerBlock:
+        "Chrysalis Finance is frequently considered for elective healthcare treatments where clinics need support across varied treatment values.",
+      keyTakeaways: [
+        "Commonly used in elective treatment contexts.",
+        "May support broader treatment-value ranges depending on setup.",
+        "Acceptance outcomes can vary across patient segments.",
+        "Review operational and disclosure detail before launch.",
+      ],
+      summaryRows: [
+        ["Provider style", "Healthcare-elective finance positioning"],
+        ["Typical clinic fit", "Mid-to-higher value treatment mixes"],
+        ["Key check", "Representative examples and acceptance outcomes"],
+        ["Decision driver", "Treatment-range fit and communication quality"],
+      ],
+      featureTable: {
+        title: "Pros & Cons Table",
+        headers: ["Pros", "Cons"],
+        rows: [
+          ["Healthcare-finance familiarity in elective contexts", "Pricing and acceptance can vary across patient groups"],
+          ["Potential support for wider treatment values", "Commercial and process detail must be validated carefully"],
+        ],
+      },
+      costTable: {
+        title: "Comparison Table",
+        headers: ["Comparison Angle", "Why It Matters"],
+        rows: [
+          ["Treatment value flexibility", "Impacts suitability for larger treatment plans"],
+          ["Patient communication flow", "Affects conversion quality and consent confidence"],
+        ],
+      },
+      sections: [
+        {
+          heading: "Where Chrysalis may fit",
+          body: "Can suit clinics with mixed treatment values that need a provider model familiar with elective healthcare financing.",
+        },
+      ],
+      faqs: [{ question: "Should clinics compare Chrysalis against multiple providers?", answer: "Yes. A side-by-side comparison improves fit and reduces APR-only decision risk." }],
+      internalLinks: [
+        { href: "/finance-providers", label: "Finance Providers Hub" },
+        { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
+      ],
+      references: ["Provider website disclosures and onboarding documentation", "Financial Conduct Authority (FCA) consumer credit guidance"],
+      disclaimer:
+        "Educational profile only. We are not a lender and do not provide credit products. Confirm all terms directly with authorised providers.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  [
+    "kandoo-finance",
+    {
+      slug: "kandoo-finance",
+      title: "Kandoo for Dental Clinics: Profile & Comparison",
+      type: "article",
+      description:
+        "Profile overview of Kandoo in a dental context, including panel-routing considerations and key provider comparison criteria.",
+      answerBlock:
+        "Kandoo is commonly discussed as a broker-style route that may offer access to a broader lender panel for varied patient profiles.",
+      keyTakeaways: [
+        "Broker-style routing can broaden lender access.",
+        "Panel quality and routing logic heavily affect outcomes.",
+        "Patient messaging clarity is critical in intermediary models.",
+        "Compare panel breadth with disclosure and process transparency.",
+      ],
+      summaryRows: [
+        ["Provider style", "Broker/intermediary panel model"],
+        ["Typical clinic fit", "Clinics serving mixed credit profiles"],
+        ["Key check", "Panel routing clarity and representative disclosures"],
+        ["Decision driver", "Panel fit plus communication transparency"],
+      ],
+      featureTable: {
+        title: "Pros & Cons Table",
+        headers: ["Pros", "Cons"],
+        rows: [
+          ["Potential access to multiple lenders via one route", "Outcomes depend on panel fit and routing approach"],
+          ["Can increase flexibility for varied patient profiles", "Intermediary journey must be clearly explained to patients"],
+        ],
+      },
+      costTable: {
+        title: "Comparison Table",
+        headers: ["Comparison Angle", "Why It Matters"],
+        rows: [
+          ["Panel breadth", "Affects match rate for different patient circumstances"],
+          ["Decision transparency", "Improves patient expectation setting and trust"],
+        ],
+      },
+      sections: [
+        { heading: "Where Kandoo may fit", body: "May fit clinics wanting broader lender-routing options for diverse patient affordability profiles." },
+      ],
+      faqs: [{ question: "Does broker-style access guarantee approval?", answer: "No. Approval still depends on lender criteria, affordability, and credit profile." }],
+      internalLinks: [
+        { href: "/finance-providers", label: "Finance Providers Hub" },
+        { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
+      ],
+      references: ["Provider website disclosures and onboarding documentation", "Financial Conduct Authority (FCA) consumer credit guidance"],
+      disclaimer:
+        "Educational profile only. We are not a lender and do not provide credit products. Confirm all terms directly with authorised providers.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  [
+    "tabeo-finance",
+    {
+      slug: "tabeo-finance",
+      title: "Tabeo for Dental Clinics: Profile & Comparison",
+      type: "article",
+      description:
+        "Profile overview of Tabeo for UK dental clinics, focusing on digital workflow fit and practical provider comparison points.",
+      answerBlock:
+        "Tabeo is often positioned as a digital-first healthcare payments and finance platform for clinics prioritising modern online patient journeys.",
+      keyTakeaways: [
+        "Digital-first workflows can improve patient convenience.",
+        "Team adaptation and implementation quality remain essential.",
+        "Feature fit varies by clinic workflow complexity.",
+        "Compare digital speed with reporting and support depth.",
+      ],
+      summaryRows: [
+        ["Provider style", "Digital-first healthcare finance journey"],
+        ["Typical clinic fit", "Teams prioritising online-first patient flow"],
+        ["Key check", "Implementation and support model quality"],
+        ["Decision driver", "Digital usability plus operational fit"],
+      ],
+      featureTable: {
+        title: "Pros & Cons Table",
+        headers: ["Pros", "Cons"],
+        rows: [
+          ["Modern digital journey can improve completion convenience", "Digital rollout may require process change and training"],
+          ["Integrated payment and finance positioning", "Fit still depends on specific clinic requirements"],
+        ],
+      },
+      costTable: {
+        title: "Comparison Table",
+        headers: ["Comparison Angle", "Why It Matters"],
+        rows: [
+          ["Digital onboarding quality", "Impacts completion rates and patient confidence"],
+          ["Operational reporting", "Supports performance tracking and optimisation"],
+        ],
+      },
+      sections: [
+        { heading: "Where Tabeo may fit", body: "Can fit clinics aiming to modernise patient onboarding with streamlined digital workflows." },
+      ],
+      faqs: [{ question: "Is digital-first always better for every clinic?", answer: "Not always. Best fit depends on team readiness, patient profile, and process complexity." }],
+      internalLinks: [
+        { href: "/finance-providers", label: "Finance Providers Hub" },
+        { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
+      ],
+      references: ["Provider website disclosures and onboarding documentation", "Financial Conduct Authority (FCA) consumer credit guidance"],
+      disclaimer:
+        "Educational profile only. We are not a lender and do not provide credit products. Confirm all terms directly with authorised providers.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  [
+    "medenta-finance",
+    {
+      slug: "medenta-finance",
+      title: "Medenta for Dental Clinics: Profile & Comparison",
+      type: "article",
+      description:
+        "Profile overview of Medenta for UK dental clinics, including dental-workflow alignment and provider comparison criteria.",
+      answerBlock:
+        "Medenta is frequently considered by practices that want finance workflows aligned closely with dental treatment pathways.",
+      keyTakeaways: [
+        "Dental-sector familiarity can support smoother clinic conversations.",
+        "Product and onboarding details should be checked regularly.",
+        "Workflow alignment may differ across clinic models.",
+        "Support quality can influence consistency and team confidence.",
+      ],
+      summaryRows: [
+        ["Provider style", "Dental-sector aligned workflow positioning"],
+        ["Typical clinic fit", "Practices seeking dental-specific support"],
+        ["Key check", "Current terms and onboarding expectations"],
+        ["Decision driver", "Workflow fit and support quality"],
+      ],
+      featureTable: {
+        title: "Pros & Cons Table",
+        headers: ["Pros", "Cons"],
+        rows: [
+          ["Dental-sector familiarity may align with consultation flow", "Specific terms and products can evolve over time"],
+          ["Potentially strong fit for dental-focused teams", "Not every clinic model matches the same onboarding style"],
+        ],
+      },
+      costTable: {
+        title: "Comparison Table",
+        headers: ["Comparison Angle", "Why It Matters"],
+        rows: [
+          ["Dental workflow fit", "Reduces friction during treatment finance conversations"],
+          ["Support model quality", "Affects team confidence and journey consistency"],
+        ],
+      },
+      sections: [{ heading: "Where Medenta may fit", body: "May appeal to clinics wanting provider support that maps closely to dental treatment journeys." }],
+      faqs: [{ question: "Should Medenta still be compared against alternatives?", answer: "Yes. Side-by-side comparison remains important for pricing, process, and acceptance fit." }],
+      internalLinks: [
+        { href: "/finance-providers", label: "Finance Providers Hub" },
+        { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
+      ],
+      references: ["Provider website disclosures and onboarding documentation", "Financial Conduct Authority (FCA) consumer credit guidance"],
+      disclaimer:
+        "Educational profile only. We are not a lender and do not provide credit products. Confirm all terms directly with authorised providers.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  [
+    "practi-finance",
+    {
+      slug: "practi-finance",
+      title: "Practi for Dental Clinics: Profile & Comparison",
+      type: "article",
+      description:
+        "Profile overview of Practi for UK dental clinics, focusing on patient communication simplicity and provider-fit criteria.",
+      answerBlock:
+        "Practi is often discussed as a patient-friendly finance journey option for clinics prioritising streamlined treatment acceptance communication.",
+      keyTakeaways: [
+        "Simple communication style can support patient confidence.",
+        "Conversion outcomes still depend on implementation quality.",
+        "Integration effort should be assessed before rollout.",
+        "Compare messaging clarity with operational demands.",
+      ],
+      summaryRows: [
+        ["Provider style", "Patient-friendly streamlined journey positioning"],
+        ["Typical clinic fit", "Teams focusing on communication simplicity"],
+        ["Key check", "Integration requirements and support resources"],
+        ["Decision driver", "Messaging quality plus operational compatibility"],
+      ],
+      featureTable: {
+        title: "Pros & Cons Table",
+        headers: ["Pros", "Cons"],
+        rows: [
+          ["Clear communication style can improve patient understanding", "Results depend on patient profile and implementation quality"],
+          ["Emphasis on streamlined treatment acceptance journeys", "Operational fit must be tested before full rollout"],
+        ],
+      },
+      costTable: {
+        title: "Comparison Table",
+        headers: ["Comparison Angle", "Why It Matters"],
+        rows: [
+          ["Patient messaging clarity", "Supports informed consent and expectation management"],
+          ["Clinic onboarding demand", "Affects implementation speed and team confidence"],
+        ],
+      },
+      sections: [{ heading: "Where Practi may fit", body: "Can suit clinics aiming to simplify finance explanations during treatment discussions." }],
+      faqs: [{ question: "Can communication style alone determine provider choice?", answer: "No. Communication quality should be combined with pricing, support, and acceptance fit." }],
+      internalLinks: [
+        { href: "/finance-providers", label: "Finance Providers Hub" },
+        { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
+      ],
+      references: ["Provider website disclosures and onboarding documentation", "Financial Conduct Authority (FCA) consumer credit guidance"],
+      disclaimer:
+        "Educational profile only. We are not a lender and do not provide credit products. Confirm all terms directly with authorised providers.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  [
+    "ideal4finance",
+    {
+      slug: "ideal4finance",
+      title: "Ideal4Finance for Dental Clinics: Profile & Comparison",
+      type: "article",
+      description:
+        "Profile overview of Ideal4Finance in a dental context, including introducer-model fit and key provider comparison criteria.",
+      answerBlock:
+        "Ideal4Finance is commonly positioned as an introducer-led model that can connect clinics and patients with a broader lender network.",
+      keyTakeaways: [
+        "Introducer-style pathways can broaden lender choice.",
+        "Network quality and process control drive real outcomes.",
+        "Disclosure standards are critical in intermediary routes.",
+        "Compare flexibility with governance and communication quality.",
+      ],
+      summaryRows: [
+        ["Provider style", "Introducer-led lender-network model"],
+        ["Typical clinic fit", "Practices wanting multi-lender pathway flexibility"],
+        ["Key check", "Network characteristics and introducer disclosures"],
+        ["Decision driver", "Network fit plus compliance quality"],
+      ],
+      featureTable: {
+        title: "Pros & Cons Table",
+        headers: ["Pros", "Cons"],
+        rows: [
+          ["Introducer model can provide broader lender pathway options", "Outcome quality depends on network fit and process controls"],
+          ["Useful for clinics not wanting a single-lender route", "Introducer disclosure and compliance discipline is essential"],
+        ],
+      },
+      costTable: {
+        title: "Comparison Table",
+        headers: ["Comparison Angle", "Why It Matters"],
+        rows: [
+          ["Network lender diversity", "Influences flexibility across patient profiles"],
+          ["Disclosure compliance quality", "Protects patient understanding and regulatory alignment"],
+        ],
+      },
+      sections: [{ heading: "Where Ideal4Finance may fit", body: "May suit practices wanting introducer-led flexibility rather than a single provider route." }],
+      faqs: [{ question: "Does introducer-led finance remove the need for compliance checks?", answer: "No. Clinics still need robust disclosures and clear patient communication processes." }],
+      internalLinks: [
+        { href: "/finance-providers", label: "Finance Providers Hub" },
+        { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
+      ],
+      references: ["Provider website disclosures and onboarding documentation", "Financial Conduct Authority (FCA) consumer credit guidance"],
+      disclaimer:
+        "Educational profile only. We are not a lender and do not provide credit products. Confirm all terms directly with authorised providers.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+];
+
 const basePageEntries = allPages.map(([slug, title, type]) => {
     const summaryRows = [
       ["Typical UK treatment budget", "£800 to £12,000+ depending on treatment"],
@@ -3647,6 +4175,7 @@ const rawPageMap = Object.fromEntries([
   ...turkeyPageEntries,
   ...financeComparisonEntries,
   ...ukTurkeyComparisonEntries,
+  ...financeProviderEntries,
 ]);
 
 export const pageMap = Object.fromEntries(

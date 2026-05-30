@@ -62,10 +62,22 @@ const homepageSections = [
 ];
 
 export default function Home() {
-  const featuredPages = pageSlugs
-    .filter((slug) => !["about-us", "privacy-policy", "terms", "cookie-policy"].includes(slug))
-    .slice(0, 18)
-    .map((slug) => getPageBySlug(slug));
+  const prioritySlugs = [
+    "finance-providers",
+    "dental-finance-companies-uk",
+    "v12-retail-finance",
+    "chrysalis-finance",
+    "kandoo-finance",
+    "tabeo-finance",
+    "medenta-finance",
+    "practi-finance",
+    "ideal4finance",
+  ];
+  const featuredSlugs = [...prioritySlugs, ...pageSlugs].filter(
+    (slug, index, all) =>
+      !["about-us", "privacy-policy", "terms", "cookie-policy"].includes(slug) && all.indexOf(slug) === index
+  );
+  const featuredPages = featuredSlugs.slice(0, 18).map((slug) => getPageBySlug(slug)).filter(Boolean);
 
   return (
     <main className="mx-auto w-full max-w-5xl p-6">
