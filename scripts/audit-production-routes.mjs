@@ -1,18 +1,11 @@
 import { SITE_URL } from "../src/lib/siteData.js";
-
-const routePaths = [
-  "/finance-calculator",
-  "/dental-payment-plans",
-  "/dental-implants-finance",
-  "/veneers-finance",
-  "/turkey-teeth-finance",
-];
+import { requiredProductionRoutePaths } from "../src/lib/routeAuditPaths.js";
 
 const baseUrl = new URL(process.env.ROUTE_AUDIT_BASE_URL ?? SITE_URL);
 
 const failures = [];
 
-for (const path of routePaths) {
+for (const path of requiredProductionRoutePaths) {
   const url = new URL(path, baseUrl);
   try {
     const response = await fetch(url, {
