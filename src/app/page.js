@@ -61,6 +61,26 @@ const homepageSections = [
   "Turkey treatment finance",
 ];
 
+const popularGuides = [
+  { href: "/finance-calculator/", label: "Finance Calculator", desc: "Estimate monthly payments for any dental treatment budget and term." },
+  { href: "/dental-payment-plans/", label: "Dental Payment Plans", desc: "Compare UK monthly payment plan options and typical eligibility criteria." },
+  { href: "/dental-implants-finance/", label: "Implants Finance", desc: "Spread the cost of single or multiple implants with monthly repayment examples." },
+  { href: "/veneers-finance/", label: "Veneers Finance", desc: "Finance composite or porcelain veneers across 12 to 60-month terms." },
+  { href: "/turkey-teeth-finance/", label: "Turkey Teeth Finance", desc: "UK patient guide to financing dental treatment abroad in Turkey." },
+  { href: "/0-percent-dental-finance/", label: "0% Dental Finance", desc: "How 0% APR promotional plans work and where to find them." },
+  { href: "/bad-credit-dental-finance/", label: "Bad Credit Dental Finance", desc: "Options for patients with impaired credit history." },
+  { href: "/dental-finance-companies-uk/", label: "Finance Providers", desc: "Compare UK dental finance companies, brokers, and lenders." },
+];
+
+const treatmentCategories = [
+  { href: "/dental-implants-finance/", label: "Dental Implants", desc: "Single tooth to full-arch implant finance." },
+  { href: "/veneers-finance/", label: "Veneers", desc: "Composite and porcelain smile makeover finance." },
+  { href: "/turkey-teeth-finance/", label: "Turkey Dental", desc: "Treatment abroad finance for UK patients." },
+  { href: "/dental-treatment-finance/", label: "General Treatment", desc: "Finance for fillings, crowns, bridges, and more." },
+  { href: "/cosmetic-dentistry-finance/", label: "Cosmetic Dentistry", desc: "Whitening, bonding, and cosmetic work on finance." },
+  { href: "/dental-payment-plans/", label: "Payment Plans", desc: "Monthly plans direct from UK dental clinics." },
+];
+
 export default function Home() {
   return (
     <main className="mx-auto w-full max-w-5xl p-6">
@@ -151,16 +171,7 @@ export default function Home() {
       <section className="mt-6">
         <h2 className="text-2xl font-semibold">Popular Guides</h2>
         <div className="mt-2 grid gap-3 sm:grid-cols-2">
-          {[
-            { href: "/finance-calculator/", label: "Finance Calculator", desc: "Estimate monthly payments for any dental treatment budget and term." },
-            { href: "/dental-payment-plans/", label: "Dental Payment Plans", desc: "Compare UK monthly payment plan options and typical eligibility criteria." },
-            { href: "/dental-implants-finance/", label: "Implants Finance", desc: "Spread the cost of single or multiple implants with monthly repayment examples." },
-            { href: "/veneers-finance/", label: "Veneers Finance", desc: "Finance composite or porcelain veneers across 12 to 60-month terms." },
-            { href: "/turkey-teeth-finance/", label: "Turkey Teeth Finance", desc: "UK patient guide to financing dental treatment abroad in Turkey." },
-            { href: "/0-percent-dental-finance/", label: "0% Dental Finance", desc: "How 0% APR promotional plans work and where to find them." },
-            { href: "/bad-credit-dental-finance/", label: "Bad Credit Dental Finance", desc: "Options for patients with impaired credit history." },
-            { href: "/dental-finance-companies-uk/", label: "Finance Providers", desc: "Compare UK dental finance companies, brokers, and lenders." },
-          ].map(({ href, label, desc }) => (
+          {popularGuides.map(({ href, label, desc }) => (
             <Link key={href} href={href} className="block rounded border border-gray-200 p-3 hover:border-blue-400">
               <span className="font-semibold underline">{label}</span>
               <p className="mt-1 text-sm text-gray-600">{desc}</p>
@@ -172,14 +183,7 @@ export default function Home() {
       <section className="mt-6">
         <h2 className="text-2xl font-semibold">Browse by Treatment</h2>
         <div className="mt-2 grid gap-3 sm:grid-cols-3">
-          {[
-            { href: "/dental-implants-finance/", label: "Dental Implants", desc: "Single tooth to full-arch implant finance." },
-            { href: "/veneers-finance/", label: "Veneers", desc: "Composite and porcelain smile makeover finance." },
-            { href: "/turkey-teeth-finance/", label: "Turkey Dental", desc: "Treatment abroad finance for UK patients." },
-            { href: "/dental-treatment-finance/", label: "General Treatment", desc: "Finance for fillings, crowns, bridges, and more." },
-            { href: "/cosmetic-dentistry-finance/", label: "Cosmetic Dentistry", desc: "Whitening, bonding, and cosmetic work on finance." },
-            { href: "/dental-payment-plans/", label: "Payment Plans", desc: "Monthly plans direct from UK dental clinics." },
-          ].map(({ href, label, desc }) => (
+          {treatmentCategories.map(({ href, label, desc }) => (
             <Link key={href} href={href} className="block rounded border border-gray-200 p-3 hover:border-blue-400">
               <span className="font-semibold underline">{label}</span>
               <p className="mt-1 text-sm text-gray-600">{desc}</p>
