@@ -1,5 +1,7 @@
 import { SITE_URL, pageSlugs } from "../lib/siteData.js";
 
+export const dynamic = "force-static";
+
 export default function sitemap() {
   const now = new Date();
   return [
