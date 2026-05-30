@@ -1,6 +1,7 @@
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 import { getInternalLinks, getPageUrl } from "@/lib/siteData";
+import LeadCtaSection from "@/components/LeadCtaSection";
 
 function buildCitySchemas(page) {
   const reviewedBy = [
@@ -49,141 +50,156 @@ export default function CityPageTemplate({ page }) {
   const schemas = buildCitySchemas(page);
 
   return (
-    <main className="mx-auto w-full max-w-5xl p-6 text-gray-900">
+    <main className="site-container py-8 text-[#132445]">
       {schemas.map((schema, index) => (
         <StructuredData key={`${page.slug}-city-schema-${index}`} data={schema} />
       ))}
 
-      <nav className="mb-4 text-sm">
-        <Link href="/" className="underline">
-          Home
-        </Link>{" "}
-        / {page.title}
-      </nav>
+      <section className="surface-card p-6 md:p-8">
+        <nav className="text-sm text-[#5d6f91]">
+          <Link href="/" className="font-medium text-[#1f4eb1] underline">
+            Home
+          </Link>{" "}
+          / {page.title}
+        </nav>
+        <h1 className="mt-3 text-3xl font-extrabold text-[#0f2858] md:text-4xl">{page.title}</h1>
+        <p className="mt-4 rounded-2xl border border-[#cfe0ff] bg-[#edf4ff] p-4">{page.answerBlock}</p>
+        <p className="mt-4 text-[#3f567b]">{page.localIntroduction}</p>
+      </section>
 
-      <h1 className="text-4xl font-bold">{page.title}</h1>
-      <p className="mt-3 rounded bg-blue-50 p-4">{page.answerBlock}</p>
-      <p className="mt-4">{page.localIntroduction}</p>
-
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">Key Takeaways</h2>
-        <ul className="mt-2 list-disc space-y-1 pl-6">
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Key Takeaways</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {page.keyTakeaways.map((point) => (
-            <li key={point}>{point}</li>
+            <div key={point} className="subtle-card p-3 text-sm text-[#334b71]">
+              {point}
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
-      <section className="mt-6 overflow-x-auto">
-        <h2 className="text-2xl font-semibold">Monthly Payment Examples</h2>
-        <table className="mt-2 w-full border-collapse border border-gray-300">
-          <thead>
-            <tr>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Scenario</th>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Treatment Cost</th>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">APR</th>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Monthly</th>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Total Repayable</th>
-            </tr>
-          </thead>
-          <tbody>
-            {page.monthlyExamples.map((example) => (
-              <tr key={example.label}>
-                <th className="border border-gray-300 bg-gray-50 p-2 text-left">{example.label}</th>
-                <td className="border border-gray-300 p-2">{example.treatmentCost}</td>
-                <td className="border border-gray-300 p-2">{example.apr}</td>
-                <td className="border border-gray-300 p-2">{example.monthly}</td>
-                <td className="border border-gray-300 p-2">{example.totalRepayable}</td>
+      <section className="mt-8">
+        <h2 className="section-title text-2xl">Monthly Payment Examples</h2>
+        <div className="table-wrap mt-4">
+          <table className="table-ui">
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th>Treatment Cost</th>
+                <th>APR</th>
+                <th>Monthly</th>
+                <th>Total Repayable</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {page.monthlyExamples.map((example) => (
+                <tr key={example.label}>
+                  <th>{example.label}</th>
+                  <td>{example.treatmentCost}</td>
+                  <td>{example.apr}</td>
+                  <td>{example.monthly}</td>
+                  <td>{example.totalRepayable}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
-      <section className="mt-6 overflow-x-auto">
-        <h2 className="text-2xl font-semibold">Comparison Table</h2>
-        <table className="mt-2 w-full border-collapse border border-gray-300">
-          <thead>
-            <tr>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Option</th>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Strength</th>
-              <th className="border border-gray-300 bg-gray-50 p-2 text-left">Consideration</th>
-            </tr>
-          </thead>
-          <tbody>
-            {page.comparisonRows.map(([option, strength, consideration]) => (
-              <tr key={option}>
-                <th className="border border-gray-300 bg-gray-50 p-2 text-left">{option}</th>
-                <td className="border border-gray-300 p-2">{strength}</td>
-                <td className="border border-gray-300 p-2">{consideration}</td>
+      <section className="mt-8">
+        <h2 className="section-title text-2xl">Comparison Table</h2>
+        <div className="table-wrap mt-4">
+          <table className="table-ui">
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Strength</th>
+                <th>Consideration</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {page.comparisonRows.map(([option, strength, consideration]) => (
+                <tr key={option}>
+                  <th>{option}</th>
+                  <td>{strength}</td>
+                  <td>{consideration}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
-      <section className="mt-6 overflow-x-auto">
-        <h2 className="text-2xl font-semibold">Summary Table</h2>
-        <table className="mt-2 w-full border-collapse border border-gray-300">
-          <tbody>
-            {page.summaryRows.map(([label, value]) => (
-              <tr key={label}>
-                <th className="border border-gray-300 bg-gray-50 p-2 text-left">{label}</th>
-                <td className="border border-gray-300 p-2">{value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <section className="mt-8">
+        <h2 className="section-title text-2xl">Summary Table</h2>
+        <div className="table-wrap mt-4">
+          <table className="table-ui">
+            <tbody>
+              {page.summaryRows.map(([label, value]) => (
+                <tr key={label}>
+                  <th>{label}</th>
+                  <td>{value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">Long-tail Queries Covered</h2>
-        <ul className="mt-2 list-disc space-y-1 pl-6">
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Long-tail Queries Covered</h2>
+        <ul className="mt-3 list-disc space-y-2 pl-6 text-[#3f567b]">
           {page.longTailQueries.map((query) => (
             <li key={query}>{query}</li>
           ))}
         </ul>
       </section>
 
-      <section className="mt-6 space-y-4">
-        {page.sections.map((section) => (
-          <article key={section.heading}>
-            <h2 className="text-2xl font-semibold">{section.heading}</h2>
-            <p className="mt-2">{section.body}</p>
-          </article>
-        ))}
+      <section className="surface-card mt-8 p-6">
+        <div className="space-y-6">
+          {page.sections.map((section) => (
+            <article key={section.heading}>
+              <h2 className="section-title text-2xl">{section.heading}</h2>
+              <p className="mt-2 text-[#3f567b]">{section.body}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>
-        <div className="mt-3 space-y-3">
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Frequently Asked Questions</h2>
+        <div className="mt-4 space-y-3">
           {page.faqs.map((faq) => (
-            <details key={faq.question} className="rounded border border-gray-200 p-3">
-              <summary className="cursor-pointer font-medium">{faq.question}</summary>
-              <p className="mt-2">{faq.answer}</p>
+            <details key={faq.question} className="subtle-card p-4">
+              <summary className="cursor-pointer font-semibold text-[#0f2858]">{faq.question}</summary>
+              <p className="mt-2 text-[#3f567b]">{faq.answer}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <section className="mt-6 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">Review and Disclosure</h2>
-        <p>Author: {page.author}</p>
-        <p>Finance Reviewer: {page.financeReviewer ?? page.reviewer}</p>
-        {page.dentalReviewer ? <p>Dental Reviewer: {page.dentalReviewer}</p> : null}
-        <p>Last Updated: {page.lastUpdated}</p>
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Review and Disclosure</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="subtle-card p-3 text-sm">Author: {page.author}</div>
+          <div className="subtle-card p-3 text-sm">Finance Reviewer: {page.financeReviewer ?? page.reviewer}</div>
+          {page.dentalReviewer ? <div className="subtle-card p-3 text-sm">Dental Reviewer: {page.dentalReviewer}</div> : null}
+          <div className="subtle-card p-3 text-sm">Last Updated: {page.lastUpdated}</div>
+        </div>
       </section>
 
-      <section className="mt-6 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">Internal Links</h2>
-        <div className="mt-2 flex flex-wrap gap-3 text-sm">
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Related Guides</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {internalLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="underline">
+            <Link key={link.href} href={link.href} className="subtle-card p-4 font-semibold text-[#0f2858] transition hover:border-[#b2c5ed] hover:bg-[#f2f7ff]">
               {link.label}
             </Link>
           ))}
         </div>
       </section>
+
+      <LeadCtaSection />
     </main>
   );
 }

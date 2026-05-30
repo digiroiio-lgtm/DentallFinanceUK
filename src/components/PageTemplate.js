@@ -3,6 +3,7 @@ import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 import { getInternalLinks, getPageUrl } from "@/lib/siteData";
 import CalculatorWidget from "@/components/CalculatorWidget";
+import LeadCtaSection from "@/components/LeadCtaSection";
 
 function buildSchemas(page) {
   const reviewedBy = [
@@ -75,58 +76,53 @@ function buildSchemas(page) {
 
 function DataTable({ section }) {
   return (
-    <section className="mt-6 overflow-x-auto">
-      <h2 className="text-2xl font-semibold">{section.title}</h2>
-      {section.description ? <p className="mt-2 text-sm text-gray-600">{section.description}</p> : null}
-      <table className="mt-3 w-full border-collapse border border-gray-300 text-sm">
-        <thead>
-          <tr>
-            {section.headers.map((header) => (
-              <th key={header} className="border border-gray-300 bg-gray-50 p-2 text-left">
-                {header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {section.rows.map((row, rowIndex) => (
-            <tr key={`${section.title}-${rowIndex}`}>
-              {row.map((cell, cellIndex) => (
-                <td key={`${section.title}-${rowIndex}-${cellIndex}`} className="border border-gray-300 p-2">
-                  {cell}
-                </td>
+    <section className="mt-8">
+      <h2 className="section-title text-2xl">{section.title}</h2>
+      {section.description ? <p className="mt-2 text-sm text-[#556689]">{section.description}</p> : null}
+      <div className="table-wrap mt-4">
+        <table className="table-ui">
+          <thead>
+            <tr>
+              {section.headers.map((header) => (
+                <th key={header}>{header}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {section.rows.map((row, rowIndex) => (
+              <tr key={`${section.title}-${rowIndex}`}>
+                {row.map((cell, cellIndex) => (
+                  <td key={`${section.title}-${rowIndex}-${cellIndex}`}>{cell}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }
 
 function SavingsCalculation({ calculation }) {
   const toneClasses = {
-    default: "border-gray-200 bg-white",
-    accent: "border-blue-200 bg-blue-50",
-    positive: "border-green-200 bg-green-50",
+    default: "subtle-card",
+    accent: "rounded-2xl border border-[#bfd4ff] bg-[#eef4ff]",
+    positive: "rounded-2xl border border-[#bfe9c9] bg-[#effcf2]",
   };
 
   return (
-    <section className="mt-6 rounded border border-gray-200 p-4">
-      <h2 className="text-2xl font-semibold">{calculation.title}</h2>
-      {calculation.description ? <p className="mt-2">{calculation.description}</p> : null}
+    <section className="surface-card mt-8 p-6">
+      <h2 className="section-title text-2xl">{calculation.title}</h2>
+      {calculation.description ? <p className="mt-3 text-[#556689]">{calculation.description}</p> : null}
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         {calculation.metrics.map((metric) => (
-          <div
-            key={metric.label}
-            className={`rounded border p-3 text-center ${toneClasses[metric.tone ?? "default"]}`}
-          >
-            <p className="text-xs text-gray-500">{metric.label}</p>
-            <p className="text-xl font-bold">{metric.value}</p>
+          <div key={metric.label} className={`${toneClasses[metric.tone ?? "default"]} p-4 text-center`}>
+            <p className="text-xs uppercase tracking-wide text-[#64779c]">{metric.label}</p>
+            <p className="mt-1 text-2xl font-bold text-[#0f2858]">{metric.value}</p>
           </div>
         ))}
       </div>
-      {calculation.footnote ? <p className="mt-3 text-xs text-gray-500">{calculation.footnote}</p> : null}
+      {calculation.footnote ? <p className="mt-3 text-xs text-[#6b7da3]">{calculation.footnote}</p> : null}
     </section>
   );
 }
@@ -139,23 +135,23 @@ function SectionContent({ section }) {
     <>
       {section.paragraphs?.length
         ? section.paragraphs.map((paragraph, index) => (
-            <p key={`${section.heading}-paragraph-${index}`} className="mt-2">
+            <p key={`${section.heading}-paragraph-${index}`} className="mt-2 text-[#374e75]">
               {paragraph}
             </p>
           ))
         : section.body
-          ? <p className="mt-2">{section.body}</p>
+          ? <p className="mt-2 text-[#374e75]">{section.body}</p>
           : null}
 
       {items.length > 0 ? (
-        <ListTag className={`mt-3 space-y-2 pl-6 ${section.ordered ? "list-decimal" : "list-disc"}`}>
+        <ListTag className={`mt-3 space-y-2 pl-6 text-[#374e75] ${section.ordered ? "list-decimal" : "list-disc"}`}>
           {items.map((item, index) => {
             const value = typeof item === "string" ? { text: item } : item;
 
             return (
               <li key={`${section.heading}-item-${index}`}>
                 {value.href ? (
-                  <Link href={value.href} className="underline">
+                  <Link href={value.href} className="font-medium text-[#1f4eb1] underline decoration-2 underline-offset-2">
                     {value.text}
                   </Link>
                 ) : (
@@ -170,202 +166,211 @@ function SectionContent({ section }) {
   );
 }
 
+function RelatedCards({ links }) {
+  return (
+    <section className="surface-card mt-8 p-6">
+      <h2 className="section-title text-2xl">Related Guides</h2>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {links.map((link) => (
+          <Link key={link.href} href={link.href} className="subtle-card p-4 font-semibold text-[#0f2858] transition hover:border-[#b2c5ed] hover:bg-[#f2f7ff]">
+            {link.label}
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default function PageTemplate({ page }) {
   const internalLinks = page.internalLinks ?? getInternalLinks(page.slug);
   const schemas = buildSchemas(page);
   const medicalReview = page.medicalReview ?? null;
   const financeDisclosure = page.financeDisclosure ?? null;
+  const isTurkey = /turkey|hollywood-smile/.test(page.slug);
 
   return (
-    <main className="mx-auto w-full max-w-5xl p-6 text-gray-900">
+    <main className="site-container py-8 text-[#132445]">
       {schemas.map((schema, index) => (
         <StructuredData key={`${page.slug}-schema-${index}`} data={schema} />
       ))}
 
-      <nav className="mb-4 text-sm">
-        <Link href="/" className="underline">
-          Home
-        </Link>{" "}
-        / {page.title}
-      </nav>
-
-      <h1 className="text-4xl font-bold">{page.title}</h1>
-      <p className="mt-3 rounded bg-blue-50 p-4">{page.answerBlock}</p>
-
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">Key Takeaways</h2>
-        <ul className="mt-2 list-disc space-y-1 pl-6">
-          {page.keyTakeaways.map((point) => (
-            <li key={point}>{point}</li>
-          ))}
-        </ul>
+      <section className={`surface-card p-6 md:p-8 ${isTurkey ? "bg-gradient-to-br from-[#fff8ea] to-[#ffffff]" : ""}`}>
+        <nav className="text-sm text-[#5d6f91]">
+          <Link href="/" className="font-medium text-[#1f4eb1] underline">
+            Home
+          </Link>{" "}
+          / {page.title}
+        </nav>
+        <h1 className="mt-3 text-3xl font-extrabold leading-tight text-[#0f2858] md:text-4xl">{page.title}</h1>
+        <p className={`mt-4 rounded-2xl border p-4 ${isTurkey ? "border-[#f0ddba] bg-[#fff4de]" : "border-[#cfe0ff] bg-[#edf4ff]"}`}>
+          {page.answerBlock}
+        </p>
       </section>
 
-      <section className="mt-6 overflow-x-auto">
-        <h2 className="text-2xl font-semibold">Summary Table</h2>
-        <table className="mt-2 w-full border-collapse border border-gray-300">
-          <tbody>
-            {page.summaryRows.map(([label, value]) => (
-              <tr key={label}>
-                <th className="border border-gray-300 bg-gray-50 p-2 text-left">{label}</th>
-                <td className="border border-gray-300 p-2">{value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Key Takeaways</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {page.keyTakeaways.map((point) => (
+            <div key={point} className="subtle-card p-3 text-sm text-[#334b71]">
+              {point}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="section-title text-2xl">Summary Table</h2>
+        <div className="table-wrap mt-4">
+          <table className="table-ui">
+            <tbody>
+              {page.summaryRows.map(([label, value]) => (
+                <tr key={label}>
+                  <th>{label}</th>
+                  <td>{value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {page.featureTable ? <DataTable section={page.featureTable} /> : null}
-
       {page.costTable ? <DataTable section={page.costTable} /> : null}
-
       {page.savingsCalculation ? <SavingsCalculation calculation={page.savingsCalculation} /> : null}
-
       {page.savingsTable ? <DataTable section={page.savingsTable} /> : null}
-
       {page.monthlyPaymentTable ? <DataTable section={page.monthlyPaymentTable} /> : null}
 
       {page.type === "calculator" ? (
         <>
-          <section className="mt-6">
-            <h2 className="text-2xl font-semibold">Calculator</h2>
-            <p className="mt-1 mb-3 text-sm text-gray-600">
-              Adjust the inputs below to estimate your monthly repayment. The URL updates automatically — copy and share
-              it to save your calculation.
+          <section className="surface-card mt-8 p-6">
+            <h2 className="section-title text-2xl">Calculator</h2>
+            <p className="mt-2 text-sm text-[#556689]">
+              Adjust inputs to estimate monthly repayments and compare repayment structures.
             </p>
-            <Suspense fallback={<p className="rounded border border-gray-200 p-4 text-sm text-gray-500">Loading calculator…</p>}>
-              <CalculatorWidget config={page.calculatorConfig} />
-            </Suspense>
+            <div className="mt-4">
+              <Suspense fallback={<p className="subtle-card p-4 text-sm text-[#64779c]">Loading calculator…</p>}>
+                <CalculatorWidget config={page.calculatorConfig} />
+              </Suspense>
+            </div>
           </section>
 
-          {page.scenarios && page.scenarios.length > 0 && (
-            <section className="mt-8 overflow-x-auto">
-              <h2 className="text-2xl font-semibold">Example Scenarios</h2>
-              <p className="mt-1 text-sm text-gray-600">
-                Indicative estimates based on standard loan amortisation. Use the calculator above to adjust for your
-                own figures.
-              </p>
-              <table className="mt-3 w-full border-collapse border border-gray-300 text-sm">
-                <thead>
-                  <tr>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Scenario</th>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Amount</th>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">APR</th>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Term</th>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Monthly</th>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {page.scenarios.map((row) => (
-                    <tr key={row.name}>
-                      <td className="border border-gray-300 p-2 font-medium">{row.name}</td>
-                      <td className="border border-gray-300 p-2">{row.amount}</td>
-                      <td className="border border-gray-300 p-2">{row.apr}</td>
-                      <td className="border border-gray-300 p-2">{row.term}</td>
-                      <td className="border border-gray-300 p-2">{row.monthly}</td>
-                      <td className="border border-gray-300 p-2">{row.total}</td>
+          {page.scenarios?.length > 0 ? (
+            <section className="mt-8">
+              <h2 className="section-title text-2xl">Example Scenarios</h2>
+              <p className="mt-2 text-sm text-[#556689]">Indicative examples to compare monthly and total repayment outcomes.</p>
+              <div className="table-wrap mt-4">
+                <table className="table-ui">
+                  <thead>
+                    <tr>
+                      <th>Scenario</th>
+                      <th>Amount</th>
+                      <th>APR</th>
+                      <th>Term</th>
+                      <th>Monthly</th>
+                      <th>Total</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {page.scenarios.map((row) => (
+                      <tr key={row.name}>
+                        <th>{row.name}</th>
+                        <td>{row.amount}</td>
+                        <td>{row.apr}</td>
+                        <td>{row.term}</td>
+                        <td>{row.monthly}</td>
+                        <td>{row.total}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </section>
-          )}
+          ) : null}
 
-          {page.aprExamples && page.aprExamples.length > 0 && (
-            <section className="mt-8 overflow-x-auto">
-              <h2 className="text-2xl font-semibold">APR Comparison</h2>
-              <p className="mt-1 text-sm text-gray-600">
-                Same loan amount and term at different APRs, showing the impact of interest rate on monthly payment
-                and total cost.
-              </p>
-              <table className="mt-3 w-full border-collapse border border-gray-300 text-sm">
-                <thead>
-                  <tr>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">APR</th>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Monthly Payment</th>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Total Repayable</th>
-                    <th className="border border-gray-300 bg-gray-50 p-2 text-left">Total Interest</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {page.aprExamples.map((row) => (
-                    <tr key={row.apr}>
-                      <th className="border border-gray-300 bg-gray-50 p-2 text-left font-medium">{row.apr}</th>
-                      <td className="border border-gray-300 p-2">{row.monthly}</td>
-                      <td className="border border-gray-300 p-2">{row.total}</td>
-                      <td className="border border-gray-300 p-2">{row.interest}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          {page.aprExamples?.length > 0 ? (
+            <section className="mt-8">
+              <h2 className="section-title text-2xl">APR Comparison</h2>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {page.aprExamples.map((row) => (
+                  <div key={row.apr} className="subtle-card p-4">
+                    <p className="text-sm font-semibold text-[#0f2858]">{row.apr}</p>
+                    <p className="mt-2 text-sm text-[#556689]">Monthly: {row.monthly}</p>
+                    <p className="text-sm text-[#556689]">Total: {row.total}</p>
+                    <p className="text-sm text-[#556689]">Interest: {row.interest}</p>
+                  </div>
+                ))}
+              </div>
             </section>
-          )}
+          ) : null}
 
-          {page.savingsExample && (
-            <section className="mt-8 rounded border border-blue-100 bg-blue-50 p-4">
-              <h2 className="text-2xl font-semibold">Savings Example</h2>
-              <p className="mt-2">{page.savingsExample.description}</p>
-              <div className="mt-3 grid gap-3 sm:grid-cols-3">
-                <div className="rounded border border-blue-200 bg-white p-3 text-center">
-                  <p className="text-xs text-gray-500">0% APR monthly</p>
-                  <p className="text-xl font-bold text-blue-800">{page.savingsExample.zeroAprMonthly}</p>
-                  <p className="text-xs text-gray-500">Total: {page.savingsExample.zeroAprTotal}</p>
+          {page.savingsExample ? (
+            <section className="surface-card mt-8 border-[#bfe9c9] bg-[#f1fcf4] p-6">
+              <h2 className="section-title text-2xl">Savings Example</h2>
+              <p className="mt-2 text-[#3b5679]">{page.savingsExample.description}</p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                <div className="subtle-card p-4 text-center">
+                  <p className="text-xs text-[#6a7c9f]">0% APR monthly</p>
+                  <p className="text-xl font-bold text-[#0f2858]">{page.savingsExample.zeroAprMonthly}</p>
+                  <p className="text-xs text-[#6a7c9f]">Total: {page.savingsExample.zeroAprTotal}</p>
                 </div>
-                <div className="rounded border border-gray-200 bg-white p-3 text-center">
-                  <p className="text-xs text-gray-500">{page.savingsExample.repAprLabel} monthly</p>
-                  <p className="text-xl font-bold">{page.savingsExample.repAprMonthly}</p>
-                  <p className="text-xs text-gray-500">Total: {page.savingsExample.repAprTotal}</p>
+                <div className="subtle-card p-4 text-center">
+                  <p className="text-xs text-[#6a7c9f]">{page.savingsExample.repAprLabel} monthly</p>
+                  <p className="text-xl font-bold text-[#0f2858]">{page.savingsExample.repAprMonthly}</p>
+                  <p className="text-xs text-[#6a7c9f]">Total: {page.savingsExample.repAprTotal}</p>
                 </div>
-                <div className="rounded border border-green-200 bg-white p-3 text-center">
-                  <p className="text-xs text-gray-500">Interest saved at 0% APR</p>
-                  <p className="text-xl font-bold text-green-700">{page.savingsExample.saving}</p>
+                <div className="rounded-2xl border border-[#bfe9c9] bg-white p-4 text-center">
+                  <p className="text-xs text-[#6a7c9f]">Interest saved at 0% APR</p>
+                  <p className="text-xl font-bold text-[#1f8f4e]">{page.savingsExample.saving}</p>
                 </div>
               </div>
-              <p className="mt-3 text-xs text-gray-500">
-                Savings examples are indicative. Actual savings depend on the specific APR, term, and lender product available to you.
+              <p className="mt-3 text-xs text-[#6b7da3]">
+                Savings examples are indicative. Actual savings depend on APR, term, and lender product availability.
               </p>
             </section>
-          )}
+          ) : null}
         </>
       ) : null}
 
-      <section className="mt-6 space-y-4">
-        {page.sections.map((section) => (
-          <article key={section.heading}>
-            <h2 className="text-2xl font-semibold">{section.heading}</h2>
-            <SectionContent section={section} />
-          </article>
-        ))}
+      <section className="surface-card mt-8 p-6">
+        <div className="space-y-6">
+          {page.sections.map((section) => (
+            <article key={section.heading}>
+              <h2 className="section-title text-2xl">{section.heading}</h2>
+              <SectionContent section={section} />
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section className="mt-6">
-        <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>
-        <div className="mt-3 space-y-3">
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Frequently Asked Questions</h2>
+        <div className="mt-4 space-y-3">
           {page.faqs.map((faq) => (
-            <details key={faq.question} className="rounded border border-gray-200 p-3">
-              <summary className="cursor-pointer font-medium">{faq.question}</summary>
-              <p className="mt-2">{faq.answer}</p>
+            <details key={faq.question} className="subtle-card p-4">
+              <summary className="cursor-pointer font-semibold text-[#0f2858]">{faq.question}</summary>
+              <p className="mt-2 text-[#3f567b]">{faq.answer}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <section className="mt-6 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">{medicalReview?.title ?? "Review and Disclosure"}</h2>
-        {medicalReview?.summary ? <p className="mb-3">{medicalReview.summary}</p> : null}
-        <p>Author: {page.author}</p>
-        <p>Finance Reviewer: {page.financeReviewer ?? page.reviewer}</p>
-        {page.dentalReviewer ? <p>Dental Reviewer: {page.dentalReviewer}</p> : null}
-        <p>Last Updated: {page.lastUpdated}</p>
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">{medicalReview?.title ?? "Review and Disclosure"}</h2>
+        {medicalReview?.summary ? <p className="mt-2 text-[#3f567b]">{medicalReview.summary}</p> : null}
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="subtle-card p-3 text-sm">Author: {page.author}</div>
+          <div className="subtle-card p-3 text-sm">Finance Reviewer: {page.financeReviewer ?? page.reviewer}</div>
+          {page.dentalReviewer ? <div className="subtle-card p-3 text-sm">Dental Reviewer: {page.dentalReviewer}</div> : null}
+          <div className="subtle-card p-3 text-sm">Last Updated: {page.lastUpdated}</div>
+        </div>
       </section>
 
       {financeDisclosure ? (
-        <section className="mt-6 rounded border border-gray-200 p-4">
-          <h2 className="text-2xl font-semibold">{financeDisclosure.title ?? "Finance Disclosure"}</h2>
-          {financeDisclosure.intro ? <p className="mt-2">{financeDisclosure.intro}</p> : null}
+        <section className="surface-card mt-8 border-[#d6deef] bg-[#f8fbff] p-6">
+          <h2 className="section-title text-2xl">{financeDisclosure.title ?? "Finance Disclosure"}</h2>
+          {financeDisclosure.intro ? <p className="mt-2 text-[#3f567b]">{financeDisclosure.intro}</p> : null}
           {financeDisclosure.items?.length ? (
-            <ul className="mt-3 list-disc space-y-1 pl-6">
+            <ul className="mt-3 list-disc space-y-1 pl-6 text-[#3f567b]">
               {financeDisclosure.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -374,26 +379,18 @@ export default function PageTemplate({ page }) {
         </section>
       ) : null}
 
-      <section className="mt-6 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">References and Sources</h2>
-        <ul className="list-disc pl-6">
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">References and Sources</h2>
+        <ul className="mt-3 list-disc space-y-1 pl-6 text-[#3f567b]">
           {page.references.map((reference) => (
             <li key={reference}>{reference}</li>
           ))}
         </ul>
-        <p className="mt-3 text-sm">Medical Disclaimer: {page.disclaimer}</p>
+        <p className="mt-4 rounded-xl border border-[#e1e8f7] bg-[#f8fbff] p-3 text-sm text-[#4f6389]">Medical Disclaimer: {page.disclaimer}</p>
       </section>
 
-      <section className="mt-6 rounded border border-gray-200 p-4">
-        <h2 className="text-2xl font-semibold">Internal Links</h2>
-        <div className="mt-2 flex flex-wrap gap-3 text-sm">
-          {internalLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="underline">
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      </section>
+      <RelatedCards links={internalLinks} />
+      <LeadCtaSection />
     </main>
   );
 }
