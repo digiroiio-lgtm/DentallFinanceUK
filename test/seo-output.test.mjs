@@ -67,3 +67,23 @@ test("sitemap includes the full Turkey finance cluster", () => {
     assert.ok(urls.includes(`https://dentalfinanceuk.co.uk/${slug}`), `Missing sitemap entry for /${slug}`);
   }
 });
+
+test("sitemap includes comparison pages", () => {
+  const data = sitemap();
+  const urls = data.map((item) => item.url);
+
+  const comparisonSlugs = [
+    "dental-finance-vs-credit-card",
+    "dental-finance-vs-loan",
+    "dental-finance-vs-buy-now-pay-later",
+    "uk-vs-turkey-dental-costs",
+    "veneers-uk-vs-turkey",
+    "implants-uk-vs-turkey",
+    "all-on-4-uk-vs-turkey",
+    "hollywood-smile-uk-vs-turkey",
+  ];
+
+  for (const slug of comparisonSlugs) {
+    assert.ok(urls.includes(`https://dentalfinanceuk.co.uk/${slug}`), `Missing sitemap entry for /${slug}`);
+  }
+});

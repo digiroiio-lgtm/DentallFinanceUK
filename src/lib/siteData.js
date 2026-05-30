@@ -114,8 +114,13 @@ const allPages = [
   ["implant-finance-calculator", "Implant Finance Calculator", "calculator"],
   ["veneer-finance-calculator", "Veneer Finance Calculator", "calculator"],
   ["dental-finance-vs-credit-card", "Dental Finance vs Credit Card", "article"],
-  ["dental-finance-vs-personal-loan", "Dental Finance vs Personal Loan", "article"],
+  ["dental-finance-vs-loan", "Dental Finance vs Loan", "article"],
+  ["dental-finance-vs-buy-now-pay-later", "Dental Finance vs Buy Now Pay Later", "article"],
   ["uk-vs-turkey-dental-costs", "UK vs Turkey Dental Costs", "article"],
+  ["veneers-uk-vs-turkey", "Veneers UK vs Turkey", "article"],
+  ["implants-uk-vs-turkey", "Implants UK vs Turkey", "article"],
+  ["all-on-4-uk-vs-turkey", "All-on-4 UK vs Turkey", "article"],
+  ["hollywood-smile-uk-vs-turkey", "Hollywood Smile UK vs Turkey", "article"],
   ["blog", "Blog", "hub"],
   ["about-us", "About Us", "policy"],
   ["editorial-policy", "Editorial Policy", "policy"],
@@ -804,6 +809,38 @@ function buildTurkeyMonthlyRow(label, amount, aprPct, term) {
     `${term} months`,
     fmtMoney(monthly),
     fmtMoney(total),
+  ];
+}
+
+function buildComparisonCostRow(label, amount, aprPct, term) {
+  const monthly = calcMonthly(amount, aprPct, term);
+  const total = monthly * term;
+  const interest = total - amount;
+
+  return [
+    label,
+    toCurrency(amount),
+    aprPct === 0 ? "0% APR" : `${aprPct}% APR`,
+    `${term} months`,
+    fmtMoney(monthly),
+    fmtMoney(total),
+    fmtMoney(interest),
+  ];
+}
+
+function buildTurkeyAdjustedSavingsRow(label, ukCost, turkeyClinicCost, extraCosts) {
+  const turkeyTotal = turkeyClinicCost + extraCosts;
+  const saving = ukCost - turkeyTotal;
+  const savingPct = Math.round((saving / ukCost) * 100);
+
+  return [
+    label,
+    toCurrency(ukCost),
+    toCurrency(turkeyClinicCost),
+    toCurrency(extraCosts),
+    toCurrency(turkeyTotal),
+    toCurrency(saving),
+    `${savingPct}%`,
   ];
 }
 
@@ -1544,6 +1581,829 @@ const turkeyPageEntries = [
   ...turkeyCostPageConfigs.map((config) => buildTurkeyCostPage(config)),
 ];
 
+const comparisonReferenceList = [
+  "Financial Conduct Authority (FCA) consumer credit guidance",
+  "MoneyHelper guidance on credit cards, loans, and buy now pay later borrowing",
+  "NHS dental charges and treatment planning guidance",
+];
+
+function buildFinanceComparisonPage(config) {
+  const dentalFinanceAmount = config.dentalFinanceAmount ?? 4000;
+  const dentalFinanceApr = config.dentalFinanceApr ?? 0;
+  const dentalFinanceTerm = config.dentalFinanceTerm ?? 24;
+  const dentalFinanceTotal = calcMonthly(dentalFinanceAmount, dentalFinanceApr, dentalFinanceTerm) * dentalFinanceTerm;
+  const alternativeTotal = calcMonthly(config.alternativeAmount, config.alternativeApr, config.alternativeTerm) * config.alternativeTerm;
+  const saving = alternativeTotal - dentalFinanceTotal;
+  const savingPct = Math.round((saving / alternativeTotal) * 100);
+
+  return [
+    config.slug,
+    {
+      slug: config.slug,
+      title: config.title,
+      type: "article",
+      description: config.description,
+      answerBlock: config.answerBlock,
+      keyTakeaways: config.keyTakeaways,
+      summaryRows: [
+        ["Comparison focus", config.summaryLabel],
+        ["Dental finance benchmark", `${toCurrency(dentalFinanceAmount)} over ${dentalFinanceTerm} months`],
+        ["Alternative benchmark", `${toCurrency(config.alternativeAmount)} over ${config.alternativeTerm} months`],
+        ["Indicative saving", `${fmtMoney(saving)} (${savingPct}%)`],
+      ],
+      featureTable: {
+        title: "Feature Table",
+        description: config.featureDescription,
+        headers: ["Feature", "Dental finance", config.alternativeColumnLabel],
+        rows: config.featureRows,
+      },
+      costTable: {
+        title: "Cost Table",
+        description: config.costDescription,
+        headers: ["Example", "Amount financed", "APR", "Term", "Monthly payment", "Total repayable", "Interest"],
+        rows: [
+          buildComparisonCostRow("Dental finance example", dentalFinanceAmount, dentalFinanceApr, dentalFinanceTerm),
+          buildComparisonCostRow(config.alternativeRowLabel, config.alternativeAmount, config.alternativeApr, config.alternativeTerm),
+          ...(config.extraCostRows ?? []).map((row) =>
+            buildComparisonCostRow(row.label, row.amount, row.apr, row.term)
+          ),
+        ],
+      },
+      savingsCalculation: {
+        title: "Savings Calculation",
+        description: config.savingsDescription,
+        metrics: [
+          { label: "Dental finance total", value: fmtMoney(dentalFinanceTotal), tone: "accent" },
+          { label: `${config.alternativeColumnLabel} total`, value: fmtMoney(alternativeTotal) },
+          { label: "Indicative saving", value: fmtMoney(saving), tone: "positive" },
+        ],
+        footnote:
+          "Illustrative example based on the sample amount shown above. Actual APRs, fees, and promotional periods vary by provider and borrower profile.",
+      },
+      sections: config.sections,
+      faqs: config.faqs,
+      internalLinks: config.internalLinks,
+      author: "DentalFinanceUK Editorial Team",
+      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      references: comparisonReferenceList,
+      disclaimer:
+        "Educational only. Compare regulated lender paperwork, full terms, and affordability before choosing any borrowing option.",
+      lastUpdated: "2026-05-30",
+    },
+  ];
+}
+
+const financeComparisonEntries = [
+  buildFinanceComparisonPage({
+    slug: "dental-finance-vs-credit-card",
+    title: "Dental Finance vs Credit Card",
+    description:
+      "Compare dental finance vs a credit card using feature tables, repayment examples, and an indicative savings calculation for UK dental treatment costs.",
+    answerBlock:
+      "Dental finance is usually cheaper than carrying dental treatment on a standard credit card because the APR can be lower and some clinics offer 0% promotional plans. Credit cards can be more flexible for small balances, but long-term revolving debt often costs more overall.",
+    summaryLabel: "Clinic-linked dental finance against revolving card borrowing",
+    alternativeColumnLabel: "Credit card",
+    featureDescription: "Use this table to compare how treatment-specific finance differs from using a standard consumer credit card.",
+    featureRows: [
+      ["Typical use", "Planned treatment cost spread over fixed monthly payments", "Flexible spending line that can be used for deposits or the full balance"],
+      ["APR profile", "Can include 0% promotional terms or representative APRs", "Often a higher variable APR if the balance is not cleared quickly"],
+      ["Repayment structure", "Fixed term and fixed end date", "Open-ended balance unless you clear it aggressively"],
+      ["Best fit", "Larger treatment plans where predictable budgeting matters", "Smaller balances or short-term cash flow bridging"],
+    ],
+    costDescription: "Illustrative £4,000 comparison using a 24-month term for both options.",
+    alternativeRowLabel: "Credit card example",
+    alternativeAmount: 4000,
+    alternativeApr: 24.9,
+    alternativeTerm: 24,
+    savingsDescription:
+      "On a like-for-like £4,000 example, 0% dental finance can materially reduce total repayable compared with leaving the same balance on a representative credit card APR for 24 months.",
+    keyTakeaways: [
+      "Credit cards can appear convenient, but the total repayable rises quickly if the balance is not cleared inside a short window.",
+      "Dental finance gives a clearer repayment end date and often better treatment-specific budgeting.",
+      "Section 75 and chargeback considerations differ depending on how and where you pay.",
+      "Always compare the total borrowing cost, not only the first monthly figure.",
+    ],
+    sections: [
+      {
+        heading: "When dental finance is usually the stronger option",
+        body: "Dental finance is often better for treatment plans that need a fixed monthly budget and a known completion date. That structure helps patients compare affordability before treatment starts.",
+      },
+      {
+        heading: "When a credit card may still be useful",
+        body: "A credit card can work for small deposits, emergency payments, or short-term bridging if you already have a low-rate or promotional balance and a realistic plan to clear it quickly.",
+      },
+      {
+        heading: "What changes the real cost",
+        body: "APR, repayment discipline, and the length of time you carry the balance matter more than the payment method label. A low introductory offer can become expensive if the balance is still outstanding when the offer ends.",
+      },
+      {
+        heading: "How to compare safely",
+        body: "Ask for the dental finance representative example, check whether a deposit is required, and compare that against your likely credit card rate and repayment pace before committing.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is dental finance cheaper than a credit card?",
+        answer:
+          "Often yes for larger treatment plans, especially when 0% or lower representative APR clinic finance is available. A standard credit card balance can cost more if it runs for many months.",
+      },
+      {
+        question: "Can I use a credit card for a dental deposit and finance the rest?",
+        answer:
+          "Sometimes, but that depends on the clinic and lender process. Splitting payment methods can complicate budgeting, so confirm the treatment plan and repayment schedule first.",
+      },
+      {
+        question: "Does dental finance affect my credit score like a credit card does?",
+        answer:
+          "Yes. Formal dental finance applications can involve credit checks, and missed repayments can damage your credit profile just like missed credit card payments.",
+      },
+      {
+        question: "What is the main risk with credit cards for treatment costs?",
+        answer:
+          "The biggest risk is allowing the balance to revolve for too long at a high variable APR, which can push the total repayable well above the original treatment price.",
+      },
+    ],
+    internalLinks: [
+      { href: "/dental-finance-vs-loan", label: "Dental Finance vs Loan" },
+      { href: "/dental-finance-vs-buy-now-pay-later", label: "Dental Finance vs Buy Now Pay Later" },
+      { href: "/0-percent-dental-finance", label: "0% Dental Finance" },
+      { href: "/dental-payment-plans", label: "Dental Payment Plans" },
+      { href: "/finance-calculator", label: "Finance Calculator" },
+    ],
+  }),
+  buildFinanceComparisonPage({
+    slug: "dental-finance-vs-loan",
+    title: "Dental Finance vs Loan",
+    description:
+      "Compare dental finance vs a loan with feature tables, cost examples, and an indicative savings calculation for private dental treatment in the UK.",
+    answerBlock:
+      "Dental finance is often better aligned to treatment timing, while a standard loan can offer longer repayment terms and broader use of funds. Loans may reduce monthly payments by stretching the term, but that can increase the total repayable.",
+    summaryLabel: "Treatment-linked finance against a general-purpose unsecured loan",
+    alternativeColumnLabel: "Loan",
+    featureDescription: "Dental finance and loans can both spread treatment costs, but the structure and total borrowing cost are different.",
+    featureRows: [
+      ["Typical use", "Linked to a treatment plan and clinic process", "General-purpose borrowing you arrange yourself"],
+      ["Term profile", "Often short-to-medium term with fixed repayments", "Can run longer, lowering monthly cost but increasing total interest"],
+      ["Clinic integration", "Usually aligned to treatment approval and scheduling", "You receive the funds and pay the clinic directly"],
+      ["Best fit", "Patients prioritising fixed treatment budgeting", "Patients needing flexibility or funding beyond the clinic invoice"],
+    ],
+    costDescription: "Illustrative £4,000 comparison using 0% dental finance over 24 months and a 7.9% loan over 36 months.",
+    alternativeRowLabel: "Loan example",
+    alternativeAmount: 4000,
+    alternativeApr: 7.9,
+    alternativeTerm: 36,
+    savingsDescription:
+      "Loans can lower the monthly figure by extending the term, but the extra months usually mean paying more overall than a shorter 0% dental finance plan.",
+    keyTakeaways: [
+      "Loans can feel more flexible, but the longer term is often the reason the monthly payment looks easier.",
+      "Dental finance is usually more treatment-specific and easier to compare with the clinic quote.",
+      "If you need to fund travel or wider household costs too, a loan may offer broader flexibility.",
+      "Always compare monthly affordability with total repayable before choosing.",
+    ],
+    sections: [
+      {
+        heading: "Why monthly payment is not the full story",
+        body: "A loan may show a lower monthly payment simply because it runs for longer. That can be helpful for cash flow, but it is not automatically the cheaper option.",
+      },
+      {
+        heading: "When a loan can make sense",
+        body: "A loan can be useful when you need one funding pot for treatment, time off work, travel, or related costs that clinic-linked finance will not cover.",
+      },
+      {
+        heading: "When dental finance can be simpler",
+        body: "If your priority is matching borrowing directly to a known treatment plan, dental finance often gives a cleaner approval-to-treatment journey with clearer treatment-specific paperwork.",
+      },
+      {
+        heading: "How to compare representative examples",
+        body: "Check APR, fees, overpayment rules, and early settlement terms. If a longer loan term only solves affordability by increasing the total cost too much, reconsider the treatment timing or deposit size.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is dental finance better than a loan?",
+        answer:
+          "It depends on your priorities. Dental finance can be better for treatment-specific budgeting, while a loan can be better if you need more flexibility or a longer repayment window.",
+      },
+      {
+        question: "Why can a loan have a lower monthly payment but a higher total cost?",
+        answer:
+          "Because the balance is repaid over more months, which spreads the cost but also creates more time for interest to accrue.",
+      },
+      {
+        question: "Can I use a loan for treatment in multiple stages?",
+        answer:
+          "Yes, because the loan funds are usually paid to you. That flexibility can help on phased treatment plans, but you still need to budget carefully for the full cost.",
+      },
+      {
+        question: "Does dental finance always offer 0% APR?",
+        answer:
+          "No. Some clinics advertise 0% promotional terms, while others use representative APR products. Availability depends on the provider, term, and your eligibility.",
+      },
+    ],
+    internalLinks: [
+      { href: "/dental-finance-vs-credit-card", label: "Dental Finance vs Credit Card" },
+      { href: "/dental-finance-vs-buy-now-pay-later", label: "Dental Finance vs Buy Now Pay Later" },
+      { href: "/dental-loan-calculator", label: "Dental Loan Calculator" },
+      { href: "/monthly-payment-calculator", label: "Monthly Payment Calculator" },
+      { href: "/finance-calculator", label: "Finance Calculator" },
+    ],
+  }),
+  buildFinanceComparisonPage({
+    slug: "dental-finance-vs-buy-now-pay-later",
+    title: "Dental Finance vs Buy Now Pay Later",
+    description:
+      "Compare dental finance vs buy now pay later using feature tables, sample cost scenarios, and an indicative savings calculation for UK treatment plans.",
+    answerBlock:
+      "Buy now pay later can look attractive when a short 0% offer is available, but it is usually best suited to smaller balances and shorter windows. Dental finance is generally safer for larger treatment plans because the repayment term, lender disclosures, and treatment budgeting are clearer from the start.",
+    summaryLabel: "Treatment-linked finance against short-term buy now pay later borrowing",
+    alternativeColumnLabel: "Buy now pay later",
+    featureDescription: "Buy now pay later can help with short-term affordability, but the promotional structure creates different risks from a fixed dental finance plan.",
+    featureRows: [
+      ["Typical use", "Planned treatment spread over a fixed agreement", "Short-term deferred or instalment payments"],
+      ["Promotional structure", "Terms are agreed upfront for the whole balance", "Often interest-free only if cleared within a short promotional window"],
+      ["Balance risk", "Known monthly payment and end date", "Remaining balance can become expensive if the offer expires"],
+      ["Best fit", "Medium or large treatment plans needing stable budgeting", "Small balances you are confident you can clear quickly"],
+    ],
+    costDescription:
+      "Illustrative £4,000 comparison showing dental finance over 24 months, a 12-month 0% BNPL plan, and a 24-month high-APR BNPL rollover example.",
+    alternativeRowLabel: "BNPL rollover example",
+    alternativeAmount: 4000,
+    alternativeApr: 29.9,
+    alternativeTerm: 24,
+    extraCostRows: [{ label: "BNPL promotional example", amount: 4000, apr: 0, term: 12 }],
+    savingsDescription:
+      "If a BNPL balance is not cleared during the short promotional period, the total repayable can exceed a structured dental finance plan by a wide margin.",
+    keyTakeaways: [
+      "BNPL is most useful when you can clear the full balance inside the promotional period.",
+      "Dental finance is generally easier to budget for when treatment costs are high or staged.",
+      "A lower first monthly payment is not the same as a lower total cost.",
+      "Read the promotional expiry terms carefully before relying on BNPL for treatment.",
+    ],
+    sections: [
+      {
+        heading: "Why BNPL can look cheaper than it really is",
+        body: "Short promotional instalments can create an attractive headline monthly figure, but the strategy only works if you can reliably clear the balance before any higher rate or deferred interest kicks in.",
+      },
+      {
+        heading: "Why dental finance often suits bigger treatment plans",
+        body: "Dental finance is usually easier to model for larger balances because the agreement sets the monthly payment, term, and expected total repayable from the beginning.",
+      },
+      {
+        heading: "Where BNPL may still help",
+        body: "BNPL can be reasonable for low-cost cosmetic or hygiene work if the amount is modest and you have the cash flow to clear it rapidly without relying on future borrowing.",
+      },
+      {
+        heading: "What to check before choosing",
+        body: "Confirm how missed payments, promotional expiry, or balance rollovers are handled. Then compare that with the dental finance representative example and your treatment timeline.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is buy now pay later good for dental treatment?",
+        answer:
+          "It can work for smaller balances or very short repayment windows, but it is often less suitable for larger treatment plans where you need predictable long-term budgeting.",
+      },
+      {
+        question: "What is the biggest BNPL risk for dental costs?",
+        answer:
+          "The main risk is failing to clear the balance during the promotional period and then paying a much higher rate or fees on the remaining balance.",
+      },
+      {
+        question: "Is dental finance more regulated than BNPL?",
+        answer:
+          "Both can be regulated depending on the provider and product, but dental finance usually presents a more traditional fixed-credit structure for larger treatment balances.",
+      },
+      {
+        question: "Should I choose BNPL just because the first payment is lower?",
+        answer:
+          "No. Compare the full repayment schedule, the promotional expiry rules, and the worst-case total cost if the balance is not cleared on time.",
+      },
+    ],
+    internalLinks: [
+      { href: "/dental-finance-vs-credit-card", label: "Dental Finance vs Credit Card" },
+      { href: "/dental-finance-vs-loan", label: "Dental Finance vs Loan" },
+      { href: "/0-percent-finance-calculator", label: "0% Finance Calculator" },
+      { href: "/monthly-payment-calculator", label: "Monthly Payment Calculator" },
+      { href: "/dental-payment-plans", label: "Dental Payment Plans" },
+    ],
+  }),
+];
+
+function buildUkTurkeyComparisonPage(config) {
+  const turkeyTotal = config.turkeyClinicCost + config.extraCosts;
+  const saving = config.ukCost - turkeyTotal;
+  const savingPct = Math.round((saving / config.ukCost) * 100);
+
+  return [
+    config.slug,
+    {
+      slug: config.slug,
+      title: config.title,
+      type: "article",
+      description: config.description,
+      answerBlock: config.answerBlock,
+      keyTakeaways: config.keyTakeaways,
+      summaryRows: [
+        ["Treatment focus", config.treatmentLabel],
+        ["Typical UK private cost", toCurrency(config.ukCost)],
+        ["Estimated Turkey trip total", toCurrency(turkeyTotal)],
+        ["Indicative saving", `${toCurrency(saving)} (${savingPct}%)`],
+      ],
+      featureTable: {
+        title: "Feature Table",
+        description: config.featureDescription,
+        headers: ["Comparison point", "UK private treatment", "Turkey treatment"],
+        rows: config.featureRows,
+      },
+      costTable: {
+        title: "Cost Table",
+        description: config.costDescription,
+        headers: [
+          "Scenario",
+          "Typical UK private cost",
+          "Turkey clinic quote",
+          "Travel & aftercare allowance",
+          "Estimated Turkey total",
+          "Indicative saving",
+          "Saving",
+        ],
+        rows: [
+          buildTurkeyAdjustedSavingsRow(
+            "Indicative standard case",
+            config.ukCost,
+            config.turkeyClinicCost,
+            config.extraCosts
+          ),
+          buildTurkeyAdjustedSavingsRow(
+            "Higher-complexity case",
+            config.complexUkCost,
+            config.complexTurkeyClinicCost,
+            config.complexExtraCosts
+          ),
+        ],
+      },
+      savingsCalculation: {
+        title: "Savings Calculation",
+        description: config.savingsDescription,
+        metrics: [
+          { label: "UK private benchmark", value: toCurrency(config.ukCost), tone: "accent" },
+          { label: "Turkey total with extras", value: toCurrency(turkeyTotal) },
+          { label: "Indicative saving", value: toCurrency(saving), tone: "positive" },
+        ],
+        footnote:
+          "Indicative only. Turkey totals include a planning allowance for flights, accommodation, and UK-based aftercare, but real cases vary by clinic and treatment scope.",
+      },
+      sections: config.sections,
+      faqs: config.faqs,
+      internalLinks: config.internalLinks,
+      medicalReview: turkeyMedicalReview,
+      financeDisclosure: turkeyFinanceDisclosure,
+      author: "DentalFinanceUK Editorial Team",
+      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      references: turkeyReferenceList,
+      disclaimer:
+        "Educational only. Always compare itemised treatment plans, travel costs, and aftercare arrangements before booking treatment abroad.",
+      lastUpdated: "2026-05-30",
+    },
+  ];
+}
+
+const ukTurkeyComparisonEntries = [
+  [
+    "uk-vs-turkey-dental-costs",
+    {
+      slug: "uk-vs-turkey-dental-costs",
+      title: "UK vs Turkey Dental Costs",
+      type: "article",
+      description:
+        "Compare UK vs Turkey dental costs with feature tables, full trip cost examples, indicative savings calculations, and FAQs for common cosmetic and implant treatments.",
+      answerBlock:
+        "Turkey dental treatment can be cheaper than private UK dentistry, but the true comparison must include flights, accommodation, time away from work, and any UK aftercare or remedial treatment. The best saving is the one that still leaves you comfortable with clinical planning and follow-up support.",
+      keyTakeaways: [
+        "Headline Turkey prices are usually lower, but extras can narrow the final saving.",
+        "The strongest comparison uses itemised treatment plans rather than package slogans.",
+        "Aftercare access in the UK is usually the main practical trade-off when travelling abroad.",
+        "Patients should compare total trip cost, not only the clinic quote.",
+      ],
+      summaryRows: [
+        ["Comparison focus", "Private UK dentistry vs Turkey treatment travel plans"],
+        ["Treatments compared", "Veneers, implants, All-on-4, and Hollywood smile"],
+        ["Average Turkey trip total in this model", "£6,700"],
+        ["Average indicative saving", "£4,450 (40%)"],
+      ],
+      featureTable: {
+        title: "Feature Table",
+        description: "Use this table to compare the practical differences that usually sit behind the price gap.",
+        headers: ["Comparison point", "UK private dentistry", "Turkey dentistry"],
+        rows: [
+          ["Upfront quote", "Usually reflects local appointments and local review access", "Often lower headline clinic quote, but travel and some extras may sit outside the package"],
+          ["Travel requirement", "Local travel only", "Flights, hotels, transfers, and time off work usually need to be budgeted"],
+          ["Aftercare access", "Follow-up is easier to arrange with the treating clinic", "You may need UK private review or another overseas trip if issues arise"],
+          ["Main budget risk", "Higher clinic fee at the start", "Unexpected extras or remedial care reducing the headline saving"],
+        ],
+      },
+      costTable: {
+        title: "Cost Table",
+        description: "Indicative comparisons across the main treatment categories most commonly researched by UK patients.",
+        headers: [
+          "Treatment",
+          "Typical UK private cost",
+          "Turkey clinic quote",
+          "Travel & aftercare allowance",
+          "Estimated Turkey total",
+          "Indicative saving",
+          "Saving",
+        ],
+        rows: [
+          buildTurkeyAdjustedSavingsRow("Veneers", 7800, 3200, 1500),
+          buildTurkeyAdjustedSavingsRow("Dental implants", 9800, 4200, 1700),
+          buildTurkeyAdjustedSavingsRow("All-on-4", 16000, 7800, 2200),
+          buildTurkeyAdjustedSavingsRow("Hollywood smile", 11000, 4600, 1600),
+        ],
+      },
+      savingsCalculation: {
+        title: "Savings Calculation",
+        description:
+          "Across the four comparison models below, the average UK benchmark is about £11,150 versus an average Turkey total of about £6,700 once travel and aftercare allowances are included.",
+        metrics: [
+          { label: "Average UK benchmark", value: "£11,150", tone: "accent" },
+          { label: "Average Turkey total", value: "£6,700" },
+          { label: "Average indicative saving", value: "£4,450", tone: "positive" },
+        ],
+        footnote:
+          "These averages are simple planning examples, not formal quotations. Complex cases, premium materials, and extra visits can change the gap significantly.",
+      },
+      sections: [
+        {
+          heading: "Why the same treatment can cost less in Turkey",
+          body: "Patients often see lower clinic quotes in Turkey because operating costs, package construction, and pricing strategy differ from the UK private market. That does not automatically mean the treatment is like-for-like in planning, materials, or follow-up support.",
+        },
+        {
+          heading: "What must be added to the Turkey quote",
+          body: "At minimum, budget for flights, accommodation, transfers, food, medication, and a realistic allowance for UK review appointments or adjustments after you return home. Implant and full-arch work usually require the biggest contingency.",
+        },
+        {
+          heading: "How to compare quality as well as price",
+          body: "Ask for itemised plans, implant or material brand details, warranty wording, and the expected number of visits. Compare that against UK private treatment scope rather than relying on social-media package marketing.",
+        },
+        {
+          heading: "When a lower price is not better value",
+          body: "A cheaper overseas quote can become poor value if the treatment scope is reduced, aftercare is difficult, or remedial work is needed later in the UK. Value comes from the whole treatment journey, not only the booking price.",
+        },
+      ],
+      faqs: [
+        {
+          question: "Is dental treatment in Turkey always cheaper than the UK?",
+          answer:
+            "The clinic quote is often cheaper, but you should compare the full travel and aftercare budget before deciding whether the real saving is worth it.",
+        },
+        {
+          question: "What costs are most often missed in UK vs Turkey comparisons?",
+          answer:
+            "Flights, hotels, transfers, medications, time off work, and future UK aftercare are the costs patients most commonly underestimate.",
+        },
+        {
+          question: "Can I use finance to cover a Turkey treatment trip?",
+          answer:
+            "Some patients model the full trip cost with separate UK credit, but any formal borrowing option depends on the lender and product. Always compare total repayable first.",
+        },
+        {
+          question: "What should I check before booking treatment in Turkey?",
+          answer:
+            "Check the itemised treatment plan, clinician credentials, material or implant brands, warranty wording, number of visits, and who handles complications after you return to the UK.",
+        },
+      ],
+      internalLinks: [
+        { href: "/veneers-uk-vs-turkey", label: "Veneers UK vs Turkey" },
+        { href: "/implants-uk-vs-turkey", label: "Implants UK vs Turkey" },
+        { href: "/all-on-4-uk-vs-turkey", label: "All-on-4 UK vs Turkey" },
+        { href: "/hollywood-smile-uk-vs-turkey", label: "Hollywood Smile UK vs Turkey" },
+        { href: "/turkey-teeth-finance", label: "Turkey Teeth Finance" },
+      ],
+      medicalReview: turkeyMedicalReview,
+      financeDisclosure: turkeyFinanceDisclosure,
+      author: "DentalFinanceUK Editorial Team",
+      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
+      references: turkeyReferenceList,
+      disclaimer:
+        "Educational only. The examples on this page do not replace an individual clinical treatment plan or regulated financial illustration.",
+      lastUpdated: "2026-05-30",
+    },
+  ],
+  buildUkTurkeyComparisonPage({
+    slug: "veneers-uk-vs-turkey",
+    title: "Veneers UK vs Turkey",
+    treatmentLabel: "Cosmetic veneers",
+    description:
+      "Compare veneers in the UK vs Turkey with a feature table, full cost breakdown, indicative savings calculation, and FAQs for UK patients considering treatment abroad.",
+    answerBlock:
+      "Veneers in Turkey can be materially cheaper than private UK veneers, but the real comparison should include travel, hotel costs, and the price of any future maintenance or replacement back in the UK.",
+    keyTakeaways: [
+      "Turkey veneer quotes can be lower, but smile design, material choice, and review access vary widely.",
+      "Composite, porcelain, and package-based veneer offers are not always directly comparable.",
+      "Travel and aftercare allowances can reduce the headline saving by more than a thousand pounds.",
+      "Patients should compare treatment planning quality as carefully as price.",
+    ],
+    featureDescription: "Key differences patients usually weigh when comparing veneer treatment in the UK and Turkey.",
+    featureRows: [
+      ["Typical quote structure", "Usually includes local planning and easier review appointments", "Often a lower clinic quote, but travel and some extras may sit outside the package"],
+      ["Aftercare access", "Simple to arrange polish, review, or remake discussions locally", "You may need a UK dentist for maintenance or another trip for adjustments"],
+      ["Time away from work", "Local appointments only", "Travel days and possible return visits should be budgeted"],
+      ["Main cost risk", "Higher upfront clinic price", "Unexpected extras or long-term maintenance reducing the net saving"],
+    ],
+    costDescription: "Illustrative veneer comparisons showing how travel and UK aftercare allowances affect the apparent saving.",
+    savingsDescription:
+      "On this indicative standard case, a Turkey veneer trip remains cheaper than a private UK veneer plan, but the saving is meaningfully lower once travel and follow-up costs are included.",
+    ukCost: 7800,
+    turkeyClinicCost: 3200,
+    extraCosts: 1500,
+    complexUkCost: 9200,
+    complexTurkeyClinicCost: 3900,
+    complexExtraCosts: 1900,
+    sections: [
+      {
+        heading: "What usually drives the veneer price gap",
+        body: "The main drivers are laboratory choice, clinic positioning, number of veneers, preparation style, and whether temporaries, smile design, and review appointments are bundled into the quote.",
+      },
+      {
+        heading: "Why aftercare matters on veneers",
+        body: "Veneers are cosmetic restorations that may need review, polishing, edge adjustments, or eventual replacement. Local aftercare can be a major advantage when comparing long-term value.",
+      },
+      {
+        heading: "How to compare quotes properly",
+        body: "Ask for the number of units included, material details, mock-up or smile design information, and the remake policy. A cheaper veneer package is not automatically the better clinical option.",
+      },
+      {
+        heading: "Who this comparison is most useful for",
+        body: "This page is most useful for patients comparing a full private UK smile design route against a Turkey veneer trip where the headline quote looks much lower at first glance.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Are veneers in Turkey cheaper than the UK?",
+        answer:
+          "Often yes at headline price level, but the real comparison should include travel, accommodation, and any later maintenance or replacement costs in the UK.",
+      },
+      {
+        question: "What is the main risk when comparing veneer prices abroad?",
+        answer:
+          "The biggest risk is assuming every veneer package uses the same material quality, smile design process, and aftercare commitment when that is often not the case.",
+      },
+      {
+        question: "Can I include travel in my veneer budget?",
+        answer:
+          "Yes, and you should. Flights, hotels, transfers, and UK review appointments can significantly change the overall saving.",
+      },
+      {
+        question: "Do cheaper veneers always mean better value?",
+        answer:
+          "No. Value depends on planning, aesthetics, material quality, longevity, and how easy it will be to resolve any issues later.",
+      },
+    ],
+    internalLinks: [
+      { href: "/uk-vs-turkey-dental-costs", label: "UK vs Turkey Dental Costs" },
+      { href: "/veneers-finance-turkey", label: "Veneers Finance Turkey" },
+      { href: "/veneers-finance", label: "Veneers Finance" },
+      { href: "/veneer-finance-calculator", label: "Veneer Finance Calculator" },
+      { href: "/turkey-teeth-finance", label: "Turkey Teeth Finance" },
+    ],
+  }),
+  buildUkTurkeyComparisonPage({
+    slug: "implants-uk-vs-turkey",
+    title: "Implants UK vs Turkey",
+    treatmentLabel: "Dental implants",
+    description:
+      "Compare dental implants in the UK vs Turkey with a feature table, full cost breakdown, indicative savings calculation, and FAQs for patients planning implant treatment.",
+    answerBlock:
+      "Dental implants in Turkey can cost less than private UK implant treatment, but implant brand choice, bone grafting needs, and follow-up care can change the final value more than the headline price alone.",
+    keyTakeaways: [
+      "Implant comparisons should include diagnostics, grafting risk, and restoration quality as well as price.",
+      "Turkey can still be cheaper after travel costs, but implant aftercare is a major consideration.",
+      "A lower quote is not like-for-like unless implant systems, abutments, and crown details are clear.",
+      "Complex implant cases need the largest contingency allowance in any overseas budget.",
+    ],
+    featureDescription: "Key implant-specific differences patients usually consider when comparing UK and Turkey treatment routes.",
+    featureRows: [
+      ["Diagnostics and planning", "CBCT scans and local reviews are easier to coordinate", "Planning can still be detailed, but repeat travel may be needed if treatment changes"],
+      ["Aftercare access", "Local review and maintenance are simpler to arrange", "Future checks or complications may need UK private support or another trip"],
+      ["Treatment staging", "Phased visits are easier to manage locally", "Multiple-stage implant work can increase travel complexity"],
+      ["Main cost risk", "Higher clinic quote from the start", "Bone grafting, extra stages, or remedial work narrowing the saving"],
+    ],
+    costDescription: "Indicative implant comparisons showing how travel and aftercare allowances affect the UK vs Turkey gap.",
+    savingsDescription:
+      "The standard implant example below still shows a substantial Turkey saving, but implant cases need a larger safety margin because extra stages and aftercare can raise the true cost.",
+    ukCost: 9800,
+    turkeyClinicCost: 4200,
+    extraCosts: 1700,
+    complexUkCost: 12000,
+    complexTurkeyClinicCost: 5200,
+    complexExtraCosts: 2200,
+    sections: [
+      {
+        heading: "Why implant cost comparisons are harder than veneer comparisons",
+        body: "Implants involve diagnostics, surgery, healing, and the final restoration. Bone quality, grafting, sinus lift needs, and restoration materials all change the final cost and complexity.",
+      },
+      {
+        heading: "How aftercare changes the decision",
+        body: "Implant maintenance and complication management matter as much as the original placement fee. If local aftercare is important to you, that should carry real weight in the comparison.",
+      },
+      {
+        heading: "What to ask the clinic before comparing prices",
+        body: "Request implant brand details, what is included in the restorative phase, whether grafting is included, and who is responsible if an implant fails or needs revision.",
+      },
+      {
+        heading: "When Turkey may still be the better fit",
+        body: "Turkey can still be attractive if the treatment plan is clearly documented, the provider has strong credentials, and you are comfortable with the travel and aftercare model.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Are dental implants in Turkey cheaper than the UK?",
+        answer:
+          "Often yes, but the true comparison should include scans, grafting risk, travel, accommodation, and future aftercare or maintenance in the UK.",
+      },
+      {
+        question: "What should I check before comparing implant prices?",
+        answer:
+          "Check the implant system, restorative materials, whether grafting is included, how many visits are needed, and what the complication policy looks like.",
+      },
+      {
+        question: "Can implant aftercare reduce the saving from Turkey treatment?",
+        answer:
+          "Yes. Follow-up appointments, maintenance, or remedial treatment in the UK can meaningfully narrow the original price advantage.",
+      },
+      {
+        question: "Is the cheapest implant quote usually the best choice?",
+        answer:
+          "No. With implants, material quality, planning, and long-term support are often more important than choosing the absolute lowest quote.",
+      },
+    ],
+    internalLinks: [
+      { href: "/uk-vs-turkey-dental-costs", label: "UK vs Turkey Dental Costs" },
+      { href: "/dental-implants-finance-turkey", label: "Dental Implants Finance Turkey" },
+      { href: "/dental-implants-finance", label: "Dental Implants Finance" },
+      { href: "/implant-finance-calculator", label: "Implant Finance Calculator" },
+      { href: "/turkey-teeth-finance", label: "Turkey Teeth Finance" },
+    ],
+  }),
+  buildUkTurkeyComparisonPage({
+    slug: "all-on-4-uk-vs-turkey",
+    title: "All-on-4 UK vs Turkey",
+    treatmentLabel: "All-on-4 full-arch implants",
+    description:
+      "Compare All-on-4 treatment in the UK vs Turkey with a feature table, cost examples, indicative savings calculation, and FAQs for full-arch implant patients.",
+    answerBlock:
+      "All-on-4 treatment in Turkey can still cost less than a private UK full-arch case, but the stakes are higher because treatment is complex, staged, and heavily dependent on planning, materials, and aftercare access.",
+    keyTakeaways: [
+      "All-on-4 comparisons need a larger contingency budget than standard implant or veneer cases.",
+      "Turkey can offer a large headline saving, but travel and complication risk must be factored in.",
+      "A full-arch package should be compared on implant system, bridge material, and staged care, not just price.",
+      "Aftercare clarity is essential before committing to overseas full-arch treatment.",
+    ],
+    featureDescription: "Key practical differences patients usually weigh when comparing UK and Turkey All-on-4 treatment.",
+    featureRows: [
+      ["Treatment complexity", "Complex surgery and prosthetics managed locally", "Complex treatment can be cheaper, but repeated travel may be required"],
+      ["Aftercare access", "Local review is easier for bite, fit, and healing issues", "Complications may need UK private help or another overseas visit"],
+      ["Visit planning", "More flexible if extra appointments are needed", "Travel timing is critical when surgery and restoration stages change"],
+      ["Main cost risk", "Higher starting price", "Revision, replacement, or extra travel reducing the net saving"],
+    ],
+    costDescription: "Indicative All-on-4 comparisons showing how full-arch travel and follow-up allowances affect the saving.",
+    savingsDescription:
+      "All-on-4 can still show a large Turkey saving, but it is also the comparison where planning mistakes or weak aftercare can become most expensive later.",
+    ukCost: 16000,
+    turkeyClinicCost: 7800,
+    extraCosts: 2200,
+    complexUkCost: 18500,
+    complexTurkeyClinicCost: 9200,
+    complexExtraCosts: 2800,
+    sections: [
+      {
+        heading: "Why All-on-4 is a higher-stakes comparison",
+        body: "All-on-4 involves full-arch surgery, temporary phases, healing, and final restoration decisions. Because the treatment is complex, the risk of underestimating aftercare is greater than on simpler cases.",
+      },
+      {
+        heading: "What the package price may not show",
+        body: "Ask whether the quote includes diagnostics, extractions, grafting, sedation, temporary bridges, final bridge material, medication, and any revision policy. Package wording can hide meaningful differences.",
+      },
+      {
+        heading: "Why aftercare carries more weight on full-arch work",
+        body: "Bite, fit, healing, and hygiene support matter long after surgery. If follow-up access is difficult, small issues can become bigger and more expensive to resolve.",
+      },
+      {
+        heading: "How to compare All-on-4 providers properly",
+        body: "Compare clinician experience, implant system, prosthetic design, warranty wording, and how staged treatment changes are handled before placing too much emphasis on price.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is All-on-4 in Turkey cheaper than the UK?",
+        answer:
+          "Often yes on headline price, but the comparison should include travel, accommodation, aftercare, and the possibility of extra stages or adjustments.",
+      },
+      {
+        question: "Why is aftercare so important on All-on-4 treatment?",
+        answer:
+          "Because full-arch implant work is complex and small issues with fit, bite, or healing can have a major effect on comfort and long-term outcomes.",
+      },
+      {
+        question: "What should I ask before comparing All-on-4 quotes?",
+        answer:
+          "Ask what implant system and bridge material are used, whether diagnostics and temporaries are included, how many visits are needed, and how complications would be managed.",
+      },
+      {
+        question: "Can the cheapest All-on-4 quote still be the most expensive later?",
+        answer:
+          "Yes. Weak planning, unclear warranty terms, or difficult aftercare can make a cheap starting quote poor value if remedial work is needed later.",
+      },
+    ],
+    internalLinks: [
+      { href: "/uk-vs-turkey-dental-costs", label: "UK vs Turkey Dental Costs" },
+      { href: "/all-on-4-finance-turkey", label: "All-on-4 Finance Turkey" },
+      { href: "/all-on-4-finance-calculator", label: "All-on-4 Finance Calculator" },
+      { href: "/full-mouth-reconstruction-finance-turkey", label: "Full Mouth Reconstruction Finance Turkey" },
+      { href: "/turkey-teeth-finance", label: "Turkey Teeth Finance" },
+    ],
+  }),
+  buildUkTurkeyComparisonPage({
+    slug: "hollywood-smile-uk-vs-turkey",
+    title: "Hollywood Smile UK vs Turkey",
+    treatmentLabel: "Hollywood smile treatment",
+    description:
+      "Compare Hollywood smile treatment in the UK vs Turkey with a feature table, cost examples, indicative savings calculation, and FAQs for cosmetic dentistry patients.",
+    answerBlock:
+      "A Hollywood smile package in Turkey can be much cheaper than a private UK smile makeover, but package-based cosmetic dentistry is only a fair comparison when the treatment scope, materials, and future maintenance plan are clearly documented.",
+    keyTakeaways: [
+      "Hollywood smile packages are often cheaper in Turkey, but package labels can hide major treatment differences.",
+      "Travel and aftercare still matter even on cosmetic dentistry cases.",
+      "Smile design, temporaries, and final material choice should be compared line by line.",
+      "Patients should treat the headline package price as a starting point, not the full answer.",
+    ],
+    featureDescription: "Key differences patients usually weigh when comparing UK and Turkey Hollywood smile treatment.",
+    featureRows: [
+      ["Package transparency", "Usually easier to question line by line with a local provider", "Package labels can look simple even when the treatment scope differs"],
+      ["Aftercare access", "Local review and polishing are easier to arrange", "Follow-up may require UK private support or further travel"],
+      ["Travel requirement", "Local appointments only", "Travel and hotel costs need to be added to the package"],
+      ["Main cost risk", "Higher initial private quote", "Add-on fees or future maintenance reducing the apparent saving"],
+    ],
+    costDescription: "Indicative Hollywood smile comparisons showing how travel and maintenance allowances affect the final gap.",
+    savingsDescription:
+      "The illustrative standard case still shows a strong Turkey saving, but cosmetic package prices should always be tested against what is actually included and who will handle maintenance later.",
+    ukCost: 11000,
+    turkeyClinicCost: 4600,
+    extraCosts: 1600,
+    complexUkCost: 13000,
+    complexTurkeyClinicCost: 5600,
+    complexExtraCosts: 2100,
+    sections: [
+      {
+        heading: "What a Hollywood smile price normally includes",
+        body: "Quotes can include veneers, crowns, whitening, gum contouring, temporaries, mock-ups, and smile design work. Because the label is broad, itemised comparison is essential.",
+      },
+      {
+        heading: "Why package-based pricing needs extra scrutiny",
+        body: "A low package price is not enough on its own. You need to know the number of units, material quality, provisional stage, and any refinement or remake policy before deciding value.",
+      },
+      {
+        heading: "How aftercare affects long-term cost",
+        body: "Cosmetic treatment often needs polishing, review, and sometimes replacement over time. If aftercare is difficult to access, the original saving can narrow later.",
+      },
+      {
+        heading: "When Turkey may still be the right choice",
+        body: "Turkey may still offer strong value if the treatment plan is clear, the materials are confirmed, and you are comfortable with the travel and maintenance model involved.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is a Hollywood smile in Turkey cheaper than the UK?",
+        answer:
+          "Usually yes at headline package level, but the true comparison should include travel, accommodation, and future maintenance or review costs.",
+      },
+      {
+        question: "Why are Hollywood smile packages hard to compare?",
+        answer:
+          "Because the term can cover different combinations of veneers, crowns, whitening, and smile design work. Two packages with the same name may be clinically very different.",
+      },
+      {
+        question: "What should I ask before comparing Hollywood smile quotes?",
+        answer:
+          "Ask how many units are included, what materials are used, whether temporaries and design appointments are included, and how future maintenance would work.",
+      },
+      {
+        question: "Can cheaper cosmetic dentistry still become expensive later?",
+        answer:
+          "Yes. If the treatment needs refinement, replacement, or difficult aftercare later, the long-term cost can rise well above the original package headline.",
+      },
+    ],
+    internalLinks: [
+      { href: "/uk-vs-turkey-dental-costs", label: "UK vs Turkey Dental Costs" },
+      { href: "/hollywood-smile-finance-turkey", label: "Hollywood Smile Finance Turkey" },
+      { href: "/hollywood-smile-turkey-cost-monthly-payments", label: "Hollywood Smile Turkey Cost Monthly Payments" },
+      { href: "/veneers-finance-turkey", label: "Veneers Finance Turkey" },
+      { href: "/turkey-teeth-finance", label: "Turkey Teeth Finance" },
+    ],
+  }),
+];
+
 const basePageEntries = allPages.map(([slug, title, type]) => {
     const summaryRows = [
       ["Typical UK treatment budget", "£800 to £12,000+ depending on treatment"],
@@ -1740,7 +2600,13 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
     return [slug, base];
   });
 
-export const pageMap = Object.fromEntries([...basePageEntries, ...cityPageEntries, ...turkeyPageEntries]);
+export const pageMap = Object.fromEntries([
+  ...basePageEntries,
+  ...cityPageEntries,
+  ...turkeyPageEntries,
+  ...financeComparisonEntries,
+  ...ukTurkeyComparisonEntries,
+]);
 
 export const pageSlugs = Object.keys(pageMap);
 

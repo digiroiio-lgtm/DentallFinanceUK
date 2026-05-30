@@ -98,6 +98,33 @@ function DataTable({ section }) {
   );
 }
 
+function SavingsCalculation({ calculation }) {
+  const toneClasses = {
+    default: "border-gray-200 bg-white",
+    accent: "border-blue-200 bg-blue-50",
+    positive: "border-green-200 bg-green-50",
+  };
+
+  return (
+    <section className="mt-6 rounded border border-gray-200 p-4">
+      <h2 className="text-2xl font-semibold">{calculation.title}</h2>
+      {calculation.description ? <p className="mt-2">{calculation.description}</p> : null}
+      <div className="mt-4 grid gap-3 sm:grid-cols-3">
+        {calculation.metrics.map((metric) => (
+          <div
+            key={metric.label}
+            className={`rounded border p-3 text-center ${toneClasses[metric.tone ?? "default"]}`}
+          >
+            <p className="text-xs text-gray-500">{metric.label}</p>
+            <p className="text-xl font-bold">{metric.value}</p>
+          </div>
+        ))}
+      </div>
+      {calculation.footnote ? <p className="mt-3 text-xs text-gray-500">{calculation.footnote}</p> : null}
+    </section>
+  );
+}
+
 export default function PageTemplate({ page }) {
   const internalLinks = page.internalLinks ?? getInternalLinks(page.slug);
   const schemas = buildSchemas(page);
@@ -142,6 +169,12 @@ export default function PageTemplate({ page }) {
           </tbody>
         </table>
       </section>
+
+      {page.featureTable ? <DataTable section={page.featureTable} /> : null}
+
+      {page.costTable ? <DataTable section={page.costTable} /> : null}
+
+      {page.savingsCalculation ? <SavingsCalculation calculation={page.savingsCalculation} /> : null}
 
       {page.savingsTable ? <DataTable section={page.savingsTable} /> : null}
 
