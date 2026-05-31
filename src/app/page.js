@@ -147,7 +147,7 @@ export default function Home() {
       <section className="mt-8 grid gap-6 lg:grid-cols-2">
         <div className="surface-card p-6">
           <h2 className="section-title text-2xl">Why trust Dental Finance UK</h2>
-          <ul className="mt-4 space-y-3 text-sm text-[#556689]">
+          <ul className="mt-4 space-y-3 text-sm text-[#695aa0]">
             <li className="subtle-card interactive-card p-3">Independent educational and comparison content, not lender advertising copy.</li>
             <li className="subtle-card interactive-card p-3">Consistent review standards for finance and treatment pages.</li>
             <li className="subtle-card interactive-card p-3">Clear financial disclosure and UK-focused guidance for informed decisions.</li>
@@ -257,7 +257,7 @@ export default function Home() {
 
       <section className="surface-card mt-8 p-6">
         <h2 className="section-title text-2xl">Calculator tools</h2>
-        <p className="mt-3 text-[#4e6288]">Use calculator tools to compare 0% APR and representative APR scenarios.</p>
+        <p className="mt-3 text-[#67589e]">Use calculator tools to compare 0% APR and representative APR scenarios.</p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Link href="/finance-calculator" className="btn btn-primary calculator-cta-btn">
             Open Finance Calculator

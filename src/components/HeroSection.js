@@ -20,7 +20,7 @@ export default function HeroSection({ title, description, primaryCta, secondaryC
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
             {highlights.map((item) => (
-              <span key={item} className="badge border-[#5a78b0] bg-[#163a7f] text-[#dce8ff]">
+              <span key={item} className="badge border-[#bca8f4] bg-[#452d97] text-[#f3edff]">
                 {item}
               </span>
             ))}

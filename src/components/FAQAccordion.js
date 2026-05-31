@@ -5,8 +5,8 @@ export default function FAQAccordion({ items = [] }) {
       <div className="mt-4 space-y-3">
         {items.map((faq) => (
           <details key={faq.question} className="subtle-card interactive-card p-4">
-            <summary className="cursor-pointer font-semibold text-[#0f2858]">{faq.question}</summary>
-            <p className="mt-2 text-sm text-[#556689]">{faq.answer}</p>
+            <summary className="cursor-pointer font-semibold text-[#2f1f75]">{faq.question}</summary>
+            <p className="mt-2 text-sm text-[#695aa0]">{faq.answer}</p>
           </details>
         ))}
       </div>

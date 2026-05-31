@@ -15,15 +15,15 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#d9e2f3] bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-[#4b3798] bg-[#22135a]/95 backdrop-blur">
       <div className="site-container flex items-center justify-between gap-3 py-3">
-        <Link href="/" className="text-lg font-extrabold tracking-tight text-[#0f2858] md:text-xl" onClick={() => setOpen(false)}>
+        <Link href="/" className="text-lg font-extrabold tracking-tight text-[#f3efff] md:text-xl" onClick={() => setOpen(false)}>
           Dental Finance UK
         </Link>
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#d9e2f3] text-[#0f2858] md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#6f5ab8] text-[#f3efff] md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="Toggle navigation menu"
@@ -39,7 +39,7 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={`rounded-xl px-3 py-2 text-sm font-medium transition ${
-                  active ? "bg-[#eaf1ff] text-[#0f2858]" : "text-[#425273] hover:bg-[#f4f7fd]"
+                  active ? "bg-[#6d4fe0] text-[#ffffff]" : "text-[#d9d0fb] hover:bg-[#302072]"
                 }`}
               >
                 {item.label}
@@ -53,7 +53,7 @@ export default function SiteHeader() {
       </div>
 
       {open ? (
-        <nav className="site-container space-y-2 border-t border-[#e7ecf7] pb-4 pt-3 md:hidden">
+        <nav className="site-container space-y-2 border-t border-[#433184] pb-4 pt-3 md:hidden">
           {primaryNav.map((item) => {
             const active = isActive(pathname, item.href);
             return (
@@ -62,7 +62,7 @@ export default function SiteHeader() {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={`block rounded-xl px-3 py-2 text-sm font-medium ${
-                  active ? "bg-[#eaf1ff] text-[#0f2858]" : "bg-[#f9fbff] text-[#425273]"
+                  active ? "bg-[#6d4fe0] text-[#ffffff]" : "bg-[#2c1c6e] text-[#d9d0fb]"
                 }`}
               >
                 {item.label}

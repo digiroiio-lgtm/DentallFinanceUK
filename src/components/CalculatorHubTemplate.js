@@ -55,20 +55,20 @@ export default function CalculatorHubTemplate({ page }) {
   const schemas = buildHubSchemas(page);
 
   return (
-    <main className="site-container py-8 text-[#132445]">
+    <main className="site-container py-8 text-[#25185f]">
       {schemas.map((schema, index) => (
         <StructuredData key={`${page.slug}-hub-schema-${index}`} data={schema} />
       ))}
 
       <section className="surface-card p-6 md:p-8">
-        <nav className="text-sm text-[#5d6f91]">
-          <Link href="/" className="font-medium text-[#1f4eb1] underline">
+        <nav className="text-sm text-[#6a5ea0]">
+          <Link href="/" className="font-medium text-[#6d4fe0] underline">
             Home
           </Link>{" "}
           / {page.title}
         </nav>
-        <h1 className="mt-3 text-3xl font-extrabold text-[#0f2858] md:text-4xl">{page.title}</h1>
-        <p className="mt-4 rounded-2xl border border-[#cfe0ff] bg-[#edf4ff] p-4">{page.answerBlock}</p>
+        <h1 className="mt-3 text-3xl font-extrabold text-[#2f1f75] md:text-4xl">{page.title}</h1>
+        <p className="mt-4 rounded-2xl border border-[#cdbdf3] bg-[#ece3ff] p-4">{page.answerBlock}</p>
       </section>
 
       <section className="surface-card mt-8 p-6">
@@ -86,8 +86,8 @@ export default function CalculatorHubTemplate({ page }) {
         <h2 className="section-title text-2xl">Choose a Calculator</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {calculatorHubLinks.map((calc) => (
-            <Link key={calc.href} href={calc.href} className="subtle-card p-4 transition hover:border-[#b2c5ed] hover:bg-[#f2f7ff]">
-              <p className="font-semibold text-[#0f2858]">{calc.label}</p>
+            <Link key={calc.href} href={calc.href} className="subtle-card p-4 transition hover:border-[#ab95ee] hover:bg-[#e8deff]">
+              <p className="font-semibold text-[#2f1f75]">{calc.label}</p>
               <p className="mt-1 text-sm text-[#556689]">{calc.description}</p>
             </Link>
           ))}
@@ -150,14 +150,14 @@ export default function CalculatorHubTemplate({ page }) {
             <li key={reference}>{reference}</li>
           ))}
         </ul>
-        <p className="mt-4 rounded-xl border border-[#e1e8f7] bg-[#f8fbff] p-3 text-sm text-[#4f6389]">Medical Disclaimer: {page.disclaimer}</p>
+        <p className="mt-4 rounded-xl border border-[#d4c7f5] bg-[#f3edff] p-3 text-sm text-[#64579a]">Medical Disclaimer: {page.disclaimer}</p>
       </section>
 
       <section className="surface-card mt-8 p-6">
         <h2 className="section-title text-2xl">Related Guides</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {internalLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="subtle-card p-4 font-semibold text-[#0f2858] transition hover:border-[#b2c5ed] hover:bg-[#f2f7ff]">
+            <Link key={link.href} href={link.href} className="subtle-card p-4 font-semibold text-[#2f1f75] transition hover:border-[#ab95ee] hover:bg-[#e8deff]">
               {link.label}
             </Link>
           ))}

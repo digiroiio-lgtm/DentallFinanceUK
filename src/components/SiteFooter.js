@@ -54,12 +54,12 @@ const footerColumns = [
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-[#d9e2f3] bg-[#0f2858] text-[#e4edff]">
+    <footer className="mt-16 border-t border-[#4f3a9f] bg-[#1a1046] text-[#ece7ff]">
       <div className="site-container py-12">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_3fr]">
           <div>
             <p className="text-xl font-bold text-white">Dental Finance UK</p>
-            <p className="mt-3 text-sm text-[#c5d3f3]">
+            <p className="mt-3 text-sm text-[#d2c7ff]">
               Independent UK resource for comparing monthly dental payment plans, provider options, and treatment finance guides.
             </p>
           </div>
@@ -71,7 +71,7 @@ export default function SiteFooter() {
                 <ul className="mt-3 space-y-2 text-sm">
                   {column.links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="text-[#c5d3f3] hover:text-white">
+                      <Link href={link.href} className="text-[#d2c7ff] hover:text-white">
                         {link.label}
                       </Link>
                     </li>
@@ -82,7 +82,7 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 rounded-2xl border border-[#2a4270] bg-[#112e65] p-4 text-xs leading-6 text-[#d2ddf5]">
+        <div className="mt-10 rounded-2xl border border-[#4f3a9f] bg-[#26156a] p-4 text-xs leading-6 text-[#ddd4ff]">
           DentalFinanceUK is an independent educational and comparison website. We do not provide loans, make lending decisions, or offer regulated credit products. Finance products are provided by third-party authorised providers, subject to status and eligibility.
         </div>
       </div>

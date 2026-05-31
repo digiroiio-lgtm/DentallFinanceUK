@@ -4,7 +4,7 @@ export default function CTASection({ title, description, primaryCta, secondaryCt
   return (
     <section className={`surface-card cta-section mt-6 p-6 ${className}`}>
       <h2 className="section-title text-2xl">{title}</h2>
-      <p className="mt-2 text-[#4e6288]">{description}</p>
+      <p className="mt-2 text-[#67589e]">{description}</p>
       <div className="mt-4 flex flex-wrap gap-3">
         <Link href={primaryCta.href} className="btn btn-primary">
           {primaryCta.label}
