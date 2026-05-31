@@ -87,6 +87,12 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
   ].join("\n");
 
   const whatsappHref = `https://wa.me/905353998999?text=${encodeURIComponent(whatsappMessage)}`;
+  const monthlyGuidance =
+    monthly < 100
+      ? "This repayment range is commonly used for veneers and smaller treatment plans."
+      : monthly < 150
+        ? "Many patients choose treatment plans within this monthly budget."
+        : null;
 
   return (
     <div className="surface-card p-5">
@@ -148,6 +154,12 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
           <p className="mt-1 text-2xl font-bold text-[#2f1f75]">{formatCurrency(interest >= 0 ? interest : 0)}</p>
         </div>
       </div>
+
+      {monthlyGuidance ? (
+        <p className="mt-4 rounded-xl border border-[#d4c7f5] bg-[#f8f4ff] p-3 text-xs text-[#65579a]">
+          <span className="font-semibold">Informational guidance:</span> {monthlyGuidance}
+        </p>
+      ) : null}
 
       <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
         <button
