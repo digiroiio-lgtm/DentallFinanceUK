@@ -100,8 +100,8 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
         : null;
 
   function handleAmountChange(event) {
-    const nextValue = parseFloat(event.target.value);
-    dispatch({ type: "SET_AMOUNT", payload: isNaN(nextValue) ? 100 : Math.max(100, nextValue) });
+    const nextValue = Number.parseFloat(event.target.value);
+    dispatch({ type: "SET_AMOUNT", payload: Number.isNaN(nextValue) ? 100 : Math.max(100, nextValue) });
   }
 
   return (
