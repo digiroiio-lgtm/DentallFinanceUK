@@ -210,12 +210,12 @@ export default function PageTemplate({ page }) {
             </p>
           </div>
           {isTurkey && page.image ? (
-            <div className="relative hidden overflow-hidden rounded-2xl md:block" style={{ width: 360, height: 240 }}>
+            <div className="relative mt-2 aspect-[3/2] w-full max-w-[420px] overflow-hidden rounded-2xl md:mt-0 md:w-[360px] md:max-w-none">
               <Image
                 src={page.image}
                 alt={page.imageAlt ?? page.title}
                 fill
-                sizes="360px"
+                sizes="(max-width: 767px) 100vw, 360px"
                 className="object-cover"
                 priority
               />

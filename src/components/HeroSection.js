@@ -46,12 +46,12 @@ export default function HeroSection({ title, description, primaryCta, secondaryC
           </div>
         </div>
         {image ? (
-          <div className="relative hidden overflow-hidden rounded-2xl md:block" style={{ width: 420, height: 280 }}>
+          <div className="relative mt-4 aspect-[3/2] w-full max-w-[420px] overflow-hidden rounded-2xl md:mt-0 md:w-[420px] md:max-w-none">
             <Image
               src={image}
               alt={imageAlt ?? "Dental finance consultation"}
               fill
-              sizes="420px"
+              sizes="(max-width: 767px) 100vw, 420px"
               className="object-cover"
               priority
             />
