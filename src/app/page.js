@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import FAQAccordion from "@/components/FAQAccordion";
 import HomepageLoanCalculator from "@/components/HomepageLoanCalculator";
 import TreatmentSelectorSection from "@/components/TreatmentSelectorSection";
+import HeroDescriptionExperiment from "@/components/HeroDescriptionExperiment";
 import { getPageUrl } from "@/lib/siteData";
 
 export const dynamic = "force-static";
@@ -85,10 +86,10 @@ export default function Home() {
 
       <HeroSection
         title="Dental Finance UK"
-        description="Calculate monthly dental payments in seconds. Compare monthly repayments for veneers, implants, All-on-4, All-on-6 and Turkey Teeth treatments."
+        description={<HeroDescriptionExperiment />}
         primaryCta={{ href: "/finance-calculator", label: "Calculate My Monthly Cost" }}
         secondaryCta={{ href: "https://wa.me/905353998999", label: "Speak With Treatment Team", external: true, newTab: true }}
-        highlights={["FCA-aware", "Independent comparison", "UK patients"]}
+        highlights={["Independent UK Comparison Resource"]}
         image="/69fc79ae77a97849cc2e8703_7c42f7b1-d707-494d-a5e4-034c58e9032b-Q4IlvNfBnYqSHgr06sCvIvePcMb1ZK.webp"
         imageAlt="Dental professional reviewing finance options with a patient on a tablet"
       />
