@@ -9,6 +9,7 @@ import ProviderCard from "@/components/ProviderCard";
 import TreatmentCard from "@/components/TreatmentCard";
 import FAQAccordion from "@/components/FAQAccordion";
 import LeadCtaSection from "@/components/LeadCtaSection";
+import HomepageLoanCalculator from "@/components/HomepageLoanCalculator";
 import { getPageUrl } from "@/lib/siteData";
 
 export const dynamic = "force-static";
@@ -178,6 +179,8 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <HomepageLoanCalculator />
 
       <CTASection
         title="Compare providers with confidence"
