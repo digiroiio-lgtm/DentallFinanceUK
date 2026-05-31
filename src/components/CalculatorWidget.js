@@ -99,6 +99,11 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
         ? "Many patients choose treatment plans within this monthly budget."
         : null;
 
+  function handleAmountChange(event) {
+    const nextValue = parseFloat(event.target.value);
+    dispatch({ type: "SET_AMOUNT", payload: isNaN(nextValue) ? 100 : Math.max(100, nextValue) });
+  }
+
   return (
     <div className="surface-card p-5">
       <div className="grid gap-4 md:grid-cols-3">
@@ -110,7 +115,7 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
             max="100000"
             step="100"
             value={amount}
-            onChange={(e) => dispatch({ type: "SET_AMOUNT", payload: Math.max(0, parseFloat(e.target.value) || 0) })}
+            onChange={handleAmountChange}
             className="mt-2 w-full rounded-xl border border-[#cabcf0] bg-[#fbf8ff] p-2.5 text-base outline-none focus:border-[#6d4fe0]"
             aria-label="Loan amount in pounds"
           />

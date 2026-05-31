@@ -27,6 +27,11 @@ export default function HomepageLoanCalculator() {
   const [apr, setApr] = useState(9.9);
   const [term, setTerm] = useState(24);
 
+  function handleAmountChange(event) {
+    const nextValue = Number.parseFloat(event.target.value);
+    setAmount(Number.isNaN(nextValue) ? 100 : Math.max(100, nextValue));
+  }
+
   const { monthly, totalRepayable, totalInterest, calculatorHref, whatsappHref } = useMemo(() => {
     const monthlyPayment = calcMonthly(amount, apr, term);
     const repayable = monthlyPayment * term;
@@ -94,7 +99,7 @@ export default function HomepageLoanCalculator() {
                 max="100000"
                 step="100"
                 value={amount}
-                onChange={(event) => setAmount(Math.max(0, Number.parseFloat(event.target.value) || 0))}
+                onChange={handleAmountChange}
                 className="mt-2 w-full rounded-xl border border-[#cabcf0] bg-white p-3 text-base text-[#0f172a] outline-none transition focus:border-[#6d4fe0]"
                 aria-label="Homepage loan amount in pounds"
               />
