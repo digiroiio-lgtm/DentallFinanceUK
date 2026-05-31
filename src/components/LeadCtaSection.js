@@ -2,18 +2,18 @@ import Link from "next/link";
 
 export default function LeadCtaSection() {
   return (
-    <section className="surface-card mt-10 bg-gradient-to-r from-[#2b1b6b] to-[#6e4adf] p-6 text-white">
+    <section className="surface-card mt-10 bg-gradient-to-r from-[#f1e8ff] to-[#faf7ff] p-6 text-[#0f172a] md:from-[#2b1b6b] md:to-[#6e4adf] md:text-white">
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-center">
         <div>
-          <h2 className="text-2xl font-bold">Ready to compare your monthly dental payments?</h2>
-          <p className="mt-2 text-sm text-[#eee7ff]">
+          <h2 className="text-2xl font-bold text-[#0f172a] md:text-white">Ready to compare your monthly dental payments?</h2>
+          <p className="mt-2 text-sm text-[#334155] md:text-[#eee7ff]">
             Use the calculator and provider guides to compare finance examples before you apply.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <Link href="/finance-calculator" className="btn bg-white text-[#2f1f75] hover:bg-[#f3ebff]">
+            <Link href="/finance-calculator" className="btn btn-primary">
               Use Finance Calculator
             </Link>
-            <Link href="/finance-providers" className="btn border border-[#cfbeff] bg-transparent text-white hover:bg-[#5a3fc0]">
+            <Link href="/finance-providers" className="btn btn-secondary">
               Compare Providers
             </Link>
           </div>
