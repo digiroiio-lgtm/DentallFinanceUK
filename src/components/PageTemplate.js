@@ -204,7 +204,7 @@ export default function PageTemplate({ page }) {
               </Link>{" "}
               / {page.title}
             </nav>
-            <h1 className="mt-3 text-3xl font-extrabold leading-tight text-[#0f2858] md:text-4xl">{page.title}</h1>
+            <h1 className="mt-3 text-3xl font-extrabold leading-tight text-[#2f1f75] md:text-4xl">{page.title}</h1>
             <p className={`mt-4 rounded-2xl border p-4 ${isTurkey ? "border-[#c9b9ef] bg-[#f0e8ff]" : "border-[#cdbdf3] bg-[#ece3ff]"}`}>
               {page.answerBlock}
             </p>
@@ -332,7 +332,7 @@ export default function PageTemplate({ page }) {
                 </div>
                 <div className="subtle-card p-4 text-center">
                   <p className="text-xs text-[#6a7c9f]">{page.savingsExample.repAprLabel} monthly</p>
-                  <p className="text-xl font-bold text-[#0f2858]">{page.savingsExample.repAprMonthly}</p>
+                  <p className="text-xl font-bold text-[#2f1f75]">{page.savingsExample.repAprMonthly}</p>
                   <p className="text-xs text-[#6a7c9f]">Total: {page.savingsExample.repAprTotal}</p>
                 </div>
                 <div className="rounded-2xl border border-[#cbbdf1] bg-[#f7f3ff] p-4 text-center">
