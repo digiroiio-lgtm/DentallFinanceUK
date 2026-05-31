@@ -1,5 +1,12 @@
 "use client";
 import { useReducer, useState, useEffect, useRef } from "react";
+import {
+  coerceCalculatorInputs,
+  DECIMAL_INPUT_PATTERN,
+  normalizeAmountInputOnBlur,
+  normalizeAprInputOnBlur,
+  parseNumberOrFallback,
+} from "@/lib/calculatorInputs";
 
 const TERM_OPTIONS = [6, 12, 18, 24, 36, 48, 60];
 
@@ -17,10 +24,10 @@ function loanReducer(state, action) {
   switch (action.type) {
     case "INIT":
       return { ...state, ...action.payload };
-    case "SET_AMOUNT":
-      return { ...state, amount: action.payload };
-    case "SET_APR":
-      return { ...state, apr: action.payload };
+    case "SET_AMOUNT_INPUT":
+      return { ...state, amountInput: action.payload };
+    case "SET_APR_INPUT":
+      return { ...state, aprInput: action.payload };
     case "SET_TERM":
       return { ...state, term: action.payload };
     default:
@@ -31,11 +38,11 @@ function loanReducer(state, action) {
 export default function CalculatorWidget({ config, treatmentType = "Dental treatment" }) {
   const defaults = config ?? { defaultAmount: 3000, defaultApr: 0, defaultTerm: 24 };
   const [loan, dispatch] = useReducer(loanReducer, {
-    amount: defaults.defaultAmount,
-    apr: defaults.defaultApr,
+    amountInput: String(defaults.defaultAmount),
+    aprInput: String(defaults.defaultApr),
     term: defaults.defaultTerm,
   });
-  const { amount, apr, term } = loan;
+  const { amountInput, aprInput, term } = loan;
   const [copied, setCopied] = useState(false);
   const skipUrlWrite = useRef(true);
 
@@ -45,8 +52,8 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
     const pApr = parseFloat(params.get("apr"));
     const pTerm = parseInt(params.get("term"), 10);
     const update = {};
-    if (!isNaN(pAmount) && pAmount > 0) update.amount = pAmount;
-    if (!isNaN(pApr) && pApr >= 0) update.apr = pApr;
+    if (!isNaN(pAmount) && pAmount > 0) update.amountInput = String(params.get("amount"));
+    if (!isNaN(pApr) && pApr >= 0) update.aprInput = String(params.get("apr"));
     if (!isNaN(pTerm) && pTerm > 0) update.term = pTerm;
     if (Object.keys(update).length > 0) dispatch({ type: "INIT", payload: update });
   }, []);
@@ -57,11 +64,18 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
       return;
     }
     const params = new URLSearchParams();
-    params.set("amount", amount);
-    params.set("apr", apr);
+    if (amountInput !== "") params.set("amount", amountInput);
+    if (aprInput !== "") params.set("apr", aprInput);
     params.set("term", term);
     window.history.replaceState(null, "", "?" + params.toString());
-  }, [amount, apr, term]);
+  }, [amountInput, aprInput, term]);
+
+  const { amount, apr } = coerceCalculatorInputs({
+    amountInput,
+    aprInput,
+    fallbackAmount: 0,
+    fallbackApr: 0,
+  });
 
   const monthly = calcMonthly(amount, apr, term);
   const total = monthly * term;
@@ -100,8 +114,7 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
         : null;
 
   function handleAmountChange(event) {
-    const nextValue = Number.parseFloat(event.target.value);
-    dispatch({ type: "SET_AMOUNT", payload: Number.isNaN(nextValue) ? 100 : Math.max(100, nextValue) });
+    dispatch({ type: "SET_AMOUNT_INPUT", payload: event.target.value });
   }
 
   return (
@@ -110,12 +123,22 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
         <label className="block">
           <span className="text-sm font-semibold text-[#2f1f75]">Loan Amount (£)</span>
           <input
-            type="number"
-            min="100"
-            max="100000"
-            step="100"
-            value={amount}
+            type="text"
+            inputMode="decimal"
+            pattern={DECIMAL_INPUT_PATTERN}
+            autoComplete="off"
+            value={amountInput}
             onChange={handleAmountChange}
+            onBlur={(event) =>
+              dispatch({
+                type: "SET_AMOUNT_INPUT",
+                payload: normalizeAmountInputOnBlur(event.target.value, {
+                  defaultAmount: defaults.defaultAmount,
+                  minAmount: 100,
+                  maxAmount: 100000,
+                }),
+              })
+            }
             className="mt-2 w-full rounded-xl border border-[#cabcf0] bg-[#fbf8ff] p-2.5 text-base outline-none focus:border-[#6d4fe0]"
             aria-label="Loan amount in pounds"
           />
@@ -123,12 +146,22 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
         <label className="block">
           <span className="text-sm font-semibold text-[#2f1f75]">APR (%)</span>
           <input
-            type="number"
-            min="0"
-            max="50"
-            step="0.1"
-            value={apr}
-            onChange={(e) => dispatch({ type: "SET_APR", payload: Math.max(0, parseFloat(e.target.value) || 0) })}
+            type="text"
+            inputMode="decimal"
+            pattern={DECIMAL_INPUT_PATTERN}
+            autoComplete="off"
+            value={aprInput}
+            onChange={(event) => dispatch({ type: "SET_APR_INPUT", payload: event.target.value })}
+            onBlur={(event) =>
+              dispatch({
+                type: "SET_APR_INPUT",
+                payload: normalizeAprInputOnBlur(event.target.value, {
+                  defaultApr: parseNumberOrFallback(defaults.defaultApr, 0),
+                  minApr: 0,
+                  maxApr: 50,
+                }),
+              })
+            }
             className="mt-2 w-full rounded-xl border border-[#cabcf0] bg-[#fbf8ff] p-2.5 text-base outline-none focus:border-[#6d4fe0]"
             aria-label="Annual percentage rate"
           />

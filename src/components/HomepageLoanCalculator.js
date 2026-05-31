@@ -2,6 +2,12 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import {
+  coerceCalculatorInputs,
+  DECIMAL_INPUT_PATTERN,
+  normalizeAmountInputOnBlur,
+  normalizeAprInputOnBlur,
+} from "@/lib/calculatorInputs";
 
 const TERM_OPTIONS = [6, 12, 18, 24, 36, 48, 60];
 const WHATSAPP_NUMBER = "905353998999";
@@ -23,16 +29,17 @@ function formatCurrency(value) {
 }
 
 export default function HomepageLoanCalculator() {
-  const [amount, setAmount] = useState(2500);
-  const [apr, setApr] = useState(9.9);
+  const [amountInput, setAmountInput] = useState("2500");
+  const [aprInput, setAprInput] = useState("9.9");
   const [term, setTerm] = useState(24);
 
-  function handleAmountChange(event) {
-    const nextValue = Number.parseFloat(event.target.value);
-    setAmount(Number.isNaN(nextValue) ? 100 : Math.max(100, nextValue));
-  }
-
   const { monthly, totalRepayable, totalInterest, calculatorHref, whatsappHref } = useMemo(() => {
+    const { amount, apr } = coerceCalculatorInputs({
+      amountInput,
+      aprInput,
+      fallbackAmount: 0,
+      fallbackApr: 0,
+    });
     const monthlyPayment = calcMonthly(amount, apr, term);
     const repayable = monthlyPayment * term;
     const interest = Math.max(repayable - amount, 0);
@@ -61,7 +68,7 @@ export default function HomepageLoanCalculator() {
       calculatorHref: `/dental-loan-calculator?${params.toString()}`,
       whatsappHref: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
     };
-  }, [amount, apr, term]);
+  }, [amountInput, aprInput, term]);
 
   return (
     <section className="surface-card mt-8 overflow-hidden">
@@ -94,12 +101,21 @@ export default function HomepageLoanCalculator() {
             <label className="block">
               <span className="text-sm font-semibold text-[#2f1f75]">Loan amount (£)</span>
               <input
-                type="number"
-                min="100"
-                max="100000"
-                step="100"
-                value={amount}
-                onChange={handleAmountChange}
+                type="text"
+                inputMode="decimal"
+                pattern={DECIMAL_INPUT_PATTERN}
+                autoComplete="off"
+                value={amountInput}
+                onChange={(event) => setAmountInput(event.target.value)}
+                onBlur={(event) =>
+                  setAmountInput(
+                    normalizeAmountInputOnBlur(event.target.value, {
+                      defaultAmount: 2500,
+                      minAmount: 100,
+                      maxAmount: 100000,
+                    })
+                  )
+                }
                 className="mt-2 w-full rounded-xl border border-[#cabcf0] bg-white p-3 text-base text-[#0f172a] outline-none transition focus:border-[#6d4fe0]"
                 aria-label="Homepage loan amount in pounds"
               />
@@ -107,12 +123,21 @@ export default function HomepageLoanCalculator() {
             <label className="block">
               <span className="text-sm font-semibold text-[#2f1f75]">APR (%)</span>
               <input
-                type="number"
-                min="0"
-                max="50"
-                step="0.1"
-                value={apr}
-                onChange={(event) => setApr(Math.max(0, Number.parseFloat(event.target.value) || 0))}
+                type="text"
+                inputMode="decimal"
+                pattern={DECIMAL_INPUT_PATTERN}
+                autoComplete="off"
+                value={aprInput}
+                onChange={(event) => setAprInput(event.target.value)}
+                onBlur={(event) =>
+                  setAprInput(
+                    normalizeAprInputOnBlur(event.target.value, {
+                      defaultApr: 0,
+                      minApr: 0,
+                      maxApr: 50,
+                    })
+                  )
+                }
                 className="mt-2 w-full rounded-xl border border-[#cabcf0] bg-white p-3 text-base text-[#0f172a] outline-none transition focus:border-[#6d4fe0]"
                 aria-label="Homepage annual percentage rate"
               />
