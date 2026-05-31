@@ -116,7 +116,7 @@ export default function Home() {
         title="Dental Finance UK: Compare Monthly Payment Plans"
         description="Compare dental finance options, monthly payment examples, 0% APR plans, provider guides and treatment finance options for UK patients."
         primaryCta={{ href: "/finance-calculator", label: "Calculate My Monthly Cost" }}
-        secondaryCta={{ href: "https://wa.me/905353998999", label: "Speak With Treatment Team" }}
+        secondaryCta={{ href: "https://wa.me/905353998999", label: "Speak With Treatment Team", external: true, newTab: true }}
         highlights={[
           "Independent comparison resource",
           "FCA-aware educational content",
