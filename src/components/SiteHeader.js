@@ -17,8 +17,14 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#e4dcf7] bg-white/95 shadow-sm backdrop-blur">
       <div className="site-container flex items-center justify-between gap-3 py-3">
-        <Link href="/" className="text-lg font-extrabold tracking-tight text-[#2f1f75] md:text-xl" onClick={() => setOpen(false)}>
-          Dental Finance UK
+        <Link
+          href="/"
+          className="inline-flex items-center whitespace-nowrap rounded-md bg-[#012169] px-2.5 py-1 text-sm font-extrabold tracking-tight text-white md:text-xl"
+          onClick={() => setOpen(false)}
+        >
+          <span className="text-white">Dental</span>
+          <span className="ml-1 text-[#c8102e]">Finance</span>
+          <span className="ml-1 text-white">UK</span>
         </Link>
 
         <button
