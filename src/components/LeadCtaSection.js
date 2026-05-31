@@ -1,13 +1,16 @@
 import Link from "next/link";
 
-export default function LeadCtaSection() {
+export default function LeadCtaSection({
+  title = "Ready to compare your monthly dental payments?",
+  description = "Use the calculator and provider guides to compare finance examples before you apply.",
+}) {
   return (
     <section className="surface-card mt-10 bg-gradient-to-r from-[#f1e8ff] to-[#faf7ff] p-6 text-[#0f172a] md:from-[#2b1b6b] md:to-[#6e4adf] md:text-white">
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-center">
         <div>
-          <h2 className="text-2xl font-bold text-[#0f172a] md:text-white">Ready to compare your monthly dental payments?</h2>
+          <h2 className="text-2xl font-bold text-[#0f172a] md:text-white">{title}</h2>
           <p className="mt-2 text-sm text-[#334155] md:text-[#eee7ff]">
-            Use the calculator and provider guides to compare finance examples before you apply.
+            {description}
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link href="/finance-calculator" className="btn btn-primary">

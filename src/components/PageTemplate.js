@@ -167,6 +167,17 @@ function SectionContent({ section }) {
   );
 }
 
+function InlineCta({ text, href, subtext }) {
+  return (
+    <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-[#c9baf1] bg-[#f0e8ff] p-5 sm:flex-row sm:items-center sm:justify-between">
+      {subtext ? <p className="text-sm text-[#4a3a8a]">{subtext}</p> : null}
+      <Link href={href} className="btn btn-primary shrink-0">
+        {text}
+      </Link>
+    </div>
+  );
+}
+
 function RelatedCards({ links }) {
   return (
     <section className="surface-card mt-8 p-6">
@@ -255,7 +266,21 @@ export default function PageTemplate({ page }) {
       {page.costTable ? <DataTable section={page.costTable} /> : null}
       {page.savingsCalculation ? <SavingsCalculation calculation={page.savingsCalculation} /> : null}
       {page.savingsTable ? <DataTable section={page.savingsTable} /> : null}
+      {isTurkey && page.savingsTable ? (
+        <InlineCta
+          text="Calculate My Turkey Teeth Payment"
+          href="/finance-calculator"
+          subtext="Use our calculator to estimate monthly payments on your Turkey treatment budget."
+        />
+      ) : null}
       {page.monthlyPaymentTable ? <DataTable section={page.monthlyPaymentTable} /> : null}
+      {isTurkey && page.monthlyPaymentTable ? (
+        <InlineCta
+          text="Check My Exact Monthly Cost"
+          href="/finance-calculator"
+          subtext="Adjust the calculator to your actual treatment amount, APR, and preferred term."
+        />
+      ) : null}
 
       {page.type === "calculator" ? (
         <>
@@ -359,6 +384,14 @@ export default function PageTemplate({ page }) {
         </div>
       </section>
 
+      {isTurkey ? (
+        <InlineCta
+          text="Compare UK vs Turkey Costs"
+          href="/turkey-teeth-finance"
+          subtext="See full UK vs Turkey savings comparisons across veneers, implants, and smile makeovers."
+        />
+      ) : null}
+
       <section className="surface-card mt-8 p-6">
         <h2 className="section-title text-2xl">Frequently Asked Questions</h2>
         <div className="mt-4 space-y-3">
@@ -407,7 +440,10 @@ export default function PageTemplate({ page }) {
       </section>
 
       <RelatedCards links={internalLinks} />
-      <LeadCtaSection />
+      <LeadCtaSection
+        title={isTurkey ? "Get A Personalised Turkey Teeth Finance Estimate" : undefined}
+        description={isTurkey ? "Compare treatment cost, monthly payments and potential UK vs Turkey savings." : undefined}
+      />
     </main>
   );
 }
