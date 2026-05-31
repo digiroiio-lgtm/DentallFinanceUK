@@ -89,10 +89,21 @@ const treatmentCards = [
 ];
 
 const financeSteps = [
-  "Choose treatment and request example finance terms.",
-  "Compare providers based on total repayable amount and affordability checks.",
-  "Review APR, term length, and disclosure details before application.",
-  "Apply directly with the provider and receive outcome from the lender.",
+  {
+    title: "Customer applies",
+    description:
+      "Share your customer application link with tracking enabled so submitted finance requests can be monitored clearly.",
+  },
+  {
+    title: "Customer receives offers",
+    description:
+      "After submission, eligible customers can review available lender offers and choose the option that fits their budget.",
+  },
+  {
+    title: "Customer completes finance",
+    description:
+      "Once approved and accepted, the treatment finance agreement is finalised and repayments start under the selected terms.",
+  },
 ];
 
 export default function Home() {
@@ -174,15 +185,27 @@ export default function Home() {
         primaryCta={{ href: "/finance-providers", label: "View Provider Hub" }}
       />
 
-      <section className="surface-card mt-8 p-6">
-        <h2 className="section-title text-2xl">How dental finance works</h2>
-        <ol className="mt-4 grid gap-3 sm:grid-cols-2">
-          {financeSteps.map((step) => (
-            <li key={step} className="subtle-card interactive-card p-4 text-sm text-[#556689]">
-              {step}
-            </li>
-          ))}
-        </ol>
+      <section className="steps-showcase mt-8 p-6 md:p-8">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <span className="steps-kicker">CUSTOMER</span>
+            <h2 className="step-intro-title mt-5 text-3xl md:text-5xl">Your customers see the following...</h2>
+            <p className="mt-4 text-base text-[#d6d9f5] md:text-lg">
+              Once these steps are followed, your customer can proceed with treatment finance subject to eligibility and lender approval.
+            </p>
+          </div>
+          <ol className="steps-timeline">
+            {financeSteps.map((step, index) => (
+              <li key={step.title} className="step-item">
+                <span className="step-number">{index + 1}</span>
+                <div className="step-card">
+                  <h3 className="step-card-title">{step.title}</h3>
+                  <p className="step-card-copy">{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
 
       <CTASection
