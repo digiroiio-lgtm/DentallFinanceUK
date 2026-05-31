@@ -86,7 +86,7 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
     `Estimated monthly payment: ${formatCurrency(monthly)}`,
   ].join("\n");
 
-  const whatsappHref = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappHref = `https://wa.me/905353998999?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <div className="surface-card p-5">
