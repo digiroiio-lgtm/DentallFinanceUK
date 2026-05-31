@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 import { getInternalLinks, getPageUrl } from "@/lib/siteData";
@@ -195,16 +196,32 @@ export default function PageTemplate({ page }) {
       ))}
 
       <section className={`surface-card p-6 md:p-8 ${isTurkey ? "bg-gradient-to-br from-[#fff8ea] to-[#ffffff]" : ""}`}>
-        <nav className="text-sm text-[#5d6f91]">
-          <Link href="/" className="font-medium text-[#1f4eb1] underline">
-            Home
-          </Link>{" "}
-          / {page.title}
-        </nav>
-        <h1 className="mt-3 text-3xl font-extrabold leading-tight text-[#0f2858] md:text-4xl">{page.title}</h1>
-        <p className={`mt-4 rounded-2xl border p-4 ${isTurkey ? "border-[#f0ddba] bg-[#fff4de]" : "border-[#cfe0ff] bg-[#edf4ff]"}`}>
-          {page.answerBlock}
-        </p>
+        <div className={`${isTurkey && page.image ? "grid gap-6 md:grid-cols-[1fr_auto] md:items-start" : ""}`}>
+          <div>
+            <nav className="text-sm text-[#5d6f91]">
+              <Link href="/" className="font-medium text-[#1f4eb1] underline">
+                Home
+              </Link>{" "}
+              / {page.title}
+            </nav>
+            <h1 className="mt-3 text-3xl font-extrabold leading-tight text-[#0f2858] md:text-4xl">{page.title}</h1>
+            <p className={`mt-4 rounded-2xl border p-4 ${isTurkey ? "border-[#f0ddba] bg-[#fff4de]" : "border-[#cfe0ff] bg-[#edf4ff]"}`}>
+              {page.answerBlock}
+            </p>
+          </div>
+          {isTurkey && page.image ? (
+            <div className="relative hidden overflow-hidden rounded-2xl md:block" style={{ width: 360, height: 240 }}>
+              <Image
+                src={page.image}
+                alt={page.imageAlt ?? page.title}
+                fill
+                sizes="360px"
+                className="object-cover"
+                priority
+              />
+            </div>
+          ) : null}
+        </div>
       </section>
 
       <section className="surface-card mt-8 p-6">

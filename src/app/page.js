@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import StructuredData from "@/components/StructuredData";
 import HeroSection from "@/components/HeroSection";
 import TrustBadges from "@/components/TrustBadges";
@@ -112,6 +113,8 @@ export default function Home() {
           "Finance reviewed",
           "Dental treatment guides reviewed",
         ]}
+        image="/69fc79ae77a97849cc2e8703_7c42f7b1-d707-494d-a5e4-034c58e9032b-Q4IlvNfBnYqSHgr06sCvIvePcMb1ZK.webp"
+        imageAlt="Dental professional reviewing finance options with a patient on a tablet"
       />
 
       <TrustBadges
@@ -205,10 +208,21 @@ export default function Home() {
 
       <section className="surface-card mt-8 p-6">
         <h2 className="section-title text-2xl">Compare providers</h2>
-        <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-          {providerCards.map((provider) => (
-            <ProviderCard key={provider.href} {...provider} />
-          ))}
+        <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_280px]">
+          <div className="grid gap-3 md:grid-cols-2">
+            {providerCards.map((provider) => (
+              <ProviderCard key={provider.href} {...provider} />
+            ))}
+          </div>
+          <div className="relative hidden overflow-hidden rounded-2xl lg:block" style={{ minHeight: 187 }}>
+            <Image
+              src="/682ad3e892a970bf90d1c10f_article-d89e7d29-27d0-4f1c-9363-901fcf47bb9a-1747637031194-978648.webp"
+              alt="Patients reviewing dental finance documents with a clinic advisor"
+              fill
+              sizes="280px"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 

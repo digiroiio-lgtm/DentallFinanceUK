@@ -240,6 +240,32 @@ main {
   overflow: hidden;
 }
 
+.hero-gradient {
+  background: linear-gradient(135deg, #0f2858 0%, #1d4ea3 100%);
+}
+
+.btn-hero-cta {
+  background: #ffffff;
+  color: #0f2858;
+  border: 1px solid #ffffff;
+  font-weight: 700;
+}
+
+.btn-hero-cta:hover {
+  background: #edf4ff;
+  border-color: #edf4ff;
+}
+
+.btn-hero-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #aac3f6;
+}
+
+.btn-hero-outline:hover {
+  background: #163a7f;
+}
+
 @media (min-width: 768px) {
   .mobile-floating-cta {
     display: none;
