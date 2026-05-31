@@ -28,7 +28,7 @@ function loanReducer(state, action) {
   }
 }
 
-export default function CalculatorWidget({ config }) {
+export default function CalculatorWidget({ config, treatmentType = "Dental treatment" }) {
   const defaults = config ?? { defaultAmount: 3000, defaultApr: 0, defaultTerm: 24 };
   const [loan, dispatch] = useReducer(loanReducer, {
     amount: defaults.defaultAmount,
@@ -76,6 +76,17 @@ export default function CalculatorWidget({ config }) {
       })
       .catch(() => {});
   }
+
+  const whatsappMessage = [
+    "Hi, I’d like to discuss treatment options based on this estimate.",
+    `Treatment type: ${treatmentType}`,
+    `Loan amount: ${formatCurrency(amount)}`,
+    `APR: ${apr}%`,
+    `Term: ${term} months`,
+    `Estimated monthly payment: ${formatCurrency(monthly)}`,
+  ].join("\n");
+
+  const whatsappHref = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <div className="surface-card p-5">
@@ -138,15 +149,24 @@ export default function CalculatorWidget({ config }) {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-3">
+      <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
         <button
           onClick={handleShare}
-          className="btn btn-secondary text-sm"
+          className="btn btn-secondary w-full text-sm"
           type="button"
           aria-label="Copy shareable link to clipboard"
         >
           {copied ? "✓ Link copied!" : "Copy shareable link"}
         </button>
+        <a
+          className="btn btn-secondary w-full text-sm"
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Speak with treatment team on WhatsApp"
+        >
+          Speak With Treatment Team
+        </a>
       </div>
 
       <p className="mt-4 rounded-xl border border-[#d4c7f5] bg-[#f3edff] p-3 text-xs text-[#65579a]">

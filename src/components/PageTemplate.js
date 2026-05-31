@@ -266,7 +266,7 @@ export default function PageTemplate({ page }) {
             </p>
             <div className="mt-4">
               <Suspense fallback={<p className="subtle-card p-4 text-sm text-[#6d5ea5]">Loading calculator…</p>}>
-                <CalculatorWidget config={page.calculatorConfig} />
+                <CalculatorWidget config={page.calculatorConfig} treatmentType={page.title} />
               </Suspense>
             </div>
           </section>
