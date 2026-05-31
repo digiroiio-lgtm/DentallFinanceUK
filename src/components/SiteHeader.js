@@ -16,25 +16,28 @@ export default function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#e4dcf7] bg-white/95 shadow-sm backdrop-blur">
-      <div className="site-container flex items-center justify-between gap-3 py-3">
+      <div className="site-container flex items-center justify-between py-2">
         <Link
           href="/"
-          className="inline-flex items-center whitespace-nowrap rounded-md bg-[#012169] px-2.5 py-1 text-sm font-extrabold tracking-tight text-white md:text-xl"
+          className="flex flex-col whitespace-nowrap leading-none"
           onClick={() => setOpen(false)}
         >
-          <span className="text-white">Dental</span>
-          <span className="ml-1 text-[#c8102e]">Finance</span>
-          <span className="ml-1 text-white">UK</span>
+          <span className="text-base font-extrabold tracking-tight text-[#2f1f75]">
+            Dental Finance UK
+          </span>
+          <span className="mt-0.5 text-[0.65rem] font-semibold tracking-widest text-[#7350e6] uppercase">
+            Calculate. Compare. Decide.
+          </span>
         </Link>
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#cabcf0] text-[#2f1f75] md:hidden"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[#2f1f75] md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="Toggle navigation menu"
         >
-          <span className="text-xl">☰</span>
+          <span className="text-lg leading-none">☰</span>
         </button>
 
         <nav className="hidden items-center gap-1 md:flex">
