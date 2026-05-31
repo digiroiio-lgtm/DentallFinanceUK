@@ -78,12 +78,17 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
   }
 
   const whatsappMessage = [
-    "Hi, I’d like to discuss treatment options based on this estimate.",
-    `Treatment type: ${treatmentType}`,
-    `Loan amount: ${formatCurrency(amount)}`,
+    "Hello,",
+    "",
+    "I used the Dental Finance UK calculator.",
+    "",
+    `Treatment: ${treatmentType}`,
+    `Budget: ${formatCurrency(amount)}`,
     `APR: ${apr}%`,
     `Term: ${term} months`,
-    `Estimated monthly payment: ${formatCurrency(monthly)}`,
+    `Estimated Monthly Payment: ${formatCurrency(monthly)}`,
+    "",
+    "I would like to discuss suitable treatment options.",
   ].join("\n");
 
   const whatsappHref = `https://wa.me/905353998999?text=${encodeURIComponent(whatsappMessage)}`;
