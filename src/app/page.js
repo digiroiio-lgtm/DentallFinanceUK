@@ -1,15 +1,15 @@
 import Link from "next/link";
-import Image from "next/image";
 import StructuredData from "@/components/StructuredData";
 import HeroSection from "@/components/HeroSection";
 import TrustBadges from "@/components/TrustBadges";
 import CTASection from "@/components/CTASection";
 import ReviewerBox from "@/components/ReviewerBox";
-import ProviderCard from "@/components/ProviderCard";
 import TreatmentCard from "@/components/TreatmentCard";
 import FAQAccordion from "@/components/FAQAccordion";
 import LeadCtaSection from "@/components/LeadCtaSection";
 import HomepageLoanCalculator from "@/components/HomepageLoanCalculator";
+import TreatmentSelectorSection from "@/components/TreatmentSelectorSection";
+import WhatsAppCtaBlock from "@/components/WhatsAppCtaBlock";
 import { getPageUrl } from "@/lib/siteData";
 
 export const dynamic = "force-static";
@@ -58,52 +58,50 @@ const homepageSchema = [
   },
 ];
 
-const providerCards = [
+const providerRows = [
   {
-    title: "Provider Hub",
-    href: "/finance-providers",
-    copy: "Compare provider features, approvals, and plan flexibility.",
-    apr: "0% to representative APR",
-    bestFor: "wide comparison",
+    provider: "Kandoo",
+    href: "/kandoo-finance",
+    softCheck: "Yes",
+    apr: "Variable",
+    bestFor: "General",
   },
   {
-    title: "Best Provider UK",
-    href: "/best-dental-finance-provider-uk",
-    copy: "Review top UK provider options and best-for scenarios.",
-    apr: "provider dependent",
-    bestFor: "decision support",
+    provider: "V12",
+    href: "/v12-retail-finance",
+    softCheck: "Yes",
+    apr: "Variable",
+    bestFor: "Clinics",
   },
   {
-    title: "Kandoo vs V12",
-    href: "/kandoo-vs-v12",
-    copy: "Side-by-side eligibility and repayment positioning.",
-    apr: "varies by lender",
-    bestFor: "head-to-head compare",
+    provider: "Tabeo",
+    href: "/tabeo-finance",
+    softCheck: "Yes",
+    apr: "Variable",
+    bestFor: "Cosmetic",
   },
 ];
 
 const treatmentCards = [
   { title: "Veneers Finance", href: "/veneers-finance", exampleCost: "£3,500", fromMonthly: "£146" },
   { title: "Dental Implants Finance", href: "/dental-implants-finance", exampleCost: "£4,800", fromMonthly: "£200" },
-  { title: "Invisalign Finance", href: "/dental-treatment-finance", exampleCost: "£3,000", fromMonthly: "£125" },
   { title: "Turkey Teeth Finance", href: "/turkey-teeth-finance", exampleCost: "£4,000", fromMonthly: "£167" },
+  { title: "All-on-4 Finance", href: "/all-on-4-finance-turkey", exampleCost: "£7,000", fromMonthly: "£292" },
+  { title: "All-on-6 Finance", href: "/all-on-6-finance-turkey", exampleCost: "£9,500", fromMonthly: "£396" },
 ];
 
 const financeSteps = [
   {
-    title: "Customer applies",
-    description:
-      "Share your customer application link with tracking enabled so submitted finance requests can be monitored clearly.",
+    title: "Choose treatment",
+    description: "Select the treatment you are planning so you can focus on realistic finance ranges.",
   },
   {
-    title: "Customer receives offers",
-    description:
-      "After submission, eligible customers can review available lender offers and choose the option that fits their budget.",
+    title: "Compare monthly payments",
+    description: "Use calculator previews to see indicative monthly costs before you apply.",
   },
   {
-    title: "Customer completes finance",
-    description:
-      "Once approved and accepted, the treatment finance agreement is finalised and repayments start under the selected terms.",
+    title: "Apply with a provider",
+    description: "Continue with a provider application when you are ready, subject to eligibility and approval.",
   },
 ];
 
@@ -117,8 +115,8 @@ export default function Home() {
       <HeroSection
         title="Dental Finance UK: Compare Monthly Payment Plans"
         description="Compare dental finance options, monthly payment examples, 0% APR plans, provider guides and treatment finance options for UK patients."
-        primaryCta={{ href: "/finance-calculator", label: "Check Monthly Payments" }}
-        secondaryCta={{ href: "/finance-providers", label: "Compare Providers" }}
+        primaryCta={{ href: "/finance-calculator", label: "Calculate My Monthly Cost" }}
+        secondaryCta={{ href: "https://wa.me/905353998999", label: "Speak With Treatment Team" }}
         highlights={[
           "Independent comparison resource",
           "FCA-aware educational content",
@@ -129,6 +127,79 @@ export default function Home() {
         imageAlt="Dental professional reviewing finance options with a patient on a tablet"
       />
 
+      <WhatsAppCtaBlock className="mt-6" />
+
+      <HomepageLoanCalculator />
+
+      <WhatsAppCtaBlock className="mt-6" />
+
+      <TreatmentSelectorSection />
+
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Popular treatment finance options</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {treatmentCards.map((item) => (
+            <TreatmentCard key={item.href} {...item} />
+          ))}
+        </div>
+      </section>
+
+      <section className="surface-card mt-8 p-6">
+        <h2 className="section-title text-2xl">Compare providers</h2>
+        <p className="mt-3 text-[#67589e]">Review provider positioning and continue to the most relevant comparison page.</p>
+        <div className="table-wrap mt-4">
+          <table className="table-ui">
+            <thead>
+              <tr>
+                <th>Provider</th>
+                <th>Soft Check</th>
+                <th>APR</th>
+                <th>Best For</th>
+                <th>CTA</th>
+              </tr>
+            </thead>
+            <tbody>
+              {providerRows.map((provider) => (
+                <tr key={provider.provider}>
+                  <td className="font-semibold text-[#2f1f75]">{provider.provider}</td>
+                  <td>{provider.softCheck}</td>
+                  <td>{provider.apr}</td>
+                  <td>{provider.bestFor}</td>
+                  <td>
+                    <Link href={provider.href} className="btn btn-secondary !px-3 !py-2 text-xs">
+                      View Options
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="steps-showcase mt-8 p-6 md:p-8">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <span className="steps-kicker">PATIENT JOURNEY</span>
+            <h2 className="step-intro-title mt-5 text-3xl md:text-5xl">How Dental Finance Works</h2>
+            <p className="mt-4 text-base text-[#d6d9f5] md:text-lg">
+              Follow this simple process to move from treatment research to finance application with confidence.
+            </p>
+          </div>
+          <ol className="steps-timeline">
+            {financeSteps.map((step, index) => (
+              <li key={step.title} className="step-item">
+                <span className="step-number">{index + 1}</span>
+                <div className="step-card">
+                  <h3 className="step-card-title">{step.title}</h3>
+                  <p className="step-card-copy">{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <TrustBadges
         badges={[
           "Trusted by UK patients",
@@ -136,13 +207,6 @@ export default function Home() {
           "Finance compliance aware",
           "Reviewed treatment guidance",
         ]}
-      />
-
-      <CTASection
-        title="Get your personalised monthly estimate"
-        description="Use our calculators to compare repayment examples in under two minutes."
-        primaryCta={{ href: "/finance-calculator", label: "Start Calculator" }}
-        secondaryCta={{ href: "/monthly-payment-calculator", label: "Monthly Tool" }}
       />
 
       <section className="mt-8 grid gap-6 lg:grid-cols-2">
@@ -154,7 +218,6 @@ export default function Home() {
             <li className="subtle-card interactive-card p-3">Clear financial disclosure and UK-focused guidance for informed decisions.</li>
           </ul>
         </div>
-
         <div className="grid gap-4">
           <ReviewerBox
             label="Editorial Team"
@@ -180,82 +243,10 @@ export default function Home() {
         </div>
       </section>
 
-      <HomepageLoanCalculator />
-
-      <CTASection
-        title="Compare providers with confidence"
-        description="See side-by-side options before committing to a treatment plan."
-        primaryCta={{ href: "/finance-providers", label: "View Provider Hub" }}
-      />
-
-      <section className="steps-showcase mt-8 p-6 md:p-8">
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <span className="steps-kicker">CUSTOMER</span>
-            <h2 className="step-intro-title mt-5 text-3xl md:text-5xl">Your customers see the following...</h2>
-            <p className="mt-4 text-base text-[#d6d9f5] md:text-lg">
-              Once these steps are followed, your customer can proceed with treatment finance subject to eligibility and lender approval.
-            </p>
-          </div>
-          <ol className="steps-timeline">
-            {financeSteps.map((step, index) => (
-              <li key={step.title} className="step-item">
-                <span className="step-number">{index + 1}</span>
-                <div className="step-card">
-                  <h3 className="step-card-title">{step.title}</h3>
-                  <p className="step-card-copy">{step.description}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <CTASection
-        title="Ready to estimate repayments?"
-        description="Check typical terms and monthly examples for your treatment budget."
-        primaryCta={{ href: "/finance-calculator", label: "Estimate Payments" }}
-      />
-
-      <section className="surface-card mt-8 p-6">
-        <h2 className="section-title text-2xl">Popular treatment finance options</h2>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {treatmentCards.map((item) => (
-            <TreatmentCard key={item.href} {...item} />
-          ))}
-        </div>
-      </section>
-
       <CTASection
         title="Find a treatment plan that fits your budget"
         description="Compare common treatments and repayment scenarios before applying."
         primaryCta={{ href: "/dental-treatment-finance", label: "Explore Treatment Finance" }}
-      />
-
-      <section className="surface-card mt-8 p-6">
-        <h2 className="section-title text-2xl">Compare providers</h2>
-        <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_280px]">
-          <div className="grid gap-3 md:grid-cols-2">
-            {providerCards.map((provider) => (
-              <ProviderCard key={provider.href} {...provider} />
-            ))}
-          </div>
-          <div className="relative hidden overflow-hidden rounded-2xl lg:block" style={{ minHeight: 187 }}>
-            <Image
-              src="/682ad3e892a970bf90d1c10f_article-d89e7d29-27d0-4f1c-9363-901fcf47bb9a-1747637031194-978648.webp"
-              alt="Patients reviewing dental finance documents with a clinic advisor"
-              fill
-              sizes="280px"
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </section>
-
-      <CTASection
-        title="See all provider comparisons"
-        description="Review provider differences, representative examples, and application pathways."
-        primaryCta={{ href: "/finance-providers", label: "Compare All Providers" }}
       />
 
       <section className="surface-card mt-8 p-6">
@@ -271,12 +262,14 @@ export default function Home() {
         </div>
       </section>
 
+      <WhatsAppCtaBlock className="mt-8" />
+
       <LeadCtaSection />
 
       <FAQAccordion items={homeFaqs} />
 
       <Link href="/finance-calculator" className="mobile-floating-cta md:hidden">
-        Check Monthly Payments
+        Calculate My Monthly Cost
       </Link>
     </main>
   );
