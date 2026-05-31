@@ -17,7 +17,7 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#4b3798] bg-[#22135a]/95 backdrop-blur">
       <div className="site-container flex items-center justify-between gap-3 py-3">
-        <Link href="/" className="text-lg font-extrabold tracking-tight text-[#f3efff] md:text-xl" onClick={() => setOpen(false)}>
+        <Link href="/" className="text-lg font-extrabold tracking-tight text-[#ffffff] md:text-xl" onClick={() => setOpen(false)}>
           Dental Finance UK
         </Link>
 
