@@ -2374,6 +2374,8 @@ const turkeyPageEntries = [
       slug: "turkey-teeth-finance",
       title: "Turkey Teeth Finance",
       type: "article",
+      image: "/6716da7bf5d64834150836eb_output.webp",
+      imageAlt: "Patient smiling during dental treatment abroad, with finance planning concept",
       description:
         "UK to Turkey teeth finance guide covering treatment costs, payment plans, monthly payment examples, and UK vs Turkey savings across veneers, implants, and smile makeovers.",
       answerBlock:

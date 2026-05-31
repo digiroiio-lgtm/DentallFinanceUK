@@ -15,14 +15,14 @@ export default function TrustBadges({ badges = [] }) {
           <p className="review-stars" role="img" aria-label="5 out of 5 stars">
             ★★★★★
           </p>
-          <p className="text-sm text-[#4c6188]">5.0/5 content quality rating</p>
+          <p className="text-sm text-[#5f5295]">5.0/5 content quality rating</p>
         </div>
       </div>
       <div className="finance-disclosure-banner mt-4">
-        <p className="text-sm text-[#344a72]">
+        <p className="text-sm text-[#524689]">
           Financial disclosure: We are an independent comparison resource, not a lender. Offers and eligibility are determined by authorised providers.
         </p>
-        <Link href="/financial-disclosure" className="text-sm font-semibold text-[#0f2858] hover:underline">
+        <Link href="/financial-disclosure" className="text-sm font-semibold text-[#5f3cd5] hover:underline">
           Read full disclosure
         </Link>
       </div>

@@ -50,20 +50,20 @@ export default function CityPageTemplate({ page }) {
   const schemas = buildCitySchemas(page);
 
   return (
-    <main className="site-container py-8 text-[#132445]">
+    <main className="site-container py-8 text-[#25185f]">
       {schemas.map((schema, index) => (
         <StructuredData key={`${page.slug}-city-schema-${index}`} data={schema} />
       ))}
 
       <section className="surface-card p-6 md:p-8">
-        <nav className="text-sm text-[#5d6f91]">
-          <Link href="/" className="font-medium text-[#1f4eb1] underline">
+        <nav className="text-sm text-[#6a5ea0]">
+          <Link href="/" className="font-medium text-[#6d4fe0] underline">
             Home
           </Link>{" "}
           / {page.title}
         </nav>
-        <h1 className="mt-3 text-3xl font-extrabold text-[#0f2858] md:text-4xl">{page.title}</h1>
-        <p className="mt-4 rounded-2xl border border-[#cfe0ff] bg-[#edf4ff] p-4">{page.answerBlock}</p>
+        <h1 className="mt-3 text-3xl font-extrabold text-[#2f1f75] md:text-4xl">{page.title}</h1>
+        <p className="mt-4 rounded-2xl border border-[#cdbdf3] bg-[#ece3ff] p-4">{page.answerBlock}</p>
         <p className="mt-4 text-[#3f567b]">{page.localIntroduction}</p>
       </section>
 
@@ -192,7 +192,7 @@ export default function CityPageTemplate({ page }) {
         <h2 className="section-title text-2xl">Related Guides</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {internalLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="subtle-card p-4 font-semibold text-[#0f2858] transition hover:border-[#b2c5ed] hover:bg-[#f2f7ff]">
+            <Link key={link.href} href={link.href} className="subtle-card p-4 font-semibold text-[#2f1f75] transition hover:border-[#ab95ee] hover:bg-[#e8deff]">
               {link.label}
             </Link>
           ))}

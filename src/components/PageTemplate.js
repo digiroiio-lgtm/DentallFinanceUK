@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 import { getInternalLinks, getPageUrl } from "@/lib/siteData";
@@ -106,7 +107,7 @@ function DataTable({ section }) {
 function SavingsCalculation({ calculation }) {
   const toneClasses = {
     default: "subtle-card",
-    accent: "rounded-2xl border border-[#bfd4ff] bg-[#eef4ff]",
+    accent: "rounded-2xl border border-[#c9baf1] bg-[#eee5ff]",
     positive: "rounded-2xl border border-[#bfe9c9] bg-[#effcf2]",
   };
 
@@ -151,7 +152,7 @@ function SectionContent({ section }) {
             return (
               <li key={`${section.heading}-item-${index}`}>
                 {value.href ? (
-                  <Link href={value.href} className="font-medium text-[#1f4eb1] underline decoration-2 underline-offset-2">
+                  <Link href={value.href} className="font-medium text-[#6d4fe0] underline decoration-2 underline-offset-2">
                     {value.text}
                   </Link>
                 ) : (
@@ -166,13 +167,24 @@ function SectionContent({ section }) {
   );
 }
 
+function InlineCta({ text, href, subtext }) {
+  return (
+    <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-[#c9baf1] bg-[#f0e8ff] p-5 sm:flex-row sm:items-center sm:justify-between">
+      {subtext ? <p className="text-sm text-[#4a3a8a]">{subtext}</p> : null}
+      <Link href={href} className="btn btn-primary shrink-0">
+        {text}
+      </Link>
+    </div>
+  );
+}
+
 function RelatedCards({ links }) {
   return (
     <section className="surface-card mt-8 p-6">
       <h2 className="section-title text-2xl">Related Guides</h2>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {links.map((link) => (
-          <Link key={link.href} href={link.href} className="subtle-card p-4 font-semibold text-[#0f2858] transition hover:border-[#b2c5ed] hover:bg-[#f2f7ff]">
+          <Link key={link.href} href={link.href} className="subtle-card p-4 font-semibold text-[#2f1f75] transition hover:border-[#ab95ee] hover:bg-[#e8deff]">
             {link.label}
           </Link>
         ))}
@@ -189,22 +201,38 @@ export default function PageTemplate({ page }) {
   const isTurkey = /turkey|hollywood-smile/.test(page.slug);
 
   return (
-    <main className="site-container py-8 text-[#132445]">
+    <main className="site-container py-8 text-[#25185f]">
       {schemas.map((schema, index) => (
         <StructuredData key={`${page.slug}-schema-${index}`} data={schema} />
       ))}
 
       <section className={`surface-card p-6 md:p-8 ${isTurkey ? "bg-gradient-to-br from-[#fff8ea] to-[#ffffff]" : ""}`}>
-        <nav className="text-sm text-[#5d6f91]">
-          <Link href="/" className="font-medium text-[#1f4eb1] underline">
-            Home
-          </Link>{" "}
-          / {page.title}
-        </nav>
-        <h1 className="mt-3 text-3xl font-extrabold leading-tight text-[#0f2858] md:text-4xl">{page.title}</h1>
-        <p className={`mt-4 rounded-2xl border p-4 ${isTurkey ? "border-[#f0ddba] bg-[#fff4de]" : "border-[#cfe0ff] bg-[#edf4ff]"}`}>
-          {page.answerBlock}
-        </p>
+        <div className={`${isTurkey && page.image ? "grid gap-6 md:grid-cols-[1fr_auto] md:items-start" : ""}`}>
+          <div>
+            <nav className="text-sm text-[#6a5ea0]">
+              <Link href="/" className="font-medium text-[#6d4fe0] underline">
+                Home
+              </Link>{" "}
+              / {page.title}
+            </nav>
+            <h1 className="mt-3 text-3xl font-extrabold leading-tight text-[#2f1f75] md:text-4xl">{page.title}</h1>
+            <p className={`mt-4 rounded-2xl border p-4 ${isTurkey ? "border-[#c9b9ef] bg-[#f0e8ff]" : "border-[#cdbdf3] bg-[#ece3ff]"}`}>
+              {page.answerBlock}
+            </p>
+          </div>
+          {isTurkey && page.image ? (
+            <div className="relative mt-2 aspect-[3/2] w-full max-w-[420px] overflow-hidden rounded-2xl md:mt-0 md:w-[360px] md:max-w-none">
+              <Image
+                src={page.image}
+                alt={page.imageAlt ?? page.title}
+                fill
+                sizes="(max-width: 767px) 100vw, 360px"
+                className="object-cover"
+                priority
+              />
+            </div>
+          ) : null}
+        </div>
       </section>
 
       <section className="surface-card mt-8 p-6">
@@ -238,7 +266,21 @@ export default function PageTemplate({ page }) {
       {page.costTable ? <DataTable section={page.costTable} /> : null}
       {page.savingsCalculation ? <SavingsCalculation calculation={page.savingsCalculation} /> : null}
       {page.savingsTable ? <DataTable section={page.savingsTable} /> : null}
+      {isTurkey && page.savingsTable ? (
+        <InlineCta
+          text="Calculate My Turkey Teeth Payment"
+          href="/finance-calculator"
+          subtext="Use our calculator to estimate monthly payments on your Turkey treatment budget."
+        />
+      ) : null}
       {page.monthlyPaymentTable ? <DataTable section={page.monthlyPaymentTable} /> : null}
+      {isTurkey && page.monthlyPaymentTable ? (
+        <InlineCta
+          text="Check My Exact Monthly Cost"
+          href="/finance-calculator"
+          subtext="Adjust the calculator to your actual treatment amount, APR, and preferred term."
+        />
+      ) : null}
 
       {page.type === "calculator" ? (
         <>
@@ -248,8 +290,8 @@ export default function PageTemplate({ page }) {
               Adjust inputs to estimate monthly repayments and compare repayment structures.
             </p>
             <div className="mt-4">
-              <Suspense fallback={<p className="subtle-card p-4 text-sm text-[#64779c]">Loading calculator…</p>}>
-                <CalculatorWidget config={page.calculatorConfig} />
+              <Suspense fallback={<p className="subtle-card p-4 text-sm text-[#6d5ea5]">Loading calculator…</p>}>
+                <CalculatorWidget config={page.calculatorConfig} treatmentType={page.title} />
               </Suspense>
             </div>
           </section>
@@ -304,7 +346,7 @@ export default function PageTemplate({ page }) {
           ) : null}
 
           {page.savingsExample ? (
-            <section className="surface-card mt-8 border-[#bfe9c9] bg-[#f1fcf4] p-6">
+            <section className="surface-card mt-8 border-[#c9baf1] bg-[#efe6ff] p-6">
               <h2 className="section-title text-2xl">Savings Example</h2>
               <p className="mt-2 text-[#3b5679]">{page.savingsExample.description}</p>
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -315,12 +357,12 @@ export default function PageTemplate({ page }) {
                 </div>
                 <div className="subtle-card p-4 text-center">
                   <p className="text-xs text-[#6a7c9f]">{page.savingsExample.repAprLabel} monthly</p>
-                  <p className="text-xl font-bold text-[#0f2858]">{page.savingsExample.repAprMonthly}</p>
+                  <p className="text-xl font-bold text-[#2f1f75]">{page.savingsExample.repAprMonthly}</p>
                   <p className="text-xs text-[#6a7c9f]">Total: {page.savingsExample.repAprTotal}</p>
                 </div>
-                <div className="rounded-2xl border border-[#bfe9c9] bg-white p-4 text-center">
+                <div className="rounded-2xl border border-[#cbbdf1] bg-[#f7f3ff] p-4 text-center">
                   <p className="text-xs text-[#6a7c9f]">Interest saved at 0% APR</p>
-                  <p className="text-xl font-bold text-[#1f8f4e]">{page.savingsExample.saving}</p>
+                  <p className="text-xl font-bold text-[#5f3cd5]">{page.savingsExample.saving}</p>
                 </div>
               </div>
               <p className="mt-3 text-xs text-[#6b7da3]">
@@ -341,6 +383,14 @@ export default function PageTemplate({ page }) {
           ))}
         </div>
       </section>
+
+      {isTurkey ? (
+        <InlineCta
+          text="Compare UK vs Turkey Costs"
+          href="/turkey-teeth-finance"
+          subtext="See full UK vs Turkey savings comparisons across veneers, implants, and smile makeovers."
+        />
+      ) : null}
 
       <section className="surface-card mt-8 p-6">
         <h2 className="section-title text-2xl">Frequently Asked Questions</h2>
@@ -366,7 +416,7 @@ export default function PageTemplate({ page }) {
       </section>
 
       {financeDisclosure ? (
-        <section className="surface-card mt-8 border-[#d6deef] bg-[#f8fbff] p-6">
+        <section className="surface-card mt-8 border-[#cdc0f0] bg-[#f4eeff] p-6">
           <h2 className="section-title text-2xl">{financeDisclosure.title ?? "Finance Disclosure"}</h2>
           {financeDisclosure.intro ? <p className="mt-2 text-[#3f567b]">{financeDisclosure.intro}</p> : null}
           {financeDisclosure.items?.length ? (
@@ -386,11 +436,14 @@ export default function PageTemplate({ page }) {
             <li key={reference}>{reference}</li>
           ))}
         </ul>
-        <p className="mt-4 rounded-xl border border-[#e1e8f7] bg-[#f8fbff] p-3 text-sm text-[#4f6389]">Medical Disclaimer: {page.disclaimer}</p>
+        <p className="mt-4 rounded-xl border border-[#d4c7f5] bg-[#f3edff] p-3 text-sm text-[#64579a]">Medical Disclaimer: {page.disclaimer}</p>
       </section>
 
       <RelatedCards links={internalLinks} />
-      <LeadCtaSection />
+      <LeadCtaSection
+        title={isTurkey ? "Get A Personalised Turkey Teeth Finance Estimate" : undefined}
+        description={isTurkey ? "Compare treatment cost, monthly payments and potential UK vs Turkey savings." : undefined}
+      />
     </main>
   );
 }
