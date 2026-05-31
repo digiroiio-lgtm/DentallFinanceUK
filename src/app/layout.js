@@ -2,6 +2,7 @@ import "./globals.css";
 import { SITE_URL } from "@/lib/siteData";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import WhatsAppStickyButton from "@/components/WhatsAppStickyButton";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
       <body>
         <SiteHeader />
         {children}
+        <WhatsAppStickyButton />
         <SiteFooter />
       </body>
     </html>
