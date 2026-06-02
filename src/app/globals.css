@@ -210,6 +210,13 @@ main {
   gap: 0.35rem;
 }
 
+.lead-form-subheading {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #475569;
+  margin-bottom: 0.1rem;
+}
+
 .lead-form-label {
   margin-top: 0.35rem;
   font-size: 0.78rem;

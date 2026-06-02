@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export default function LeadCtaSection({
-  title = "Ready to compare your monthly dental payments?",
-  description = "Use the calculator and provider guides to compare finance examples before you apply.",
+  title = "Ready to compare dental finance options?",
+  description = "Use our calculator to estimate monthly payments and compare available lenders.",
 }) {
   return (
     <section className="surface-card mt-10 bg-gradient-to-r from-[#f1e8ff] to-[#faf7ff] p-6 text-[#0f172a] md:from-[#2b1b6b] md:to-[#6e4adf] md:text-white">
@@ -14,16 +14,17 @@ export default function LeadCtaSection({
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link href="/finance-calculator" className="btn btn-primary">
-              Use Finance Calculator
+              Calculate Monthly Payments
             </Link>
             <Link href="/finance-providers" className="btn btn-secondary">
-              Compare Providers
+              Compare Finance Providers
             </Link>
           </div>
         </div>
 
         <div className="lead-form-card">
-          <p className="text-sm font-semibold text-[#0f2858]">Get tailored finance guidance</p>
+          <p className="text-sm font-semibold text-[#0f2858]">Find clinics within your budget</p>
+          <p className="lead-form-subheading">Tell us your budget and treatment type to see suitable clinics and estimated prices.</p>
           <label className="lead-form-label" htmlFor="lead-budget">
             Budget
           </label>
