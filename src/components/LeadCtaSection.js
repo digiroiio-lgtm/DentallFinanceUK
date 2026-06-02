@@ -68,7 +68,7 @@ Submitted from Finance Guidance Form.`;
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
     const whatsappWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-    if (!whatsappWindow || whatsappWindow.closed) {
+    if (!whatsappWindow) {
       setSubmitError("We couldn’t open WhatsApp. Please allow pop-ups and try again.");
     }
   }
@@ -103,7 +103,6 @@ Submitted from Finance Guidance Form.`;
             type="text"
             autoComplete="off"
             inputMode="numeric"
-            pattern="^[£0-9,\\s]+$"
             className="lead-form-input"
             placeholder="e.g. £3,000"
             value={budget}
