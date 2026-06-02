@@ -10,18 +10,25 @@ export default function LeadCtaSection({
   const [budget, setBudget] = useState("");
   const [treatment, setTreatment] = useState("");
   const [errors, setErrors] = useState({ budget: "", treatment: "" });
+  const [submitError, setSubmitError] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    const trimmedBudget = budget.trim();
-    const trimmedTreatment = treatment.trim();
+    const trimmedBudget = budget.trim().replace(/\s+/g, " ");
+    const trimmedTreatment = treatment.trim().replace(/\s+/g, " ");
+    const budgetPattern = /^[£0-9,\s]+$/;
     const nextErrors = {
-      budget: trimmedBudget ? "" : "Budget is required.",
+      budget: !trimmedBudget
+        ? "Budget is required."
+        : budgetPattern.test(trimmedBudget)
+          ? ""
+          : "Please enter a valid budget.",
       treatment: trimmedTreatment ? "" : "Treatment is required.",
     };
 
     setErrors(nextErrors);
+    setSubmitError("");
 
     if (nextErrors.budget || nextErrors.treatment) {
       return;
@@ -49,7 +56,10 @@ Submitted from Finance Guidance Form.`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/905353998999?text=${encodedMessage}`;
 
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    const whatsappWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    if (!whatsappWindow) {
+      setSubmitError("We couldn’t open WhatsApp. Please allow pop-ups and try again.");
+    }
   }
 
   return (
@@ -91,6 +101,9 @@ Submitted from Finance Guidance Form.`;
               if (errors.budget) {
                 setErrors((currentErrors) => ({ ...currentErrors, budget: "" }));
               }
+              if (submitError) {
+                setSubmitError("");
+              }
             }}
             aria-invalid={Boolean(errors.budget)}
             aria-describedby={errors.budget ? "lead-budget-error" : undefined}
@@ -116,6 +129,9 @@ Submitted from Finance Guidance Form.`;
               if (errors.treatment) {
                 setErrors((currentErrors) => ({ ...currentErrors, treatment: "" }));
               }
+              if (submitError) {
+                setSubmitError("");
+              }
             }}
             aria-invalid={Boolean(errors.treatment)}
             aria-describedby={errors.treatment ? "lead-treatment-error" : undefined}
@@ -129,6 +145,7 @@ Submitted from Finance Guidance Form.`;
             <button type="submit" className="btn btn-primary lead-form-cta">
               See Clinics & Prices
             </button>
+            {submitError ? <p className="text-xs text-red-700">{submitError}</p> : null}
             <p className="lead-form-microcopy">
               Compare clinics, treatment options and estimated prices based on your budget.
             </p>
