@@ -96,6 +96,11 @@ main {
   border-color: #15803d;
 }
 
+.btn-primary:active {
+  background: #166534;
+  border-color: #166534;
+}
+
 .btn-secondary {
   background: #ffffff;
   color: #0f172a;
@@ -219,6 +224,53 @@ main {
   padding: 0.55rem 0.7rem;
   font-size: 0.88rem;
   color: #0f172a;
+}
+
+.lead-form-cta-group {
+  margin-top: 1.25rem;
+}
+
+.lead-form-cta {
+  width: 100%;
+  min-height: 3.6rem;
+  border-radius: 0.95rem;
+  padding: 0.95rem 1.1rem;
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.2;
+  box-shadow: 0 14px 28px rgba(22, 163, 74, 0.2);
+}
+
+.lead-form-cta:hover {
+  box-shadow: 0 16px 30px rgba(21, 128, 61, 0.24);
+  transform: translateY(-1px);
+}
+
+.lead-form-cta:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 20px rgba(22, 101, 52, 0.22);
+}
+
+.lead-form-cta:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.22);
+  outline-offset: 2px;
+}
+
+.lead-form-microcopy {
+  margin-top: 0.65rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #475569;
+}
+
+@media (min-width: 768px) {
+  .lead-form-card {
+    padding: 1.15rem;
+  }
+
+  .lead-form-microcopy {
+    font-size: 0.85rem;
+  }
 }
 
 .mobile-floating-cta {

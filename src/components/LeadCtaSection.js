@@ -48,9 +48,14 @@ export default function LeadCtaSection({
             className="lead-form-input"
             placeholder="e.g. Implants"
           />
-          <Link href="/contact" className="btn btn-primary mt-3 w-full">
-            Continue
-          </Link>
+          <div className="lead-form-cta-group">
+            <Link href="/contact" className="btn btn-primary lead-form-cta">
+              See Clinics &amp; Prices
+            </Link>
+            <p className="lead-form-microcopy">
+              Compare clinics, treatment options and estimated prices based on your budget.
+            </p>
+          </div>
         </div>
       </div>
     </section>
