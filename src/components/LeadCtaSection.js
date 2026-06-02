@@ -50,7 +50,7 @@ export default function LeadCtaSection({
           />
           <div className="lead-form-cta-group">
             <Link href="/contact" className="btn btn-primary lead-form-cta">
-              See Clinics &amp; Prices
+              See Clinics & Prices
             </Link>
             <p className="lead-form-microcopy">
               Compare clinics, treatment options and estimated prices based on your budget.
