@@ -210,11 +210,15 @@ main {
   gap: 0.35rem;
 }
 
-.lead-form-subheading {
+.lead-form-subheading,
+.lead-form-microcopy {
   font-size: 0.82rem;
   line-height: 1.45;
   color: #475569;
-  margin-bottom: 0.1rem;
+}
+
+.lead-form-subheading {
+  margin-bottom: 0.25rem;
 }
 
 .lead-form-label {
@@ -265,9 +269,6 @@ main {
 
 .lead-form-microcopy {
   margin-top: 0.65rem;
-  font-size: 0.82rem;
-  line-height: 1.45;
-  color: #475569;
 }
 
 @media (min-width: 768px) {
@@ -275,6 +276,7 @@ main {
     padding: 1.15rem;
   }
 
+  .lead-form-subheading,
   .lead-form-microcopy {
     font-size: 0.85rem;
   }
