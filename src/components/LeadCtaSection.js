@@ -3,6 +3,13 @@
 import Link from "next/link";
 import { useState } from "react";
 
+const BUDGET_PATTERN = /^[£0-9,\s]+$/;
+const WHATSAPP_NUMBER = "905353998999";
+
+function normalizeInput(value) {
+  return value.trim().replace(/\s+/g, " ");
+}
+
 export default function LeadCtaSection({
   title = "Ready to compare dental finance options?",
   description = "Use our calculator to estimate monthly payments and compare available lenders.",
@@ -15,13 +22,12 @@ export default function LeadCtaSection({
   function handleSubmit(event) {
     event.preventDefault();
 
-    const trimmedBudget = budget.trim().replace(/\s+/g, " ");
-    const trimmedTreatment = treatment.trim().replace(/\s+/g, " ");
-    const budgetPattern = /^[£0-9,\s]+$/;
+    const trimmedBudget = normalizeInput(budget);
+    const trimmedTreatment = normalizeInput(treatment);
     const nextErrors = {
       budget: !trimmedBudget
         ? "Budget is required."
-        : budgetPattern.test(trimmedBudget)
+        : BUDGET_PATTERN.test(trimmedBudget)
           ? ""
           : "Please enter a valid budget.",
       treatment: trimmedTreatment ? "" : "Treatment is required.",
@@ -54,7 +60,7 @@ Treatment: ${trimmedTreatment}
 
 Submitted from Finance Guidance Form.`;
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/905353998999?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
     const whatsappWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     if (!whatsappWindow) {
