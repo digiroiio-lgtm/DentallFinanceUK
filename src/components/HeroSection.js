@@ -25,11 +25,11 @@ function HeroCtaLink({ cta, className }) {
 
 export default function HeroSection({ title, description, primaryCta, secondaryCta, highlights = [], image, imageAlt }) {
   return (
-    <section className="surface-card hero-card hero-gradient p-7 text-[#0f172a] md:p-10 md:text-white">
+    <section className="surface-card hero-card hero-gradient p-7 md:p-10">
       <div className={`${image ? "grid items-center gap-8 md:grid-cols-[1fr_auto]" : ""}`}>
         <div>
-          <h1 className="text-3xl font-extrabold leading-tight md:text-5xl">{title}</h1>
-          <p className="mt-4 max-w-2xl text-base text-[#334155] md:text-lg md:text-white">{description}</p>
+          <h1 className="text-3xl font-extrabold leading-tight text-[#111827] md:text-5xl">{title}</h1>
+          <p className="mt-4 max-w-2xl text-base text-[#374151] md:text-lg">{description}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <HeroCtaLink cta={primaryCta} className="btn btn-hero-cta" />
             <HeroCtaLink cta={secondaryCta} className="btn btn-hero-outline" />
