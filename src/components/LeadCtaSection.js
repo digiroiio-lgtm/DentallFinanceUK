@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const BUDGET_PATTERN = /^[£0-9,\s]+$/;
+const BUDGET_PATTERN = /^£?\s*(\d{1,3}(,\d{3})+|\d+)\s*$/;
+const MAX_FIELD_LENGTH = 120;
 const WHATSAPP_NUMBER = "905353998999";
 
 function normalizeInput(value) {
-  return value.trim().replace(/\s+/g, " ");
+  return value.replace(/[\r\n\t]+/g, " ").trim().replace(/\s+/g, " ");
 }
 
 export default function LeadCtaSection({
@@ -29,8 +30,12 @@ export default function LeadCtaSection({
         ? "Budget is required."
         : BUDGET_PATTERN.test(trimmedBudget)
           ? ""
-          : "Please enter a valid budget.",
-      treatment: trimmedTreatment ? "" : "Treatment is required.",
+          : "Please enter a budget amount (e.g., £3,000 or 3000).",
+      treatment: !trimmedTreatment
+        ? "Treatment is required."
+        : trimmedTreatment.length > MAX_FIELD_LENGTH
+          ? "Please keep treatment under 120 characters."
+          : "",
     };
 
     setErrors(nextErrors);
@@ -63,7 +68,7 @@ Submitted from Finance Guidance Form.`;
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
     const whatsappWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-    if (!whatsappWindow) {
+    if (!whatsappWindow || whatsappWindow.closed) {
       setSubmitError("We couldn’t open WhatsApp. Please allow pop-ups and try again.");
     }
   }
