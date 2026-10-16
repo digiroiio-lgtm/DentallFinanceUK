@@ -1,5 +1,7 @@
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { buildBreadcrumbSchema } from "@/lib/breadcrumbs";
 import LeadCtaSection from "@/components/LeadCtaSection";
 import { calculatorHubLinks, getInternalLinks, getPageUrl } from "@/lib/siteData";
 
@@ -28,14 +30,7 @@ function buildHubSchemas(page) {
         acceptedAnswer: { "@type": "Answer", text: faq.answer },
       })),
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: getPageUrl("/") },
-        { "@type": "ListItem", position: 2, name: page.title, item: getPageUrl(`/${page.slug}`) },
-      ],
-    },
+    buildBreadcrumbSchema(page),
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
@@ -61,12 +56,7 @@ export default function CalculatorHubTemplate({ page }) {
       ))}
 
       <section className="surface-card p-6 md:p-8">
-        <nav className="text-sm text-[#6a5ea0]">
-          <Link href="/" className="font-medium text-[#6d4fe0] underline">
-            Home
-          </Link>{" "}
-          / {page.title}
-        </nav>
+        <Breadcrumbs page={page} />
         <h1 className="mt-3 text-3xl font-extrabold text-[#2f1f75] md:text-4xl">{page.title}</h1>
         <p className="mt-4 rounded-2xl border border-[#cdbdf3] bg-[#ece3ff] p-4">{page.answerBlock}</p>
       </section>
@@ -137,8 +127,6 @@ export default function CalculatorHubTemplate({ page }) {
         <h2 className="section-title text-2xl">Review and Disclosure</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <div className="subtle-card p-3 text-sm">Author: {page.author}</div>
-          <div className="subtle-card p-3 text-sm">Finance Reviewer: {page.financeReviewer ?? page.reviewer}</div>
-          {page.dentalReviewer ? <div className="subtle-card p-3 text-sm">Dental Reviewer: {page.dentalReviewer}</div> : null}
           <div className="subtle-card p-3 text-sm">Last Updated: {page.lastUpdated}</div>
         </div>
       </section>

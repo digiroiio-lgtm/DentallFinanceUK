@@ -5,9 +5,14 @@ import robots from "../src/app/robots.js";
 
 test("robots includes required allow/disallow and sitemap", () => {
   const data = robots();
-  assert.equal(data.rules.userAgent, "*");
-  assert.equal(data.rules.allow, "/");
-  assert.deepEqual(data.rules.disallow, ["/admin/", "/api/", "/private/"]);
+  const [wildcard, searchCrawlers] = data.rules;
+  assert.equal(wildcard.userAgent, "*");
+  assert.equal(wildcard.allow, "/");
+  assert.deepEqual(wildcard.disallow, ["/admin/", "/api/", "/private/"]);
+  assert.ok(searchCrawlers.userAgent.includes("OAI-SearchBot"));
+  assert.ok(searchCrawlers.userAgent.includes("PerplexityBot"));
+  assert.deepEqual(searchCrawlers.disallow, wildcard.disallow);
+  assert.ok(!searchCrawlers.userAgent.includes("GPTBot"), "training crawlers are a separate decision");
   assert.equal(data.sitemap, "https://dentalfinanceuk.co.uk/sitemap.xml");
 });
 

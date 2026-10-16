@@ -2,26 +2,15 @@ import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { buildBreadcrumbSchema } from "@/lib/breadcrumbs";
 import { getInternalLinks, getPageUrl } from "@/lib/siteData";
 import CalculatorWidget from "@/components/CalculatorWidget";
 import LeadCtaSection from "@/components/LeadCtaSection";
 import ContactForm from "@/components/ContactForm";
 
 function buildSchemas(page) {
-  const reviewedBy = [
-    page.financeReviewer ? { "@type": "Person", name: page.financeReviewer } : null,
-    page.dentalReviewer ? { "@type": "Person", name: page.dentalReviewer } : null,
-    !page.financeReviewer && page.reviewer ? { "@type": "Person", name: page.reviewer } : null,
-  ].filter(Boolean);
-
-  const breadcrumbs = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: getPageUrl("/") },
-      { "@type": "ListItem", position: 2, name: page.title, item: getPageUrl(`/${page.slug}`) },
-    ],
-  };
+  const breadcrumbs = buildBreadcrumbSchema(page);
 
   if (page.type === "calculator") {
     return [
@@ -58,8 +47,7 @@ function buildSchemas(page) {
       "@type": "Article",
       headline: page.title,
       dateModified: page.lastUpdated,
-      author: { "@type": "Person", name: page.author },
-      reviewedBy,
+      author: { "@type": "Organization", name: page.author, url: getPageUrl("/") },
       description: page.description,
       mainEntityOfPage: getPageUrl(`/${page.slug}`),
     },
@@ -210,12 +198,7 @@ export default function PageTemplate({ page }) {
       <section className={`surface-card p-6 md:p-8 ${isTurkey ? "bg-gradient-to-br from-[#fff8ea] to-[#ffffff]" : ""}`}>
         <div className={`${isTurkey && page.image ? "grid gap-6 md:grid-cols-[1fr_auto] md:items-start" : ""}`}>
           <div>
-            <nav className="text-sm text-[#6a5ea0]">
-              <Link href="/" className="font-medium text-[#6d4fe0] underline">
-                Home
-              </Link>{" "}
-              / {page.title}
-            </nav>
+            <Breadcrumbs page={page} />
             <h1 className="mt-3 text-3xl font-extrabold leading-tight text-[#2f1f75] md:text-4xl">{page.title}</h1>
             <p className={`mt-4 rounded-2xl border p-4 ${isTurkey ? "border-[#c9b9ef] bg-[#f0e8ff]" : "border-[#cdbdf3] bg-[#ece3ff]"}`}>
               {page.answerBlock}
@@ -412,8 +395,6 @@ export default function PageTemplate({ page }) {
         {medicalReview?.summary ? <p className="mt-2 text-[#3f567b]">{medicalReview.summary}</p> : null}
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <div className="subtle-card p-3 text-sm">Author: {page.author}</div>
-          <div className="subtle-card p-3 text-sm">Finance Reviewer: {page.financeReviewer ?? page.reviewer}</div>
-          {page.dentalReviewer ? <div className="subtle-card p-3 text-sm">Dental Reviewer: {page.dentalReviewer}</div> : null}
           <div className="subtle-card p-3 text-sm">Last Updated: {page.lastUpdated}</div>
         </div>
       </section>

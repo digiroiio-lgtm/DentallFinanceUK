@@ -1,5 +1,6 @@
 "use client";
 import { useReducer, useState, useEffect, useRef } from "react";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 import {
   coerceCalculatorInputs,
   DECIMAL_INPUT_PATTERN,
@@ -45,6 +46,8 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
   const { amountInput, aprInput, term } = loan;
   const [copied, setCopied] = useState(false);
   const skipUrlWrite = useRef(true);
+  const started = useRef(false);
+  const calculatorId = treatmentType.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -68,7 +71,11 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
     if (aprInput !== "") params.set("apr", aprInput);
     params.set("term", term);
     window.history.replaceState(null, "", "?" + params.toString());
-  }, [amountInput, aprInput, term]);
+    if (!started.current) {
+      started.current = true;
+      trackEvent(ANALYTICS_EVENTS.calculatorStart, { calculator_id: calculatorId });
+    }
+  }, [amountInput, aprInput, term, calculatorId]);
 
   const { amount, apr } = coerceCalculatorInputs({
     amountInput,
@@ -81,7 +88,12 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
   const total = monthly * term;
   const interest = total - amount;
 
+  function trackCompleted() {
+    trackEvent(ANALYTICS_EVENTS.calculatorComplete, { calculator_id: calculatorId, term_months: term });
+  }
+
   function handleShare() {
+    trackCompleted();
     navigator.clipboard
       .writeText(window.location.href)
       .then(() => {
@@ -219,6 +231,10 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Speak with treatment team on WhatsApp"
+          onClick={() => {
+            trackCompleted();
+            trackEvent(ANALYTICS_EVENTS.financeCtaClick, { placement: "calculator", destination: "whatsapp" });
+          }}
         >
           Speak With Treatment Team
         </a>
