@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { OPERATOR_STATUS } from "@/lib/operator";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 
 // Legal and trust links shared by the site footer. Every legal page must be listed here
 // (enforced by test/compliance-v5.test.mjs).
@@ -52,7 +53,7 @@ export default function LegalFooter() {
   return (
     <div className="mt-10 rounded-2xl border border-[#4f3a9f] bg-[#26156a] p-4 text-xs leading-6 text-[#ddd4ff]">
       {OPERATOR_STATUS} Figures on this site are illustrative, not offers. Finance from third-party lenders is subject to
-      status, eligibility, affordability and lender approval.
+      status, eligibility, affordability and lender approval. <CookieSettingsButton />
     </div>
   );
 }
