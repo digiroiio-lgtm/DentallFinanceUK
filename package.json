@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test",
-    "audit:production-routes": "node scripts/audit-production-routes.mjs"
+    "audit:production-routes": "node scripts/audit-production-routes.mjs",
+    "audit:seo": "node scripts/seo-audit.mjs"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",

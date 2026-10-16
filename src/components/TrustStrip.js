@@ -3,7 +3,7 @@ export default function TrustStrip() {
     "Compare multiple finance providers",
     "Estimate monthly payments instantly",
     "UK and Turkey treatment finance comparisons",
-    "No impact soft-check information available",
+    "Plain-English guides to credit checks and affordability",
   ];
 
   return (

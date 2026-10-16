@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 const BUDGET_PATTERN = /^£?\s*(\d{1,3}(,\d{3})+|\d+)\s*$/;
 const MAX_FIELD_LENGTH = 120;
@@ -45,18 +46,8 @@ export default function LeadCtaSection({
       return;
     }
 
-    const eventParams = {
-      budget: trimmedBudget,
-      treatment: trimmedTreatment,
-    };
-
-    if (typeof window !== "undefined") {
-      if (typeof window.gtag === "function") {
-        window.gtag("event", "clinic_match_request", eventParams);
-      } else if (Array.isArray(window.dataLayer)) {
-        window.dataLayer.push({ event: "clinic_match_request", ...eventParams });
-      }
-    }
+    // Budget and treatment text are deliberately not sent to analytics.
+    trackEvent(ANALYTICS_EVENTS.financeCtaClick, { placement: "lead_form", destination: "whatsapp" });
 
     const message = `New Clinic Match Request
 

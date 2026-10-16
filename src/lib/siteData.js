@@ -992,7 +992,6 @@ function buildEditorialArticleEntry(config) {
       faqs: buildEditorialFaqs(config, example),
       internalLinks: buildEditorialInternalLinks(config),
       author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
       references: editorialReferenceLists[config.category] ?? comparisonReferenceList,
       disclaimer:
         "Educational only. Borrowing availability, APR, and treatment suitability depend on the lender, clinic, and your circumstances. Review regulated credit documents and clinical advice before proceeding.",
@@ -1065,7 +1064,6 @@ const editorialRoadmapEntry = [
     ],
     internalLinks: editorialPublishedConfigs.slice(0, 8).map((article) => ({ href: `/${article.slug}`, label: article.title })),
     author: "DentalFinanceUK Editorial Team",
-    reviewer: "Dr Emily Carter, GDC-Registered Dentist",
     references: [
       "DentalFinanceUK editorial policy",
       "Financial Conduct Authority (FCA) consumer credit guidance",
@@ -1121,13 +1119,10 @@ const allPages = [
   ["cookie-policy", "Cookie Policy", "policy"],
 ];
 
-const DEFAULT_AUTHOR = "James Walker, Consumer Finance Writer";
-const DEFAULT_FINANCE_REVIEWER = "Michael Brown, Consumer Credit Specialist";
-const DEFAULT_DENTAL_REVIEWER = "Dr Sarah Thompson BDS";
-
-function needsDentalReviewer(slug) {
-  return /implant|veneer|turkey|all-on|hollywood-smile|cosmetic-dentistry/.test(slug) || slug === "uk-vs-turkey-dental-costs";
-}
+// Content is published by the editorial team. No individual author or clinical
+// reviewer is named because none has been verified.
+export const EDITORIAL_TEAM = "DentalFinanceUK Editorial Team";
+const DEFAULT_AUTHOR = EDITORIAL_TEAM;
 
 function toCurrency(value) {
   return `£${value.toLocaleString("en-GB")}`;
@@ -1881,9 +1876,9 @@ const turkeyFinanceDisclosure = {
 };
 
 const turkeyMedicalReview = {
-  title: "Dental Review",
+  title: "Editorial Notice",
   summary:
-    "This content has been reviewed for clinical suitability, aftercare planning, and the main risks UK patients should understand before travelling to Turkey for dental treatment.",
+    "This is general educational information prepared by our editorial team about aftercare planning and the main risks UK patients should understand before travelling to Turkey for dental treatment. It has not been clinically reviewed and is not dental advice. Speak to a registered dentist before deciding on treatment.",
 };
 
 const turkeyReferenceList = [
@@ -2017,7 +2012,6 @@ function buildCityPage(city, service) {
         { href: "/veneers-finance", label: "Veneers Finance" },
       ],
       author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
       references: [
         "Financial Conduct Authority (FCA) Consumer Credit rules",
         "NHS dental charges and treatment guidance",
@@ -2211,7 +2205,6 @@ function buildTurkeySupportPage(config) {
       medicalReview: turkeyMedicalReview,
       financeDisclosure: turkeyFinanceDisclosure,
       author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
       references: turkeyReferenceList,
       disclaimer:
         "Educational only. This content does not replace a personalised treatment plan, travel risk assessment, or regulated financial advice.",
@@ -2361,7 +2354,6 @@ function buildTurkeyCostPage(config) {
       medicalReview: turkeyMedicalReview,
       financeDisclosure: turkeyFinanceDisclosure,
       author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
       references: turkeyReferenceList,
       disclaimer:
         "Educational only. Monthly figures are examples and are not personalised financial or medical advice.",
@@ -2470,7 +2462,6 @@ const turkeyPageEntries = [
       medicalReview: turkeyMedicalReview,
       financeDisclosure: turkeyFinanceDisclosure,
       author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
       references: turkeyReferenceList,
       disclaimer:
         "Educational only. Always get personalised dental advice, treatment planning, and regulated financial information before committing to care abroad.",
@@ -2570,7 +2561,6 @@ const turkeyPageEntries = [
       medicalReview: turkeyMedicalReview,
       financeDisclosure: turkeyFinanceDisclosure,
       author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
       references: turkeyReferenceList,
       disclaimer:
         "Educational only. Always confirm suitability with a clinician and review formal finance paperwork before agreeing to treatment abroad.",
@@ -2644,7 +2634,6 @@ function buildFinanceComparisonPage(config) {
       faqs: config.faqs,
       internalLinks: config.internalLinks,
       author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
       references: comparisonReferenceList,
       disclaimer:
         "Educational only. Compare regulated lender paperwork, full terms, and affordability before choosing any borrowing option.",
@@ -2959,7 +2948,6 @@ function buildUkTurkeyComparisonPage(config) {
       medicalReview: turkeyMedicalReview,
       financeDisclosure: turkeyFinanceDisclosure,
       author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
       references: turkeyReferenceList,
       disclaimer:
         "Educational only. Always compare itemised treatment plans, travel costs, and aftercare arrangements before booking treatment abroad.",
@@ -3083,7 +3071,6 @@ const ukTurkeyComparisonEntries = [
       medicalReview: turkeyMedicalReview,
       financeDisclosure: turkeyFinanceDisclosure,
       author: "DentalFinanceUK Editorial Team",
-      reviewer: "Dr Emily Carter, GDC-Registered Dentist",
       references: turkeyReferenceList,
       disclaimer:
         "Educational only. The examples on this page do not replace an individual clinical treatment plan or regulated financial illustration.",
@@ -4353,7 +4340,6 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
       ],
       faqs: financeFaqs,
       author: DEFAULT_AUTHOR,
-      financeReviewer: DEFAULT_FINANCE_REVIEWER,
       references: [
         "Financial Conduct Authority (FCA) Consumer Credit rules",
         "NHS dental charges and treatment guidance",
@@ -4451,8 +4437,7 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
             { question: "Do calculator results affect my credit score?", answer: "No. The calculators are informational tools only. No credit check is performed when using any calculator on this site." },
             { question: "What is APR?", answer: "APR (Annual Percentage Rate) is the annual cost of borrowing, including interest and any compulsory fees. A lower APR means less total cost. 0% APR means no interest is charged for the promotional term." },
           ],
-          author: DEFAULT_AUTHOR,
-          financeReviewer: DEFAULT_FINANCE_REVIEWER,
+      author: DEFAULT_AUTHOR,
           references: base.references,
           disclaimer: base.disclaimer,
           lastUpdated: "2026-05-29",
@@ -4567,10 +4552,7 @@ export const pageMap = Object.fromEntries(
     slug,
     {
       ...page,
-      author: page.author ?? DEFAULT_AUTHOR,
-      financeReviewer: page.financeReviewer ?? DEFAULT_FINANCE_REVIEWER,
-      dentalReviewer: page.dentalReviewer ?? (needsDentalReviewer(slug) ? DEFAULT_DENTAL_REVIEWER : undefined),
-      reviewer: page.reviewer ?? page.financeReviewer ?? DEFAULT_FINANCE_REVIEWER,
+      author: DEFAULT_AUTHOR,
     },
   ])
 );
