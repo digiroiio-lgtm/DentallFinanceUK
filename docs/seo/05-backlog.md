@@ -9,7 +9,7 @@ Score = Impact (1-5) x Confidence (1-5) / Effort (1-5). Impact and confidence ar
 | 3 | Confirm `dentalfinanceuk.co.uk` is attached to the Vercel project (canonicals/sitemap point at it) | 5 | 4 | 1 | 20 | **Owner action** |
 | 4 | Metadata length fixes (53 titles, 37 descriptions) | 3 | 5 | 1 | 15 | Done in Round 1 |
 | 5 | Visible breadcrumbs + parent-hub BreadcrumbList | 3 | 4 | 2 | 6 | Done in Round 1 |
-| 6 | Replace 18 generic-template pages with real Power Pages, core money pages first | 5 | 4 | 4 | 5 | Sprint 2 |
+| 6 | Replace 18 generic-template pages with real Power Pages, core money pages first | 5 | 4 | 4 | 5 | Sprint 2 done for 14 pages (9 commercial, 5 policy). **Remaining 4 (contact, privacy, terms, cookies) blocked: need operator facts and legal text** |
 | 7 | Resolve intent overlap groups (25 pages): bad credit, eligibility, providers, monthly payments | 4 | 3 | 3 | 4 | Sprint 2/3, needs GSC data |
 | 8 | Verify and source every third-party provider claim; expand or fold 7 thin profiles | 4 | 4 | 4 | 4 | Sprint 5 |
 | 9 | GA4 + consent banner, then measure events | 4 | 4 | 3 | 5.3 | Needs GA4 ID and consent approach |

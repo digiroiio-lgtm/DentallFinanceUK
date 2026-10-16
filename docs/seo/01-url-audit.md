@@ -6,38 +6,30 @@ Suggested classifications are **heuristics for prioritising review**, not decisi
 ## Summary
 - Pages: **121** (article 82, calculator-hub 1, calculator 10, policy 10, city 18)
 - In sitemap: 121/121
-- Generic base-template pages: 18
-- Pages under 250 words: 10 (median page: 440 words)
-- Pages with only the 7 default outbound links: 46
-- Pages with no contextual or sitewide (header/footer) inbound link: 23
+- Generic base-template pages: 4
+- Pages under 250 words: 13 (median page: 506 words)
+- Pages with only the 7 default outbound links: 32
+- Pages with no contextual or sitewide (header/footer) inbound link: 21
 - Pages in an intent-overlap group: 25
-- Suggested: OPTIMISE 58, KEEP 53, EXPAND 10
-- Thinnest: practi-finance (189), chrysalis-finance (192), tabeo-finance (192), medenta-finance (192), kandoo-finance (195), ideal4finance (195), v12-retail-finance (201), dental-finance-companies-ranked (223)
+- Suggested: KEEP 61, OPTIMISE 47, EXPAND 13
+- Thinnest: authors (154), practi-finance (189), chrysalis-finance (192), tabeo-finance (192), medenta-finance (192), kandoo-finance (195), ideal4finance (195), v12-retail-finance (201)
 
-## Pages needing attention (68)
+## Pages needing attention (60)
 | URL | Type | Words | Suggested | Flags |
 |---|---|---|---|---|
-| `/dental-finance-uk` | article | 440 | OPTIMISE | generic-template; default-links-only |
-| `/dental-monthly-payments` | article | 440 | OPTIMISE | generic-template; default-links-only; no-contextual-inbound; intent-overlap:monthly payments |
-| `/dental-payment-plans` | article | 440 | OPTIMISE | generic-template; default-links-only; intent-overlap:monthly payments |
-| `/dental-finance-calculator` | article | 440 | OPTIMISE | generic-template; default-links-only; no-contextual-inbound |
-| `/0-percent-dental-finance` | article | 440 | OPTIMISE | generic-template; default-links-only; intent-overlap:0% finance |
+| `/dental-monthly-payments` | article | 549 | OPTIMISE | intent-overlap:monthly payments |
+| `/dental-payment-plans` | article | 734 | OPTIMISE | intent-overlap:monthly payments |
+| `/0-percent-dental-finance` | article | 489 | OPTIMISE | intent-overlap:0% finance |
 | `/bad-credit-dental-finance` | article | 670 | OPTIMISE | intent-overlap:bad-credit family |
-| `/dental-treatment-finance` | article | 440 | OPTIMISE | generic-template; default-links-only |
-| `/dental-implants-finance` | article | 440 | OPTIMISE | generic-template; default-links-only |
-| `/veneers-finance` | article | 438 | OPTIMISE | generic-template; default-links-only |
-| `/cosmetic-dentistry-finance` | article | 440 | OPTIMISE | generic-template; default-links-only |
 | `/0-percent-finance-calculator` | calculator | 535 | OPTIMISE | default-links-only; intent-overlap:0% finance |
 | `/monthly-payment-calculator` | calculator | 533 | OPTIMISE | default-links-only; intent-overlap:monthly payments |
 | `/veneer-cost-calculator` | calculator | 544 | OPTIMISE | default-links-only; intent-overlap:veneer calculators |
 | `/implant-cost-calculator` | calculator | 575 | OPTIMISE | default-links-only; intent-overlap:implant calculators |
 | `/implant-finance-calculator` | calculator | 364 | OPTIMISE | default-links-only; intent-overlap:implant calculators |
 | `/veneer-finance-calculator` | calculator | 371 | OPTIMISE | default-links-only; intent-overlap:veneer calculators |
-| `/about-us` | policy | 383 | OPTIMISE | generic-template; default-links-only; policy-needs-real-facts |
-| `/editorial-policy` | policy | 384 | OPTIMISE | generic-template; default-links-only; policy-needs-real-facts |
-| `/medical-review-policy` | policy | 364 | OPTIMISE | generic-template; default-links-only; policy-needs-real-facts |
-| `/financial-disclosure` | policy | 360 | OPTIMISE | generic-template; default-links-only; policy-needs-real-facts |
-| `/authors` | policy | 356 | OPTIMISE | generic-template; default-links-only; no-contextual-inbound; policy-needs-real-facts |
+| `/medical-review-policy` | policy | 240 | EXPAND | thin |
+| `/financial-disclosure` | policy | 233 | EXPAND | thin |
+| `/authors` | policy | 154 | EXPAND | thin; no-contextual-inbound |
 | `/contact` | policy | 356 | OPTIMISE | generic-template; default-links-only; policy-needs-real-facts |
 | `/privacy-policy` | policy | 360 | OPTIMISE | generic-template; default-links-only; policy-needs-real-facts |
 | `/terms` | policy | 356 | OPTIMISE | generic-template; default-links-only; policy-needs-real-facts |

@@ -19,6 +19,8 @@ Confirmed by owner: the operator is **not FCA-authorised** and the site is infor
 | C11 | No cookie consent mechanism; analytics helper is inert until consent exists | site-wide | Medium | Open (see 10) |
 | C12 | Any "guaranteed approval" or "no credit check" content | none published | n/a | Rule: never advertise; educational debunking only, after review |
 | C13 | Cost figures for implants/veneers/Turkey savings without cited sources | treatment and Turkey pages | Medium | Open |
+| C15 | Homepage provider table asserted "Soft Check: Yes" and APR/"Best for" for named lenders without sources; "Used by patients researching" label | `src/app/page.js` | High | **Fixed in Sprint 2**: replaced by neutral profile links |
+| C16 | Commercial relationships (lenders, clinics, WhatsApp "treatment team") are undisclosed; the new Financial Disclosure and About pages make no claim about them | `/financial-disclosure`, `/about-us` | High | **Blocked: owner must state the facts** |
 | C14 | Programmatic city pages (18) are templated from a base cost and may read as doorway pages | `city` type | Medium (SEO and accuracy) | Open: review value per page; consider noindex or consolidation |
 
 Because the operator is not authorised, do not build or imply: application journeys, eligibility checkers, approval simulations, lender-specific offers or "apply now" CTAs.
