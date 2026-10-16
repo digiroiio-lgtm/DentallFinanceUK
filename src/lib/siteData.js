@@ -1,3 +1,5 @@
+import { clusterCalculatorHubLinks, mergeClusterPages } from "./clusterPages.js";
+
 export const SITE_URL = "https://dentalfinanceuk.co.uk";
 
 export const primaryNav = [
@@ -1758,6 +1760,7 @@ export const calculatorHubLinks = [
   { href: "/implant-cost-calculator", label: "Implant Cost Calculator", description: "Compare monthly payment options for single implants, multiple implants, and full arches." },
   { href: "/all-on-4-finance-calculator", label: "All-on-4 Finance Calculator", description: "Calculate monthly repayments for All-on-4 full-arch dental implant treatment." },
   { href: "/all-on-6-finance-calculator", label: "All-on-6 Finance Calculator", description: "Estimate monthly costs for All-on-6 implant procedures across different term lengths." },
+  ...clusterCalculatorHubLinks,
 ];
 
 function getMonthlyExamples(costBase) {
@@ -4408,13 +4411,13 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
           answerBlock:
             "Choose a specialist dental finance calculator below to estimate monthly repayments, compare APR options, and view example scenarios for your treatment.",
           keyTakeaways: [
-            "Seven specialist calculators covering 0%, loans, implants, veneers, All-on-4, and All-on-6.",
+            "Eight specialist calculators covering 0%, loans, implants, veneers, All-on-4, All-on-6, and full mouth implants.",
             "Shareable URLs let you save or send your estimate.",
             "APR comparison tables show the true cost across different rates.",
             "All results are indicative — confirm with your lender before applying.",
           ],
           summaryRows: [
-            ["Calculators available", "7 specialist tools"],
+            ["Calculators available", "8 specialist tools"],
             ["Typical loan range", "£500 to £35,000"],
             ["Term options", "6 to 60 months"],
             ["0% APR", "Available on selected promotional plans"],
@@ -4546,7 +4549,7 @@ const basePageEntries = allPages.map(([slug, title, type]) => {
     return [slug, base];
   });
 
-const rawPageMap = Object.fromEntries([
+const baseRawPageMap = Object.fromEntries([
   ...basePageEntries,
   editorialRoadmapEntry,
   ...editorialPublishedEntries,
@@ -4556,6 +4559,8 @@ const rawPageMap = Object.fromEntries([
   ...ukTurkeyComparisonEntries,
   ...financeProviderEntries,
 ]);
+
+const rawPageMap = mergeClusterPages(baseRawPageMap);
 
 export const pageMap = Object.fromEntries(
   Object.entries(rawPageMap).map(([slug, page]) => [
