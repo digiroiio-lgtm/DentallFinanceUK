@@ -6,6 +6,8 @@ import HomepageLoanCalculator from "@/components/HomepageLoanCalculator";
 import TreatmentSelectorSection from "@/components/TreatmentSelectorSection";
 import HeroDescriptionExperiment from "@/components/HeroDescriptionExperiment";
 import { getPageUrl } from "@/lib/siteData";
+import TrustStrip from "@/components/TrustStrip";
+import UkTurkeySavingsCalculator from "@/components/UkTurkeySavingsCalculator";
 
 export const dynamic = "force-static";
 
@@ -88,7 +90,7 @@ export default function Home() {
         title="Dental Finance UK"
         description={<HeroDescriptionExperiment />}
         primaryCta={{ href: "/finance-calculator", label: "Calculate My Monthly Cost" }}
-        secondaryCta={{ href: "https://wa.me/905353998999", label: "Speak With Treatment Team", external: true, newTab: true }}
+        secondaryCta={{ href: "https://wa.me/905353998999", label: "WhatsApp A Treatment Advisor", external: true, newTab: true }}
         highlights={["Independent UK Comparison Resource"]}
         image="/69fc79ae77a97849cc2e8703_7c42f7b1-d707-494d-a5e4-034c58e9032b-Q4IlvNfBnYqSHgr06sCvIvePcMb1ZK.webp"
         imageAlt="Dental professional reviewing finance options with a patient on a tablet"
@@ -96,11 +98,27 @@ export default function Home() {
 
       <HomepageLoanCalculator />
 
+      <TrustStrip />
+
+      <UkTurkeySavingsCalculator />
+
       <TreatmentSelectorSection />
 
       <section className="surface-card mt-8 p-6">
-        <h2 className="section-title text-2xl">Compare providers</h2>
-        <p className="mt-3 text-[#67589e]">Compare key provider differences at a glance.</p>
+        <div className="mb-5 flex flex-wrap items-center gap-4">
+          <div>
+            <h2 className="section-title text-2xl">Compare providers</h2>
+            <p className="mt-1 text-sm text-[#67589e]">Compare key provider differences at a glance.</p>
+          </div>
+          <div className="ml-auto shrink-0">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#65579a]">Used by patients researching</p>
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
+              {["Veneers", "Dental Implants", "All-on-4", "Turkey Treatments"].map((t) => (
+                <span key={t} className="rounded-full bg-[#ede8ff] px-2.5 py-0.5 text-xs font-semibold text-[#2f1f75]">✓ {t}</span>
+              ))}
+            </div>
+          </div>
+        </div>
         <div className="table-wrap mt-4">
           <table className="table-ui">
             <thead>

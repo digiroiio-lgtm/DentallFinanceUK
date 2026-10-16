@@ -173,9 +173,9 @@ export default function HomepageLoanCalculator() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn w-full border border-[#25D366] bg-white text-[#166534] hover:bg-[#f0fdf4]"
-              aria-label="Speak with treatment team on WhatsApp"
+              aria-label="WhatsApp a treatment advisor"
             >
-              Speak With Treatment Team
+              🟢 WhatsApp A Treatment Advisor
             </a>
           </div>
 
