@@ -15,7 +15,9 @@ Score = Impact (1-5) x Confidence (1-5) / Effort (1-5). Impact and confidence ar
 | 9 | GA4 + consent banner, then measure events | 4 | 4 | 3 | 5.3 | Needs GA4 ID and consent approach |
 | 10 | Connect Search Console for this domain | 5 | 5 | 1 | 25 | **Owner action** (add property access) |
 | 11 | Internal-link pass: 46 pages on default links, 23 with no contextual or sitewide inbound (18 are city pages) | 4 | 4 | 3 | 5.3 | Sprint 5 |
-| 12 | `/no-credit-check-dental-finance` educational explainer | 3 | 3 | 2 | 4.5 | **Blocked: legal wording review** |
+| 12 | `/no-credit-check-dental-finance` educational explainer | 3 | 3 | 2 | 4.5 | Drafted in Sprint 3 (PR); **legal wording review before relying on it** |
+| 16 | Bad-credit pillar, low-score and CCJ pages | 4 | 3 | 3 | 4 | Done in Sprint 3 (PR) |
+| 17 | Hub-and-spoke linking: derived topic links, hub-to-spoke, city sections, no orphans | 4 | 4 | 3 | 5.3 | Done in Sprint 3 (PR) |
 | 13 | Treatment pages: Invisalign, dentures (one at a time, evidence-led) | 3 | 2 | 4 | 1.5 | Sprint 4, after demand data |
 | 14 | Refresh dates on genuinely revised pages only | 2 | 4 | 1 | 8 | Ongoing |
 | 15 | AI-citation baseline with the prompt set in 07 | 3 | 3 | 2 | 4.5 | Sprint 5/6 |

@@ -25,6 +25,8 @@ const SHARED_LINKS = {
   eligibility: { href: "/dental-finance-eligibility", label: "Dental Finance Eligibility" },
   declined: { href: "/dental-finance-declined", label: "Dental Finance Declined" },
   lowScore: { href: "/dental-finance-low-credit-score", label: "Low Credit Score Dental Finance" },
+  ccj: { href: "/dental-finance-with-ccj", label: "Dental Finance With a CCJ" },
+  noCheck: { href: "/no-credit-check-dental-finance", label: "No Credit Check Dental Finance Explained" },
 };
 
 function toSection({ title, paragraphs = [], bullets = [] }) {
@@ -170,6 +172,7 @@ const badCreditEntries = [
     internalLinks: [
       SHARED_LINKS.badCredit,
       SHARED_LINKS.declined,
+      SHARED_LINKS.noCheck,
       { href: "/dental-finance-eligibility-what-lenders-check", label: "What Lenders Check: Full Guide" },
       SHARED_LINKS.plans,
       SHARED_LINKS.disclosure,
@@ -225,7 +228,7 @@ const badCreditEntries = [
           "Yes, but consider checking your credit report first and being selective about where you reapply, since multiple applications in a short period can itself affect your credit file.",
       },
     ],
-    internalLinks: [SHARED_LINKS.eligibility, SHARED_LINKS.lowScore, SHARED_LINKS.badCredit, SHARED_LINKS.disclosure],
+    internalLinks: [SHARED_LINKS.eligibility, SHARED_LINKS.lowScore, SHARED_LINKS.ccj, SHARED_LINKS.noCheck, SHARED_LINKS.badCredit, SHARED_LINKS.disclosure],
   }),
   buildTextPage({
     slug: "dental-finance-low-credit-score",

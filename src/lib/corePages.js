@@ -89,6 +89,19 @@ function page(config) {
 }
 
 // Shared illustrative figures
+const CITIES = [
+  ["London", "london"],
+  ["Manchester", "manchester"],
+  ["Birmingham", "birmingham"],
+  ["Leeds", "leeds"],
+  ["Liverpool", "liverpool"],
+  ["Glasgow", "glasgow"],
+];
+
+function localSection(heading, prefix, label) {
+  return section(heading, ["Local guides with illustrative costs and payment examples:"], CITIES.map(([name, key]) => ({ text: `${label} in ${name}`, href: `/${prefix}-${key}` })));
+}
+
 const TERMS = [12, 24, 36];
 const AMOUNTS = [1500, 3000, 6000];
 const A3000 = 3000;
@@ -160,6 +173,7 @@ const dentalFinanceUk = page({
       "Check your rights: regulated credit usually gives a right to withdraw within 14 days and to settle early. Confirm in your agreement.",
       "Only borrow what you can comfortably repay. Late payments can lead to fees and harm your credit file.",
     ]),
+    localSection("Dental finance by city", "dental-finance", "Dental finance"),
     section("Explore by need", null, [
       { text: "Compare payment plan types", href: "/dental-payment-plans" },
       { text: "See monthly payment examples", href: "/dental-monthly-payments" },
@@ -522,6 +536,7 @@ const implantsFinance = page({
       "Aftercare, reviews and any warranty terms",
       "Anything that could cost extra, such as grafting or sedation",
     ]),
+    localSection("Implant finance by city", "dental-implants-finance", "Implant finance"),
     section("Matching finance to the treatment plan", [
       "Check the finance covers the whole treatment, including later stages, and whether the lender pays the practice in one go or in stages. If the plan changes, ask how the agreement and any deposit are affected.",
     ], [
@@ -581,6 +596,7 @@ const veneersFinance = page({
       "Lab fees, follow-up visits and any warranty",
       "Replacement or repair costs over time",
     ]),
+    localSection("Veneers finance by city", "veneers-finance", "Veneers finance"),
     section("Paying monthly for veneers", [
       "Because veneers are cosmetic, confirm that your chosen lender or practice plan covers them. Compare a short 0% plan if you can afford the payment against a longer interest-bearing plan.",
     ], [
@@ -698,7 +714,7 @@ const editorialPolicy = page({
     { question: "Who writes the content?", answer: "The DentalFinanceUK Editorial Team. We do not attribute pages to named individual authors or clinical reviewers." },
     { question: "Is your content financial or dental advice?", answer: "No. It is general information. Speak to a regulated adviser or your dentist about your own situation." },
   ],
-  internalLinks: [L.method, L.disclosure, { href: "/medical-review-policy", label: "Medical Review Policy" }, { href: "/about-us", label: "About Us" }],
+  internalLinks: [L.method, L.disclosure, { href: "/medical-review-policy", label: "Medical Review Policy" }, { href: "/authors", label: "Authors and Editorial Team" }, { href: "/about-us", label: "About Us" }],
   references: policyReferences,
 });
 

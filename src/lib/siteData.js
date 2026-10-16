@@ -1,5 +1,6 @@
 import { clusterCalculatorHubLinks, mergeClusterPages } from "./clusterPages.js";
 import { applyCorePages } from "./corePages.js";
+import { applyCreditPages } from "./creditPages.js";
 
 export const SITE_URL = "https://dentalfinanceuk.co.uk";
 
@@ -4546,7 +4547,7 @@ const baseRawPageMap = Object.fromEntries([
   ...financeProviderEntries,
 ]);
 
-const rawPageMap = mergeClusterPages(applyCorePages(baseRawPageMap));
+const rawPageMap = applyCreditPages(mergeClusterPages(applyCorePages(baseRawPageMap)));
 
 export const pageMap = Object.fromEntries(
   Object.entries(rawPageMap).map(([slug, page]) => [
