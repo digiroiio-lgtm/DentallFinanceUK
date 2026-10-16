@@ -1,7 +1,9 @@
+import { getConsent } from "./consent.js";
+
 // Consent-gated analytics helper. It does nothing until BOTH of these are true:
 //  1. a GA4 / GTM snippet has defined window.gtag or window.dataLayer, and
 //  2. the visitor has granted analytics consent (localStorage "dfuk_analytics_consent" = "granted").
-// No consent banner ships yet, so by default no event leaves the browser.
+// The CookieConsent banner records that choice; until then no event leaves the browser.
 //
 // Only coarse, non-personal parameters are allowed. Loan amounts, budgets, APRs,
 // names, emails, phone numbers and any credit information must never be sent.
@@ -44,7 +46,6 @@ const ALLOWED_PARAMS = new Set([
   "product_category",
   "traffic_source",
 ]);
-const CONSENT_KEY = "dfuk_analytics_consent";
 
 export function sanitiseEventParams(params = {}) {
   const clean = {};
@@ -57,11 +58,7 @@ export function sanitiseEventParams(params = {}) {
 }
 
 export function hasAnalyticsConsent() {
-  try {
-    return typeof window !== "undefined" && window.localStorage.getItem(CONSENT_KEY) === "granted";
-  } catch {
-    return false;
-  }
+  return typeof window !== "undefined" && getConsent() === "granted";
 }
 
 export function trackEvent(name, params = {}) {

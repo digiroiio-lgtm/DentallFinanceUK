@@ -5,6 +5,7 @@
 //    are stated as open, never invented. See docs/legal/10-solicitor-review-list.md.
 //  - No claim of FCA authorisation, exemption, clinical review or whole-of-market coverage.
 import { COMMERCIAL_DISCLOSURE, OPERATOR, OPERATOR_STATUS, formatOperatorAddress } from "./operator.js";
+import { ANALYTICS_CONFIGURED } from "./consent.js";
 
 const LAST_UPDATED = "2026-10-16";
 const ADDRESS = formatOperatorAddress();
@@ -199,7 +200,8 @@ const privacy = page({
     ["Controller", OPERATOR.legalName],
     ["Contact", OPERATOR.email],
     ["Calculator data", "Processed in your browser only"],
-    ["Analytics and advertising cookies", "None in use"],
+    ["Analytics cookies", ANALYTICS_CONFIGURED ? "Google Analytics, only with your consent" : "None in use"],
+    ["Advertising cookies", "None in use"],
     ["Data shared with lenders", "None"],
   ],
   sections: [
@@ -212,12 +214,15 @@ const privacy = page({
       "We do not currently use affiliate tracking. If we add affiliate links, the provider or affiliate network may record that you arrived from our site. We will update this policy and our cookie choices before any such tracking starts.",
     ]),
     section("Lawful basis", [
-      "We rely on our legitimate interests in responding to enquiries you send us and in running a secure website. If we introduce analytics or other non-essential technologies, we will ask for your consent first.",
+      ANALYTICS_CONFIGURED
+        ? "We rely on our legitimate interests in responding to enquiries you send us and in running a secure website. We use Google Analytics only with your consent, which you can withdraw at any time from \"Cookie settings\" in the footer."
+        : "We rely on our legitimate interests in responding to enquiries you send us and in running a secure website. If we introduce analytics or other non-essential technologies, we will ask for your consent first.",
     ]),
     section("Who receives your data", null, [
       "Formspree, which processes contact form submissions on our behalf.",
       "WhatsApp (Meta), when you choose to contact us there; WhatsApp's own privacy terms apply to your use of WhatsApp.",
       "Vercel, which hosts the website.",
+      ...(ANALYTICS_CONFIGURED ? ["Google (Google Analytics), only if you accept analytics cookies."] : []),
       "Our team in Türkiye, who read and answer enquiries.",
     ]),
     section("International transfers", [
@@ -242,26 +247,54 @@ const privacy = page({
   references: [REFS.ukGdpr, REFS.ico],
 });
 
+const cookieAnalyticsSections = ANALYTICS_CONFIGURED
+  ? [
+      section("Analytics cookies (only with your consent)", [
+        "If you choose \"Accept analytics\", we load Google Analytics to understand how the site is used, for example which pages are visited. Google Analytics is provided by Google. Nothing is loaded and no analytics cookie is set unless you accept. Calculator figures and form contents are never sent to Google Analytics.",
+      ], [
+        "_ga: distinguishes visitors. Duration set by Google, up to about two years.",
+        "_ga_<container-id>: keeps session state. Duration set by Google, up to about two years.",
+      ]),
+      section("Changing your choice", [
+        "Use \"Cookie settings\" in the footer at any time to accept or reject analytics. If you reject or withdraw consent, we stop Google Analytics on this site and delete the Google Analytics cookies set on our domain.",
+        "We store your choice in your browser's local storage under dfuk_analytics_consent. This is strictly necessary to remember your decision.",
+      ]),
+    ]
+  : [
+      section("What we use today", [
+        "Pages and calculators work without setting cookies. Calculator figures are kept in the page address while you use a calculator so that the result can be shared; they are not sent to us.",
+      ]),
+    ];
+
 const cookies = page({
   slug: "cookie-policy",
   title: "Cookie Policy",
-  description: "Which cookies and similar technologies Dental Finance UK uses. We do not currently use analytics, advertising or affiliate cookies.",
-  answerBlock: "Dental Finance UK does not currently set analytics, advertising or affiliate tracking cookies. If we add any non-essential cookies or similar technologies in future, we will ask for your consent first and explain them here.",
-  keyTakeaways: [
-    "No analytics, advertising or affiliate cookies are in use.",
-    "Non-essential technologies will only be used with your consent.",
-    "External services you choose to use, such as WhatsApp, have their own policies.",
-  ],
+  description: ANALYTICS_CONFIGURED
+    ? "Which cookies Dental Finance UK uses: Google Analytics only with your consent, no advertising or affiliate cookies, and how to change your choice."
+    : "Which cookies and similar technologies Dental Finance UK uses. We do not currently use analytics, advertising or affiliate cookies.",
+  answerBlock: ANALYTICS_CONFIGURED
+    ? "Dental Finance UK uses Google Analytics cookies only if you accept them in our cookie banner. We do not use advertising or affiliate tracking cookies. You can change your choice at any time from \"Cookie settings\" in the footer."
+    : "Dental Finance UK does not currently set analytics, advertising or affiliate tracking cookies. If we add any non-essential cookies or similar technologies in future, we will ask for your consent first and explain them here.",
+  keyTakeaways: ANALYTICS_CONFIGURED
+    ? [
+        "Analytics cookies are set only after you accept.",
+        "Reject is as easy as accept, and you can change your mind later.",
+        "No advertising or affiliate cookies are in use.",
+        "External services you choose to use, such as WhatsApp, have their own policies.",
+      ]
+    : [
+        "No analytics, advertising or affiliate cookies are in use.",
+        "Non-essential technologies will only be used with your consent.",
+        "External services you choose to use, such as WhatsApp, have their own policies.",
+      ],
   summaryRows: [
     ["Essential cookies", "None set by this site"],
-    ["Analytics cookies", "None"],
+    ["Analytics cookies", ANALYTICS_CONFIGURED ? "Google Analytics, only with your consent" : "None"],
     ["Advertising or affiliate cookies", "None today"],
-    ["Consent", "Will be requested before any non-essential use"],
+    ["Consent", ANALYTICS_CONFIGURED ? "Requested by our banner; change any time via Cookie settings" : "Will be requested before any non-essential use"],
   ],
   sections: [
-    section("What we use today", [
-      "Pages and calculators work without setting cookies. Calculator figures are kept in the page address while you use a calculator so that the result can be shared; they are not sent to us.",
-    ]),
+    ...cookieAnalyticsSections,
     section("Affiliate attribution", [
       "No affiliate attribution cookies are used today. If affiliate links are added, the provider or network may set cookies on their own site after you click; we will list them here and ask for consent where required before any non-essential technology runs on our site.",
     ]),
@@ -269,10 +302,14 @@ const cookies = page({
       "If you choose to message us on WhatsApp or submit the contact form, those services may use their own cookies or similar technologies under their own policies.",
     ]),
     section("Changes", [
-      "If we add analytics or other non-essential technologies, we will add a consent choice, list each technology, its purpose and duration here, and let you change your choice at any time.",
+      "If we add other non-essential technologies, we will list each one, its purpose and duration here before it is used, and ask for your consent.",
     ]),
   ],
-  faqs: [{ question: "Do you track me with cookies?", answer: "No. We do not currently use analytics, advertising or affiliate cookies." }],
+  faqs: [
+    ANALYTICS_CONFIGURED
+      ? { question: "Do you track me with cookies?", answer: "Only if you accept analytics cookies. We do not use advertising or affiliate cookies." }
+      : { question: "Do you track me with cookies?", answer: "No. We do not currently use analytics, advertising or affiliate cookies." },
+  ],
   internalLinks: [LINK.privacy, LINK.legal, LINK.terms],
   references: [REFS.pecr, REFS.ico],
 });

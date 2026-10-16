@@ -3,6 +3,7 @@ import { SITE_URL } from "@/lib/siteData";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppStickyButton from "@/components/WhatsAppStickyButton";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
         {children}
         <WhatsAppStickyButton />
         <SiteFooter />
+        <CookieConsent />
       </body>
     </html>
   );

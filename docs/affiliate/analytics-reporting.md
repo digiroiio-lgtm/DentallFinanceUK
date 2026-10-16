@@ -1,5 +1,13 @@
 # Analytics and attribution reporting plan
 
+## Activating Google Analytics and the cookie banner
+The consent banner (`src/components/CookieConsent.js`) and Google Analytics stay **off** until a GA4 measurement ID is set:
+1. In Vercel: Project → Settings → Environment Variables → add `NEXT_PUBLIC_GA_ID` = `G-XXXXXXXXXX` (Production, and Preview if wanted).
+2. Redeploy. The banner then appears on first visit, with equal "Reject analytics" and "Accept analytics" buttons.
+3. Google Analytics loads only after "Accept analytics". "Cookie settings" in the footer reopens the choice; rejecting disables GA and deletes GA cookies on this domain.
+4. The cookie and privacy policies switch automatically to describe Google Analytics when the ID is set.
+Malformed IDs are ignored (`isValidGaId` in `src/lib/consent.js`).
+
 ## Events (defined in `src/lib/analytics.js`; inert until GA4 and consent exist)
 | Event | Trigger | Parameters |
 |---|---|---|

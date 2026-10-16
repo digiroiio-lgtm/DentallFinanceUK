@@ -16,7 +16,7 @@ Confirmed by owner: the operator is **not FCA-authorised** and the site is infor
 | C8 | Lead form opens WhatsApp with a Turkey phone number; users may assume UK-regulated handling | `LeadCtaSection`, `CalculatorWidget` | Medium | Open: disclose who answers and where data goes |
 | C9 | Provider pages and "ranked" comparisons of named third parties without sources or dates | provider/comparison pages | High | Open: verify or remove claims before expanding |
 | C10 | Calculator/scenario figures are illustrative; some pages state typical APR ranges and 0% examples without a source | calculators, payment pages | Medium | Partly mitigated by methodology page; add dated sources |
-| C11 | No cookie consent mechanism; analytics helper is inert until consent exists | site-wide | Medium | Open (see 10) |
+| C11 | No cookie consent mechanism; analytics helper is inert until consent exists | site-wide | Medium | **Built**: consent banner and Cookie settings ship dormant; they activate with `NEXT_PUBLIC_GA_ID` |
 | C12 | Any "guaranteed approval" or "no credit check" content | none published | n/a | Rule: never advertise; educational debunking only, after review |
 | C13 | Cost figures for implants/veneers/Turkey savings without cited sources | treatment and Turkey pages | Medium | Open |
 | C15 | Homepage provider table asserted "Soft Check: Yes" and APR/"Best for" for named lenders without sources; "Used by patients researching" label | `src/app/page.js` | High | **Fixed in Sprint 2**: replaced by neutral profile links |
