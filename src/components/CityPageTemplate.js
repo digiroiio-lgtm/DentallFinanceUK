@@ -1,5 +1,6 @@
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
+import { organizationSchema } from "@/lib/operator";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { buildBreadcrumbSchema, getRelatedLinks } from "@/lib/breadcrumbs";
 import { getPageUrl } from "@/lib/siteData";
@@ -13,6 +14,7 @@ function buildCitySchemas(page) {
       headline: page.title,
       dateModified: page.lastUpdated,
       author: { "@type": "Organization", name: page.author, url: getPageUrl("/") },
+      publisher: organizationSchema(getPageUrl),
       url: getPageUrl(`/${page.slug}`),
       description: page.description,
     },

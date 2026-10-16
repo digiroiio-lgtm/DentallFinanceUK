@@ -1,5 +1,6 @@
 "use client";
 
+import { COMMERCIAL_DISCLOSURE, whatsappHref as buildWhatsappHref } from "@/lib/operator";
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
@@ -10,7 +11,6 @@ import {
 } from "@/lib/calculatorInputs";
 
 const TERM_OPTIONS = [6, 12, 18, 24, 36, 48, 60];
-const WHATSAPP_NUMBER = "905353998999";
 
 function calcMonthly(principal, aprPct, months) {
   if (!principal || !months) return 0;
@@ -48,25 +48,13 @@ export default function HomepageLoanCalculator() {
       apr: String(apr),
       term: String(term),
     });
-    const message = [
-      "Hello,",
-      "",
-      "I used the Dental Finance UK homepage calculator preview.",
-      "",
-      `Budget: ${formatCurrency(amount)}`,
-      `APR: ${apr}%`,
-      `Term: ${term} months`,
-      `Estimated Monthly Payment: ${formatCurrency(monthlyPayment)}`,
-      "",
-      "I would like to discuss suitable treatment options.",
-    ].join("\n");
 
     return {
       monthly: monthlyPayment,
       totalRepayable: repayable,
       totalInterest: interest,
       calculatorHref: `/dental-loan-calculator?${params.toString()}`,
-      whatsappHref: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
+      whatsappHref: buildWhatsappHref(),
     };
   }, [amountInput, aprInput, term]);
 
@@ -173,11 +161,14 @@ export default function HomepageLoanCalculator() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn w-full border border-[#25D366] bg-white text-[#166534] hover:bg-[#f0fdf4]"
-              aria-label="WhatsApp a treatment advisor"
+              aria-label="Ask the Dental Finance UK team on WhatsApp"
             >
-              🟢 WhatsApp A Treatment Advisor
+              🟢 Ask Our Team on WhatsApp
             </a>
           </div>
+          <p className="mt-3 text-xs text-[#65579a]">
+            Your calculator figures are not sent. {COMMERCIAL_DISCLOSURE}
+          </p>
 
           <p className="mt-4 text-xs text-[#65579a]">
             Indicative estimate only. Continue to the full calculator for a larger repayment view and comparison

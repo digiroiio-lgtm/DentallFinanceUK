@@ -677,46 +677,6 @@ const cosmeticFinance = page({
 
 const policyReferences = ["Financial Conduct Authority: financial promotions and consumer credit rules", "MoneyHelper: guides to borrowing and credit"];
 
-const editorialPolicy = page({
-  slug: "editorial-policy",
-  type: "policy",
-  title: "Editorial Policy",
-  description: "How Dental Finance UK researches, writes, updates and corrects its dental finance guides, and what our content is and is not.",
-  answerBlock:
-    "Our guides are written by the DentalFinanceUK Editorial Team as general information about dental finance in the UK. We do not give personal financial, credit or clinical advice, and we do not name individual experts or clinical reviewers.",
-  keyTakeaways: [
-    "Content is published by the Editorial Team, not by named individual experts.",
-    "Figures are illustrative examples calculated from stated formulas.",
-    "We aim to cite UK sources such as the FCA, MoneyHelper and the NHS.",
-    "We correct errors when we find them and update the page date when content changes.",
-  ],
-  summaryRows: [
-    ["Publisher", "DentalFinanceUK Editorial Team"],
-    ["Content type", "General information, not advice"],
-    ["Figures", "Illustrative examples, not quotes"],
-    ["Clinical review", "None; see our Medical Review Policy"],
-  ],
-  sections: [
-    section("What we publish", [
-      "We publish guides, comparisons and calculators about paying for dental treatment in the UK. Content is educational and does not take your circumstances into account.",
-    ]),
-    section("How we work", null, [
-      "We research from UK sources where possible, including regulator and public-body guidance.",
-      "Worked examples are calculated with a standard formula described on our methodology page.",
-      "We aim to show when a page was last updated and change that date only when the content changes.",
-      "We do not publish testimonials, reviews or ratings we cannot substantiate.",
-    ]),
-    section("Corrections", [
-      "If you think something is wrong or out of date, please contact us with the page and the issue. We will review it and correct it where appropriate.",
-    ]),
-  ],
-  faqs: [
-    { question: "Who writes the content?", answer: "The DentalFinanceUK Editorial Team. We do not attribute pages to named individual authors or clinical reviewers." },
-    { question: "Is your content financial or dental advice?", answer: "No. It is general information. Speak to a regulated adviser or your dentist about your own situation." },
-  ],
-  internalLinks: [L.method, L.disclosure, { href: "/medical-review-policy", label: "Medical Review Policy" }, { href: "/authors", label: "Authors and Editorial Team" }, { href: "/about-us", label: "About Us" }],
-  references: policyReferences,
-});
 
 const medicalReviewPolicy = page({
   slug: "medical-review-policy",
@@ -781,79 +741,7 @@ const authors = page({
   references: policyReferences,
 });
 
-const aboutUs = page({
-  slug: "about-us",
-  type: "policy",
-  title: "About Dental Finance UK",
-  description: "About Dental Finance UK: an independent information resource about paying for dental treatment in the UK. We are not a lender or credit broker.",
-  answerBlock:
-    "Dental Finance UK is an independent information website about paying for private dental treatment in the UK. We explain how finance works, provide calculators and compare options. We are not a lender or credit broker, we are not authorised by the FCA, and we do not arrange or approve credit.",
-  keyTakeaways: [
-    "We provide information and calculators only.",
-    "We do not lend, broker, arrange or approve finance.",
-    "We are not authorised or regulated by the FCA.",
-    "Finance products are offered by third parties subject to their own eligibility rules.",
-  ],
-  summaryRows: [
-    ["What we are", "An independent information website"],
-    ["What we are not", "A lender, credit broker or dental practice"],
-    ["FCA status", "Not authorised by the FCA"],
-    ["Content", "General information and illustrative calculators"],
-  ],
-  sections: [
-    section("What we do", [
-      "We publish guides on dental payment plans, monthly costs, credit checks and treatment finance, and offer calculators that estimate repayments from figures you enter.",
-    ]),
-    section("What we do not do", null, [
-      "We do not make lending decisions or assess eligibility.",
-      "We do not give personal financial, credit or clinical advice.",
-      "We do not arrange or recommend any specific loan or plan.",
-    ]),
-    section("Contact", [
-      "You can reach us through the contact page. Company details will be published on this page when confirmed.",
-    ]),
-  ],
-  faqs: [
-    { question: "Are you a lender or broker?", answer: "No. We are an information website and do not provide or arrange credit." },
-    { question: "Are you regulated by the FCA?", answer: "No. We are not authorised by the FCA because we do not carry out regulated credit activity." },
-  ],
-  internalLinks: [{ href: "/editorial-policy", label: "Editorial Policy" }, L.disclosure, L.method, L.contact],
-  references: policyReferences,
-});
 
-const financialDisclosure = page({
-  slug: "financial-disclosure",
-  type: "policy",
-  title: "Financial Disclosure",
-  description: "Financial disclosure for Dental Finance UK: we are an information website, not a lender or credit broker, and not authorised by the FCA.",
-  answerBlock:
-    "Dental Finance UK is an information website. We do not provide, arrange or approve credit, we are not authorised by the FCA, and nothing on this site is a financial promotion of a specific product or personal advice. Any lender mentioned is an independent third party.",
-  keyTakeaways: [
-    "We are not a lender or credit broker and are not FCA-authorised.",
-    "Examples and calculators are illustrative, not offers.",
-    "Third-party lenders set their own eligibility, rates and terms.",
-    "Always read the lender's own documents before agreeing to credit.",
-  ],
-  summaryRows: [
-    ["Our status", "Information website; not FCA-authorised"],
-    ["Credit activity", "None: we do not lend, broker or arrange credit"],
-    ["Examples", "Illustrative only"],
-    ["Third parties", "Lenders and clinics are independent of us"],
-  ],
-  sections: [
-    section("What this means for you", [
-      "Because we do not carry out regulated credit activity, we cannot assess your eligibility, tell you whether you will be approved or recommend a specific product. Use our guides to understand your options, then speak to your dentist and to a regulated lender.",
-    ]),
-    section("Illustrative figures", [
-      "Costs, repayments and interest shown on this site are illustrative examples calculated from stated assumptions. Your actual terms will depend on the lender and your circumstances.",
-    ]),
-  ],
-  faqs: [
-    { question: "Where can I check whether a lender is authorised?", answer: "On the FCA Register at the Financial Conduct Authority's website." },
-  ],
-  internalLinks: [{ href: "/about-us", label: "About Us" }, { href: "/editorial-policy", label: "Editorial Policy" }, L.method, L.badCredit],
-  references: policyReferences,
-});
 
 export const corePageEntries = [
   dentalFinanceUk,
@@ -865,11 +753,8 @@ export const corePageEntries = [
   implantsFinance,
   veneersFinance,
   cosmeticFinance,
-  editorialPolicy,
   medicalReviewPolicy,
   authors,
-  aboutUs,
-  financialDisclosure,
 ];
 
 // Replaces the generic base page of the same slug (no FAQ merge: the generic FAQs

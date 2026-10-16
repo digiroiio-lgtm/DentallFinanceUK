@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
+import { COMMERCIAL_DISCLOSURE, whatsappHref } from "@/lib/operator";
 
 const BUDGET_PATTERN = /^£?\s*(\d{1,3}(,\d{3})+|\d+)\s*$/;
 const MAX_FIELD_LENGTH = 120;
-const WHATSAPP_NUMBER = "905353998999";
 
 function normalizeInput(value) {
   return value.replace(/[\r\n\t]+/g, " ").trim().replace(/\s+/g, " ");
@@ -14,7 +14,7 @@ function normalizeInput(value) {
 
 export default function LeadCtaSection({
   title = "Ready to compare dental finance options?",
-  description = "Use our calculator to estimate monthly payments and compare available lenders.",
+  description = "Use our calculator to estimate illustrative monthly payments and read our guides before you speak to a clinic or lender.",
 }) {
   const [budget, setBudget] = useState("");
   const [treatment, setTreatment] = useState("");
@@ -55,8 +55,7 @@ Budget: ${trimmedBudget}
 Treatment: ${trimmedTreatment}
 
 Submitted from Finance Guidance Form.`;
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+    const whatsappUrl = whatsappHref(message);
 
     const whatsappWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     if (!whatsappWindow) {
@@ -148,7 +147,8 @@ Submitted from Finance Guidance Form.`;
             </button>
             {submitError ? <p className="text-xs text-red-700">{submitError}</p> : null}
             <p className="lead-form-microcopy">
-              Compare clinics, treatment options and estimated prices based on your budget.
+              Opens WhatsApp with your budget and treatment type only. {COMMERCIAL_DISCLOSURE} We are not a lender or
+              credit broker and do not arrange finance.
             </p>
           </div>
         </form>
