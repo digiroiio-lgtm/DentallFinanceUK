@@ -15,7 +15,12 @@
 | `/dental-implants-finance` | 9 implant pages |
 | `/veneers-finance` | 8 veneer and cosmetic pages |
 
-## Opportunity report (from `npm run audit:seo`)
+## Implemented in Sprint 3
+- `getRelatedLinks()` (`src/lib/breadcrumbs.js`): hand-written link lists are kept; pages without one get parent hub + siblings + calculator hub + overview instead of the same seven links. Hubs link down to up to six spokes; the bad-credit cluster is cross-linked via priority siblings.
+- City pages now sit under their service hub (implants, veneers, general) and each hub has a "by city" section linking all six.
+- Result: pages with no contextual or sitewide inbound link 23 → 0; pages with only derived links 46 → 32 (the rest have hand-written lists).
+
+## Opportunity report at the start of Round 1 (from `npm run audit:seo`)
 - **46 pages** use only the 7 fixed default outbound links. Replace with 3 to 6 topic-specific links each (parent hub, sibling guide, one tool).
 - **23 pages** have no contextual or sitewide (header/footer) inbound link:
   - Articles: `dental-monthly-payments`, `dental-finance-calculator`, `how-to-compare-dental-finance-providers`

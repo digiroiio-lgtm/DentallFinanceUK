@@ -4,8 +4,8 @@
 //   node scripts/seo-audit.mjs --write    also write docs/seo/01-url-audit.csv and .md
 // Classifications are heuristics to prioritise human review, not decisions.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { SITE_URL, getInternalLinks, pageMap, pageSlugs, primaryNav } from "../src/lib/siteData.js";
-import { getParentSlug } from "../src/lib/breadcrumbs.js";
+import { SITE_URL, calculatorHubLinks, pageMap, pageSlugs, primaryNav } from "../src/lib/siteData.js";
+import { getParentSlug, getRelatedLinks } from "../src/lib/breadcrumbs.js";
 import { buildMetaDescription, buildMetaTitle } from "../src/lib/seoMeta.js";
 import sitemap from "../src/app/sitemap.js";
 
@@ -51,18 +51,21 @@ function isPolicyPlaceholder(page) {
 
 export function buildAudit() {
   const inSitemap = new Set(sitemap().map((entry) => entry.url));
-  const inbound = Object.fromEntries(pageSlugs.map((slug) => [slug, { explicit: 0, fallback: 0, nav: 0, breadcrumb: 0 }]));
+  const inbound = Object.fromEntries(pageSlugs.map((slug) => [slug, { explicit: 0, nav: 0, breadcrumb: 0 }]));
   const bump = (slug, kind) => {
     if (inbound[slug]) inbound[slug][kind] += 1;
   };
 
   for (const href of new Set([...primaryNav.map((link) => link.href), ...footerHrefs])) bump(href.replace(/^\//, ""), "nav");
+  const outbound = {};
   for (const page of Object.values(pageMap)) {
-    if (page.internalLinks?.length) {
-      for (const link of page.internalLinks) if (link.href.replace(/^\//, "") !== page.slug) bump(link.href.replace(/^\//, ""), "explicit");
-    } else {
-      for (const link of getInternalLinks(page.slug)) bump(link.href.replace(/^\//, ""), "fallback");
-    }
+    // Links a visitor sees: related-links block (own or derived) plus links written inside sections.
+    const hrefs = new Set(getRelatedLinks(page).map((link) => link.href));
+    for (const sectionItem of page.sections ?? []) for (const item of sectionItem.items ?? []) if (item?.href) hrefs.add(item.href);
+    if (page.type === "calculator-hub") for (const link of calculatorHubLinks) hrefs.add(link.href);
+    hrefs.delete(`/${page.slug}`);
+    outbound[page.slug] = hrefs.size;
+    for (const href of hrefs) bump(href.replace(/^\//, ""), "explicit");
     const parent = getParentSlug(page);
     if (parent) bump(parent, "breadcrumb");
   }
@@ -79,7 +82,7 @@ export function buildAudit() {
     const flags = [];
     if (generic) flags.push("generic-template");
     if (words < THIN_WORDS) flags.push("thin");
-    if (!page.internalLinks?.length) flags.push("default-links-only");
+    if (!page.internalLinks?.length) flags.push("derived-links-only");
     if (links.explicit + links.nav === 0) flags.push("no-contextual-inbound");
     if (groups.length) flags.push(`intent-overlap:${groups.join("+")}`);
     if (isPolicyPlaceholder(page)) flags.push("policy-needs-real-facts");
@@ -101,10 +104,9 @@ export function buildAudit() {
       faqs: page.faqs?.length ?? 0,
       parent_hub: getParentSlug(page) ?? "",
       inbound_explicit: links.explicit,
-      inbound_fallback: links.fallback,
       inbound_nav: links.nav,
       inbound_breadcrumb: links.breadcrumb,
-      outbound: page.internalLinks?.length ?? getInternalLinks(slug).length,
+      outbound: outbound[slug],
       canonical: `/${slug}`,
       in_sitemap: inSitemap.has(`${SITE_URL}/${slug}`),
       schema: schemaTypes(page),
@@ -133,7 +135,7 @@ export function summarise(rows) {
     notInSitemap: count((row) => !row.in_sitemap),
     genericTemplate: count((row) => row.flags.includes("generic-template")),
     thin: count((row) => row.flags.includes("thin")),
-    defaultLinksOnly: count((row) => row.flags.includes("default-links-only")),
+    defaultLinksOnly: count((row) => row.flags.includes("derived-links-only")),
     noContextualInbound: count((row) => row.flags.includes("no-contextual-inbound")),
     intentOverlap: count((row) => row.flags.includes("intent-overlap")),
     medianWords: sorted[Math.floor(sorted.length / 2)].words,

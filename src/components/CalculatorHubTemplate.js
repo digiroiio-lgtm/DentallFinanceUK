@@ -1,9 +1,9 @@
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { buildBreadcrumbSchema } from "@/lib/breadcrumbs";
+import { buildBreadcrumbSchema, getRelatedLinks } from "@/lib/breadcrumbs";
 import LeadCtaSection from "@/components/LeadCtaSection";
-import { calculatorHubLinks, getInternalLinks, getPageUrl } from "@/lib/siteData";
+import { calculatorHubLinks, getPageUrl } from "@/lib/siteData";
 
 function buildHubSchemas(page) {
   return [
@@ -46,7 +46,7 @@ function buildHubSchemas(page) {
 }
 
 export default function CalculatorHubTemplate({ page }) {
-  const internalLinks = getInternalLinks(page.slug);
+  const internalLinks = getRelatedLinks(page);
   const schemas = buildHubSchemas(page);
 
   return (

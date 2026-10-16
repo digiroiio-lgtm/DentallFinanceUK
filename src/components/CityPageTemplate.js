@@ -1,8 +1,8 @@
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { buildBreadcrumbSchema } from "@/lib/breadcrumbs";
-import { getInternalLinks, getPageUrl } from "@/lib/siteData";
+import { buildBreadcrumbSchema, getRelatedLinks } from "@/lib/breadcrumbs";
+import { getPageUrl } from "@/lib/siteData";
 import LeadCtaSection from "@/components/LeadCtaSection";
 
 function buildCitySchemas(page) {
@@ -30,7 +30,7 @@ function buildCitySchemas(page) {
 }
 
 export default function CityPageTemplate({ page }) {
-  const baseLinks = getInternalLinks(page.slug);
+  const baseLinks = getRelatedLinks(page);
   const internalLinks = [...(page.localLinks ?? []), ...baseLinks].filter(
     (link, index, array) => link.href !== `/${page.slug}` && array.findIndex((item) => item.href === link.href) === index
   );

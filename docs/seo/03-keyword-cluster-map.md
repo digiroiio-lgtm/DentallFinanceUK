@@ -29,13 +29,14 @@ Legend. Action: KEEP, OPTIMISE, EXPAND (turn into Power Page), MERGE (review), C
 | after rejection | `/dental-finance-declined` | KEEP | |
 | defaults / missed payments | `/dental-finance-after-missed-payments-or-defaults` | KEEP | |
 | other bad-credit pages | `/bad-credit-dental-finance-options`, `/bad-credit-dental-loans-vs-clinic-finance`, `/improve-dental-finance-approval-with-bad-credit` | MERGE review | Check overlap with the pillar before adding pages |
-| dental finance with CCJ | none | CREATE (conditional) | Only if intent is distinct from the pillar; needs compliance review |
+| dental finance with CCJ | `/dental-finance-with-ccj` | **Created (Sprint 3)** | Distinct intent: what a CCJ is, six-year record, satisfied vs unsatisfied. Needs compliance review |
 | no credit history | none | Fold into `/dental-finance-low-credit-score` | Not enough distinct intent for a page |
+| bad credit pillar and low score | `/bad-credit-dental-finance`, `/dental-finance-low-credit-score` | **Rewritten (Sprint 3)** | Pillar is the decision hub; low-score page covers scores vs lender rules |
 
 ## D. No credit check and guaranteed approval
 | Keywords | URL | Action | Notes |
 |---|---|---|---|
-| no credit check dental finance UK, without credit check | none | CREATE `/no-credit-check-dental-finance` (educational only) | Explain soft vs hard searches, affordability assessments and why "guaranteed approval" claims are unreliable. Compliance review before publishing |
+| no credit check dental finance UK, without credit check | `/no-credit-check-dental-finance` | **Created (Sprint 3), educational only** | Explain soft vs hard searches, affordability assessments and why "guaranteed approval" claims are unreliable. Compliance review before publishing |
 | soft search, soft credit check | none | Cover inside the page above | Not a separate URL |
 | guaranteed approval | none | **Never advertise** | Only debunk |
 

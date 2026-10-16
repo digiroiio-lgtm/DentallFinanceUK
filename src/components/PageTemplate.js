@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { buildBreadcrumbSchema } from "@/lib/breadcrumbs";
-import { getInternalLinks, getPageUrl } from "@/lib/siteData";
+import { buildBreadcrumbSchema, getRelatedLinks } from "@/lib/breadcrumbs";
+import { getPageUrl } from "@/lib/siteData";
 import CalculatorWidget from "@/components/CalculatorWidget";
 import LeadCtaSection from "@/components/LeadCtaSection";
 import ContactForm from "@/components/ContactForm";
@@ -183,7 +183,7 @@ function RelatedCards({ links }) {
 }
 
 export default function PageTemplate({ page }) {
-  const internalLinks = page.internalLinks ?? getInternalLinks(page.slug);
+  const internalLinks = getRelatedLinks(page);
   const schemas = buildSchemas(page);
   const medicalReview = page.medicalReview ?? null;
   const financeDisclosure = page.financeDisclosure ?? null;
