@@ -1,10 +1,12 @@
+import { whatsappHref } from "@/lib/operator";
+
 export default function WhatsAppStickyButton() {
   return (
     <a
-      href="https://wa.me/905353998999"
+      href={whatsappHref()}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
+      aria-label="Chat with the Dental Finance UK team (Multiligo) on WhatsApp"
       className="whatsapp-sticky fixed z-40 inline-flex items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_12px_30px_rgba(37,211,102,0.45)] transition hover:bg-[#1fb75a]"
     >
       <svg aria-hidden="true" viewBox="0 0 24 24" className="h-7 w-7 fill-current" focusable="false">

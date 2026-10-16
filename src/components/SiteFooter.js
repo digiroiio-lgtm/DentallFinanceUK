@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { OPERATOR, OPERATOR_STATUS } from "@/lib/operator";
 
 const footerColumns = [
   {
@@ -23,7 +24,7 @@ const footerColumns = [
     title: "Provider Guides",
     links: [
       { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
-      { href: "/best-dental-finance-provider-uk", label: "Best Dental Finance Provider UK" },
+      { href: "/best-dental-finance-provider-uk", label: "Choosing a Dental Finance Provider" },
       { href: "/kandoo-vs-v12", label: "Kandoo vs V12" },
       { href: "/finance-providers", label: "Finance Providers Hub" },
     ],
@@ -38,16 +39,27 @@ const footerColumns = [
     ],
   },
   {
-    title: "Legal",
+    title: "About & Trust",
     links: [
       { href: "/about-us", label: "About Us" },
       { href: "/editorial-policy", label: "Editorial Policy" },
+      { href: "/how-we-compare", label: "How We Compare" },
+      { href: "/affiliate-disclosure", label: "Affiliate Disclosure" },
       { href: "/medical-review-policy", label: "Medical Review Policy" },
+      { href: "/complaints-and-corrections", label: "Complaints & Corrections" },
+      { href: "/contact", label: "Contact" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { href: "/legal-notice", label: "Legal Notice" },
+      { href: "/disclaimer", label: "Disclaimer" },
       { href: "/financial-disclosure", label: "Financial Disclosure" },
       { href: "/privacy-policy", label: "Privacy Policy" },
-      { href: "/terms", label: "Terms" },
       { href: "/cookie-policy", label: "Cookie Policy" },
-      { href: "/contact", label: "Contact" },
+      { href: "/terms", label: "Terms" },
+      { href: "/accessibility", label: "Accessibility" },
     ],
   },
 ];
@@ -60,11 +72,18 @@ export default function SiteFooter() {
           <div>
             <p className="text-xl font-bold text-white">Dental Finance UK</p>
             <p className="mt-3 text-sm text-[#d2c7ff]">
-              Independent UK resource for comparing monthly dental payment plans, provider options, and treatment finance guides.
+              Educational guides and illustrative calculators about paying for dental treatment in the UK.
+            </p>
+            <p className="mt-3 text-xs text-[#c4b8f5]">
+              Operated by {OPERATOR.legalName}, {OPERATOR.address.addressLocality} / {OPERATOR.address.addressRegion},{" "}
+              {OPERATOR.country}.{" "}
+              <a href={`mailto:${OPERATOR.email}`} className="underline hover:text-white">
+                {OPERATOR.email}
+              </a>
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-6">
             {footerColumns.map((column) => (
               <div key={column.title}>
                 <p className="text-sm font-semibold text-white">{column.title}</p>
@@ -83,7 +102,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="mt-10 rounded-2xl border border-[#4f3a9f] bg-[#26156a] p-4 text-xs leading-6 text-[#ddd4ff]">
-          DentalFinanceUK is an independent educational and comparison website. We do not provide loans, make lending decisions, or offer regulated credit products. Finance products are provided by third-party authorised providers, subject to status and eligibility.
+          {OPERATOR_STATUS} Figures on this site are illustrative, not offers. Finance from third-party lenders is subject to status, eligibility, affordability and lender approval.
         </div>
       </div>
     </footer>

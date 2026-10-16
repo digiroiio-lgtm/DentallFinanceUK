@@ -7,6 +7,7 @@ import TreatmentSelectorSection from "@/components/TreatmentSelectorSection";
 import HeroDescriptionExperiment from "@/components/HeroDescriptionExperiment";
 import { getPageUrl } from "@/lib/siteData";
 import { calculateMonthlyPayment, formatGbp } from "@/lib/financeCalc";
+import { OPERATOR, organizationSchema, whatsappHref } from "@/lib/operator";
 import TrustStrip from "@/components/TrustStrip";
 import UkTurkeySavingsCalculator from "@/components/UkTurkeySavingsCalculator";
 
@@ -48,15 +49,15 @@ const homeFaqs = [
 const homepageSchema = [
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Dental Finance UK",
-    url: getPageUrl("/"),
+    ...organizationSchema(getPageUrl),
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Dental Finance UK",
+    name: OPERATOR.siteName,
     url: getPageUrl("/"),
+    inLanguage: "en-GB",
+    publisher: { "@id": `${getPageUrl("/")}#operator` },
   },
   {
     "@context": "https://schema.org",
@@ -115,7 +116,7 @@ export default function Home() {
         title="Dental Finance UK"
         description={<HeroDescriptionExperiment />}
         primaryCta={{ href: "/finance-calculator", label: "Calculate My Monthly Cost" }}
-        secondaryCta={{ href: "https://wa.me/905353998999", label: "WhatsApp A Treatment Advisor", external: true, newTab: true }}
+        secondaryCta={{ href: whatsappHref(), label: "Ask Our Team on WhatsApp", external: true, newTab: true }}
         highlights={["Independent UK Comparison Resource"]}
         image="/69fc79ae77a97849cc2e8703_7c42f7b1-d707-494d-a5e4-034c58e9032b-Q4IlvNfBnYqSHgr06sCvIvePcMb1ZK.webp"
         imageAlt="Dental professional reviewing finance options with a patient on a tablet"

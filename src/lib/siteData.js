@@ -1,6 +1,7 @@
 import { clusterCalculatorHubLinks, mergeClusterPages } from "./clusterPages.js";
 import { applyCorePages } from "./corePages.js";
 import { applyCreditPages } from "./creditPages.js";
+import { applyLegalPages } from "./legalPages.js";
 
 export const SITE_URL = "https://dentalfinanceuk.co.uk";
 
@@ -3459,8 +3460,8 @@ const financeProviderEntries = [
       ],
       internalLinks: [
         { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
-        { href: "/best-dental-finance-provider-uk", label: "Best Dental Finance Provider UK" },
-        { href: "/dental-finance-companies-ranked", label: "Dental Finance Companies Ranked" },
+        { href: "/best-dental-finance-provider-uk", label: "Choosing a Dental Finance Provider" },
+        { href: "/dental-finance-companies-ranked", label: "How to Rank Dental Finance Companies" },
         { href: "/kandoo-vs-v12", label: "Kandoo vs V12" },
         { href: "/kandoo-vs-tabeo", label: "Kandoo vs Tabeo" },
         { href: "/v12-vs-chrysalis", label: "V12 vs Chrysalis" },
@@ -3543,8 +3544,8 @@ const financeProviderEntries = [
       ],
       internalLinks: [
         { href: "/finance-providers", label: "Finance Providers Hub" },
-        { href: "/best-dental-finance-provider-uk", label: "Best Dental Finance Provider UK" },
-        { href: "/dental-finance-companies-ranked", label: "Dental Finance Companies Ranked" },
+        { href: "/best-dental-finance-provider-uk", label: "Choosing a Dental Finance Provider" },
+        { href: "/dental-finance-companies-ranked", label: "How to Rank Dental Finance Companies" },
         { href: "/kandoo-vs-v12", label: "Kandoo vs V12" },
         { href: "/kandoo-vs-tabeo", label: "Kandoo vs Tabeo" },
         { href: "/v12-vs-chrysalis", label: "V12 vs Chrysalis" },
@@ -4159,7 +4160,7 @@ const financeProviderEntries = [
         { href: "/finance-providers", label: "Finance Providers Hub" },
         { href: "/ideal4finance", label: "Ideal4Finance" },
         { href: "/kandoo-finance", label: "Kandoo Finance" },
-        { href: "/dental-finance-companies-ranked", label: "Dental Finance Companies Ranked" },
+        { href: "/dental-finance-companies-ranked", label: "How to Rank Dental Finance Companies" },
       ],
       references: ["Provider website disclosures and onboarding documentation", "Financial Conduct Authority (FCA) consumer credit guidance"],
       disclaimer:
@@ -4171,7 +4172,7 @@ const financeProviderEntries = [
     "best-dental-finance-provider-uk",
     {
       slug: "best-dental-finance-provider-uk",
-      title: "Best Dental Finance Provider UK: How to Choose by Fit",
+      title: "Choosing a Dental Finance Provider in the UK: A Fit-Based Guide",
       type: "article",
       description:
         "Find the best dental finance provider in the UK by using a fit-based comparison framework across patient profile, workflow, and disclosure quality.",
@@ -4217,7 +4218,7 @@ const financeProviderEntries = [
       faqs: [{ question: "Is there one best dental finance provider in the UK?", answer: "No. Best provider depends on your clinic workflow, patient profile, and compliance priorities." }],
       internalLinks: [
         { href: "/finance-providers", label: "Finance Providers Hub" },
-        { href: "/dental-finance-companies-ranked", label: "Dental Finance Companies Ranked" },
+        { href: "/dental-finance-companies-ranked", label: "How to Rank Dental Finance Companies" },
         { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
       ],
       references: [
@@ -4234,7 +4235,7 @@ const financeProviderEntries = [
     "dental-finance-companies-ranked",
     {
       slug: "dental-finance-companies-ranked",
-      title: "Dental Finance Companies Ranked: UK Fit-Based Comparison",
+      title: "How to Rank Dental Finance Companies: A Fit-Based Framework",
       type: "article",
       description:
         "See a fit-based ranking framework for dental finance companies in the UK using weighted criteria beyond headline APR.",
@@ -4280,7 +4281,7 @@ const financeProviderEntries = [
       faqs: [{ question: "Can ranked lists replace direct provider checks?", answer: "No. Rankings support shortlisting but do not replace direct due diligence and current-term validation." }],
       internalLinks: [
         { href: "/finance-providers", label: "Finance Providers Hub" },
-        { href: "/best-dental-finance-provider-uk", label: "Best Dental Finance Provider UK" },
+        { href: "/best-dental-finance-provider-uk", label: "Choosing a Dental Finance Provider" },
         { href: "/dental-finance-companies-uk", label: "Dental Finance Companies UK" },
         { href: "/ideal4finance-vs-kandoo", label: "Ideal4Finance vs Kandoo" },
       ],
@@ -4547,7 +4548,7 @@ const baseRawPageMap = Object.fromEntries([
   ...financeProviderEntries,
 ]);
 
-const rawPageMap = applyCreditPages(mergeClusterPages(applyCorePages(baseRawPageMap)));
+const rawPageMap = applyLegalPages(applyCreditPages(mergeClusterPages(applyCorePages(baseRawPageMap))));
 
 export const pageMap = Object.fromEntries(
   Object.entries(rawPageMap).map(([slug, page]) => [

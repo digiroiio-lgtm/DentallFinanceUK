@@ -111,7 +111,10 @@ export default function ContactForm() {
 
         <div className="contact-field">
           <label htmlFor="message">Message</label>
-          <textarea id="message" name="message" rows={4} />
+          <textarea id="message" name="message" rows={4} aria-describedby="message-hint" />
+          <p id="message-hint" className="text-xs text-[#556689]">
+            Please do not include credit reports, bank details, ID documents or medical records.
+          </p>
           <ValidationError field="message" prefix="Message" errors={state.errors} className="contact-error" />
         </div>
 
@@ -133,6 +136,15 @@ export default function ContactForm() {
         </label>
 
         <ValidationError errors={state.errors} className="contact-error" />
+
+        <p className="text-xs text-[#556689]">
+          Your message is sent to Multiligo, which operates this website, through our form provider Formspree, and is used
+          only to reply to you. We do not pass enquiries to lenders or credit brokers. See our{" "}
+          <Link href="/privacy-policy" className="font-medium text-[#6d4fe0] underline">
+            Privacy Policy
+          </Link>
+          .
+        </p>
 
         <button type="submit" className="btn btn-primary" disabled={state.submitting}>
           {state.submitting ? "Sending…" : "Send enquiry"}

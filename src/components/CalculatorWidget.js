@@ -1,6 +1,7 @@
 "use client";
 import { useReducer, useState, useEffect, useRef } from "react";
 import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
+import { COMMERCIAL_DISCLOSURE, whatsappHref as buildWhatsappHref } from "@/lib/operator";
 import {
   coerceCalculatorInputs,
   DECIMAL_INPUT_PATTERN,
@@ -103,21 +104,7 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
       .catch(() => {});
   }
 
-  const whatsappMessage = [
-    "Hello,",
-    "",
-    "I used the Dental Finance UK calculator.",
-    "",
-    `Treatment: ${treatmentType}`,
-    `Budget: ${formatCurrency(amount)}`,
-    `APR: ${apr}%`,
-    `Term: ${term} months`,
-    `Estimated Monthly Payment: ${formatCurrency(monthly)}`,
-    "",
-    "I would like to discuss suitable treatment options.",
-  ].join("\n");
-
-  const whatsappHref = `https://wa.me/905353998999?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappHref = buildWhatsappHref();
   const monthlyGuidance =
     monthly < 100
       ? "This repayment range is commonly used for veneers and smaller treatment plans."
@@ -230,15 +217,16 @@ export default function CalculatorWidget({ config, treatmentType = "Dental treat
           href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Speak with treatment team on WhatsApp"
+          aria-label="Ask the Dental Finance UK team on WhatsApp"
           onClick={() => {
             trackCompleted();
             trackEvent(ANALYTICS_EVENTS.financeCtaClick, { placement: "calculator", destination: "whatsapp" });
           }}
         >
-          Speak With Treatment Team
+          Ask Our Team on WhatsApp
         </a>
       </div>
+      <p className="mt-3 text-xs text-[#65579a]">Your calculator figures are not sent. {COMMERCIAL_DISCLOSURE}</p>
 
       <p className="mt-4 rounded-xl border border-[#d4c7f5] bg-[#f3edff] p-3 text-xs text-[#65579a]">
         Disclaimer: Indicative estimate only. Figures are based on standard loan amortisation and do not represent a formal credit offer.

@@ -2,12 +2,14 @@ import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
+import { organizationSchema } from "@/lib/operator";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { buildBreadcrumbSchema, getRelatedLinks } from "@/lib/breadcrumbs";
+import { buildBreadcrumbSchema, getParentSlug, getRelatedLinks } from "@/lib/breadcrumbs";
 import { getPageUrl } from "@/lib/siteData";
 import CalculatorWidget from "@/components/CalculatorWidget";
 import LeadCtaSection from "@/components/LeadCtaSection";
 import ContactForm from "@/components/ContactForm";
+import ComparisonDisclosure from "@/components/ComparisonDisclosure";
 
 function buildSchemas(page) {
   const breadcrumbs = buildBreadcrumbSchema(page);
@@ -48,6 +50,7 @@ function buildSchemas(page) {
       headline: page.title,
       dateModified: page.lastUpdated,
       author: { "@type": "Organization", name: page.author, url: getPageUrl("/") },
+      publisher: organizationSchema(getPageUrl),
       description: page.description,
       mainEntityOfPage: getPageUrl(`/${page.slug}`),
     },
@@ -218,6 +221,8 @@ export default function PageTemplate({ page }) {
           ) : null}
         </div>
       </section>
+
+      {page.slug === "finance-providers" || getParentSlug(page) === "finance-providers" ? <ComparisonDisclosure /> : null}
 
       <section className="surface-card mt-8 p-6">
         <h2 className="section-title text-2xl">Key Takeaways</h2>
