@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { OPERATOR, OPERATOR_STATUS } from "@/lib/operator";
+import { OPERATOR } from "@/lib/operator";
+import LegalFooter, { LegalFooterColumns } from "@/components/LegalFooter";
 
 const footerColumns = [
   {
@@ -38,30 +39,6 @@ const footerColumns = [
       { href: "/all-on-4-uk-vs-turkey", label: "All-on-4 UK vs Turkey" },
     ],
   },
-  {
-    title: "About & Trust",
-    links: [
-      { href: "/about-us", label: "About Us" },
-      { href: "/editorial-policy", label: "Editorial Policy" },
-      { href: "/how-we-compare", label: "How We Compare" },
-      { href: "/affiliate-disclosure", label: "Affiliate Disclosure" },
-      { href: "/medical-review-policy", label: "Medical Review Policy" },
-      { href: "/complaints-and-corrections", label: "Complaints & Corrections" },
-      { href: "/contact", label: "Contact" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { href: "/legal-notice", label: "Legal Notice" },
-      { href: "/disclaimer", label: "Disclaimer" },
-      { href: "/financial-disclosure", label: "Financial Disclosure" },
-      { href: "/privacy-policy", label: "Privacy Policy" },
-      { href: "/cookie-policy", label: "Cookie Policy" },
-      { href: "/terms", label: "Terms" },
-      { href: "/accessibility", label: "Accessibility" },
-    ],
-  },
 ];
 
 export default function SiteFooter() {
@@ -98,12 +75,11 @@ export default function SiteFooter() {
                 </ul>
               </div>
             ))}
+            <LegalFooterColumns />
           </div>
         </div>
 
-        <div className="mt-10 rounded-2xl border border-[#4f3a9f] bg-[#26156a] p-4 text-xs leading-6 text-[#ddd4ff]">
-          {OPERATOR_STATUS} Figures on this site are illustrative, not offers. Finance from third-party lenders is subject to status, eligibility, affordability and lender approval.
-        </div>
+        <LegalFooter />
       </div>
     </footer>
   );

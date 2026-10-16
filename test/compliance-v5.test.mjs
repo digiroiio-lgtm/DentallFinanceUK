@@ -11,7 +11,7 @@ const appSources = [read("src/app/page.js"), read("src/app/layout.js")];
 const allSources = [...componentSources, ...appSources].join("\n");
 
 test("all legal and trust pages exist and are linked from the footer", () => {
-  const footer = read("src/components/SiteFooter.js");
+  const footer = read("src/components/SiteFooter.js") + read("src/components/LegalFooter.js");
   for (const slug of [...LEGAL_SLUGS, "medical-review-policy"]) {
     assert.ok(pageMap[slug], `missing /${slug}`);
     assert.ok(footer.includes(`"/${slug}"`), `footer does not link /${slug}`);

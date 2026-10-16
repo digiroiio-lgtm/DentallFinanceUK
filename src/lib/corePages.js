@@ -477,6 +477,8 @@ const treatmentFinance = page({
       { text: "Veneers finance", href: "/veneers-finance" },
       { text: "Cosmetic dentistry finance", href: "/cosmetic-dentistry-finance" },
       { text: "Crown payment examples", href: "/dental-crowns-monthly-payments" },
+      { text: "Clear aligners finance", href: "/clear-aligners-finance" },
+      { text: "Dental insurance vs dental plans", href: "/dental-insurance-vs-dental-plans" },
       { text: "Turkey teeth finance", href: "/turkey-teeth-finance" },
     ]),
     section("One-off, staged and ongoing treatment", [
@@ -659,6 +661,7 @@ const cosmeticFinance = page({
       "Take time to decide: a reputable provider should give you a written quote and let you think before signing. Regulated credit usually includes a right to withdraw within 14 days, but check the agreement.",
     ]),
     section("Next steps", null, [
+      { text: "Clear aligners finance", href: "/clear-aligners-finance" },
       { text: "Veneers finance", href: "/veneers-finance" },
       { text: "Dental payment plans compared", href: "/dental-payment-plans" },
       { text: "Monthly payment examples", href: "/dental-monthly-payments" },
@@ -743,6 +746,120 @@ const authors = page({
 
 
 
+const insuranceVsPlans = page({
+  slug: "dental-insurance-vs-dental-plans",
+  title: "Dental Insurance vs Dental Plans: What Is the Difference?",
+  description:
+    "Dental insurance, dental membership (capitation) plans and paying as you go compared: how each works, what they usually cover and what to check before you sign up.",
+  answerBlock:
+    "Dental insurance pays towards treatment costs in return for a premium, usually with limits and exclusions. A dental membership plan spreads the cost of routine care with one practice through a monthly fee. Paying as you go means paying each bill when it arises. Which suits you depends on how often you need treatment and how predictable you want costs to be.",
+  keyTakeaways: [
+    "Insurance pays claims within limits; a membership plan prices routine care with one practice.",
+    "Pre-existing conditions and waiting periods often limit what insurance pays at first.",
+    "Some membership plans include a small insurance element for accidents or emergencies.",
+    "Neither replaces finance for a large, one-off treatment such as implants.",
+  ],
+  summaryRows: [
+    ["Dental insurance", "Premium paid; claims reimbursed within annual and per-treatment limits"],
+    ["Membership (capitation) plan", "Monthly fee to one practice for agreed routine care, often with discounts on extra treatment"],
+    ["Pay as you go", "No ongoing fee; pay each bill in full"],
+    ["Dental finance", "Spreads the cost of a specific treatment; see our payment plans guide"],
+  ],
+  featureTable: {
+    title: "How the options compare",
+    description: "General features only; every policy and plan has its own terms.",
+    headers: ["", "Dental insurance", "Membership plan", "Pay as you go"],
+    rows: [
+      ["How you pay", "Monthly or annual premium", "Monthly fee to your practice", "Per treatment"],
+      ["Which dentist", "Often any, sometimes a network", "The practice running the plan", "Any"],
+      ["Routine check-ups", "Often partly covered", "Usually included", "Paid each time"],
+      ["Major treatment", "Covered up to limits, often after waiting periods", "Often discounted, not included", "Full cost"],
+      ["Pre-existing problems", "Often excluded", "Assessed by the practice when you join", "Not relevant"],
+      ["Main risk", "Paying premiums for limited cover", "Paying for care you do not use", "Unexpected large bills"],
+    ],
+  },
+  sections: [
+    section("What to check before choosing", null, [
+      "Annual limits, per-treatment limits and any excess.",
+      "Waiting periods and exclusions for existing conditions.",
+      "Whether you can use your current dentist.",
+      "What happens if you leave the plan or change practice.",
+      "Whether a plan includes insurance, and who the insurer is.",
+    ]),
+    section("Regulation in brief", [
+      "Dental insurance is a regulated insurance product, so the insurer and anyone selling it must meet UK insurance rules. A practice membership plan that only covers routine care may not be insurance, but many include an insurance element for accidents or emergencies. Ask who provides each part.",
+    ]),
+    section("If you need a large treatment now", [
+      "Insurance and membership plans rarely cover large, planned treatments in full, especially soon after joining. For those, compare paying in stages, a practice payment plan or finance.",
+    ], [
+      { text: "Dental payment plans compared", href: "/dental-payment-plans" },
+      { text: "Dental treatment finance", href: "/dental-treatment-finance" },
+    ]),
+  ],
+  faqs: [
+    { question: "Is a dental plan the same as dental insurance?", answer: "No. A membership plan spreads the cost of routine care with one practice. Insurance pays claims within limits. Some plans include a small insurance element." },
+    { question: "Will dental insurance pay for treatment I already need?", answer: "Often not straight away. Many policies exclude existing problems or apply waiting periods. Check the policy terms." },
+    { question: "Do you sell dental insurance?", answer: "No. We are an information website and do not sell or arrange insurance." },
+  ],
+  internalLinks: [L.plans, L.treatment, L.home, L.monthly],
+});
+
+const clearAlignersFinance = page({
+  slug: "clear-aligners-finance",
+  title: "Clear Aligners Finance UK: Costs and Monthly Payments",
+  description:
+    "Paying for clear aligners in the UK: how in-practice and direct-to-consumer aligner costs differ, what a quote should include and illustrative monthly payments.",
+  answerBlock:
+    "Clear aligners straighten teeth with a series of removable trays. They are usually private, cosmetic treatment, so payment is up front, through a practice payment plan or through finance. Costs depend on how complex the case is and how much in-person care is included, so compare what each quote covers, not just the monthly price.",
+  keyTakeaways: [
+    "Aligners are usually private treatment and not available on the NHS for adults.",
+    "In-practice treatment includes examinations and check-ups; remote models include fewer.",
+    "Retainers after treatment are often extra; ask before you commit.",
+    "Figures here are illustrative; get a written quote.",
+  ],
+  summaryRows: [
+    ["Treatment type", "Removable clear trays, usually cosmetic"],
+    ["Payment routes", "Up front, practice plan or lender finance"],
+    ["Example", `${formatGbp(3000, 0)} with a ${formatGbp(300, 0)} deposit over 18 months at 0%: ${formatGbp(monthly(3000, 18, 0, 300))} a month`],
+    ["Key check", "What in-person care and retainers are included"],
+  ],
+  costTable: {
+    title: "Illustrative aligner repayments",
+    description: "Example treatment costs with a deposit, at 0% and an example 9.9% APR. Not prices or quotes.",
+    headers: ["Example cost", "Deposit", "12 months at 0%", "24 months at 0%", "24 months at 9.9%"],
+    rows: [
+      [1800, 200],
+      [3000, 300],
+      [4500, 500],
+    ].map(([total, deposit]) => [formatGbp(total, 0), formatGbp(deposit, 0), formatGbp(monthly(total, 12, 0, deposit)), formatGbp(monthly(total, 24, 0, deposit)), formatGbp(monthly(total, 24, 9.9, deposit))]),
+  },
+  sections: [
+    section("In-practice versus remote treatment", [
+      "With in-practice treatment, a dentist or orthodontist examines you, takes scans and reviews progress in person. Some providers run treatment mainly remotely, with fewer in-person checks. Costs differ partly because of this, so compare what level of supervision each option includes and who is clinically responsible.",
+    ]),
+    section("What a quote should include", null, [
+      "Examination, scans and treatment planning",
+      "Number of aligners and any refinement stages",
+      "In-person or remote review appointments",
+      "Retainers after treatment and how long they last",
+      "What happens, and what it costs, if treatment does not go to plan",
+    ]),
+    section("Paying monthly", [
+      "Some aligner providers advertise a monthly price. That is a form of credit or instalment plan, so check who provides it, the total repayable, the APR and whether a credit search is used. Compare it with a practice plan or paying up front.",
+    ], [
+      { text: "Dental payment plans compared", href: "/dental-payment-plans" },
+      { text: "0% dental finance: what to check", href: "/0-percent-dental-finance" },
+      { text: "Soft and hard credit checks explained", href: "/no-credit-check-dental-finance" },
+    ]),
+  ],
+  faqs: [
+    { question: "Can I get clear aligners on finance?", answer: "Many practices and some aligner providers offer monthly payments. These are credit or instalment arrangements, so compare the total repayable and terms." },
+    { question: "Are clear aligners available on the NHS?", answer: "Adult orthodontic treatment for cosmetic reasons is not usually available on the NHS. Check the NHS website for eligibility." },
+    { question: "Are retainers included in the price?", answer: "Not always. Ask whether retainers are included and what replacements cost." },
+  ],
+  internalLinks: [L.cosmetic, L.plans, L.treatment, L.zero, L.monthly, L.calcHub],
+});
+
 export const corePageEntries = [
   dentalFinanceUk,
   dentalPaymentPlans,
@@ -753,6 +870,8 @@ export const corePageEntries = [
   implantsFinance,
   veneersFinance,
   cosmeticFinance,
+  insuranceVsPlans,
+  clearAlignersFinance,
   medicalReviewPolicy,
   authors,
 ];

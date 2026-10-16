@@ -38,6 +38,7 @@ const LINK = {
   medical: { href: "/medical-review-policy", label: "Medical Review Policy" },
   method: { href: "/cost-and-calculator-methodology", label: "Cost and Calculator Methodology" },
   providers: { href: "/finance-providers", label: "Finance Providers Hub" },
+  partners: { href: "/partners", label: "Partners" },
 };
 
 const operatorRows = [
@@ -207,6 +208,9 @@ const privacy = page({
       "WhatsApp: if you choose to message us, WhatsApp shares your phone number, profile name and messages with us. We use these to reply. Our WhatsApp links do not include your calculator figures. The \"find clinics within your budget\" form opens WhatsApp with only the budget and treatment type you typed, and nothing is sent until you press send in WhatsApp.",
       "Technical data: our hosting provider processes basic request data such as IP address and browser details to deliver and secure the site.",
     ]),
+    section("Affiliate and click tracking", [
+      "We do not currently use affiliate tracking. If we add affiliate links, the provider or affiliate network may record that you arrived from our site. We will update this policy and our cookie choices before any such tracking starts.",
+    ]),
     section("Lawful basis", [
       "We rely on our legitimate interests in responding to enquiries you send us and in running a secure website. If we introduce analytics or other non-essential technologies, we will ask for your consent first.",
     ]),
@@ -251,12 +255,15 @@ const cookies = page({
   summaryRows: [
     ["Essential cookies", "None set by this site"],
     ["Analytics cookies", "None"],
-    ["Advertising or affiliate cookies", "None"],
+    ["Advertising or affiliate cookies", "None today"],
     ["Consent", "Will be requested before any non-essential use"],
   ],
   sections: [
     section("What we use today", [
       "Pages and calculators work without setting cookies. Calculator figures are kept in the page address while you use a calculator so that the result can be shared; they are not sent to us.",
+    ]),
+    section("Affiliate attribution", [
+      "No affiliate attribution cookies are used today. If affiliate links are added, the provider or network may set cookies on their own site after you click; we will list them here and ask for consent where required before any non-essential technology runs on our site.",
     ]),
     section("Third-party services", [
       "If you choose to message us on WhatsApp or submit the contact form, those services may use their own cookies or similar technologies under their own policies.",
@@ -273,39 +280,41 @@ const cookies = page({
 const affiliate = page({
   slug: "affiliate-disclosure",
   title: "Affiliate Disclosure and Commercial Relationships",
-  description: "How Dental Finance UK and its operator Multiligo make money, which commercial relationships exist, and how we keep them separate from our content.",
-  answerBlock: `We do not use affiliate links and we do not receive payments from lenders, credit brokers or finance providers. ${OPERATOR.shortName}, which operates this website, receives paid marketing service fees from some dental clinics, including clinics in ${OPERATOR.country}. We tell you about this wherever we invite you to contact us.`,
+  description: "How Dental Finance UK and its operator Multiligo may make money, which commercial relationships exist today, and how affiliate links would be labelled.",
+  answerBlock: `We may in future earn a commission when readers click certain links and go on to buy from a provider. Today no affiliate links are active, and we receive no payments from lenders, credit brokers or insurers. ${OPERATOR.shortName}, which operates this website, does receive paid marketing service fees from some dental clinics, including clinics in ${OPERATOR.country}.`,
   keyTakeaways: [
-    "No affiliate links and no payments from lenders or credit brokers.",
+    "No affiliate links are active on the site today.",
+    "If we add affiliate links, each one will be labelled where it appears.",
     `${OPERATOR.shortName} is paid by some dental clinics for marketing services.`,
-    "This is disclosed next to our WhatsApp and enquiry options.",
-    "If we ever add affiliate or sponsored links, they will be labelled where they appear.",
+    "We have no payment arrangements with lenders, credit brokers or insurers.",
   ],
   summaryRows: [
-    ["Affiliate links", "None"],
-    ["Payments from lenders or brokers", "None"],
+    ["Active affiliate links", "None"],
+    ["Payments from lenders, brokers or insurers", "None"],
     ["Payments from dental clinics", `Yes: paid marketing services provided by ${OPERATOR.shortName}`],
     ["Sponsored content", "None"],
   ],
   sections: [
-    section("Why this matters", [
-      "Some of our content discusses dental treatment abroad, including in Türkiye. Because our operator is paid by some dental clinics for marketing, we want you to be able to weigh our content with that in mind.",
+    section("How affiliate links would work", null, [
+      "An affiliate link takes you to an independent company's website. If you go on to buy, that company may pay us a commission. You do not pay more because of it.",
+      "Each affiliate link will be labelled as advertising next to the link, use rel=\"sponsored\", and go directly to the provider's site without disguising the destination.",
+      "The provider, not us, decides product availability, prices and eligibility.",
+      "Commissions are paid for referrals, not for approvals. We cannot influence any provider's decision about you.",
     ]),
-    section("How we manage the conflict", null, [
-      "Guides describe risks, aftercare and total costs of treatment abroad, not only savings.",
-      "We do not recommend a specific clinic in our guides.",
-      "Finance content is written without reference to any clinic client.",
-      "Enquiry options state who answers and that the operator is paid by some clinics.",
+    section("Which products we may cover", [
+      "We are preparing to work with programmes in areas such as clear aligners, dental services and dental software. Finance and insurance products are regulated in the UK: we will not promote them through affiliate links unless the right regulatory permissions or approvals are in place.",
     ]),
-    section("If this changes", [
-      "If we add affiliate links, sponsored content or any arrangement with a finance or insurance provider, we will update this page first and label the relevant links where they appear. Finance-related arrangements would be reviewed for UK regulatory requirements before going live.",
+    section("How commercial interests could affect the site", [
+      "Commission arrangements could create an incentive to feature some providers over others. We will not order comparisons by commission without saying so, we will show the criteria we use, and we will keep providers we do not earn from in our guides where they are relevant.",
+      "Some of our content discusses dental treatment abroad. Because our operator is paid by some dental clinics, we describe risks, aftercare and total costs, not only savings, and we do not recommend a specific clinic in our guides.",
     ]),
   ],
   faqs: [
-    { question: "Do lenders pay you?", answer: "No. We have no payment arrangements with lenders, credit brokers or finance providers." },
+    { question: "Do you earn money when I click a link?", answer: "Not today: no affiliate links are active. If we add them, they will be labelled where they appear." },
+    { question: "Do lenders or insurers pay you?", answer: "No. We have no payment arrangements with lenders, credit brokers or insurers." },
     { question: "Do clinics pay you?", answer: `${OPERATOR.shortName}, the operator, provides paid marketing services to some dental clinics, including clinics in Türkiye.` },
   ],
-  internalLinks: [LINK.compare, LINK.editorial, LINK.about, LINK.disclosure],
+  internalLinks: [LINK.compare, LINK.editorial, LINK.partners, LINK.about, LINK.disclosure],
   references: [REFS.asa],
 });
 
@@ -335,6 +344,12 @@ const editorial = page({
     ]),
     section("Commercial influence", [
       "Our operator is paid by some dental clinics for marketing services. Editorial content does not recommend specific clinics, and finance guides are written independently of any client. We do not publish sponsored content, testimonials, reviews or ratings we cannot substantiate.",
+    ]),
+    section("Sponsored content and affiliate safeguards", null, [
+      "We do not publish sponsored content. If we ever do, it will be clearly labelled as advertising.",
+      "Affiliate links, if added, are labelled at the link and never decide what a guide recommends.",
+      "Providers we do not earn from stay in our guides where they are relevant.",
+      "Finance and insurance products are not promoted through affiliate links without the required UK permissions.",
     ]),
     section("Updates and corrections", [
       "Pages show a last updated date, which changes when content changes. Report an error through our complaints and corrections page and we will review and correct it where appropriate.",
@@ -507,8 +522,11 @@ const howWeCompare = page({
     section("About our fit-based framework", [
       "Some pages explain how a clinic or patient could rank providers against their own criteria. These describe a method; they are not our ranking of named providers.",
     ]),
+    section("Ranking and order", [
+      "We do not rank named providers for individual readers. Where a list has an order, we state the criteria used. We will never order a comparison by commission without saying so clearly on that page.",
+    ]),
     section("Commercial relationships", [
-      "We have no affiliate or payment arrangements with any finance provider. Our operator is paid by some dental clinics for marketing services; see our Affiliate Disclosure.",
+      "We have no affiliate or payment arrangements with any finance provider. If a provider in a comparison becomes an affiliate partner, it will be labelled in that comparison. Our operator is paid by some dental clinics for marketing services; see our Affiliate Disclosure.",
     ]),
   ],
   faqs: [
@@ -516,6 +534,56 @@ const howWeCompare = page({
     { question: "Are providers ranked?", answer: "No. We explain a method you can use to compare providers against your own needs; we do not rank named providers for you." },
   ],
   internalLinks: [LINK.providers, LINK.affiliate, LINK.editorial, LINK.disclosure],
+});
+
+const partnersPage = page({
+  slug: "partners",
+  title: "Partnerships",
+  description: `Partnership information for Dental Finance UK: the kinds of organisations we may work with, the standards we apply and how to contact ${OPERATOR.shortName}.`,
+  answerBlock: `Dental Finance UK, operated by ${OPERATOR.shortName}, is open to partnership enquiries from organisations whose products are relevant and useful to UK readers. We do not have any active affiliate partnerships today, and no organisation should be treated as endorsed by us because it is mentioned on this site.`,
+  keyTakeaways: [
+    "No active affiliate partnerships today.",
+    "Finance and insurance partnerships need UK regulatory permission or approval first.",
+    "All commercial links are labelled where they appear.",
+    `Enquiries: ${OPERATOR.email}`,
+  ],
+  summaryRows: [
+    ["Current affiliate partners", "None"],
+    ["Contact", OPERATOR.email],
+    ["Operator", OPERATOR.legalName],
+  ],
+  featureTable: {
+    title: "Partnership categories",
+    description: "Areas we are open to discussing. Listing a category is not a commitment or an endorsement.",
+    headers: ["Category", "Examples of fit", "Conditions"],
+    rows: [
+      ["Dental education and publishing", "Research, data, editorial collaboration", "Clear attribution; no paid placement in editorial without labelling"],
+      ["Dental treatment providers", "Clinics and treatment services", "Disclosure of any payment; no clinical claims we cannot substantiate"],
+      ["Dental plans", "Membership and payment plans", "Plans containing insurance follow the insurance conditions below"],
+      ["Dental insurance", "Insurers and intermediaries", "Not promoted until UK insurance distribution requirements are met"],
+      ["Finance providers", "Lenders and credit brokers", "Not promoted until UK credit broking and financial promotion requirements are met"],
+      ["Dental software (B2B)", "Practice management, imaging, booking", "Labelled affiliate or sponsored links"],
+    ],
+  },
+  sections: [
+    section("Our standards", null, [
+      "Commercial links are labelled at the link and use rel=\"sponsored\".",
+      "We do not use fake reviews, ratings, awards or partner badges.",
+      "We do not show a brand as a partner without a confirmed agreement and permission to use its name.",
+      "We do not pass readers' personal data to partners.",
+    ]),
+    section("How to get in touch", [`Email ${OPERATOR.email} with details of your organisation and programme, or use the contact form and choose "Partnership enquiry". We review every enquiry against our editorial and regulatory standards before agreeing anything.`], [
+      { text: "Contact form", href: "/contact" },
+      { text: "Affiliate Disclosure", href: "/affiliate-disclosure" },
+      { text: "How We Compare", href: "/how-we-compare" },
+    ]),
+  ],
+  faqs: [
+    { question: "Who are your current partners?", answer: "We have no active affiliate partners today." },
+    { question: "Can finance companies advertise with you?", answer: "Not until the necessary UK regulatory permissions or approvals are in place for that activity." },
+  ],
+  internalLinks: [LINK.affiliate, LINK.compare, LINK.editorial, LINK.contact, LINK.about],
+  references: [REFS.asa, REFS.fca],
 });
 
 const financialDisclosure = page({
@@ -559,6 +627,7 @@ export const legalPageEntries = [
   accessibility,
   howWeCompare,
   financialDisclosure,
+  partnersPage,
 ];
 
 export const LEGAL_SLUGS = legalPageEntries.map(([slug]) => slug);

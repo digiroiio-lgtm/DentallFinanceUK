@@ -9,7 +9,7 @@ import { getParentSlug, getRelatedLinks } from "../src/lib/breadcrumbs.js";
 import { buildMetaDescription, buildMetaTitle } from "../src/lib/seoMeta.js";
 import sitemap from "../src/app/sitemap.js";
 
-const footerHrefs = [...readFileSync(new URL("../src/components/SiteFooter.js", import.meta.url), "utf8").matchAll(/href:\s*"(\/[^"#?]*)"/g)].map((match) => match[1]);
+const footerHrefs = [...["SiteFooter.js", "LegalFooter.js"].map((file) => readFileSync(new URL(`../src/components/${file}`, import.meta.url), "utf8")).join("\n").matchAll(/href:\s*"(\/[^"#?]*)"/g)].map((match) => match[1]);
 
 const SKIP_KEYS = new Set(["slug", "type", "lastUpdated", "disclaimer", "references", "author", "internalLinks"]);
 const GENERIC_DESCRIPTION = /^UK-focused guidance on /;

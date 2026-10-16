@@ -1,5 +1,6 @@
 import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
+import EditorialTrustPanel from "@/components/EditorialTrustPanel";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { buildBreadcrumbSchema, getRelatedLinks } from "@/lib/breadcrumbs";
 import LeadCtaSection from "@/components/LeadCtaSection";
@@ -123,13 +124,7 @@ export default function CalculatorHubTemplate({ page }) {
         </div>
       </section>
 
-      <section className="surface-card mt-8 p-6">
-        <h2 className="section-title text-2xl">Review and Disclosure</h2>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <div className="subtle-card p-3 text-sm">Author: {page.author}</div>
-          <div className="subtle-card p-3 text-sm">Last Updated: {page.lastUpdated}</div>
-        </div>
-      </section>
+      <EditorialTrustPanel page={page} />
 
       <section className="surface-card mt-8 p-6">
         <h2 className="section-title text-2xl">References and Sources</h2>
