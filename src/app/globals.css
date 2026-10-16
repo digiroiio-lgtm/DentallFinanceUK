@@ -497,3 +497,78 @@ main {
     border-color: #7c3aed;
   }
 }
+
+/* Contact form (Formspree) */
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 640px;
+}
+
+.contact-form-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .contact-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.contact-field label,
+.contact-form legend {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f2858;
+}
+
+.contact-form input:not([type="checkbox"]):not([type="radio"]),
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid #c7b7ef;
+  border-radius: 0.7rem;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  color: #0f172a;
+  background: #fff;
+}
+
+.contact-form fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border: 1px solid #c7b7ef;
+  border-radius: 0.7rem;
+  padding: 0.75rem 0.9rem;
+}
+
+.contact-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #374e75;
+}
+
+.contact-error {
+  font-size: 0.8rem;
+  color: #b91c1c;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

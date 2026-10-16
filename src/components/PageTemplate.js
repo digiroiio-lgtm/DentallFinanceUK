@@ -5,6 +5,7 @@ import StructuredData from "@/components/StructuredData";
 import { getInternalLinks, getPageUrl } from "@/lib/siteData";
 import CalculatorWidget from "@/components/CalculatorWidget";
 import LeadCtaSection from "@/components/LeadCtaSection";
+import ContactForm from "@/components/ContactForm";
 
 function buildSchemas(page) {
   const reviewedBy = [
@@ -372,6 +373,8 @@ export default function PageTemplate({ page }) {
           ) : null}
         </>
       ) : null}
+
+      {page.slug === "contact" ? <ContactForm /> : null}
 
       <section className="surface-card mt-8 p-6">
         <div className="space-y-6">
