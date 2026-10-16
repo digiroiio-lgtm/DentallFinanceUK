@@ -10,6 +10,7 @@ import CalculatorWidget from "@/components/CalculatorWidget";
 import LeadCtaSection from "@/components/LeadCtaSection";
 import ContactForm from "@/components/ContactForm";
 import ComparisonDisclosure from "@/components/ComparisonDisclosure";
+import EditorialTrustPanel from "@/components/EditorialTrustPanel";
 
 function buildSchemas(page) {
   const breadcrumbs = buildBreadcrumbSchema(page);
@@ -395,14 +396,7 @@ export default function PageTemplate({ page }) {
         </div>
       </section>
 
-      <section className="surface-card mt-8 p-6">
-        <h2 className="section-title text-2xl">{medicalReview?.title ?? "Review and Disclosure"}</h2>
-        {medicalReview?.summary ? <p className="mt-2 text-[#3f567b]">{medicalReview.summary}</p> : null}
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <div className="subtle-card p-3 text-sm">Author: {page.author}</div>
-          <div className="subtle-card p-3 text-sm">Last Updated: {page.lastUpdated}</div>
-        </div>
-      </section>
+      <EditorialTrustPanel page={page} notice={medicalReview} />
 
       {financeDisclosure ? (
         <section className="surface-card mt-8 border-[#cdc0f0] bg-[#f4eeff] p-6">

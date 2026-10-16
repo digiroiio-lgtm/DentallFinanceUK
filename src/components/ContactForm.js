@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useForm, ValidationError } from "@formspree/react";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 const FORMSPREE_FORM_ID = "meaevwyv";
 
@@ -10,6 +11,7 @@ const HELP_OPTIONS = [
   "Dental finance / payment plans",
   "A specific treatment",
   "Treatment abroad (Turkey)",
+  "Partnership enquiry",
 ];
 const TREATMENT_OPTIONS = [
   "Dental Implants",
@@ -69,7 +71,16 @@ export default function ContactForm() {
         Tell us a little about your treatment and budget and we will point you towards the right next step. We do not
         sell your details on.
       </p>
-      <form className="contact-form mt-4" onSubmit={handleSubmit}>
+      <form
+        className="contact-form mt-4"
+        onSubmit={(event) => {
+          // Only the enquiry type is tracked; no personal data is sent to analytics.
+          if (event.currentTarget.help_with?.value === "Partnership enquiry") {
+            trackEvent(ANALYTICS_EVENTS.partnerEnquirySubmit, { placement: "contact_form" });
+          }
+          return handleSubmit(event);
+        }}
+      >
         <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />
 
         <SelectField id="help_with" label="What can we help with?" options={HELP_OPTIONS} required state={state} />
